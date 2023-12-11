@@ -1,10 +1,18 @@
 {% extends '!footer.html' %}
 
 {% block extrafooter %}
-    <br>
-    <p>网站采用 <a href="https://utteranc.es/">utterances</a> 评论系统，所有评论存储在<a href="https://github.com/lighkLife/wiki/issues">GitHub issues</a> 中，如果你看不到下方的评论框，那么可能需要科学上网</a> 👈
-    </p>
-    <div class="articleComments">
-        {% include "comments.html" %}
-    </div>
-{% endblock %}
+<br>
+<p>网站采用 <a href="https://utteranc.es/">utterances</a> 评论系统，所有评论存储在<a
+        href="https://github.com/lighkLife/wiki/issues">GitHub issues</a>
+    中，如果你看不到下方的评论框，那么可能需要科学上网</a> 👈
+</p>
+<div class="articleComments">
+    <script src="https://utteranc.es/client.js"
+            repo="lighkLife/wiki"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
+{% endblock extrafooter %}
