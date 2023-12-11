@@ -14,7 +14,7 @@ release = ''
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser']
+extensions = ['myst_parser', 'sphinx_comments']
 
 source_suffix = [".rst", ".md"]
 templates_path = ['_templates']
@@ -28,6 +28,9 @@ language = 'zh_CN'
 html_theme = 'furo'
 html_static_path = ['_static']
 html_search_language = 'zh'
+html_css_files = [
+    'my_style.css',
+]
 
 html_theme_options = {
     "footer_icons": [
@@ -42,4 +45,14 @@ html_theme_options = {
             "class": "",
         },
     ],
+}
+
+comments_config = {
+   "utterances": {
+       "repo": "lighkLife/wiki",
+       "issue-term": "pathname",
+       "label": "comments",
+       "theme": "github-light",
+       "crossorigin": "anonymous",
+   }
 }
