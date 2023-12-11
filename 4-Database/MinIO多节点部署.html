@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="常用中间件" href="../6-Middleware/index.html" /><link rel="prev" title="消息队列" href="index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="消息队列" href="../5-MQ/index.html" /><link rel="prev" title="MinIO介绍与单节点部署" href="MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>测试文件 - 知识库 文档</title>
+        <title>MinIO多节点部署 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -174,13 +174,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../3-Python-Shell-Go/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Database/index.html">数据库</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 数据库</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../4-Database/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../4-Database/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">数据库</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 数据库</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">MinIO多节点部署</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">消息队列</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 消息队列</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">测试文件</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-MQ/index.html">消息队列</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 消息队列</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5-MQ/test.html">测试文件</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6-Middleware/index.html">常用中间件</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 常用中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -225,15 +225,34 @@
           </label>
         </div>
         <article role="main">
-          <section id="id1">
-<h1>测试文件<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+          <section id="minio">
+<h1>MinIO多节点部署<a class="headerlink" href="#minio" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>环境准备<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <section id="id2">
-<h2>标题1<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>这是测试内容</p>
+<h3>网络和防火墙<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>开放 minio 服务端口
+开放 minio 管理端口</p>
 </section>
 <section id="id3">
-<h2>标题2<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>这也是测试内容哈哈哈哈</p>
+<h3>连续的主机名<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>MinIO 不支持分布式部署的非连续主机名或 IP 地址，创建服务器时，MinIO需要使用扩展符号{x…y}来表示一系列连续的 MinIO 主机。如 <code class="docutils literal notranslate"><span class="pre">minio-0{1...4}.example.com</span></code>对应：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">minio</span><span class="o">-</span><span class="mf">01.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">minio</span><span class="o">-</span><span class="mf">02.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">minio</span><span class="o">-</span><span class="mf">03.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">minio</span><span class="o">-</span><span class="mf">04.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>如果主机名或者IP不连续，可以配置<code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code>来保证主机名连续。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/hosts</span>
+
+<span class="mf">198.0.2.10</span>    <span class="n">minio</span><span class="o">-</span><span class="mf">01.</span><span class="n">example</span><span class="o">.</span><span class="n">net</span>
+<span class="mf">198.51.100.3</span>  <span class="n">minio</span><span class="o">-</span><span class="mf">02.</span><span class="n">example</span><span class="o">.</span><span class="n">net</span>
+<span class="mf">198.0.2.43</span>    <span class="n">minio</span><span class="o">-</span><span class="mf">03.</span><span class="n">example</span><span class="o">.</span><span class="n">net</span>
+<span class="mf">198.51.100.12</span> <span class="n">minio</span><span class="o">-</span><span class="mf">04.</span><span class="n">example</span><span class="o">.</span><span class="n">net</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -242,23 +261,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../6-Middleware/index.html">
+          <a class="next-page" href="../5-MQ/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">常用中间件</div>
+                <div class="title">消息队列</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">消息队列</div>
+                <div class="title">MinIO介绍与单节点部署</div>
                 
               </div>
             </a>
@@ -299,9 +318,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">测试文件</a><ul>
-<li><a class="reference internal" href="#id2">标题1</a></li>
-<li><a class="reference internal" href="#id3">标题2</a></li>
+<li><a class="reference internal" href="#">MinIO多节点部署</a><ul>
+<li><a class="reference internal" href="#id1">环境准备</a><ul>
+<li><a class="reference internal" href="#id2">网络和防火墙</a></li>
+<li><a class="reference internal" href="#id3">连续的主机名</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
