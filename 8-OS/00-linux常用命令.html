@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="例子" href="Examples.html" /><link rel="prev" title="使用 Sphinx 写作" href="test.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="操作系统" href="0-index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>MapReduce - 知识库 文档</title>
+        <title>linux常用命令 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -156,10 +156,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">朝花夕拾</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="test.html">使用 Sphinx 写作</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">MapReduce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html">例子</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/test.html">使用 Sphinx 写作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/Examples.html">例子</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -191,8 +191,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../7-IoT/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../8-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../8-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">操作系统</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">linux常用命令</a></li>
 </ul>
 </li>
 </ul>
@@ -229,43 +229,169 @@
           </label>
         </div>
         <article role="main">
-          <section id="mapreduce">
-<h1>MapReduce<a class="headerlink" href="#mapreduce" title="Link to this heading">#</a></h1>
+          <section id="linux">
+<h1>linux常用命令<a class="headerlink" href="#linux" title="Link to this heading">#</a></h1>
+<section id="grep">
+<h2><code class="docutils literal notranslate"><span class="pre">grep</span></code> 搜索关键字<a class="headerlink" href="#grep" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>-A NUM  –after-context=NUM</p></li>
+<li><p>-B NUM  –before-context=NUM</p></li>
+<li><p>-C NUM  -NUM –context=NUM</p></li>
+</ol>
+</section>
+<section id="top">
+<h2><code class="docutils literal notranslate"><span class="pre">top</span></code> 查看系统实时状况<a class="headerlink" href="#top" title="Link to this heading">#</a></h2>
 <section id="id1">
-<h2>1. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>是什么？<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p><strong>programing model</strong> and an associated <strong>implantation</strong> for processing and generating large data sets.</p>
+<h3>示例<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">top - 17:22:10 up 1 day,  6:38,  2 users,  load average</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.64, 3.47, 3.30</span>
+<span class="nt">Tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie</span>
+<span class="nt">%Cpu(s)</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">6.7 us,  2.3 sy,  0.0 ni, 90.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st</span>
+<span class="nt">MiB Mem </span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">11862.6 total,    339.1 free,   8378.9 used,   3144.5 buff/cache</span>
+<span class="nt">MiB Swap</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem</span><span class="w"> </span>
+
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">2275 lighk     20   0 6369944 439684  39808 S  16.6   3.6  77:34.25 gnome-shell</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">99353 lighk     20   0   10.9g   3.1g  81984 S   7.6  26.8  79:28.11 java</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">2068 lighk     20   0 1435040 103936  64888 S   7.0   0.9  81:56.48 Xorg</span>
+</pre></div>
+</div>
 </section>
 <section id="id2">
-<h2>2. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>解决了什么问题？<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>Simplified Data processing on Large Cluster.</p>
+<h3>启动时间和平均负载<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">top - 17:22:10 up 1 day,  6:38,  2 users,  load average</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.64, 3.47, 3.30</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>程序或窗口名，取决于展示模式</p></li>
+<li><p>当前时间和开机时长</p></li>
+<li><p>总用户数</p></li>
+<li><p>系统过去 1,5,15 分钟的平均负载</p></li>
+</ul>
+</section>
+<section id="cpu">
+<h3>任务和 CPU 状态<a class="headerlink" href="#cpu" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie</span>
+<span class="nt">%Cpu(s)</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">6.7 us,  2.3 sy,  0.0 ni, 90.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st</span>
+</pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>标识</p></th>
+<th class="head"><p>全称</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">us</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<td><p>没有设置 nice 值的用户进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">system</span></code></p></td>
+<td><p>内核进程运行时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ni</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nice</span></code></p></td>
+<td><p>设置了 nice 值的用户进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">idle</span></code></p></td>
+<td><p>内核空闲时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wa</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IO-wait</span></code></p></td>
+<td><p>IO 等待时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hi</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware</span> <span class="pre">interrupts</span></code></p></td>
+<td><p>硬件中断消耗时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">si</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">interrupts</span></code></p></td>
+<td><p>软件中断消耗时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">st</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stolen</span></code></p></td>
+<td><p>虚拟化层夺走的时间</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="id3">
-<h2>3. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>怎么解决的？<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>Users specify a map function that processes a key/value pair to generate a set of intermediate key/value
-pairs, and a reduce function that merges all intermediate values associated with the same intermediate key.</p>
+<h3>内存使用<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MiB Mem </span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">11862.6 total,    339.1 free,   8378.9 used,   3144.5 buff/cache</span>
+<span class="nt">MiB Swap</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem</span><span class="w"> </span>
+</pre></div>
+</div>
 </section>
 <section id="id4">
-<h2>4. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>由包含哪些组成部分？<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h3>进程信息<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>标识</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PID</p></td>
+<td><p>进程ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>USER</p></td>
+<td><p>用户名</p></td>
+</tr>
+<tr class="row-even"><td><p>PR</p></td>
+<td><p>优先级</p></td>
+</tr>
+<tr class="row-odd"><td><p>NI</p></td>
+<td><p>Nice 值，用于优先级控制</p></td>
+</tr>
+<tr class="row-even"><td><p>VIRT</p></td>
+<td><p>虚拟内存</p></td>
+</tr>
+<tr class="row-odd"><td><p>RES</p></td>
+<td><p>当前使用的物理内存（non-swapped）</p></td>
+</tr>
+<tr class="row-even"><td><p>SHR</p></td>
+<td><p>共享内存，RES的子集</p></td>
+</tr>
+<tr class="row-odd"><td><p>S</p></td>
+<td><p>进程状态</p></td>
+</tr>
+<tr class="row-even"><td><p>%CPU</p></td>
+<td><p>CPU使用率</p></td>
+</tr>
+<tr class="row-odd"><td><p>%MEM</p></td>
+<td><p>内存使用率</p></td>
+</tr>
+<tr class="row-even"><td><p>TIME+</p></td>
+<td><p>进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p>COMMAND</p></td>
+<td><p>命令名</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>进程状态：</p>
 <ul class="simple">
-<li><p>partitioning the input data</p></li>
-<li><p>scheduling the program’s execution across a set of machines</p></li>
-<li><p>handing machine failures</p></li>
-<li><p>managing the required inter-machine communication.</p></li>
+<li><p>D = uninterruptible sleep</p></li>
+<li><p>I = idle</p></li>
+<li><p>R = running</p></li>
+<li><p>S = sleeping</p></li>
+<li><p>T = stopped by job control signal</p></li>
+<li><p>t = stopped by debugger during trace</p></li>
+<li><p>Z = zombie</p></li>
 </ul>
 </section>
-<section id="example">
-<h2>5. Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>counting the number of occurrences of each word in a large collection of documents.</p></li>
-<li><p>distributed grep</p></li>
-<li><p>count of URL access frequency</p></li>
-<li><p>reverse web-link graph</p></li>
-<li><p>term-vector per host</p></li>
-</ul>
+<section id="id5">
+<h3>查看线程状态<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>top<span class="w"> </span>-p<span class="w"> </span><span class="nv">$PID</span><span class="w"> </span>-H
+</pre></div>
+</div>
 </section>
-<section id="execution-overview">
-<h2>6. Execution Overview<a class="headerlink" href="#execution-overview" title="Link to this heading">#</a></h2>
-<p><img alt="image-20220128145701204" src="https://lighk.oss-cn-beijing.aliyuncs.com/wyny/image-20220128145701204.png" /></p>
 </section>
 </section>
 
@@ -274,23 +400,15 @@ pairs, and a reduce function that merges all intermediate values associated with
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Examples.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">例子</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="test.html">
+          
+          <a class="prev-page" href="0-index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">使用 Sphinx 写作</div>
+                <div class="title">操作系统</div>
                 
               </div>
             </a>
@@ -331,13 +449,17 @@ pairs, and a reduce function that merges all intermediate values associated with
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">MapReduce</a><ul>
-<li><a class="reference internal" href="#id1">1. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>是什么？</a></li>
-<li><a class="reference internal" href="#id2">2. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>解决了什么问题？</a></li>
-<li><a class="reference internal" href="#id3">3. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>怎么解决的？</a></li>
-<li><a class="reference internal" href="#id4">4. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>由包含哪些组成部分？</a></li>
-<li><a class="reference internal" href="#example">5. Example</a></li>
-<li><a class="reference internal" href="#execution-overview">6. Execution Overview</a></li>
+<li><a class="reference internal" href="#">linux常用命令</a><ul>
+<li><a class="reference internal" href="#grep"><code class="docutils literal notranslate"><span class="pre">grep</span></code> 搜索关键字</a></li>
+<li><a class="reference internal" href="#top"><code class="docutils literal notranslate"><span class="pre">top</span></code> 查看系统实时状况</a><ul>
+<li><a class="reference internal" href="#id1">示例</a></li>
+<li><a class="reference internal" href="#id2">启动时间和平均负载</a></li>
+<li><a class="reference internal" href="#cpu">任务和 CPU 状态</a></li>
+<li><a class="reference internal" href="#id3">内存使用</a></li>
+<li><a class="reference internal" href="#id4">进程信息</a></li>
+<li><a class="reference internal" href="#id5">查看线程状态</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="例子" href="Examples.html" /><link rel="prev" title="使用 Sphinx 写作" href="test.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="linux常用命令" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" /><link rel="prev" title="测试文件" href="../7-IoT/test.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>MapReduce - 知识库 文档</title>
+        <title>操作系统 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -156,10 +156,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">朝花夕拾</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="test.html">使用 Sphinx 写作</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">MapReduce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html">例子</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/test.html">使用 Sphinx 写作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0-others/Examples.html">例子</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -191,8 +191,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../7-IoT/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../8-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../8-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">操作系统</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
 </ul>
 </li>
 </ul>
@@ -223,50 +223,23 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="mapreduce">
-<h1>MapReduce<a class="headerlink" href="#mapreduce" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>1. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>是什么？<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p><strong>programing model</strong> and an associated <strong>implantation</strong> for processing and generating large data sets.</p>
-</section>
-<section id="id2">
-<h2>2. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>解决了什么问题？<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>Simplified Data processing on Large Cluster.</p>
-</section>
-<section id="id3">
-<h2>3. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>怎么解决的？<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>Users specify a map function that processes a key/value pair to generate a set of intermediate key/value
-pairs, and a reduce function that merges all intermediate values associated with the same intermediate key.</p>
-</section>
-<section id="id4">
-<h2>4. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>由包含哪些组成部分？<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>partitioning the input data</p></li>
-<li><p>scheduling the program’s execution across a set of machines</p></li>
-<li><p>handing machine failures</p></li>
-<li><p>managing the required inter-machine communication.</p></li>
+          <section id="id1">
+<h1>操作系统<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html#grep"><code class="docutils literal notranslate"><span class="pre">grep</span></code> 搜索关键字</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html#top"><code class="docutils literal notranslate"><span class="pre">top</span></code> 查看系统实时状况</a></li>
 </ul>
-</section>
-<section id="example">
-<h2>5. Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>counting the number of occurrences of each word in a large collection of documents.</p></li>
-<li><p>distributed grep</p></li>
-<li><p>count of URL access frequency</p></li>
-<li><p>reverse web-link graph</p></li>
-<li><p>term-vector per host</p></li>
+</li>
 </ul>
-</section>
-<section id="execution-overview">
-<h2>6. Execution Overview<a class="headerlink" href="#execution-overview" title="Link to this heading">#</a></h2>
-<p><img alt="image-20220128145701204" src="https://lighk.oss-cn-beijing.aliyuncs.com/wyny/image-20220128145701204.png" /></p>
-</section>
+</div>
 </section>
 
         </article>
@@ -274,23 +247,23 @@ pairs, and a reduce function that merges all intermediate values associated with
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Examples.html">
+          <a class="next-page" href="00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">例子</div>
+                <div class="title">linux常用命令</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="test.html">
+          <a class="prev-page" href="../7-IoT/test.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">使用 Sphinx 写作</div>
+                <div class="title">测试文件</div>
                 
               </div>
             </a>
@@ -319,32 +292,8 @@ pairs, and a reduce function that merges all intermediate values associated with
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">MapReduce</a><ul>
-<li><a class="reference internal" href="#id1">1. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>是什么？</a></li>
-<li><a class="reference internal" href="#id2">2. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>解决了什么问题？</a></li>
-<li><a class="reference internal" href="#id3">3. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>怎么解决的？</a></li>
-<li><a class="reference internal" href="#id4">4. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>由包含哪些组成部分？</a></li>
-<li><a class="reference internal" href="#example">5. Example</a></li>
-<li><a class="reference internal" href="#execution-overview">6. Execution Overview</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
