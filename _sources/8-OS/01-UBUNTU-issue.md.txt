@@ -7,3 +7,5 @@
 > - 运行 `ibus-setup` 命令
 > - 切换到 Emoji 页面
 > - 修改或删除 `Ctrl-Shift-U` 快捷键
+
+![test](./img/images.jpeg)
