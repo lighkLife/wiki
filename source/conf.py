@@ -14,7 +14,10 @@ release = ''
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser', 'sphinx_comments']
+extensions = ['myst_parser', 
+              'sphinx_comments',
+              'sphinxcontrib.images',
+              ]
 
 source_suffix = [".rst", ".md"]
 templates_path = ['_templates']
@@ -45,6 +48,10 @@ html_theme_options = {
             "class": "",
         },
     ],
+}
+
+images_config = {
+    "override_image_directive": True
 }
 
 comments_config = {
