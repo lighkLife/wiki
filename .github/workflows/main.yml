@@ -19,8 +19,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: build doc
-        run: |
-          make html
+        run: make html
 
       - name: copy html
         run: touch build/html/.nojekyll
