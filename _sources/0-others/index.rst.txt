@@ -3,6 +3,6 @@
 .. toctree::
    :maxdepth: 2
 
-   test
+   sphinx
    map-reduce
    Examples

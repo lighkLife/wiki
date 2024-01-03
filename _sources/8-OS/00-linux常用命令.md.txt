@@ -83,4 +83,17 @@ MiB Swap:  15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem
 top -p $PID -H
 ```
 
+## journalctl 日志工具
+journalctl 是一个用于查询 systemd-journald 服务收集的日志的工具。以下是一些常用的 journalctl 命令用法：
+
+- 查看所有日志： journalctl
+- 查看特定服务的日志： journalctl -u [服务名称]
+- 查看某个时间段的日志： journalctl --since [时间] --until [时间]
+- 查看特定级别的日志： journalctl -p [级别]
+- 查看某个特定事件的日志： journalctl -k [事件ID]
+- 查看系统引导时的日志： journalctl -b
+- 查看最近n条日志： ournalctl -n [数字]
+- 实时查看日志： journalctl -f
+
+
 

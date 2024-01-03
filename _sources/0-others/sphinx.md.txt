@@ -1,4 +1,4 @@
-# 使用 Sphinx 写作
+# 使用 Sphinx 搭建知识库
 
 ## 介绍
 Sphinx 可以轻松创建智能且美观的文档。
@@ -31,6 +31,40 @@ pip install Sphinx
 
 ## 插件
 
+### 自动构建 sphinx-autobuild 
+作用：用于监听指定目录的文件变化，自动构建，“实时”生成 html。
+
+使用方式：
+```bash
+# 直接在 Makefie 中添加如下命令，再使用 make livehtml 即可
+livehtml:
+	sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)	
+```
 
 
 ## 语法
+
+### 警告
+```{note} 
+This is what the most basic admonitions look like.
+```
+支持的类型如下：
+- admonition
+- Attention
+- caution
+- danger
+- error
+- hint
+- important
+- note
+- seealso
+- tip
+- todo
+- warning
+
+自定义
+```{admonition} Another Custom Title
+:class: note
+
+Maaa! I made it look the same by setting the class.
+```

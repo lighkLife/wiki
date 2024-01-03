@@ -6,9 +6,10 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="MapReduce" href="map-reduce.html" /><link rel="prev" title="朝花夕拾" href="index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>使用 Sphinx 写作 - 知识库 文档</title>
+        <title>使用 Sphinx 搭建知识库 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="../_static/my_style.css?v=ec38ee01" />
     
@@ -157,13 +158,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">朝花夕拾</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">使用 Sphinx 写作</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">使用 Sphinx 搭建知识库</a></li>
 <li class="toctree-l2"><a class="reference internal" href="map-reduce.html">MapReduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Examples.html">例子</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/test.html">测试文件</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -194,6 +194,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../8-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/01-UBUNTU-issue.html">Ubuntu 使用问题记录</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9-Spring/0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9-Spring/00-spring-ioc.html">Spring IoC 容器</a></li>
 </ul>
 </li>
 </ul>
@@ -231,7 +235,7 @@
         </div>
         <article role="main">
           <section id="sphinx">
-<h1>使用 Sphinx 写作<a class="headerlink" href="#sphinx" title="Link to this heading">#</a></h1>
+<h1>使用 Sphinx 搭建知识库<a class="headerlink" href="#sphinx" title="Link to this heading">#</a></h1>
 <section id="id1">
 <h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>Sphinx 可以轻松创建智能且美观的文档。</p>
@@ -256,9 +260,46 @@
 </section>
 <section id="id3">
 <h2>插件<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="sphinx-autobuild">
+<h3>自动构建 sphinx-autobuild<a class="headerlink" href="#sphinx-autobuild" title="Link to this heading">#</a></h3>
+<p>作用：用于监听指定目录的文件变化，自动构建，“实时”生成 html。</p>
+<p>使用方式：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 直接在 Makefie 中添加如下命令，再使用 make livehtml 即可</span>
+livehtml:
+<span class="w">	</span>sphinx-autobuild<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>SOURCEDIR<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>BUILDDIR<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">$(</span>SPHINXOPTS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>O<span class="k">)</span><span class="w">	</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="id4">
 <h2>语法<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3>警告<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>This is what the most basic admonitions look like.</p>
+</div>
+<p>支持的类型如下：</p>
+<ul class="simple">
+<li><p>admonition</p></li>
+<li><p>Attention</p></li>
+<li><p>caution</p></li>
+<li><p>danger</p></li>
+<li><p>error</p></li>
+<li><p>hint</p></li>
+<li><p>important</p></li>
+<li><p>note</p></li>
+<li><p>seealso</p></li>
+<li><p>tip</p></li>
+<li><p>todo</p></li>
+<li><p>warning</p></li>
+</ul>
+<p>自定义</p>
+<div class="note admonition">
+<p class="admonition-title">Another Custom Title</p>
+<p>Maaa! I made it look the same by setting the class.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -324,11 +365,17 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">使用 Sphinx 写作</a><ul>
+<li><a class="reference internal" href="#">使用 Sphinx 搭建知识库</a><ul>
 <li><a class="reference internal" href="#id1">介绍</a></li>
 <li><a class="reference internal" href="#id2">安装</a></li>
-<li><a class="reference internal" href="#id3">插件</a></li>
-<li><a class="reference internal" href="#id4">语法</a></li>
+<li><a class="reference internal" href="#id3">插件</a><ul>
+<li><a class="reference internal" href="#sphinx-autobuild">自动构建 sphinx-autobuild</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">语法</a><ul>
+<li><a class="reference internal" href="#id5">警告</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -379,5 +426,7 @@ var addUtterances = () => {
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
     </body>
 </html>
