@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Spring 容器配置" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html" /><link rel="prev" title="Ubuntu 使用问题记录" href="../8-OS/01-UBUNTU-issue.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Spring IoC 容器" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html" /><link rel="prev" title="Ubuntu 使用问题记录" href="../8-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>Spring 框架 - 知识库 文档</title>
@@ -194,10 +194,11 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../8-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../8-OS/01-UBUNTU-issue.html">Ubuntu 使用问题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
 </ul>
 </li>
@@ -239,6 +240,19 @@
 <h1>Spring 框架<a class="headerlink" href="#spring" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id1">介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id2">容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#bean">Bean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id3">依赖</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id4">自动注入</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#bean-scope">Bean Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id5">自定义 Bean 的生命周期</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id6">启动关闭回调</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#aware">Aware 接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html#id7">容器扩展点</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html#id1">基于注解的容器配置</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html#java">基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置</a></li>
@@ -254,16 +268,16 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">
+          <a class="next-page" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Spring 容器配置</div>
+                <div class="title">Spring IoC 容器</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../8-OS/01-UBUNTU-issue.html">
+          <a class="prev-page" href="../8-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
