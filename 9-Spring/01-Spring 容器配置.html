@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="测试文件" href="test.html" /><link rel="prev" title="A fatal error SIGSEGV (0xb)" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="Spring 框架" href="0-index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Rust 相关 - 知识库 文档</title>
+        <title>Spring 容器配置 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -167,8 +167,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Rust 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="test.html">测试文件</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3-Python-Shell-Go/index.html">Python-Shell-Go</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Python-Shell-Go</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -197,8 +197,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/01-UBUNTU-issue.html">Ubuntu 使用问题记录</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../9-Spring/0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../9-Spring/01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Spring 容器配置</a></li>
 </ul>
 </li>
 </ul>
@@ -229,23 +229,69 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="rust">
-<h1>Rust 相关<a class="headerlink" href="#rust" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="test.html">测试文件</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="test.html#id2">标题1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html#id3">标题2</a></li>
+          <section id="spring">
+<h1>Spring 容器配置<a class="headerlink" href="#spring" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>基于注解的容器配置<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> ：自动注入，可设置在字段（支持数组和集合）、构造函数、setter 方法、任意名称的多个参数的方法上</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code>： 指定优先注入候选者</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Qualifier</span></code>：明确指定注入候选者，与 <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> 一起使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Resource</span></code>：通过 <code class="docutils literal notranslate"><span class="pre">name</span></code> 指定注入候选者，可设置在字段（支持数组和集合）、单参数的 setter 方法上</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code></p></li>
 </ul>
-</li>
+<p>本质上都是基于容器扩展点实现，如：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ConfigurationClassPostProcessor</span></code> （BeanFactoryPostProcessor）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AutowiredAnnotationBeanPostProcessor</span></code> （BeanPostProcessor）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CommonAnnotationBeanPostProcessor</span></code> （BeanPostProcessor）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PersistenceAnnotationBeanPostProcessor</span></code>（BeanPostProcessor）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EventListenerMethodProcessor</span></code>（BeanFactoryPostProcessor）</p></li>
 </ul>
+</section>
+<section id="java">
+<h2>基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置<a class="headerlink" href="#java" title="Link to this heading">#</a></h2>
+<p>使用<code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext</span></code>即可支持<code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 进行容器配置。</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>默认情况下，使用 Java 配置定义的具有公共 close 或 shutdown 方法的 bean 会自动注册销毁回调。如果您有公共 close 或 shutdown 方法，并且您不希望在容器关闭时调用它，则可以将 &#64;Bean(destroyMethod = “”) 添加到您的 bean定义禁用默认的 (inferred) 模式。</p>
 </div>
+</section>
+<section id="classpath-components">
+<h2>Classpath 扫描和 Components 管理<a class="headerlink" href="#classpath-components" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> 是元注解，&#64;Repository 、 &#64;Service 和 &#64;Controller 是使用 &#64;Component 标记的注解。</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Component</span><span class="w"> </span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>常规 Spring 组件中的 &#64;Bean 方法的处理方式与 Spring &#64;Configuration 类中对应方法的处理方式不同。
+&#64;Configuration 标记的类会使用 CGLIB 进行增强，来拦截方法和字段的调用。
+CGLIB 代理调用 &#64;Configuration 类中的 &#64;Bean 方法中的方法或字段创建对协作对象。</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// @Component</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FactoryMethodComponent</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="nd">@Bean</span><span class="w"> </span><span class="nd">@Scope</span><span class="p">(</span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">TestBean</span><span class="w"> </span><span class="nf">prototypeInstance</span><span class="p">(</span><span class="n">InjectionPoint</span><span class="w"> </span><span class="n">injectionPoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestBean</span><span class="p">(</span><span class="s">&quot;prototypeInstance for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">injectionPoint</span><span class="p">.</span><span class="na">getMember</span><span class="p">());</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -253,23 +299,15 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="test.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">测试文件</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">
+          
+          <a class="prev-page" href="0-index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></div>
+                <div class="title">Spring 框架</div>
                 
               </div>
             </a>
@@ -298,8 +336,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Spring 容器配置</a><ul>
+<li><a class="reference internal" href="#id1">基于注解的容器配置</a></li>
+<li><a class="reference internal" href="#java">基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置</a></li>
+<li><a class="reference internal" href="#classpath-components">Classpath 扫描和 Components 管理</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

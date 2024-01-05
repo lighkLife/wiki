@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Rust 相关" href="../2-Rust/index.html" /><link rel="prev" title="Java 相关" href="index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>&lt;no title&gt; - 知识库 文档</title>
+        <title>A fatal error SIGSEGV (0xb) - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -156,14 +156,15 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/sphinx.html">使用 Sphinx 搭建知识库</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/Examples.html">例子</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Java 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -197,7 +198,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../9-Spring/0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../9-Spring/00-spring-ioc.html">Spring IoC 容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-Spring/01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
 </ul>
 </li>
 </ul>
@@ -228,13 +229,53 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
+          <section id="a-fatal-error-sigsegv-0xb">
+<h1>A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#a-fatal-error-sigsegv-0xb" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>问题说明<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>JVM 直接崩溃退出，进程挂掉，发现报错日志：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fatal</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">detected</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="n">Environment</span><span class="p">:</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w">  </span><span class="n">SIGSEGV</span><span class="w"> </span><span class="p">(</span><span class="mh">0xb</span><span class="p">)</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">pc</span><span class="o">=</span><span class="mh">0x00007fb1568ea880</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="o">=</span><span class="mi">224048</span><span class="p">,</span><span class="w"> </span><span class="n">tid</span><span class="o">=</span><span class="mh">0x00007fb135ffb700</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="n">JRE</span><span class="w"> </span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="n">Java</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span><span class="w"> </span><span class="n">SE</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="nf">Environment</span><span class="w"> </span><span class="p">(</span><span class="mf">8.0_144</span><span class="o">-</span><span class="n">b01</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">build</span><span class="w"> </span><span class="mf">1.8.0_144</span><span class="o">-</span><span class="n">b01</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">VM</span><span class="p">:</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="nf">HotSpot</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span><span class="w"> </span><span class="mi">64</span><span class="o">-</span><span class="n">Bit</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="nf">VM</span><span class="w"> </span><span class="p">(</span><span class="mf">25.144</span><span class="o">-</span><span class="n">b01</span><span class="w"> </span><span class="n">mixed</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="n">linux</span><span class="o">-</span><span class="n">amd64</span><span class="w"> </span><span class="n">compressed</span><span class="w"> </span><span class="n">oops</span><span class="p">)</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Problematic</span><span class="w"> </span><span class="n">frame</span><span class="p">:</span>
+<span class="err">#</span><span class="w"> </span><span class="n">C</span><span class="w">  </span><span class="o">[</span><span class="n">libtaos</span><span class="p">.</span><span class="na">so</span><span class="mf">.2.4.0.41</span><span class="o">+</span><span class="mh">0x18c880</span><span class="o">]</span><span class="w">  </span><span class="n">rpcNotifyClient</span><span class="o">+</span><span class="mh">0xcf</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="n">Failed</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">core</span><span class="w"> </span><span class="n">dump</span><span class="p">.</span><span class="w"> </span><span class="n">Core</span><span class="w"> </span><span class="n">dumps</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">disabled</span><span class="p">.</span><span class="w"> </span><span class="n">To</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">core</span><span class="w"> </span><span class="n">dumping</span><span class="p">,</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="s">&quot;ulimit -c unlimited&quot;</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">again</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">would</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">submit</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">bug</span><span class="w"> </span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">visit</span><span class="p">:</span>
+<span class="err">#</span><span class="w">   </span><span class="n">http</span><span class="p">:</span><span class="c1">//bugreport.java.com/bugreport/crash.jsp</span>
+</pre></div>
+</div>
+</section>
+<section id="sigsegv-0xb">
+<h2><code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#sigsegv-0xb" title="Link to this heading">#</a></h2>
+<p>SIGSEGV 是一个信号，全称是 Segmentation Violation，中文翻译为“段错误”。这个信号是在 Unix-like 系统（包括 Linux 和 macOS）中用于通知进程出现了严重的内存访问错误。</p>
+<p>JVM（Java 虚拟机）在遇到某些严重错误时，如访问无效的内存地址，可能会向操作系统发送 SIGSEGV 信号。</p>
+<p>报错信息中的 pc=0x00007fb1568ea880 是引发 SIGSEGV 信号的指令的地址。这通常可以帮助你定位是哪个代码位置导致了这个问题。</p>
+<p>文言一心提示的解决方案如：</p>
+<ul class="simple">
+<li><p>使用调试器：使用像 gdb 这样的调试器来查看堆栈跟踪，从而定位到引发问题的具体代码行。</p></li>
+<li><p>检查 JVM 参数：确保你的 JVM 参数（如堆大小、栈大小等）设置得当。</p></li>
+<li><p>代码审查：检查你的代码，确保没有数组越界、空指针引用或其他可能导致无效内存访问的情况。</p></li>
+<li><p>更新 Java 版本：确保你使用的 Java 版本没有已知的相关问题。</p></li>
+<li><p>使用分析工具：使用如 VisualVM、JProfiler 或 YourKit 等工具来分析 JVM 的运行时状态，这可能有助于定位问题。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>操作系统日志查看<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
         </article>
       </div>
       <footer>
@@ -285,8 +326,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a><ul>
+<li><a class="reference internal" href="#id1">问题说明</a></li>
+<li><a class="reference internal" href="#sigsegv-0xb"><code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+<li><a class="reference internal" href="#id2">操作系统日志查看</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

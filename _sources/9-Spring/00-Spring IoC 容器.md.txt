@@ -149,3 +149,45 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 | `ServletConfigAware`             | 容器所运行的当前 `ServletConfig`。仅在 Web 感知的 Spring `ApplicationContext` 中有效。 | [Spring MVC](https://springdoc.cn/spring/web.html#mvc)|
 
 ## 容器扩展点
+
+**`BeanPostProcessor` 自定义 Bean**
+```java
+public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
+
+    // simply return the instantiated bean as-is
+    public Object postProcessBeforeInitialization(Object bean, String beanName) {
+        return bean; // we could potentially return any object reference here...
+    }
+
+    public Object postProcessAfterInitialization(Object bean, String beanName) {
+        System.out.println("Bean '" + beanName + "' created : " + bean.toString());
+        return bean;
+    }
+}
+```
+
+**`BeanFactoryPostProcessor` 定制配置元数据**
+```java
+public interface BeanFactoryPostProcessor {
+
+	/**
+	 * Modify the application context's internal bean factory after its standard
+	 * initialization. All bean definitions will have been loaded, but no beans
+	 * will have been instantiated yet. This allows for overriding or adding
+	 * properties even to eager-initializing beans.
+	 * @param beanFactory the bean factory used by the application context
+	 * @throws org.springframework.beans.BeansException in case of errors
+	 */
+	void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
+}
+```
+
+**`FactoryBean` 自定义实例化逻辑**
+`FactoryBean<T>` 接口提供三个方法。
+
+- `T getObject()`: 返回本工厂创建的对象的一个实例。该实例可能会被共享，这取决于该工厂是返回`singleton`还是`prototype`。
+
+- `boolean isSingleton()`: 如果这个 `FactoryBean` 返回 `singleton`，则返回 `true`，否则返回 `false`。这个方法的默认实现会返回 `true`。
+
+- `Class<?> getObjectType()`: 返回由 `getObject()` 方法返回的对象类型，如果事先不知道类型，则返回 `null`。
+

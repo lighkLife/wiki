@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="Spring 框架" href="0-index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>Spring IoC 容器 - 知识库 文档</title>
@@ -156,14 +156,15 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/sphinx.html">使用 Sphinx 搭建知识库</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/Examples.html">例子</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -196,8 +197,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/01-UBUNTU-issue.html">Ubuntu 使用问题记录</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Spring IoC 容器</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
 </ul>
 </li>
 </ul>
@@ -450,6 +451,43 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </section>
 <section id="id7">
 <h2>容器扩展点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">BeanPostProcessor</span></code> 自定义 Bean</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InstantiationTracingBeanPostProcessor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">BeanPostProcessor</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// simply return the instantiated bean as-is</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">postProcessBeforeInitialization</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span><span class="w"> </span><span class="c1">// we could potentially return any object reference here...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">postProcessAfterInitialization</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Bean &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beanName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39; created : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bean</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">BeanFactoryPostProcessor</span></code> 定制配置元数据</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BeanFactoryPostProcessor</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Modify the application context&#39;s internal bean factory after its standard</span>
+<span class="cm">	 * initialization. All bean definitions will have been loaded, but no beans</span>
+<span class="cm">	 * will have been instantiated yet. This allows for overriding or adding</span>
+<span class="cm">	 * properties even to eager-initializing beans.</span>
+<span class="cm">	 * @param beanFactory the bean factory used by the application context</span>
+<span class="cm">	 * @throws org.springframework.beans.BeansException in case of errors</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="kt">void</span><span class="w"> </span><span class="nf">postProcessBeanFactory</span><span class="p">(</span><span class="n">ConfigurableListableBeanFactory</span><span class="w"> </span><span class="n">beanFactory</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">BeansException</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 自定义实例化逻辑</strong>
+<code class="docutils literal notranslate"><span class="pre">FactoryBean&lt;T&gt;</span></code> 接口提供三个方法。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">getObject()</span></code>: 返回本工厂创建的对象的一个实例。该实例可能会被共享，这取决于该工厂是返回<code class="docutils literal notranslate"><span class="pre">singleton</span></code>还是<code class="docutils literal notranslate"><span class="pre">prototype</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">isSingleton()</span></code>: 如果这个 <code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">singleton</span></code>，则返回 <code class="docutils literal notranslate"><span class="pre">true</span></code>，否则返回 <code class="docutils literal notranslate"><span class="pre">false</span></code>。这个方法的默认实现会返回 <code class="docutils literal notranslate"><span class="pre">true</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Class&lt;?&gt;</span> <span class="pre">getObjectType()</span></code>: 返回由 <code class="docutils literal notranslate"><span class="pre">getObject()</span></code> 方法返回的对象类型，如果事先不知道类型，则返回 <code class="docutils literal notranslate"><span class="pre">null</span></code>。</p></li>
+</ul>
 </section>
 </section>
 
@@ -459,17 +497,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
         
         <div class="related-pages">
           
-          <a class="prev-page" href="0-index.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Spring 框架</div>
-                
-              </div>
-            </a>
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
