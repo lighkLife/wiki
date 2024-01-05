@@ -262,8 +262,24 @@
 <p>使用<code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext</span></code>即可支持<code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 进行容器配置。</p>
 <div class="admonition caution">
 <p class="admonition-title">小心</p>
-<p>默认情况下，使用 Java 配置定义的具有公共 close 或 shutdown 方法的 bean 会自动注册销毁回调。如果您有公共 close 或 shutdown 方法，并且您不希望在容器关闭时调用它，则可以将 &#64;Bean(destroyMethod = “”) 添加到您的 bean定义禁用默认的 (inferred) 模式。</p>
+<p>默认情况下，使用 Java 配置定义的具有公共 close 或 shutdown 方法的 bean 会自动注册销毁回调。如果您有公共 close 或 shutdown 方法，
+并且您不希望在容器关闭时调用它，则可以将 &#64;Bean(destroyMethod = “”) 添加到您的 bean定义禁用默认的 (inferred) 模式。</p>
 </div>
+<p>可以使用<code class="docutils literal notranslate"><span class="pre">&#64;Import</span></code>从另一个配置类加载 &#64;Bean 定义，类似于 <code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext.register</span></code> 方法</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">ConfigA</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigB</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="nd">@Bean</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">b</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>通过<code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code>可以实现有条件地包含 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类或 <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 方法，
+仅当 Spring Environment 中启用了特定配置文件时才使用 &#64;Profile 注释来激活 Bean。
+<code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code> 实际上是通过使用更灵活的注释 <code class="docutils literal notranslate"><span class="pre">&#64;Conditional</span></code> 来实现的</p>
 </section>
 <section id="classpath-components">
 <h2>Classpath 扫描和 Components 管理<a class="headerlink" href="#classpath-components" title="Link to this heading">#</a></h2>
@@ -278,16 +294,30 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>常规 Spring 组件中的 &#64;Bean 方法的处理方式与 Spring &#64;Configuration 类中对应方法的处理方式不同。
-&#64;Configuration 标记的类会使用 CGLIB 进行增强，来拦截方法和字段的调用。
-CGLIB 代理调用 &#64;Configuration 类中的 &#64;Bean 方法中的方法或字段创建对协作对象。</p>
+<p>常规 Spring 组件中的 <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 方法的处理方式与 Spring <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类中对应方法的处理方式不同。
+<code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类在启动时都使用 CGLIB 进行子类化。在子类中，子方法在调用父方法并创建新实例之前，
+首先检查容器中是否有任何缓存（作用域）bean，因此可以正确处理 bean 之间的依赖关系。</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// @Component</span>
 <span class="nd">@Configuration</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FactoryMethodComponent</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">	</span><span class="nd">@Bean</span><span class="w"> </span><span class="nd">@Scope</span><span class="p">(</span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">TestBean</span><span class="w"> </span><span class="nf">prototypeInstance</span><span class="p">(</span><span class="n">InjectionPoint</span><span class="w"> </span><span class="n">injectionPoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestBean</span><span class="p">(</span><span class="s">&quot;prototypeInstance for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">injectionPoint</span><span class="p">.</span><span class="na">getMember</span><span class="p">());</span>
+<span class="w">	</span><span class="nd">@Bean</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">clientService1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">ClientServiceImpl</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span>
+<span class="w">		</span><span class="n">clientService</span><span class="p">.</span><span class="na">setClientDao</span><span class="p">(</span><span class="n">clientDao</span><span class="p">());</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="nd">@Bean</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">clientService2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">ClientServiceImpl</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span>
+<span class="w">		</span><span class="n">clientService</span><span class="p">.</span><span class="na">setClientDao</span><span class="p">(</span><span class="n">clientDao</span><span class="p">());</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="nd">@Bean</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientDao</span><span class="w"> </span><span class="nf">clientDao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientDaoImpl</span><span class="p">();</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
