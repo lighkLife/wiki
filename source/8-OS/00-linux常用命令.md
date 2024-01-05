@@ -95,5 +95,18 @@ journalctl 是一个用于查询 systemd-journald 服务收集的日志的工具
 - 查看最近n条日志： ournalctl -n [数字]
 - 实时查看日志： journalctl -f
 
+## ftp
+ 
+``` shell 
+# 登录 
+ftp $host
 
+# 使用 utf-8
+quote opts utf8 on
+
+# 下载
+get filename
+# 上传
+put filename
+``` 
 
