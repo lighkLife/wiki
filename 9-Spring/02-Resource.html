@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="验证、数据绑定和类型转换" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" /><link rel="prev" title="Spring 容器配置" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>&lt;no title&gt; - 知识库 文档</title>
+        <title>Resource - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -156,7 +156,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/sphinx.html">使用 Sphinx 搭建知识库</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
@@ -197,9 +197,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Resource</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
 </ul>
 </li>
@@ -231,13 +232,36 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <div class="table-wrapper colwidths-auto docutils container">
+          <section id="resource">
+<h1>Resource<a class="headerlink" href="#resource" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>内置的一些实现<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>UrlResource</p></li>
+<li><p>ClassPathResource</p></li>
+<li><p>FileSystemResource</p></li>
+<li><p>PathResource</p></li>
+<li><p>ServletContextResource</p></li>
+<li><p>InputStreamResource</p></li>
+<li><p>ByteArrayResource</p></li>
+</ul>
+</section>
+<section id="resourceloader">
+<h2>使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 的实现获取资源<a class="headerlink" href="#resourceloader" title="Link to this heading">#</a></h2>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Resource</span><span class="w"> </span><span class="nf">getResource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">location</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ClassLoader</span><span class="w"> </span><span class="nf">getClassLoader</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>所有的 ApplicationContext 都实现了 ResourceLoader 接口，因此所有的 ApplicationContext 都可以用来获取资源实例。在一个特定的 ApplicationContext 上调用 getResource()，并且指定的位置路径没有特定的前缀，就会得到一个适合该特定 ApplicationContext 的 Resource （如 ClassPathXmlApplicationContext -&gt; ClassPathResource）。也可以指定前缀将 String 对象转换为特定 Resource ，具体策略如下：</p>
+<div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>前缀</p></th>
@@ -265,6 +289,62 @@
 </tbody>
 </table>
 </div>
+</section>
+<section id="resourcepatternresolver-resolving-a-location-pattern">
+<h2><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> resolving a location pattern<a class="headerlink" href="#resourcepatternresolver-resolving-a-location-pattern" title="Link to this heading">#</a></h2>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourcePatternResolver</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">CLASSPATH_ALL_URL_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classpath*:&quot;</span><span class="p">;</span>
+<span class="w">	</span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="nf">getResources</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">locationPattern</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>ResourcePatternResolver 支持解析位置模式，如 Ant-style path pattern。标准 ApplicationContext 中的默认 ResourceLoader 实际上是实现了 ResourcePatternResolver 接口的 PathMatchingResourcePatternResolver。</p>
+</section>
+<section id="id2">
+<h2>获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>可以通过多种方式获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code>，继而获取资源，如</p>
+<ul class="simple">
+<li><p>自动注入 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code></p></li>
+<li><p>实现 <code class="docutils literal notranslate"><span class="pre">ResourceLoaderAware</span></code> 接口</p></li>
+<li><p>实现 <code class="docutils literal notranslate"><span class="pre">ApplicationContextAware</span></code> 接口</p></li>
+</ul>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourceLoaderAware</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="kt">void</span><span class="w"> </span><span class="nf">setResourceLoader</span><span class="p">(</span><span class="n">ResourceLoader</span><span class="w"> </span><span class="n">resourceLoader</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p>可以通过实现 <code class="docutils literal notranslate"><span class="pre">ApplicationContextAware</span></code>，通过<code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code>来获取资源（因为<code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code>都实现了<code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code>接口）。</p></li>
+<li><p>如需通过通配符或特殊的<code class="docutils literal notranslate"><span class="pre">classpath*</span></code>加载多个资源，请使用<code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code>。</p></li>
+</ul>
+</div>
+</section>
+<section id="id3">
+<h2>Resource 作为依赖<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>如果资源时动态的，那么适合使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 来加载，但是，如果资源是静态的，那么可以借助<code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code>来获取资源，特殊的 <code class="docutils literal notranslate"><span class="pre">PropertyEditor</span></code> 会将字符串转换为 <code class="docutils literal notranslate"><span class="pre">Resource</span></code> 对象，如：</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="p">;</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">MyBean</span><span class="p">(</span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${template.path}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">template</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>需通过通配符或特殊的 <code class="docutils literal notranslate"><span class="pre">classpath*</span></code> 加载多个资源，如 <code class="docutils literal notranslate"><span class="pre">templates.path=classpath*:/config/templates/*.txt</span></code></p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="n">templates</span><span class="p">;</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">MyBean</span><span class="p">(</span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${templates.path}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="n">templates</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">templates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">templates</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
 
         </article>
       </div>
@@ -316,8 +396,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Resource</a><ul>
+<li><a class="reference internal" href="#id1">内置的一些实现</a></li>
+<li><a class="reference internal" href="#resourceloader">使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 的实现获取资源</a></li>
+<li><a class="reference internal" href="#resourcepatternresolver-resolving-a-location-pattern"><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> resolving a location pattern</a></li>
+<li><a class="reference internal" href="#id2">获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a></li>
+<li><a class="reference internal" href="#id3">Resource 作为依赖</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
