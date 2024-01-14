@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="02-Resource.html" /><link rel="prev" title="Spring IoC 容器" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="&lt;no title&gt;" href="02-Resource.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Spring 容器配置 - 知识库 文档</title>
+        <title>验证、数据绑定和类型转换 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -199,8 +199,8 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Spring 容器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">验证、数据绑定和类型转换</a></li>
 </ul>
 </li>
 </ul>
@@ -237,92 +237,125 @@
           </label>
         </div>
         <article role="main">
-          <section id="spring">
-<h1>Spring 容器配置<a class="headerlink" href="#spring" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>基于注解的容器配置<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+          <section id="id1">
+<h1>验证、数据绑定和类型转换<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>验证<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Spring 提供 <code class="docutils literal notranslate"><span class="pre">Validator</span></code> 接口来验证对象，如下的例子：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> ：自动注入，可设置在字段（支持数组和集合）、构造函数、setter 方法、任意名称的多个参数的方法上</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code>： 指定优先注入候选者</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Qualifier</span></code>：明确指定注入候选者，与 <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> 一起使用</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Resource</span></code>：通过 <code class="docutils literal notranslate"><span class="pre">name</span></code> 指定注入候选者，可设置在字段（支持数组和集合）、单参数的 setter 方法上</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">supports(Class)</span></code>: 这个 Validator 可以验证提供的 Class 的实例吗？</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate(Object,</span> <span class="pre">Errors)</span></code>: 验证给定的对象，如果出现验证错误，则用给定的 <code class="docutils literal notranslate"><span class="pre">Errors</span></code> 对象登记这些错误。</p></li>
 </ul>
-<p>本质上都是基于容器扩展点实现，如：</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PersonValidator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Validator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * This Validator validates only Person instances</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">supports</span><span class="p">(</span><span class="n">Class</span><span class="w"> </span><span class="n">clazz</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Person</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">clazz</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">Errors</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ValidationUtils</span><span class="p">.</span><span class="na">rejectIfEmpty</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name.empty&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getAge</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">rejectValue</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;negativevalue&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getAge</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">110</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">rejectValue</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;too.darn.old&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>数据绑定<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>数据绑定可以将用户输入绑定到目标对象，比如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> `User Input` --`DataBinder`--&gt; `Domain Model`。
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">BeanWrapper</span></code>提供了设置和获取属性值（单独或批量）、获取属性描述符、以及查询属性是否可读或可写的功能。<code class="docutils literal notranslate"><span class="pre">BeanWrapper</span></code> 通常不直接由应用程序代码使用，而是由 <code class="docutils literal notranslate"><span class="pre">DataBinder</span></code> 和 <code class="docutils literal notranslate"><span class="pre">BeanFactory</span></code> 使用。</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">BeanWrapper</span><span class="w"> </span><span class="n">company</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BeanWrapperImpl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Company</span><span class="p">());</span>
+<span class="c1">// setting the company name..</span>
+<span class="n">company</span><span class="p">.</span><span class="na">setPropertyValue</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some Company Inc.&quot;</span><span class="p">);</span>
+<span class="c1">// ... can also be done like this:</span>
+<span class="n">PropertyValue</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PropertyValue</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some Company Inc.&quot;</span><span class="p">);</span>
+<span class="n">company</span><span class="p">.</span><span class="na">setPropertyValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+
+<span class="c1">// ok, let&#39;s create the director and tie it to the company:</span>
+<span class="n">BeanWrapper</span><span class="w"> </span><span class="n">jim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BeanWrapperImpl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Employee</span><span class="p">());</span>
+<span class="n">jim</span><span class="p">.</span><span class="na">setPropertyValue</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Jim Stravinsky&quot;</span><span class="p">);</span>
+<span class="n">company</span><span class="p">.</span><span class="na">setPropertyValue</span><span class="p">(</span><span class="s">&quot;managingDirector&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jim</span><span class="p">.</span><span class="na">getWrappedInstance</span><span class="p">());</span>
+
+<span class="c1">// retrieving the salary of the managingDirector through the company</span>
+<span class="n">Float</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Float</span><span class="p">)</span><span class="w"> </span><span class="n">company</span><span class="p">.</span><span class="na">getPropertyValue</span><span class="p">(</span><span class="s">&quot;managingDirector.salary&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Spring使用 PropertyEditor 的概念来实现 Object 和 String 之间的转换。比如：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ConfigurationClassPostProcessor</span></code> （BeanFactoryPostProcessor）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AutowiredAnnotationBeanPostProcessor</span></code> （BeanPostProcessor）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CommonAnnotationBeanPostProcessor</span></code> （BeanPostProcessor）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PersistenceAnnotationBeanPostProcessor</span></code>（BeanPostProcessor）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">EventListenerMethodProcessor</span></code>（BeanFactoryPostProcessor）</p></li>
+<li><p>在Bean上设置属性是通过使用 PropertyEditor 实现完成的</p></li>
+<li><p>在Spring的MVC框架中，解析HTTP请求参数是通过使用各种 PropertyEditor 实现完成的。</p></li>
+</ul>
+<p>Spring有许多内置的 PropertyEditor 实现：</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>类</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ByteArrayPropertyEditor</span></code></p></td>
+<td><p>字节数组的编辑器。将字符串转换为其相应的字节表示。默认由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ClassEditor</span></code></p></td>
+<td><p>将代表类的字符串解析为实际的类，反之亦然。当没有找到一个类时，会抛出一个<code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code>。默认情况下，通过<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CustomBooleanEditor</span></code></p></td>
+<td><p>用于<code class="docutils literal notranslate"><span class="pre">Boolean</span></code>属性的可定制的属性编辑器。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册，但可以通过注册它的一个自定义实例作为自定义编辑器来重写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CustomCollectionEditor</span></code></p></td>
+<td><p>集合的属性编辑器，将任何源<code class="docutils literal notranslate"><span class="pre">Collection</span></code>转换为一个给定的目标<code class="docutils literal notranslate"><span class="pre">Collection</span></code>类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CustomDateEditor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">java.util.Date</span></code>的可定制属性编辑器，支持自定义<code class="docutils literal notranslate"><span class="pre">DateFormat</span></code>。默认情况下没有注册。必须根据需要由用户注册适当的格式（format）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CustomNumberEditor</span></code></p></td>
+<td><p>可定制的属性编辑器，用于任何<code class="docutils literal notranslate"><span class="pre">Number</span></code>子类，如<code class="docutils literal notranslate"><span class="pre">Integer</span></code>、<code class="docutils literal notranslate"><span class="pre">Long</span></code>、<code class="docutils literal notranslate"><span class="pre">Float</span></code>或<code class="docutils literal notranslate"><span class="pre">Double</span></code>。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册，但可以通过注册它的一个自定义实例作为自定义编辑器来重写。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FileEditor</span></code></p></td>
+<td><p>将字符串解析为<code class="docutils literal notranslate"><span class="pre">java.io.File</span></code>对象。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">InputStreamEditor</span></code></p></td>
+<td><p>单向属性编辑器，可以接受一个字符串并产生（通过中间的<code class="docutils literal notranslate"><span class="pre">ResourceEditor</span></code>和<code class="docutils literal notranslate"><span class="pre">Resource</span></code>）一个<code class="docutils literal notranslate"><span class="pre">InputStream</span></code>，这样<code class="docutils literal notranslate"><span class="pre">InputStream</span></code>属性可以直接设置为字符串。注意，默认用法不会为你关闭<code class="docutils literal notranslate"><span class="pre">InputStream</span></code>。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">LocaleEditor</span></code></p></td>
+<td><p>可以将字符串解析为<code class="docutils literal notranslate"><span class="pre">Locale</span></code>对象，反之亦然（字符串格式为<code class="docutils literal notranslate"><span class="pre">[language]_[country]_[variant]</span></code>，与<code class="docutils literal notranslate"><span class="pre">Locale</span></code>的<code class="docutils literal notranslate"><span class="pre">toString()</span></code>方法相同）。也接受空格作为分隔符，作为下划线的替代。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PatternEditor</span></code></p></td>
+<td><p>可以将字符串解析为<code class="docutils literal notranslate"><span class="pre">java.util.regex.Pattern</span></code>对象，反之亦然。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PropertiesEditor</span></code></p></td>
+<td><p>可以将字符串（格式为<code class="docutils literal notranslate"><span class="pre">java.util.Properties</span></code>类的javadoc中定义的格式）转换为<code class="docutils literal notranslate"><span class="pre">Properties</span></code>对象。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">StringTrimmerEditor</span></code></p></td>
+<td><p>trim 字符串的属性编辑器。可选择允许将空字符串转换为<code class="docutils literal notranslate"><span class="pre">null</span></code>值。默认情况下没有注册 - 必须由用户注册。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">URLEditor</span></code></p></td>
+<td><p>可以将一个 URL 的字符串表示解析为一个实际的<code class="docutils literal notranslate"><span class="pre">URL</span></code>对象。默认情况下，由<code class="docutils literal notranslate"><span class="pre">BeanWrapperImpl</span></code>注册。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如需注册其他的自定义 PropertyEditors，可以使用：</p>
+<ul class="simple">
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">ConfigurableBeanFactory</span></code> 接口的 <code class="docutils literal notranslate"><span class="pre">registerCustomEditor()</span></code> 方法</p></li>
+<li><p>使用特殊的Bean工厂后处理器 <code class="docutils literal notranslate"><span class="pre">CustomEditorConfigurer</span></code></p></li>
+<li><p>注入 <code class="docutils literal notranslate"><span class="pre">PropertyEditorRegistrar</span></code> 后，使用<code class="docutils literal notranslate"><span class="pre">registerCustomEditor</span></code>方法（推荐）</p></li>
 </ul>
 </section>
-<section id="java">
-<h2>基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置<a class="headerlink" href="#java" title="Link to this heading">#</a></h2>
-<p>使用<code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext</span></code>即可支持<code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 进行容器配置。</p>
-<div class="admonition caution">
-<p class="admonition-title">小心</p>
-<p>默认情况下，使用 Java 配置定义的具有公共 close 或 shutdown 方法的 bean 会自动注册销毁回调。如果您有公共 close 或 shutdown 方法，
-并且您不希望在容器关闭时调用它，则可以将 &#64;Bean(destroyMethod = “”) 添加到您的 bean定义禁用默认的 (inferred) 模式。</p>
-</div>
-<p>可以使用<code class="docutils literal notranslate"><span class="pre">&#64;Import</span></code>从另一个配置类加载 &#64;Bean 定义，类似于 <code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext.register</span></code> 方法</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
-<span class="nd">@Import</span><span class="p">(</span><span class="n">ConfigA</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigB</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">	</span><span class="nd">@Bean</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">b</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
-<span class="w">	</span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>通过<code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code>可以实现有条件地包含 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类或 <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 方法，
-仅当 Spring Environment 中启用了特定配置文件时才使用 &#64;Profile 注释来激活 Bean。
-<code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code> 实际上是通过使用更灵活的注释 <code class="docutils literal notranslate"><span class="pre">&#64;Conditional</span></code> 来实现的</p>
-</section>
-<section id="classpath-components">
-<h2>Classpath 扫描和 Components 管理<a class="headerlink" href="#classpath-components" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> 是元注解，&#64;Repository 、 &#64;Service 和 &#64;Controller 是使用 &#64;Component 标记的注解。</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
-<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
-<span class="nd">@Documented</span>
-<span class="nd">@Component</span><span class="w"> </span>
-<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">	</span><span class="c1">// ...</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>常规 Spring 组件中的 <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 方法的处理方式与 Spring <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类中对应方法的处理方式不同。
-<code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 类在启动时都使用 CGLIB 进行子类化。在子类中，子方法在调用父方法并创建新实例之前，
-首先检查容器中是否有任何缓存（作用域）bean，因此可以正确处理 bean 之间的依赖关系。</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// @Component</span>
-<span class="nd">@Configuration</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">	</span><span class="nd">@Bean</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">clientService1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="n">ClientServiceImpl</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span>
-<span class="w">		</span><span class="n">clientService</span><span class="p">.</span><span class="na">setClientDao</span><span class="p">(</span><span class="n">clientDao</span><span class="p">());</span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span>
-<span class="w">	</span><span class="p">}</span>
-
-<span class="w">	</span><span class="nd">@Bean</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">clientService2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="n">ClientServiceImpl</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span>
-<span class="w">		</span><span class="n">clientService</span><span class="p">.</span><span class="na">setClientDao</span><span class="p">(</span><span class="n">clientDao</span><span class="p">());</span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span>
-<span class="w">	</span><span class="p">}</span>
-
-<span class="w">	</span><span class="nd">@Bean</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientDao</span><span class="w"> </span><span class="nf">clientDao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientDaoImpl</span><span class="p">();</span>
-<span class="w">	</span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<section id="id4">
+<h2>类型转换<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -331,23 +364,15 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="02-Resource.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">&lt;no title&gt;</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">
+          
+          <a class="prev-page" href="02-Resource.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Spring IoC 容器</div>
+                <div class="title">&lt;no title&gt;</div>
                 
               </div>
             </a>
@@ -388,10 +413,10 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Spring 容器配置</a><ul>
-<li><a class="reference internal" href="#id1">基于注解的容器配置</a></li>
-<li><a class="reference internal" href="#java">基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置</a></li>
-<li><a class="reference internal" href="#classpath-components">Classpath 扫描和 Components 管理</a></li>
+<li><a class="reference internal" href="#">验证、数据绑定和类型转换</a><ul>
+<li><a class="reference internal" href="#id2">验证</a></li>
+<li><a class="reference internal" href="#id3">数据绑定</a></li>
+<li><a class="reference internal" href="#id4">类型转换</a></li>
 </ul>
 </li>
 </ul>
