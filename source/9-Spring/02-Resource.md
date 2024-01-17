@@ -27,7 +27,7 @@ public interface ResourceLoader {
 | https:     | `https://myserver/logo.png`      | 以 `URL` 形式加载。                |
 | (none)     | `/data/config.xml`               | 取决于底层的 `ApplicationContext'。 |
 
-## `ResourcePatternResolver` resolving a location pattern
+## `ResourcePatternResolver` 处理 `location pattern`
 
 ```Java
 public interface ResourcePatternResolver extends ResourceLoader {
