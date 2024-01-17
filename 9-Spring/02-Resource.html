@@ -290,8 +290,8 @@
 </table>
 </div>
 </section>
-<section id="resourcepatternresolver-resolving-a-location-pattern">
-<h2><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> resolving a location pattern<a class="headerlink" href="#resourcepatternresolver-resolving-a-location-pattern" title="Link to this heading">#</a></h2>
+<section id="resourcepatternresolver-location-pattern">
+<h2><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> 处理 <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">pattern</span></code><a class="headerlink" href="#resourcepatternresolver-location-pattern" title="Link to this heading">#</a></h2>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourcePatternResolver</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
 <span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">CLASSPATH_ALL_URL_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classpath*:&quot;</span><span class="p">;</span>
 <span class="w">	</span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="nf">getResources</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">locationPattern</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
@@ -411,7 +411,7 @@
 <li><a class="reference internal" href="#">Resource</a><ul>
 <li><a class="reference internal" href="#id1">内置的一些实现</a></li>
 <li><a class="reference internal" href="#resourceloader">使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 的实现获取资源</a></li>
-<li><a class="reference internal" href="#resourcepatternresolver-resolving-a-location-pattern"><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> resolving a location pattern</a></li>
+<li><a class="reference internal" href="#resourcepatternresolver-location-pattern"><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> 处理 <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">pattern</span></code></a></li>
 <li><a class="reference internal" href="#id2">获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a></li>
 <li><a class="reference internal" href="#id3">Resource 作为依赖</a></li>
 </ul>
