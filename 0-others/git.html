@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="数据库" href="../4-Database/index.html" /><link rel="prev" title="Python-Shell-Go" href="index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Java 相关" href="../1-Java/index.html" /><link rel="prev" title="例子" href="Examples.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>测试文件 - 知识库 文档</title>
+        <title>Git 使用记录 - 知识库 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -157,11 +157,11 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../0-others/index.html">朝花夕拾</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../0-others/sphinx.html">使用 Sphinx 搭建知识库</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0-others/map-reduce.html">MapReduce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0-others/Examples.html">例子</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0-others/git.html">Git 使用记录</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">朝花夕拾</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 朝花夕拾</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map-reduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">例子</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Git 使用记录</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -172,8 +172,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Python-Shell-Go</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Python-Shell-Go</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">测试文件</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-Python-Shell-Go/index.html">Python-Shell-Go</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Python-Shell-Go</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3-Python-Shell-Go/test.html">测试文件</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../4-Database/index.html">数据库</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 数据库</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -241,15 +241,54 @@
           </label>
         </div>
         <article role="main">
-          <section id="id1">
-<h1>测试文件<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+          <section id="git">
+<h1>Git 使用记录<a class="headerlink" href="#git" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>记住用户名密码<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span>store
+</pre></div>
+</div>
+</section>
 <section id="id2">
-<h2>标题1<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>这是测试内容</p>
+<h2>设置代理<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>http.proxy<span class="w"> </span>http://127.0.0.1:7890
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>https.proxy<span class="w"> </span>http://127.0.0.1:7890
+</pre></div>
+</div>
+</section>
+<section id="ssh-github">
+<h2>ssh 方式访问 github 失败<a class="headerlink" href="#ssh-github" title="Link to this heading">#</a></h2>
+<p>直接配置 <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Host<span class="w"> </span>github.com
+<span class="w">    </span>Hostname<span class="w"> </span>ssh.github.com
+<span class="w">    </span>Port<span class="w"> </span><span class="m">443</span>
+<span class="w">    </span><span class="c1"># user</span>
+<span class="w">    </span>User<span class="w"> </span>lighk
+</pre></div>
+</div>
 </section>
 <section id="id3">
-<h2>标题2<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>这也是测试内容哈哈哈哈</p>
+<h2>覆盖更新<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>--all
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>origin/master
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>舍弃追踪某个文件<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 舍弃追踪 </span>
+git<span class="w"> </span>update-index<span class="w"> </span>--assume-unchanged<span class="w"> </span>utils/DB.py
+
+<span class="c1"># 继续追踪</span>
+git<span class="w"> </span>update-index<span class="w"> </span>--no-assume-unchanged<span class="w"> </span>utils/DB.py
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>历史树别名<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">&quot;log --graph --all --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date=relative&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -258,23 +297,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../4-Database/index.html">
+          <a class="next-page" href="../1-Java/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">数据库</div>
+                <div class="title">Java 相关</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="Examples.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Python-Shell-Go</div>
+                <div class="title">例子</div>
                 
               </div>
             </a>
@@ -315,9 +354,13 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">测试文件</a><ul>
-<li><a class="reference internal" href="#id2">标题1</a></li>
-<li><a class="reference internal" href="#id3">标题2</a></li>
+<li><a class="reference internal" href="#">Git 使用记录</a><ul>
+<li><a class="reference internal" href="#id1">记住用户名密码</a></li>
+<li><a class="reference internal" href="#id2">设置代理</a></li>
+<li><a class="reference internal" href="#ssh-github">ssh 方式访问 github 失败</a></li>
+<li><a class="reference internal" href="#id3">覆盖更新</a></li>
+<li><a class="reference internal" href="#id4">舍弃追踪某个文件</a></li>
+<li><a class="reference internal" href="#id5">历史树别名</a></li>
 </ul>
 </li>
 </ul>
