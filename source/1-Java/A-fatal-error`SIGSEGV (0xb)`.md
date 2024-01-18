@@ -3,7 +3,7 @@
 ## 问题说明
 
 JVM 直接崩溃退出，进程挂掉，发现报错日志：
-```java
+```
 #
 # A fatal error has been detected by the Java Runtime Environment:
 #

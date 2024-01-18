@@ -150,7 +150,7 @@ public interface SmartLifecycle extends Lifecycle, Phased {
 
 ## 容器扩展点
 
-**`BeanPostProcessor` 自定义 Bean**
+### `BeanPostProcessor` 自定义 Bean
 ```java
 public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
 
@@ -166,7 +166,7 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
 }
 ```
 
-**`BeanFactoryPostProcessor` 定制配置元数据**
+### `BeanFactoryPostProcessor` 定制配置元数据
 ```java
 public interface BeanFactoryPostProcessor {
 
@@ -182,9 +182,8 @@ public interface BeanFactoryPostProcessor {
 }
 ```
 
-**`FactoryBean` 自定义实例化逻辑**
+### `FactoryBean` 自定义实例化逻辑
 `FactoryBean<T>` 接口提供三个方法。
-
 - `T getObject()`: 返回本工厂创建的对象的一个实例。该实例可能会被共享，这取决于该工厂是返回`singleton`还是`prototype`。
 
 - `boolean isSingleton()`: 如果这个 `FactoryBean` 返回 `singleton`，则返回 `true`，否则返回 `false`。这个方法的默认实现会返回 `true`。

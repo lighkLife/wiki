@@ -6,3 +6,4 @@
    sphinx
    map-reduce
    Examples
+   git
