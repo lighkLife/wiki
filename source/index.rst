@@ -9,13 +9,12 @@ Welcome to lighk-wiki
 .. toctree::
    :maxdepth: 2
 
-   0-others/index
-   1-Java/index
+   1-Java/0-index
    2-Rust/index
-   3-Python-Shell-Go/index
-   4-Database/index
-   5-MQ/index
-   6-Middleware/index
-   7-IoT/index
-   8-OS/0-index
-   9-Spring/0-index
+   3-其他语言/index
+   4-Middleware/0-index
+   5-IoT/index
+   6-OS/0-index
+   7-Spring/0-index
+   8-设计模式/0-index
+   9-寻芳拾香/0-index

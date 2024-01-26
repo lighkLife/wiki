@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = '知识库'
+project = ''
 copyright = '2023, lighk'
 author = 'lighk'
 release = ''
@@ -17,7 +17,9 @@ release = ''
 extensions = ['myst_parser', 
               'sphinx_comments',
               'sphinxcontrib.images',
-              ]
+              'sphinx.ext.todo',
+]
+todo_include_todos = True
 
 source_suffix = [".rst", ".md"]
 templates_path = ['_templates']
@@ -63,3 +65,7 @@ comments_config = {
        "crossorigin": "anonymous",
    }
 }
+
+myst_enable_extensions = [
+        "attrs_block",
+]
