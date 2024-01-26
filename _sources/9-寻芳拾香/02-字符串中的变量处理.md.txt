@@ -1,0 +1,35 @@
+# 字符串中的变量处理
+
+## 需求描述
+
+支持动态设置 SQL 中的 Where 条件。
+
+### 需求具象化
+
+使用特殊符号来设置列和参数，例如：`$<name> = #{myName} and $<sex> = #{mySex}`
+- 列名：`$<...>` 
+- 参数：`#{myName}`
+
+然后就可以将需求具体化为：
+1.将所有的参数提取出来，并找出参数对应的列名
+2.将所有的列名表达式替换为列名
+3.将所有的参数表达式替换参数值，并根据类型添加"'"
+
+## 方案一：使用字符串搜索 
+
+### 思路
+1.识别所有的列名表达式： arg，形如 “@{...}”, 并记录其开始位置：{argIndex, arg}}
+2.识别所有的参数表达式: column，形如 “#{...}”, 并记录其位置：{columnIndex, column}
+3.将列名和参数合并成对:
+
+```Java
+int min = currentArgIndex;
+String expectedColumn = null;
+for(pair: allColumnPair){
+	int diff = currentArgIndex - pair.columnIndex;
+	if(diff > 0 && diff < min) {
+		min = diff;
+		expectedColumn = pair.column;
+	}
+}
+```

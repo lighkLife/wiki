@@ -1,0 +1,475 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="AOP编程" href="05-AOP%E7%BC%96%E7%A8%8B.html" /><link rel="prev" title="验证、数据绑定和类型转换" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>SpEL - 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/my_style.css?v=ec38ee01" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">  文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">  文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/00-Q%26A.html">Q&amp;A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html">JDK 动态代理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/02-Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java四种引用</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/index.html">其他语言</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 其他语言</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/0-index.html">数据库</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 数据库</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-IoT/index.html">物联网</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 物联网</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5-IoT/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">SpEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-AOP%E7%BC%96%E7%A8%8B.html">AOP编程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/0-index.html">寻芳拾香</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 寻芳拾香</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="spel">
+<h1>SpEL<a class="headerlink" href="#spel" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>使用 SpEL<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// 方式一</span>
+<span class="n">ExpressionParser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SpelExpressionParser</span><span class="p">();</span>
+<span class="n">Expression</span><span class="w"> </span><span class="n">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="p">.</span><span class="na">parseExpression</span><span class="p">(</span><span class="s">&quot;&#39;Hello World&#39;&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">exp</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span>
+
+<span class="c1">// 方式二</span>
+<span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;#{ systemProperties[&#39;user.region&#39;] }&quot;</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">defaultLocale</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>SpEL 支持两种 <code class="docutils literal notranslate"><span class="pre">EvaluationContext</span></code> 用于计算表达式（解析属性、方法、字段，执行类型转换）：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SimpleEvaluationContext</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StandardEvaluationContext</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SimpleEvaluationContext</span></code> 是 SpEL 语言语法的子集，不包括 Java 类型引用、构造函数和 bean 引用，
+还需要显式选择表达式中属性和方法的支持级别。</p>
+<p>可以使用解析器配置对象 ( <code class="docutils literal notranslate"><span class="pre">SpelParserConfiguration</span></code> ) 来配置 SpEL 表达式解析器。可以实现：</p>
+<ul class="simple">
+<li><p>编译模式</p></li>
+<li><p>ClassLoader</p></li>
+<li><p>是否自动为 null 引用创建对象</p></li>
+<li><p>是否自动增加长集合大小</p></li>
+<li><p>集合自动增加的极限</p></li>
+</ul>
+<p>表达式长度最大为 10,000 个字符，可以通过参数 <code class="docutils literal notranslate"><span class="pre">spring.context.expression.maxLength</span></code> 修改。</p>
+</section>
+<section id="id2">
+<h2>编译表达式<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>可以通过 <code class="docutils literal notranslate"><span class="pre">spring.expression.compiler.mode</span></code> 配置设置模式</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">SpelCompilerMode</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * The compiler is switched off; this is the default.</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="n">OFF</span><span class="p">,</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * In immediate mode, expressions are compiled as soon as possible (usually after 1 interpreted run).</span>
+<span class="cm">	 * If a compiled expression fails it will throw an exception to the caller.</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="n">IMMEDIATE</span><span class="p">,</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * In mixed mode, expression evaluation silently switches between interpreted and compiled over time.</span>
+<span class="cm">	 * After a number of runs the expression gets compiled. If it later fails (possibly due to inferred</span>
+<span class="cm">	 * type information changing) then that will be caught internally and the system switches back to</span>
+<span class="cm">	 * interpreted mode. It may subsequently compile it again later.</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="n">MIXED</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>IMMEDIATE 模式之所以存在，是因为 MIXED 模式可能会导致具有副作用的表达式出现问题。如果编译表达式在部分成功后崩溃，则它可能已经做了一些影响系统状态的事情。如果发生这种情况，调用者可能不希望它以解释模式静默地重新运行，因为表达式的一部分可能会运行两次。</p>
+<p>无法编译以下类型的表达式：</p>
+<ul class="simple">
+<li><p>包含赋值</p></li>
+<li><p>依赖转换服务（conversion）</p></li>
+<li><p>使用自定义的 resolvers 或 accessors</p></li>
+<li><p>使用集合选择器或投影（ selection or projection）</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>SpEL语法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>对象属性： <code class="docutils literal notranslate"><span class="pre">user.name.firstName</span></code></p></li>
+<li><p>数组、列表访问： <code class="docutils literal notranslate"><span class="pre">array[3]</span></code></p></li>
+<li><p>map 访问： <code class="docutils literal notranslate"><span class="pre">map['key1']</span></code></p></li>
+<li><p>创建内部列表： <code class="docutils literal notranslate"><span class="pre">{1,2,3,4}</span></code>, <code class="docutils literal notranslate"><span class="pre">{{'a','b'},{'x','y'}}</span></code></p></li>
+<li><p>创建内部映射： <code class="docutils literal notranslate"><span class="pre">{name:'Nikola',dob:'10-July-1856'}</span></code>，<code class="docutils literal notranslate"><span class="pre">{:}</span></code> 代表空映射</p></li>
+<li><p>方法调用：<code class="docutils literal notranslate"><span class="pre">'abc'.substring(1,</span> <span class="pre">3)</span></code>，<code class="docutils literal notranslate"><span class="pre">isMember('Mihajlo</span> <span class="pre">Pupin')</span></code></p></li>
+<li><p>赋值：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">parser.parseExpression(&quot;name&quot;).setValue(context,</span> <span class="pre">inventor,</span> <span class="pre">&quot;Aleksandar</span> <span class="pre">Seovic&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parser.parseExpression(&quot;name</span> <span class="pre">=</span> <span class="pre">'Aleksandar</span> <span class="pre">Seovic'&quot;).getValue(context,</span> <span class="pre">inventor,</span> <span class="pre">String.class)</span></code></p></li>
+</ul>
+</li>
+<li><p>变量：<code class="docutils literal notranslate"><span class="pre">newPrimes</span> <span class="pre">=</span> <span class="pre">#primes</span></code>，内置变量<code class="docutils literal notranslate"><span class="pre">#this</span></code>和<code class="docutils literal notranslate"><span class="pre">#root</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">#primes.?[#this</span> <span class="pre">&gt;</span> <span class="pre">10]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#root.primes</span></code></p></li>
+<li><p>需要先设置<code class="docutils literal notranslate"><span class="pre">context.setVariable(&quot;primes&quot;,</span> <span class="pre">primes);</span></code></p></li>
+</ul>
+</li>
+<li><p>函数：<code class="docutils literal notranslate"><span class="pre">#reverseString('hello')</span></code></p>
+<ul>
+<li><p>需要先注册，<code class="docutils literal notranslate"><span class="pre">context.setVariable(&quot;reverseString&quot;,StringUtils.class.getDeclaredMethod(&quot;reverseString&quot;,</span> <span class="pre">String.class));</span></code></p></li>
+</ul>
+</li>
+<li><p>引用 Bean：<code class="docutils literal notranslate"><span class="pre">&#64;serviceImplA</span></code></p>
+<ul>
+<li><p>需要设置 <code class="docutils literal notranslate"><span class="pre">context.setBeanResolver(new</span> <span class="pre">BeanFactoryResolver(beanFactory));</span></code></p></li>
+</ul>
+</li>
+<li><p>Elvis 操作符：<code class="docutils literal notranslate"><span class="pre">name?:'Unknown'</span></code></p>
+<ul>
+<li><p>等价于 <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">!=</span> <span class="pre">null</span> <span class="pre">?</span> <span class="pre">name</span> <span class="pre">:</span> <span class="pre">&quot;Unknown&quot;</span></code>（像猫王的发型，所以叫这个名字，🤯）</p></li>
+</ul>
+</li>
+<li><p>安全访问符： <code class="docutils literal notranslate"><span class="pre">placeOfBirth?.city</span></code></p></li>
+<li><p>集合选择器： <code class="docutils literal notranslate"><span class="pre">members.?[nationality</span> <span class="pre">==</span> <span class="pre">'Serbian']</span></code>， <code class="docutils literal notranslate"><span class="pre">map.?[value&lt;27]</span></code>（key 和 value）</p></li>
+<li><p>集合投影： <code class="docutils literal notranslate"><span class="pre">&quot;members.![placeOfBirth.city]</span></code>（等价于 Java 的 stream().map(…).collect()）</p></li>
+<li><p>表达式模板： <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">number</span> <span class="pre">is</span> <span class="pre">#{T(java.lang.Math).random()}</span></code></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="05-AOP%E7%BC%96%E7%A8%8B.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">AOP编程</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">验证、数据绑定和类型转换</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, lighk
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/lighkLife" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">SpEL</a><ul>
+<li><a class="reference internal" href="#id1">使用 SpEL</a></li>
+<li><a class="reference internal" href="#id2">编译表达式</a></li>
+<li><a class="reference internal" href="#id3">SpEL语法</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=7d86a446"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "lighkLife/wiki");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    </body>
+</html>

@@ -1,0 +1,637 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Spring 容器配置" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html" /><link rel="prev" title="Spring 框架" href="0-index.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Spring IoC 容器 - 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/my_style.css?v=ec38ee01" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">  文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">  文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/00-Q%26A.html">Q&amp;A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html">JDK 动态代理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/02-Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java四种引用</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/index.html">其他语言</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 其他语言</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/0-index.html">数据库</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 数据库</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-IoT/index.html">物联网</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 物联网</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5-IoT/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Spring 框架</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Spring IoC 容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-SpEL.html">SpEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-AOP%E7%BC%96%E7%A8%8B.html">AOP编程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/0-index.html">寻芳拾香</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 寻芳拾香</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="spring-ioc">
+<h1>Spring IoC 容器<a class="headerlink" href="#spring-ioc" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Spring 使用依赖注入（Dependency injection ）来实现控制反转（ Inversion of Control ）原则。
+对象可以通过以下方式定义其依赖项：</p>
+<ul class="simple">
+<li><p>构造方法的参数</p></li>
+<li><p>工厂方法的参数</p></li>
+<li><p>对象实例的属性</p></li>
+</ul>
+<p>IoC 容器在创建 Bean 时，注入这些依赖项。通过类的原始构造方法或一些机制（如服务定位器模式）控制 bean 本身依赖的位置和实例化，这个过程从根本上来说是 bean 本身的逆过程（因此得名“控制反转”）</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>参考 <a class="reference external" href="https://stackoverflow.com/questions/6550700/inversion-of-control-vs-dependency-injection">Inversion of Control vs Dependency Injection</a></p>
+<p><strong>控制反转是什么，反转了什么？</strong><br>
+控制反转就是将顺序编写的代码转变为委托结构，反转的是程序控制流，不是由程序员控制程序的流程，而是由外部源（框架、服务、其他组件）控制程序的流程。
+控制反转是框架与库不同的关键部分。库本质上是一组可以调用的函数或类，每个调用都会执行一些工作并将控制权返回给客户端。</p>
+<p><strong>依赖注入是什么，与控制反转有什么关系？</strong><br>
+Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是提供对象所需的对象（其依赖项），而不是让它自己构造它们。</p>
+</div>
+</section>
+<section id="id2">
+<h2>容器<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">org.springframework.beans</span></code> 和 <code class="docutils literal notranslate"><span class="pre">org.springframework.context</span></code> 包是 Spring Framework 的 IoC 容器的基础。BeanFactory 提供了配置框架和基本功能， ApplicationContext 添加了更多企业特定的功能。</p>
+<p><img alt="ApplicationContexta" src="../_images/ApplicationContext.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">org.springframework.context.ApplicationContext</span></code> 接口代表 Spring IoC 容器，负责实例化、配置和组装 bean。容器通过读取配置元数据来获取要实例化、配置和组装哪些对象的指令。配置元数据以 XML、Java 注释或 Java 代码表示。</p>
+<p><img alt="Alt text" src="../_images/The-Spring-IoC-container.png" /></p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>ApplicationContext 提供了 getBean 方法来获取 bean 实例，但是官网并不建议在应用程序代码调用 getBean() 方法，而是使用依赖注入来获取所依赖的 bean 实例。</p>
+</div>
+</section>
+<section id="bean">
+<h2>Bean<a class="headerlink" href="#bean" title="Link to this heading">#</a></h2>
+<p>由 Spring IoC 容器实例化、组装和管理的对象，就成为 Spring bean。在容器本身内，这些 bean 定义表示为 BeanDefinition 对象。bean 的定义本质上是创建一个或多个对象的配方，可以通过以下方式实例化 bean</p>
+<ul class="simple">
+<li><p>构造方法</p></li>
+<li><p>静态工厂方法</p></li>
+<li><p>实例工程方法</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>依赖<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>DI 存在两种主要方式：</p>
+<ul class="simple">
+<li><p>基于构造函数的依赖注入</p></li>
+<li><p>基于 Setter 的依赖注入</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong>循环依赖</strong>
+若A、B相互依赖，则可以基于 Setter 进行依赖注入，Spring 会强制其中一个 Bean 在完全初始化之前注入另一个 Bean。</p>
+</div>
+</section>
+<section id="id4">
+<h2>自动注入<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>模式</p></th>
+<th class="head"><p>解释</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">no</span></code></p></td>
+<td><p>（默认）没有自动注入。Bean引用必须由 <code class="docutils literal notranslate"><span class="pre">ref</span></code> 元素来定义。对于大型部署来说，不建议改变默认设置，因为明确指定协作者会带来更大的控制力和清晰度。在某种程度上，它记录了一个系统的结构。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">byName</span></code></p></td>
+<td><p>通过属性名称进行自动注入。Spring寻找一个与需要自动注入的属性同名的Bean。例如，如果一个Bean定义被设置为按名称自动注入，并且它包含一个 <code class="docutils literal notranslate"><span class="pre">master</span></code> 属性（也就是说，它有一个 <code class="docutils literal notranslate"><span class="pre">setMaster(..)</span></code> 方法），Spring会寻找一个名为 <code class="docutils literal notranslate"><span class="pre">master</span></code> 的Bean定义并使用它来设置该属性。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">byType</span></code></p></td>
+<td><p>如果容器中正好有一个 property 类型的 bean 存在，就可以自动注入该属性。如果存在一个以上的bean，就会抛出一个致命的 exception，这表明你不能对该bean使用 <code class="docutils literal notranslate"><span class="pre">byType</span></code> 自动注入。如果没有匹配的 bean，就不会发生任何事情（该属性没有被设置）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">constructor</span></code></p></td>
+<td><p>类似于 <code class="docutils literal notranslate"><span class="pre">byType</span></code>，但适用于构造函数参数。如果容器中没有一个构造函数参数类型的bean，就会产生一个致命的错误。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>通过 byType 或 constructor 自动注入模式，可以将数组（array）和泛型集合（collection）注入。</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// byType</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">LogicHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">;</span>
+
+<span class="c1">// constructor</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BeanConstructor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BeanConstructor</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">LogicHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bean-scope">
+<h2>Bean Scope<a class="headerlink" href="#bean-scope" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>singleton</p></li>
+<li><p>prototype</p></li>
+<li><p>request</p></li>
+<li><p>session</p></li>
+<li><p>application</p></li>
+<li><p>websocket</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>spring 提供了 thread scope（<code class="docutils literal notranslate"><span class="pre">SimpleThreadScope</span></code>）, 但默认没有注册，如需要使用，可通过 <code class="docutils literal notranslate"><span class="pre">ConfigurableBeanFactory</span></code>接口上声明的<code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">registerScope(String</span> <span class="pre">scopeName,</span> <span class="pre">Scope</span> <span class="pre">scope);</span></code> 注册。需要自定义其他 scope ，先实现 <code class="docutils literal notranslate"><span class="pre">Scope</span></code> 接口，再<code class="docutils literal notranslate"><span class="pre">registerScope</span></code> 注册，就可以通过<code class="docutils literal notranslate"><span class="pre">&#64;Scope(&quot;customScope&quot;)</span></code>使用了。</p>
+</div>
+</section>
+<section id="id5">
+<h2>自定义 Bean 的生命周期<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code> 注解。<strong>推荐使用</strong>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InitializingBean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DisposableBean</span></code> callback 接口。</p></li>
+<li><p>自定义 <code class="docutils literal notranslate"><span class="pre">init()</span></code> and <code class="docutils literal notranslate"><span class="pre">destroy()</span></code> 方法。</p></li>
+</ul>
+<p>为同一个Bean配置的多个生命周期机制，具有不同的初始化方法，其调用方式如下。</p>
+<ol class="arabic simple">
+<li><p>注解了 <code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> 的方法。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">afterPropertiesSet()</span></code>，如 <code class="docutils literal notranslate"><span class="pre">InitializingBean</span></code> 回调接口所定义。</p></li>
+<li><p>一个自定义配置的 <code class="docutils literal notranslate"><span class="pre">init()</span></code> 方法。</p></li>
+</ol>
+<p>销毁方法的调用顺序是一样的。</p>
+<ol class="arabic simple">
+<li><p>注解了 <code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code> 的方法。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">destroy()</span></code>，正如 <code class="docutils literal notranslate"><span class="pre">DisposableBean</span></code> 回调接口所定义的那样。</p></li>
+<li><p>一个自定义配置的 <code class="docutils literal notranslate"><span class="pre">destroy()</span></code> 方法。</p></li>
+</ol>
+</section>
+<section id="id6">
+<h2>启动关闭回调<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Lifecycle</span></code> 接口定义（可以用来启动和停止一些后台进程）。</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Lifecycle</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">stop</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRunning</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果启动和关闭调用的顺序可能很重要，可以考虑使用 <code class="docutils literal notranslate"><span class="pre">SmartLifecycle</span></code>，启动时，phase最低的对象先启动。当停止时，遵循相反的顺序。</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Phased</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getPhase</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SmartLifecycle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Lifecycle</span><span class="p">,</span><span class="w"> </span><span class="n">Phased</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAutoStartup</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="aware">
+<h2>Aware 接口<a class="headerlink" href="#aware" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>接口名称</p></th>
+<th class="head"><p>注入的依赖性</p></th>
+<th class="head"><p>解释</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ApplicationContextAware</span></code></p></td>
+<td><p>声明 <code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code>。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#beans-factory-aware"><code class="docutils literal notranslate"><span class="pre">ApplicationContextAware</span></code> 和 <code class="docutils literal notranslate"><span class="pre">BeanNameAware</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ApplicationEventPublisherAware</span></code></p></td>
+<td><p>封装了 <code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code> 的 Event publisher 。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#context-introduction"><code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code> 的附加功能</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BeanClassLoaderAware</span></code></p></td>
+<td><p>用来加载Bean类的类加载器（Class loader）。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#beans-factory-class">实例化 Bean</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BeanFactoryAware</span></code></p></td>
+<td><p>声明 <code class="docutils literal notranslate"><span class="pre">BeanFactory</span></code>。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#beans-beanfactory"><code class="docutils literal notranslate"><span class="pre">BeanFactory</span></code> API</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BeanNameAware</span></code></p></td>
+<td><p>声明Bean的名称。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#beans-factory-aware"><code class="docutils literal notranslate"><span class="pre">ApplicationContextAware</span></code> 和 <code class="docutils literal notranslate"><span class="pre">BeanNameAware</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LoadTimeWeaverAware</span></code></p></td>
+<td><p>定义了用于在加载时处理类定义的织入点。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#aop-aj-ltw">在Spring框架中用AspectJ进行加载时织入（Load-time Weaving）</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MessageSourceAware</span></code></p></td>
+<td><p>配置解析消息的策略（支持参数化和国际化）。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#context-introduction"><code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code> 的附加功能</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NotificationPublisherAware</span></code></p></td>
+<td><p>Spring JMX notification publisher。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/integration.html#jmx-notifications">Notifications</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ResourceLoaderAware</span></code></p></td>
+<td><p>配置的加载器用于低级别的资源访问。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/core.html#resources">资源（Resources）</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ServletConfigAware</span></code></p></td>
+<td><p>容器所运行的当前 <code class="docutils literal notranslate"><span class="pre">ServletConfig</span></code>。仅在 Web 感知的 Spring <code class="docutils literal notranslate"><span class="pre">ApplicationContext</span></code> 中有效。</p></td>
+<td><p><a class="reference external" href="https://springdoc.cn/spring/web.html#mvc">Spring MVC</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h2>容器扩展点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="beanpostprocessor-bean">
+<h3><code class="docutils literal notranslate"><span class="pre">BeanPostProcessor</span></code> 自定义 Bean<a class="headerlink" href="#beanpostprocessor-bean" title="Link to this heading">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InstantiationTracingBeanPostProcessor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">BeanPostProcessor</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// simply return the instantiated bean as-is</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">postProcessBeforeInitialization</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span><span class="w"> </span><span class="c1">// we could potentially return any object reference here...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">postProcessAfterInitialization</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Bean &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beanName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39; created : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bean</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="beanfactorypostprocessor">
+<h3><code class="docutils literal notranslate"><span class="pre">BeanFactoryPostProcessor</span></code> 定制配置元数据<a class="headerlink" href="#beanfactorypostprocessor" title="Link to this heading">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BeanFactoryPostProcessor</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Modify the application context&#39;s internal bean factory after its standard</span>
+<span class="cm">	 * initialization. All bean definitions will have been loaded, but no beans</span>
+<span class="cm">	 * will have been instantiated yet. This allows for overriding or adding</span>
+<span class="cm">	 * properties even to eager-initializing beans.</span>
+<span class="cm">	 * @param beanFactory the bean factory used by the application context</span>
+<span class="cm">	 * @throws org.springframework.beans.BeansException in case of errors</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="kt">void</span><span class="w"> </span><span class="nf">postProcessBeanFactory</span><span class="p">(</span><span class="n">ConfigurableListableBeanFactory</span><span class="w"> </span><span class="n">beanFactory</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">BeansException</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="factorybean">
+<h3><code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 自定义实例化逻辑<a class="headerlink" href="#factorybean" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">FactoryBean&lt;T&gt;</span></code> 接口提供三个方法。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">getObject()</span></code>: 返回本工厂创建的对象的一个实例。该实例可能会被共享，这取决于该工厂是返回<code class="docutils literal notranslate"><span class="pre">singleton</span></code>还是<code class="docutils literal notranslate"><span class="pre">prototype</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">isSingleton()</span></code>: 如果这个 <code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">singleton</span></code>，则返回 <code class="docutils literal notranslate"><span class="pre">true</span></code>，否则返回 <code class="docutils literal notranslate"><span class="pre">false</span></code>。这个方法的默认实现会返回 <code class="docutils literal notranslate"><span class="pre">true</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Class&lt;?&gt;</span> <span class="pre">getObjectType()</span></code>: 返回由 <code class="docutils literal notranslate"><span class="pre">getObject()</span></code> 方法返回的对象类型，如果事先不知道类型，则返回 <code class="docutils literal notranslate"><span class="pre">null</span></code>。</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Spring 容器配置</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="0-index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Spring 框架</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, lighk
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/lighkLife" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Spring IoC 容器</a><ul>
+<li><a class="reference internal" href="#id1">介绍</a></li>
+<li><a class="reference internal" href="#id2">容器</a></li>
+<li><a class="reference internal" href="#bean">Bean</a></li>
+<li><a class="reference internal" href="#id3">依赖</a></li>
+<li><a class="reference internal" href="#id4">自动注入</a></li>
+<li><a class="reference internal" href="#bean-scope">Bean Scope</a></li>
+<li><a class="reference internal" href="#id5">自定义 Bean 的生命周期</a></li>
+<li><a class="reference internal" href="#id6">启动关闭回调</a></li>
+<li><a class="reference internal" href="#aware">Aware 接口</a></li>
+<li><a class="reference internal" href="#id7">容器扩展点</a><ul>
+<li><a class="reference internal" href="#beanpostprocessor-bean"><code class="docutils literal notranslate"><span class="pre">BeanPostProcessor</span></code> 自定义 Bean</a></li>
+<li><a class="reference internal" href="#beanfactorypostprocessor"><code class="docutils literal notranslate"><span class="pre">BeanFactoryPostProcessor</span></code> 定制配置元数据</a></li>
+<li><a class="reference internal" href="#factorybean"><code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 自定义实例化逻辑</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=7d86a446"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "lighkLife/wiki");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    </body>
+</html>
