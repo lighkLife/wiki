@@ -194,6 +194,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../7-Spring/03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../7-Spring/04-SpEL.html">SpEL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../7-Spring/05-AOP%E7%BC%96%E7%A8%8B.html">AOP编程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7-Spring/06-SpringMVC-DispatcherServlet.html">SpringMVC-DispatcherServlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7-Spring/06-SpringMVC-DispatcherServlet.html#dispatcherservlet">DispatcherServlet 介绍</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -266,7 +268,7 @@
 <li><p>volatile 是在底层通过内存屏障防止指令重排的，变量前后之间的指令与指令之间有序可见</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Singleton();</span></code> 并非原子操作，底层可能分多个指令来执行，有可能 instance 只是被赋一个引用，但是引用的对象
-还没有完全构建成功。</p>
+还没有完全构建成功（指令优化导致乱序，引用赋值被提前执行）。</p>
 </section>
 </section>
 
