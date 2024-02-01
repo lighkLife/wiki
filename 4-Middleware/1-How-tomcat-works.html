@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="中间件" href="../4-Middleware/0-index.html" /><link rel="prev" title="其他语言" href="index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="物联网" href="../5-IoT/index.html" /><link rel="prev" title="MinIO多节点部署" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>测试文件 - 文档</title>
+        <title>How-tomcat-works - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -169,14 +169,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">其他语言</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 其他语言</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">测试文件</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/index.html">其他语言</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 其他语言</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/0-index.html">中间件</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/1-How-tomcat-works.html">How-tomcat-works</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">中间件</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">How-tomcat-works</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../5-IoT/index.html">物联网</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 物联网</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -244,15 +244,39 @@
           </label>
         </div>
         <article role="main">
-          <section id="id1">
-<h1>测试文件<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<section id="id2">
-<h2>标题1<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>这是测试内容</p>
+          <section id="how-tomcat-works">
+<h1>How-tomcat-works<a class="headerlink" href="#how-tomcat-works" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>一个简单的请求处理程序<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><img alt="simple-server" src="../_images/simple-server.png" /></p>
 </section>
-<section id="id3">
-<h2>标题2<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>这也是测试内容哈哈哈哈</p>
+<section id="httpconnector">
+<h2>引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code><a class="headerlink" href="#httpconnector" title="Link to this heading">#</a></h2>
+<p><img alt="HttpConnector" src="../_images/HttpConnector.png" /></p>
+</section>
+<section id="tomcat">
+<h2>Tomcat 的默认连接器<a class="headerlink" href="#tomcat" title="Link to this heading">#</a></h2>
+<p>默认连接器支持 HTTP 1.1 新特性</p>
+<ul class="simple">
+<li><p>持久连接： <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">keep-alive</span></code></p></li>
+<li><p>管道化： 允许客户端发送多个请求到服务器而无需等待之前的响应</p></li>
+<li><p>块编码： 允许服务器将响应分成一系列的块，每个块之间以长度字段进行分隔</p></li>
+</ul>
+<p>默认连接器主要使用了多线程处理请求，每一个 <code class="docutils literal notranslate"><span class="pre">HttpProcessor</span></code> 都在一个独立的线程中运行，
+但并不总为每个请求创建新的 <code class="docutils literal notranslate"><span class="pre">HttpProcessor</span></code> 实例，而是使用了池化技术。</p>
+<p><img alt="default-http-connector" src="../_images/default-http-connector.png" /></p>
+</section>
+<section id="id2">
+<h2>核心组件<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="servlet">
+<h3>Servlet<a class="headerlink" href="#servlet" title="Link to this heading">#</a></h3>
+<p>.. uml::</p>
+<p>Alice -&gt; Bob: Hi!
+Alice &lt;- Bob: How are you?</p>
+</section>
+<section id="container">
+<h3>Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h3>
+</section>
 </section>
 </section>
 
@@ -261,23 +285,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../4-Middleware/0-index.html">
+          <a class="next-page" href="../5-IoT/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">中间件</div>
+                <div class="title">物联网</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">其他语言</div>
+                <div class="title">MinIO多节点部署</div>
                 
               </div>
             </a>
@@ -318,9 +342,15 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">测试文件</a><ul>
-<li><a class="reference internal" href="#id2">标题1</a></li>
-<li><a class="reference internal" href="#id3">标题2</a></li>
+<li><a class="reference internal" href="#">How-tomcat-works</a><ul>
+<li><a class="reference internal" href="#id1">一个简单的请求处理程序</a></li>
+<li><a class="reference internal" href="#httpconnector">引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code></a></li>
+<li><a class="reference internal" href="#tomcat">Tomcat 的默认连接器</a></li>
+<li><a class="reference internal" href="#id2">核心组件</a><ul>
+<li><a class="reference internal" href="#servlet">Servlet</a></li>
+<li><a class="reference internal" href="#container">Container</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
