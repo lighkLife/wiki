@@ -14,10 +14,12 @@ release = ''
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser', 
-              'sphinx_comments',
-              'sphinxcontrib.images',
-              'sphinx.ext.todo',
+extensions = [
+    'myst_parser', 
+    'sphinx_comments',
+    'sphinxcontrib.images',
+    'sphinx.ext.todo',
+    'sphinxcontrib.plantuml',
 ]
 todo_include_todos = True
 
@@ -69,3 +71,5 @@ comments_config = {
 myst_enable_extensions = [
         "attrs_block",
 ]
+
+plantuml = 'java -jar /scripts/plantuml.jar'

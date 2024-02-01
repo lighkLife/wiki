@@ -1,6 +1,6 @@
 # SpringMVC-DispatcherServlet
 
-# DispatcherServlet 介绍
+## DispatcherServlet 介绍
 `DispatcherServlet` 本质上是一个 `HttpServlet`，为请求处理提供了一个共享算法，而实际工作则由可配置的委托组件执行。其核心组件包括：
 
 ![DispatcherServlet-class](./img/DispatcherServlet-class.png)
