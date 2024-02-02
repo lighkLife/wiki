@@ -270,6 +270,30 @@
 <h2>核心组件<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <section id="servlet">
 <h3>Servlet<a class="headerlink" href="#servlet" title="Link to this heading">#</a></h3>
+<p class="plantuml">
+<img src="../_images/plantuml-815079bfd1a6564059cb73d42ff6160019e8fe30.png" alt="&#64;startuml
+skinparam DefaultFontName Source Code Pro
+skinparam DefaultFontSize 15
+skinparam RankSep 50
+
+package &quot;Commerce&quot; {
+  node &quot;High Level Components&quot; {
+    component ProductCatalog
+  }
+
+  node &quot;Abstractions&quot; {
+    component ProductFactory
+  }
+
+  node &quot;Low Level Components&quot; {
+    component SQLProductRepository
+  }
+
+  ProductCatalog ..&gt; ProductFactory: depends on
+  ProductFactory ..&gt; SQLProductRepository: depends on
+}
+&#64;enduml"/>
+</p>
 </section>
 <section id="container">
 <h3>Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h3>
