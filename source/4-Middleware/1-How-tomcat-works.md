@@ -22,9 +22,31 @@
 
 ### Servlet
 
-.. uml::
+```{uml}
+@startuml
+skinparam DefaultFontName Source Code Pro
+skinparam DefaultFontSize 15
+skinparam RankSep 50
 
-   Alice -> Bob: Hi!
-   Alice <- Bob: How are you?
+package "Commerce" {
+  node "High Level Components" {
+    component ProductCatalog
+  }
+
+  node "Abstractions" {
+    component ProductFactory
+  }
+
+  node "Low Level Components" {
+    component SQLProductRepository
+  }
+
+  ProductCatalog ..> ProductFactory: depends on
+  ProductFactory ..> SQLProductRepository: depends on
+}
+@enduml
+```
+
+
 
 ### Container

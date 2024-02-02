@@ -20,6 +20,7 @@ extensions = [
     'sphinxcontrib.images',
     'sphinx.ext.todo',
     'sphinxcontrib.plantuml',
+    'sphinx.ext.autodoc',
 ]
 todo_include_todos = True
 
@@ -70,6 +71,7 @@ comments_config = {
 
 myst_enable_extensions = [
         "attrs_block",
+        'colon_fence',
 ]
 
-plantuml = 'java -jar /scripts/plantuml.jar'
+plantuml = 'java -jar ./scripts/plantuml.jar'
