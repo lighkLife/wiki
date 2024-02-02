@@ -16,9 +16,10 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: apt-get install plantuml
-        run: apt-get install graphviz
-        run: pip install -r requirements.txt
+        run: |
+          sudo apt-get install plantuml
+          sudo apt-get install graphviz
+          pip install -r requirements.txt
 
       - name: build doc
         run: make html
