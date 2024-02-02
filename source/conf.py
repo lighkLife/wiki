@@ -73,5 +73,3 @@ myst_enable_extensions = [
         "attrs_block",
         'colon_fence',
 ]
-
-plantuml = 'java -jar ./scripts/plantuml.jar'
