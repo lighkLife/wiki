@@ -8,3 +8,5 @@ Java 相关
    01-JDK动态代理
    02-Java桥接方法
    03-Java四种引用
+   04-String实现
+   05-HashMap实现
