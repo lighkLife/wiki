@@ -301,7 +301,7 @@ JSR 166 中创建。）。在这些组件中是一组同步器——抽象数据
 （例如，代表一把锁是锁定状态还是解锁状态），更新和检查状态的操作，以及当状态需要同步器时，
 特定的方法会导致调用线程阻塞，直到另一个线程更改同步状态，以允许其继续运行。示例来自各形式的
 互斥锁，读写锁、信号量、屏障、futures、事件指示器、操作队列。</p>
-<p>As is well-known (see e.g., <a class="footnote-reference brackets" href="#id23" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) nearly any synchronizer can be
+<p>As is well-known (see e.g., <a class="footnote-reference brackets" href="#id25" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) nearly any synchronizer can be
 used to implement nearly any other. For example, it is possible to
 build semaphores from reentrant locks, and vice versa. However,
 doing so often entails enough complexity, overhead, and
@@ -314,10 +314,10 @@ framework centered on class AbstractQueuedSynchro-
 nizer, that provides common mechanics that are used by most
 of the provided synchronizers in the package, as well as other
 classes that users may define themselves.</p>
-<p>众所周知(见例子, <a class="footnote-reference brackets" href="#id23" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) ，大多数同步器之间可以互相实现。例如，可以使用重入锁实现信号量，反之亦然。然而，
+<p>众所周知(见例子, <a class="footnote-reference brackets" href="#id25" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) ，大多数同步器之间可以互相实现。例如，可以使用重入锁实现信号量，反之亦然。然而，
 这样做做往往相当复杂，开销过大，不灵活，只能作为次等的工程选择。此外，这在概念上也不吸引人。
-如果每一本质上更基本的同步器，那么开发人员就不应该被强迫任意选择一种同步器作为构建其他同步器的基础。
-所以，JSR166 建立了一个以 <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchro-nizer</span></code> 类为中心的小型框架，改类为并发包中的
+如果没有一个本质上更基本的同步器，那么开发人员就不该被迫任选一种同步器，作为构建其他同步器的基础。
+所以，JSR166 建立了一个以 <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchro-nizer</span></code> 类为中心的小型框架，该类为并发包中的
 大多数同步器提供了一个通用的机制，也可被用户自定义类使用。</p>
 <p>The remainder of this paper discusses the requirements for this
 framework, the main ideas behind its design and implementation,
@@ -329,12 +329,12 @@ characteristics.</p>
 <h2>2.REQUIREMENTS 要求<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
 <section id="functionality">
 <h3>2.1 Functionality 功能<a class="headerlink" href="#functionality" title="Link to this heading">#</a></h3>
-<p>Synchronizers possess two kinds of methods <a class="footnote-reference brackets" href="#id24" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>: at least one
+<p>Synchronizers possess two kinds of methods <a class="footnote-reference brackets" href="#id26" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>: at least one
 acquire operation that blocks the calling thread unless/until the
 synchronization state allows it to proceed, and at least one
 release operation that changes synchronization state in a way that
 may allow one or more blocked threads to unblock.</p>
-<p>同步器要具备两种方法 <a class="footnote-reference brackets" href="#id24" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>：至少一种获取操作，用来阻塞调用线程，除非/直到
+<p>同步器要具备两种方法 <a class="footnote-reference brackets" href="#id26" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>：至少一种获取操作，用来阻塞调用线程，除非/直到
 同步状态允许线程继续处理；以及至少一种释放操作，用来改变同步状态，从而允许一个或
 多个阻塞的线程解除阻塞。</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">java.util.concurrent</span></code> package does not define a single unified
@@ -358,7 +358,7 @@ version of acquire that is cancellable, and one that isn’t.</p></li>
 定义的（例如 Lock ），但其他只包含特定的版本。因此，获取和释放操作，在不同的类中
 采用了不同的名称和形式。例如这些方法 <code class="docutils literal notranslate"><span class="pre">Lock.lock</span></code>，<code class="docutils literal notranslate"><span class="pre">Semaphore.acquire</span></code>，
 <code class="docutils literal notranslate"><span class="pre">CountDownLatch.await</span></code> 和 <code class="docutils literal notranslate"><span class="pre">FutureTask.get</span></code> 都映射为框架中的获取操作。
-然而，这个包在类之间保持了一致的约定，来支持一系列的使用选项。如果有意义，每个同步器都支持：</p>
+但是，这个包就在类之间保持了一致的约定，来支持一系列的使用选项。如果有意义，每个同步器都支持：</p>
 <ul class="simple">
 <li><p>非阻塞的同步尝试（例如 <code class="docutils literal notranslate"><span class="pre">tryLock</span></code>）, 以及阻塞的版本</p></li>
 <li><p>可选的超时机制，以便应用程序可以放弃等待。</p></li>
@@ -373,7 +373,7 @@ counting semaphores, for example, may be acquired by as many
 threads as the count permits. To be widely useful, the framework
 must support both modes of operation.</p>
 <p>同步器可能根据他们管理的状态是独占状态还是共享状态而有所不同。独占状态是指
-一次只有一个线程可以继续通过可能的阻塞点，而共享状态则允许多个线程至少有时可以继续处理。
+一次只有一个线程可以继续通过可能的阻塞点，而共享状态则允许多个线程至少某些时刻可以同时处理任务。
 当然，常规的锁类只维护独占状态，但是，例如信号量，只要许可证数量足够，就可以被读多个线程获取。
 为了广泛应用，框架必须支持这两种操作模式。</p>
 <p>The java.util.concurrent package also defines interface
@@ -388,7 +388,7 @@ associated <code class="docutils literal notranslate"><span class="pre">Lock</sp
 <h3>2.2 Performance Goals 性能目标<a class="headerlink" href="#performance-goals" title="Link to this heading">#</a></h3>
 <p>Java built-in locks (accessed using synchronized methods
 and blocks) have long been a performance concern, and there is a
-sizable literature on their construction (e.g., <a class="footnote-reference brackets" href="#id25" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id26" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>). However,
+sizable literature on their construction (e.g., <a class="footnote-reference brackets" href="#id27" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id28" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>). However,
 the main focus of such work has been on minimizing space
 overhead (because any Java object can serve as a lock) and on
 minimizing time overhead when used in mostly-single-threaded
@@ -400,16 +400,16 @@ used almost exclusively in multithreaded designs (increasingly
 often on multiprocessors) under which at least occasional
 contention is to be expected. So the usual JVM strategy of
 optimizing locks primarily for the zero-contention case, leaving
-other cases to less predictable “slow paths” <a class="footnote-reference brackets" href="#id27" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> is not the right
+other cases to less predictable “slow paths” <a class="footnote-reference brackets" href="#id29" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> is not the right
 tactic for typical multithreaded server applications that rely
 heavily on java.util.concurrent.</p>
 <p>Java 内置锁（使用<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>方法和块）长期以来有性能问题，有大量关于它构造的
-文献（例如 <a class="footnote-reference brackets" href="#id25" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id26" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>）。然而，这类工作的主要焦点在于，在单核心、单线程的上下文种，
+文献（例如 <a class="footnote-reference brackets" href="#id27" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id28" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>）。然而，这类工作的主要焦点在于，在单核心、单线程的上下文种，
 最小化空间开销（因为任何Java 对象都可以作为一个锁）以及时间开销。这两点对于同步器
 来说都不是特别地重要：程序员只有在需要的时候才会构造同步器，因此没有必要紧凑的使用
 空间来避免浪费，并且同步器几乎专门为多线程设计（多处理器越来越常见），在这种情况下
 偶尔就会发生竞争。通常 JVM 的锁优化策略主要是为零竞争情况优化的，将其他情况留给不太可
-预测的“慢路径” <a class="footnote-reference brackets" href="#id27" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>，这对于依赖 java.util.concurrent 的典型的多线程服务器应用
+预测的“慢路径” <a class="footnote-reference brackets" href="#id29" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>，这对于依赖 java.util.concurrent 的典型的多线程服务器应用
 来说并不是一个正确的策略。</p>
 <p>Instead, the primary performance goal here is scalability: to
 predictably maintain efficiency even, or especially, when
@@ -426,10 +426,10 @@ waste cycles and generate memory contention, so are not often
 applicable.</p>
 <p>相反，这里的主要性能目标是可伸缩性：即在同步器被争用时，能够可预测的保持效率。
 理想情况下，无论多少线程正在尝试通过同步点，其所需要的开销应该是恒定的。主要目标之一
-是尽量减少某个线程被允许通过同步点，但尚未这样做的总时间量（译注：竞态下获取资源的时间）。
-然而，这些操作必须对资源利用均衡考量，包括需要 CPU 的总时间，内存流量和线程调度开销。
-例如，自旋锁通常提高比阻塞锁更短的获取时间，但通常会浪费 CPU 周期和内存竞争，因此
-并不普适。</p>
+是尽量减少某个线程被允许通过同步点，但尚未这样做的总时间量（译注：竞态下，
+资源足以分配给当前线程时， 当前线程获取资源的时间）。然而，这些操作必须对资源利用
+均衡考量，包括需要 CPU 的总时间，内存流量和线程调度开销。例如，获取自旋锁通常
+比获取阻塞锁使用的时间更短，但获取自旋锁通常会浪费 CPU 周期和内存竞争，因此并不普适。</p>
 <p>These goals carry across two general styles of use. Most
 applications should maximize aggregate throughput, tolerating, at
 best, probabilistic guarantees about lack of starvation. However
@@ -438,10 +438,9 @@ to maintain fairness of access across threads, tolerating poor
 aggregate throughput. No framework can decide between these
 conflicting goals on behalf of users; instead different fairness
 policies must be accommodated.</p>
-<p>这些目标贯穿两种基本的使用方式。大多数应用应该最大化总通吐量，最多只能容忍不发生饥饿
-的概率上保证。然而，在资源控制等应用程序中，更重要的是在线程之间维持公平的资源访问，
-可以容忍牺牲总通吐量。没有一个框架可以代表户在这些相互冲突的目标中作出决定；相反，
-必须提供不同的公平策略来适应不同场景。</p>
+<p>这些目标贯穿两种基本的使用方式。大多数应用应该最大化总通吐量，最多只能容忍概率上保证不发生饥饿。
+然而，在资源控制等应用程序中，更重要的是在线程之间维持公平的资源访问，可以容忍牺牲总通吐量。
+没有一个框架可以代表户在这些相互冲突的目标中作出决定；相反，必须提供不同的公平策略来适应不同场景。</p>
 <p>No matter how well-crafted they are internally, synchronizers
 will create performance bottlenecks in some applications. Thus,
 the framework must make it possible to monitor and inspect basic
@@ -487,7 +486,7 @@ kept in queue nodes must mesh with that needed for unblocking,
 and the signatures of exported methods depend on the nature of
 synchronization state.</p>
 <p>也许可以创建一个框架，允许这三者独立变化。但是，这样性能不高，也无法使用。
-例如，队列节点中保留的信息必须和解除阻塞所需要的信息所匹配，并且导出方法的
+例如，队列节点中保留的信息必须和解除阻塞所需要的信息所匹配，并且对外暴露方法的
 签名，取决于同步状态的性质。</p>
 <p>The central design decision in the synchronizer framework was
 to choose a concrete implementation of each of these three
@@ -589,7 +588,7 @@ invoke <code class="docutils literal notranslate"><span class="pre">park</span><
 之前使用的同步器上有一个“残留”的<code class="docutils literal notranslate"><span class="pre">unpark</span></code>。然而，如果没有调用<code class="docutils literal notranslate"><span class="pre">unpark</span></code>，下一次
 调用就会阻塞。虽然可以显示的清除这个状态，但没有必要。必要时，多次调用<code class="docutils literal notranslate"><span class="pre">park</span></code>更高效。</p>
 <p>This simple mechanism is similar to those used, at some level, in
-the Solaris-9 thread library <a class="footnote-reference brackets" href="#id28" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>, in WIN32 “consumable events”,
+the Solaris-9 thread library <a class="footnote-reference brackets" href="#id30" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>, in WIN32 “consumable events”,
 and in the Linux NPTL thread library, and so maps efficiently to
 each of these on the most common platforms Java runs on.
 (However, the current Sun Hotspot JVM reference
@@ -598,7 +597,7 @@ condvar in order to fit into the existing runtime design.) The
 <code class="docutils literal notranslate"><span class="pre">park</span></code> method also supports optional relative and absolute
 timeouts, and is integrated with JVM <code class="docutils literal notranslate"><span class="pre">Thread.interrupt</span></code>
 support — interrupting a thread unparks it.</p>
-<p>这种简单的机制类似于 Solaris-9 线程库<a class="footnote-reference brackets" href="#id28" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>、WIN32 的“可消耗事件”和 Linux 中的
+<p>这种简单的机制类似于 Solaris-9 线程库<a class="footnote-reference brackets" href="#id30" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>、WIN32 的“可消耗事件”和 Linux 中的
 NPTL 线程库，因此这在常见的 Java 运行平台上都可以高效运行。 （然而，当前的 Sun Hotspot JVM
 实际上参考 Solaris 和 Linux 使用了一个 pthread condvar[^注1]，以适应当前的运行设计）
 <code class="docutils literal notranslate"><span class="pre">park</span></code>操作还支持设置超时选项，可以是绝对时间和相对时间，并且于 JVM 的<code class="docutils literal notranslate"><span class="pre">Thread.interrupt</span></code>
@@ -628,8 +627,8 @@ framework does not support priority-based synchronization.</p>
 choices for synchronization queues are non-blocking data
 structures that do not themselves need to be constructed using
 lower-level locks. And of these, there are two main candidates:
-variants of Mellor-Crummey and Scott (MCS) locks <a class="footnote-reference brackets" href="#id29" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>, and
-variants of Craig, Landin, and Hagersten (CLH) locks <a class="footnote-reference brackets" href="#id30" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id31" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id32" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.
+variants of Mellor-Crummey and Scott (MCS) locks <a class="footnote-reference brackets" href="#id31" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>, and
+variants of Craig, Landin, and Hagersten (CLH) locks <a class="footnote-reference brackets" href="#id32" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id33" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id34" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.
 Historically, CLH locks have been used only in spinlocks.
 However, they appeared more amenable than MCS for use in the
 synchronizer framework because they are more easily adapted to
@@ -638,7 +637,7 @@ resulting design is far enough removed from the original CLH
 structure to require explanation.</p>
 <p>如今，普遍认为最适合同步队列的选择是非阻塞数据结构，非阻塞数据结构不需要使用较低级别
 的锁来构建。在这些选择中，有两个主要的候选者：Mellor-Crummey 和 Scott (MCS)
-锁的变体<a class="footnote-reference brackets" href="#id29" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>，以及 Craig、Landin 和 Hagersten (CLH) 锁的变体<a class="footnote-reference brackets" href="#id30" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id31" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id32" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>。
+锁的变体<a class="footnote-reference brackets" href="#id31" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>，以及 Craig、Landin 和 Hagersten (CLH) 锁的变体<a class="footnote-reference brackets" href="#id32" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id33" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id34" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>。
 从历史上看，CLH 锁仅在自旋锁中被使用。然而，与 MCS 相比，CLH 似乎更适合用于同步器框架，
 因为 CLH 更适合处理取消和超时操作，因此选择 CLH 作为同步框架实现的基础。这样得到的
 设计与原始的 CLH 结构有很大的差异，因此需要额外解释说明。</p>
@@ -680,13 +679,13 @@ contention.</p>
 避免了一些内存竞争。</p>
 <p>In the original versions of CLH locks, there were not even links
 connecting nodes. In a spinlock, the <code class="docutils literal notranslate"><span class="pre">pred</span></code> variable can be held
-as a local. However, Scott and Scherer<a class="footnote-reference brackets" href="#id32" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> showed that by
+as a local. However, Scott and Scherer<a class="footnote-reference brackets" href="#id34" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> showed that by
 explicitly maintaining predecessor fields within nodes, CLH
 locks can deal with timeouts and other forms of cancellation: If a
 node’s predecessor cancels, the node can slide up to use the
 previous node’s status field.</p>
 <p>在最初的 CLH 锁中，节点之间甚至没有链接。在自旋锁中，<code class="docutils literal notranslate"><span class="pre">pred</span></code>变量可以作为局部变量存在。
-然而， Scott 和 Scherer<a class="footnote-reference brackets" href="#id32" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> 表明，通过在节点之间明确维护前驱字段，CLH 锁可以处理
+然而， Scott 和 Scherer<a class="footnote-reference brackets" href="#id34" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> 表明，通过在节点之间明确维护前驱字段，CLH 锁可以处理
 超时和其他形式的取消操作：如果一个节点的前驱节点取消了，这个节点就可以滑动上去使用前一个节点的状态字段。</p>
 <p>The main additional modification needed to use CLH queues for
 blocking synchronizers is to provide an efficient way for one
@@ -695,10 +694,416 @@ change its status, which will be noticed on next spin by its
 successor, so links are unnecessary. But in a blocking
 synchronizer, a node needs to explicitly wake up (<code class="docutils literal notranslate"><span class="pre">unpark</span></code>) its
 successor.</p>
-<p>将 CLH 队列</p>
+<p>将 CLH 队列用于阻塞同步器的主要修改就是，为一个节点提供一个高效定位后继节点的方式。
+在自旋锁中，一个节点只需要修改自己的状态，其后继节点会在下一次自旋时注意到这个状态变化。
+所以节点之间的链接不是必须的。但是在阻塞同步器中，一个节点需要明确的唤醒（<code class="docutils literal notranslate"><span class="pre">unpark</span></code>）它的后继节点。</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> queue node contains a
+<code class="docutils literal notranslate"><span class="pre">next</span></code> link to its successor. But because there are no applicable
+techniques for lock-free atomic insertion of double-linked list
+nodes using compareAndSet, this link is not atomically set as
+part of insertion; it is simply assigned:</p>
+<p><code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> 队列节点包含一个指向其后继节点的 next 链接。
+但是，因为没有适用于使用 compareAndSet 进行双向链表节点的无锁原子插入的技术，
+所以这个链接在插入过程中不会被原子地设置；它只是简单地赋值：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">pred</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>after the insertion. This is reflected in all usages. The <code class="docutils literal notranslate"><span class="pre">next</span></code> link
+is treated only as an optimized path. If a node’s successor does
+not appear to exist (or appears to be cancelled) via its <code class="docutils literal notranslate"><span class="pre">next</span></code> field,
+it is always possible to start at the tail of the list and traverse
+backwards using the <code class="docutils literal notranslate"><span class="pre">pred</span></code> field to accurately check if there
+really is one.</p>
+<p>在插入操作之后就会反映在所有用法中。next 链接仅被视为一条优化路径。如果通过一个节点的的 <code class="docutils literal notranslate"><span class="pre">next</span></code>
+字段来看，这个节点的后继节点已经不存在（或者看起来已经被取消），始终可以从列表的尾部开始，
+并使用 <code class="docutils literal notranslate"><span class="pre">pred</span></code> 字段往回遍历，以准确地检查是否真的存在一个后继节点。</p>
+<p>A second set of modifications is to use the status field kept in
+each node for purposes of controlling blocking, not spinning. In
+the synchronizer framework, a queued thread can only return
+from an acquire operation if it passes the <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> method
+defined in a concrete subclass; a single “released” bit does not
+suffice. But control is still needed to ensure that an active thread
+is only allowed to invoke <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> when it is at the head of
+the queue; in which case it may fail to acquire, and (re)block.
+This does not require a per-node status flag because permission
+can be determined by checking that the current node’s
+predecessor is the <code class="docutils literal notranslate"><span class="pre">head</span></code>. And unlike the case of spinlocks, there
+is not enough memory contention reading <code class="docutils literal notranslate"><span class="pre">head</span></code> to warrant
+replication. However, cancellation status must still be present in
+the status field.</p>
+<p>第二组修改是利用每个节点中保存的状态字段来控制阻塞，而不是自旋。在同步器框架中，
+在排队的线程，只有在调用具体子类中定义的 <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> 方法通过后，才能从获取操作中返回；
+单独的“已释放”位是不够的。仍然需要进行控制，以确保只有在队列的头部的活动线程才可以
+调用 <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code>；在这种情况下，它也可能无法获取，并且（重新）阻塞。这不需要查看
+每个节点的状态标志，因为可以通过检查当前节点的前驱是否是<code class="docutils literal notranslate"><span class="pre">head</span></code>来确定权限。
+与自旋锁的情况不同，读取头部进行复制时，不会存在的内存争。但是，状态字段中
+必须存在取消状态。</p>
+<p>The queue node status field is also used to avoid needless calls to
+<code class="docutils literal notranslate"><span class="pre">park</span></code> and <code class="docutils literal notranslate"><span class="pre">unpark</span></code>. While these methods are relatively fast as
+blocking primitives go, they encounter avoidable overhead in the
+boundary crossing between Java and the JVM runtime and/or OS.
+Before invoking <code class="docutils literal notranslate"><span class="pre">park</span></code>, a thread sets a “signal me” bit, and then
+rechecks synchronization and node status once more before
+invoking <code class="docutils literal notranslate"><span class="pre">park</span></code>. A releasing thread clears status. This saves
+threads from needlessly attempting to block often enough to be
+worthwhile, especially for lock classes in which lost time waiting
+for the next eligible thread to acquire a lock accentuates other
+contention effects. This also avoids requiring a releasing thread
+to determine its successor unless the successor has set the signal
+bit, which in turn eliminates those cases where it must traverse
+multiple nodes to cope with an apparently null <code class="docutils literal notranslate"><span class="pre">next</span></code> field unless
+signalling occurs in conjunction with cancellation.</p>
+<p>队列节点的状态字段还用于避免不必要地调用 <code class="docutils literal notranslate"><span class="pre">park</span></code> 和 <code class="docutils literal notranslate"><span class="pre">unpark</span></code> 方法。虽然这些方法在
+阻塞原语中相对较快，但这些是在 Java 、JVM 运行时、操作系统之间的边界交叉中可以
+避免的开销。在调用<code class="docutils literal notranslate"><span class="pre">park</span></code>之前，线程会设置一个“signal me”的 bit 位，然后再检查
+同步和节点状态。释放线程会清除状态。尤其是对某些锁类来说，这样做通常是值得的，
+因为可以使线程避免不必要的阻塞，避免浪费时间去等待下一个符合条件的线程去获取锁，
+这样会加重其他竞争效应。这也避免了释放线程需要确定其后继节点，除非后继节点设置了信号位，
+除开取消操作和发信号同时发生之外，必须遍历多个节点，以应对<code class="docutils literal notranslate"><span class="pre">next</span></code>字段明显为空的情况也被避免了。</p>
+<p>Perhaps the main difference between the variant of CLH locks
+used in the synchronizer framework and those employed in other
+languages is that garbage collection is relied on for managing
+storage reclamation of nodes, which avoids complexity and
+overhead. However, reliance on GC does still entail nulling of
+link fields when they are sure to never to be needed. This can
+normally be done when dequeuing. Otherwise, unused nodes
+would still be reachable, causing them to be uncollectable.
+Some further minor tunings, including lazy initialization of the
+initial dummy node required by CLH queues upon first
+contention, are described in the source code documentation in the
+J2SE1.5 release.</p>
+<p>在同步器框架中使用 CLH 锁的变体和在其他语言中使用的主要区别在于，后者依赖于垃圾收集
+来管理节点的存储回收，这避免了复杂性和开销。然而，依赖 GC 就需要在确定不再需要链接
+字段时将其置空。这一般可以在出队时完成。然而，未使用的节点将依然可达，导致其不能被回收。
+在 J2SE1.5 发布的源代码文档中，对其进一步的微调进行了描述，包括在首次竞争时，
+对 CLH 队列所需的初始虚拟节点进行延迟初始化。</p>
+<p>Omitting such details, the general form of the resulting
+implementation of the basic acquire operation (exclusive,
+noninterruptible, untimed case only) is:</p>
+<p>忽略这些细节，最终得到的基本获取操作的一般形式（独占、无中断、无超时）如下：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">tryAcquire</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">enqueue</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="n">predecessor</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pred</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">tryAcquire</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pred</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="p">)</span>
+<span class="w">            </span><span class="n">park</span><span class="p">();</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">compareAndSet</span><span class="w"> </span><span class="n">pred</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="n">predecessor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And the release operation is:
+释放的操作如下：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tryRelease</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">compareAndSet</span><span class="w"> </span><span class="n">head</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">unpark</span><span class="w"> </span><span class="n">head</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">successor</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">exists</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The number of iterations of the main acquire loop depends, of
+course, on the nature of <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code>. Otherwise, in the
+absence of cancellation, each component of acquire and release is
+a constant-time O(1) operation, amortized across threads,
+disregarding any OS thread scheduling occuring within <code class="docutils literal notranslate"><span class="pre">park</span></code>.</p>
+<p>获取循环的迭代次数取决于 <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> 的性质。否则，在没有取消的情况下，
+忽略发生在 <code class="docutils literal notranslate"><span class="pre">park</span></code> 内部的所有操作系统线程调度，分摊到各个线程上，获取和释放操作
+都是常量时间复杂度为 O(1) 的操作。</p>
+<p>Cancellation support mainly entails checking for interrupt or
+timeout upon each return from <code class="docutils literal notranslate"><span class="pre">park</span></code> inside the acquire loop. A
+cancelled thread due to timeout or interrupt sets its node status
+and unparks its successor so it may reset links. With cancellation,
+determining predecessors and successors and resetting status may
+include O(n) traversals (where n is the length of the queue).
+Because a thread never again blocks for a cancelled operation,
+links and status fields tend to restabilize quickly.</p>
+<p>支持取消，主要涉及在获取循环中，每次从 <code class="docutils literal notranslate"><span class="pre">park</span></code> 返回时去检查中断或超时。
+由于超时或中断而取消的线程，会设置其节点状态，并唤醒其后继节点，以便其可以重置链接。
+在取消的情况下，确定前驱和后继节点，以及重置状态可能包括 O(n) 的遍历（其中 n 是队列的长度）。
+因为线程不会因为取消操作再次阻塞，链接和状态字段往往会迅速恢复稳定。</p>
 </section>
 <section id="condition-queues">
 <h3>3.4 Condition Queues 条件队列<a class="headerlink" href="#condition-queues" title="Link to this heading">#</a></h3>
+<p>The synchronizer framework provides a <code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code>
+class for use by synchronizers that maintain exclusive
+synchronization and conform to the <code class="docutils literal notranslate"><span class="pre">Lock</span></code> interface. Any number
+of condition objects may be attached to a lock object, providing
+classic monitor-style <code class="docutils literal notranslate"><span class="pre">await</span></code>, <code class="docutils literal notranslate"><span class="pre">signal</span></code>, and <code class="docutils literal notranslate"><span class="pre">signalAll</span></code>
+operations, including those with timeouts, along with some
+inspection and monitoring methods.</p>
+<p>同步器框架提供了一个 <code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> 类，供那些维护独占同步，并且符合
+<code class="docutils literal notranslate"><span class="pre">Lock</span></code> 接口的同步器使用。可以将任意数量的条件对象附加到锁对象上，提供经典
+的监视器风格的 <code class="docutils literal notranslate"><span class="pre">await</span></code>、<code class="docutils literal notranslate"><span class="pre">signal</span></code> 和 <code class="docutils literal notranslate"><span class="pre">signalAll</span></code> 操作，包括超时操作，
+以及一些检查和监控方法。</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> class enables conditions to be
+efficiently integrated with other synchronization operations,
+again by fixing some design decisions. This class supports only
+Java-style monitor access rules in which condition operations are
+legal only when the lock owning the condition is held by the
+current thread (See <a class="footnote-reference brackets" href="#id35" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> for discussion of alternatives). Thus, a
+<code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> attached to a <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> acts in
+the same way as do built-in monitors (via <code class="docutils literal notranslate"><span class="pre">Object.wait</span></code> etc),
+differing only in method names, extra functionality, and the fact
+that users can declare multiple conditions per lock.</p>
+<p>再修改一些设计方案，<code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> 类就可以将条件与其他同步操作高效地集成。
+该类仅支持 Java 风格的监视器访问规则，其中条件操作仅在当前线程持有条件的锁时才合法
+（请参阅 <a class="footnote-reference brackets" href="#id35" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>，了解其他选择的讨论）。因此，附加到 <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> 的
+<code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> 的行为与内置的监视器（通过 <code class="docutils literal notranslate"><span class="pre">Object.wait</span></code> 等）相同，与内置的监视器
+不同的只是方法名称、额外功能，以及用户可以为每个锁声明多个条件。</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> uses the same internal queue nodes as
+synchronizers, but maintains them on a separate condition queue.
+The signal operation is implemented as a queue transfer from the
+condition queue to the lock queue, without necessarily waking up
+the signalled thread before it has re-acquired its lock.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> 使用与同步器相同的内部队列节点，但是将它们被维护在单独的条件队列中。
+<code class="docutils literal notranslate"><span class="pre">singal</span></code>操作的实现是将节点从条件队列转移到锁队列，无需在信号线程重新获取它的锁之前唤醒它。</p>
+<p>The basic await operation is:
+await 操作的基本如下：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
+<span class="n">release</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span>
+<span class="n">block</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
+<span class="n">re</span><span class="o">-</span><span class="n">acquire</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And the signal operation is:
+signal 操作如下</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">transfer</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Because these operations are performed only when the lock is
+held, they can use sequential linked queue operations (using a
+<code class="docutils literal notranslate"><span class="pre">nextWaiter</span></code> field in nodes) to maintain the condition queue.
+The transfer operation simply unlinks the first node from the
+condition queue, and then uses CLH insertion to attach it to the
+lock queue.</p>
+<p>因为这些操作只在持有锁时执行，它们可以使用顺序链接队列操作（使用节点中的
+<code class="docutils literal notranslate"><span class="pre">nextWaiter</span></code> 字段）来维护条件队列。转移操作就是简单地从条件队列中删除头节点，
+然后使用 CLH 将其连接到插入到锁队列。</p>
+<p>The main complication in implementing these operations is
+dealing with cancellation of condition waits due to timeouts or
+<code class="docutils literal notranslate"><span class="pre">Thread.interrupt</span></code>. A cancellation and signal occuring at
+approximately the same time encounter a race whose outcome
+conforms to the specifications for built-in monitors. As revised in
+JSR133, these require that if an interrupt occurs before a signal,
+then the <code class="docutils literal notranslate"><span class="pre">await</span></code> method must, after re-acquiring the lock, throw
+<code class="docutils literal notranslate"><span class="pre">InterruptedException</span></code>. But if it is interrupted after a
+signal, then the method must return without throwing an
+exception, but with its thread interrupt status set.</p>
+<p>实现这些操作时主要的复杂性，在于因超时或 <code class="docutils literal notranslate"><span class="pre">Thread.interrupt</span></code>而导致条件等待的取消。
+在几乎同时发生取消和通知信号的情况下，会遇到竞争，其结果符合内置监视器的规范。
+在 JSR133 的修订中，这些规范要求，如果在通知信号之前发生中断，则 <code class="docutils literal notranslate"><span class="pre">await</span></code> 方法
+在重新获取锁之后必须抛出 <code class="docutils literal notranslate"><span class="pre">InterruptedException</span></code>。但如果在通知信号之后中断，
+则该方法必须在不抛出异常的情况下返回，并将其线程中断状态设置为已中断。</p>
+<p>To maintain proper ordering, a bit in the queue node status
+records whether the node has been (or is in the process of being)
+transferred. Both the signalling code and the cancelling code try
+to compareAndSet this status. If a signal operation loses this race,
+it instead transfers the next node on the queue, if one exists. If a
+cancellation loses, it must abort the transfer, and then await lock
+re-acquisition. This latter case introduces a potentially
+unbounded spin. A cancelled wait cannot commence lock re-
+acquisition until the node has been successfully inserted on the
+lock queue, so must spin waiting for the CLH queue insertion
+compareAndSet being performed by the signalling thread to
+succeed. The need to spin here is rare, and employs a
+<code class="docutils literal notranslate"><span class="pre">Thread.yield</span></code> to provide a scheduling hint that some other
+thread, ideally the one doing the signal, should instead run. While
+it would be possible to implement here a helping strategy for the
+cancellation to insert the node, the case is much too rare to justify
+the added overhead that this would entail. In all other cases, the
+basic mechanics here and elsewhere use no spins or yields, which
+maintains reasonable performance on uniprocessors.</p>
+<p>为了保持正确的顺序，队列节点状态中的一个位记录了节点是否已经（或正在）被转移。
+通知信号代码和取消代码都尝试比较并设置这个状态。如果通知信号操作竞争失败，
+它会转移队列中的下一个节点（如果存在的话）。如果取消操作竞争失败，它必须停止转移，
+然后等待到重新获取锁。后一种情况可能会导致永久自旋。取消等待无法重新开始获取锁，
+直到节点成功插入到锁队列中，因此在由通知信号线程执行的 CLH 队列插入比较并设置操作成功前，
+必须自旋等待。在这里需要自旋的情况很少见，并且使用了 <code class="docutils literal notranslate"><span class="pre">Thread.yield</span></code> 来提供一个调度提示，
+表示其他线程应该运行，理想情况下是执行通知信号的线程运行。虽然在这里可以实现一个辅助策略
+来进行取消操作，但是这种情况发生的频率太低，无法证明为此增加的开销是合理的。
+在其他情况下，这里和其他地方的基本机制都不使用自旋或让出，如此可以保持在单处理器上的性能。</p>
+</section>
+</section>
+<section id="usage">
+<h2>4. USAGE 使用<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<p>Class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> ties together the
+above functionality and serves as a “template method pattern” [6]
+base class for synchronizers. Subclasses define only the methods
+that implement the state inspections and updates that control
+acquire and release. However, subclasses of
+<code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> are not themselves usable as
+synchronizer ADTs, because the class necessarily exports the
+methods needed to internally control acquire and release policies,
+which should not be made visible to users of these classes. All
+java.util.concurrent synchronizer classes declare a private inner
+<code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> subclass and delegate all
+synchronization methods to it. This also allows public methods to
+be given names appropriate to the synchronizer.</p>
+<p>For example, here is a minimal <code class="docutils literal notranslate"><span class="pre">Mutex</span></code> class, that uses
+synchronization state zero to mean unlocked, and one to mean
+locked. This class does not need the value arguments supported
+for synchronization methods, so uses zero, and otherwise ignores
+them.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Mutex</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Sync</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractQueuedSynchronizer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryAcquire</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ignore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">compareAndSetState</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryRelease</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ignore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">setState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Sync</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sync</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sync</span><span class="p">.</span><span class="na">acquire</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sync</span><span class="p">.</span><span class="na">release</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A fuller version of this example, along with other usage guidance
+may be found in the J2SE documentation. Many variants are of
+course possible. For example, <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> could employ “test-
+and-test-and-set” by checking the state value before trying to
+change it.</p>
+<p>It may be surprising that a construct as performance-sensitive as
+a mutual exclusion lock is intended to be defined using a
+combination of delegation and virtual methods. However, these
+are the sorts of OO design constructions that modern dynamic
+compilers have long focussed on. They tend to be good at
+optimizing away this overhead, at least in code in which
+synchronizers are invoked frequently.</p>
+<p>Class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> also supplies a
+number of methods that assist synchronizer classes in policy
+control. For example, it includes timeout and interruptible
+versions of the basic acquire method. And while discussion so far
+has focussed on exclusive-mode synchronizers such as locks, the
+<code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> class also contains a
+parallel set of methods (such as acquireShared) that differ in
+that the <code class="docutils literal notranslate"><span class="pre">tryAcquireShared</span></code> and <code class="docutils literal notranslate"><span class="pre">tryReleaseShared</span></code>
+methods can inform the framework (via their return values) that
+further acquires may be possible, ultimately causing it to wake up
+multiple threads by cascading signals.</p>
+<p>Although it is not usually sensible to serialize (persistently store
+or transmit) a synchronizer, these classes are often used in turn to
+construct other classes, such as thread-safe collections, that are
+commonly serialized. The <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ConditionObject</span></code> classes provide methods to serialize
+synchronization state, but not the underlying blocked threads or
+other intrinsically transient bookkeeping. Even so, most
+synchronizer classes merely reset synchronization state to initial
+values on deserialization, in keeping with the implicit policy of
+built-in locks of always deserializing to an unlocked state. This
+amounts to a no-op, but must still be explicitly supported to
+enable deserialization of <code class="docutils literal notranslate"><span class="pre">final</span></code> fields.</p>
+<section id="controlling-fairness">
+<h3>4.1 Controlling Fairness 控制公平<a class="headerlink" href="#controlling-fairness" title="Link to this heading">#</a></h3>
+<p>Even though they are based on FIFO queues, synchronizers are
+not necessarily fair. Notice that in the basic acquire algorithm
+(Section 3.3), tryAcquire checks are performed before
+queuing. Thus a newly acquiring thread can “steal” access that is
+“intended” for the first thread at the head of the queue.
+This barging FIFO strategy generally provides higher aggregate
+throughput than other techniques. It reduces the time during
+which a contended lock is available but no thread has it because
+the intended next thread is in the process of unblocking. At the
+same time, it avoids excessive, unproductive contention by only
+allowing one (the first) queued thread to wake up and try to
+acquire upon any release. Developers creating synchronizers
+may further accentuate barging effects in cases where
+synchronizers are expected to be held only briefly by defining
+tryAcquire to itself retry a few times before passing back
+control.
+Barging FIFO synchronizers have only probablistic fairness
+properties. An unparked thread at the head of the lock queue has</p>
+<p><img alt="tryAcquire" src="../_images/tryAcquire.png" /></p>
+<p>an unbiased chance of winning a race with any incoming barging
+thread, reblocking and retrying if it loses. However, if incoming
+threads arrive faster than it takes an unparked thread to unblock,
+the first thread in the queue will only rarely win the race, so will
+almost always reblock, and its successors will remain blocked.
+With briefly-held synchronizers, it is common for multiple
+bargings and releases to occur on multiprocessors during the time
+the first thread takes to unblock. As seen below, the net effect is
+to maintain high rates of progress of one or more threads while
+still at least probabilistically avoiding starvation.</p>
+<p>When greater fairness is required, it is a relatively simple matter
+to arrange it. Programmers requiring strict fairness can define
+tryAcquire to fail (return false) if the current thread is not at
+the head of the queue, checking for this using method
+getFirstQueuedThread, one of a handful of supplied
+inspection methods.</p>
+<p>A faster, less strict variant is to also allow tryAcquire to
+succeed if the the queue is (momentarily) empty. In this case,
+multiple threads encountering an empty queue may race to be the
+first to acquire, normally without enqueuing at least one of them.
+This strategy is adopted in all java.util.concurrent synchronizers
+supporting a “fair” mode.</p>
+<p>While they tend to be useful in practice, fairness settings have no
+guarantees, because the Java Language Specification does not
+provide scheduling guarantees. For example, even with a strictly
+fair synchronizer, a JVM could decide to run a set of threads
+purely sequentially if they never otherwise need to block waiting
+for each other. In practice, on a uniprocessor, such threads are
+likely to each run for a time quantum before being pre-emptively
+context-switched. If such a thread is holding an exclusive lock, it
+will soon be momentarily switched back, only to release the lock
+and block now that it is known that another thread needs the lock,
+thus further increasing the periods during which a synchronizer is
+available but not acquired. Synchronizer fairness settings tend to
+have even greater impact on multiprocessors, which generate
+more interleavings, and hence more opportunities for one thread
+to discover that a lock is needed by another thread.
+Even though they may perform poorly under high contention
+when protecting briefly-held code bodies, fair locks work well,
+for example, when they protect relatively long code bodies
+and/or with relatively long inter-lock intervals, in which case
+barging provides little performance advantage and but greater
+risk of indefinite postponement. The synchronizer framework
+leaves such engineering decisions to its users.</p>
+</section>
+<section id="synchronizers">
+<h3>4.2 Synchronizers 同步器<a class="headerlink" href="#synchronizers" title="Link to this heading">#</a></h3>
+<p>Here are sketches of how java.util.concurrent synchronizer
+classes are defined using this framework:</p>
+<p>The ReentrantLock class uses synchronization state to hold
+the (recursive) lock count. When a lock is acquired, it also
+records the identity of the current thread to check recursions and
+detect illegal state exceptions when the wrong thread tries to
+unlock. The class also uses the provided ConditionObject,
+and exports other monitoring and inspection methods. The class
+supports an optional “fair” mode by internally declaring two
+different AbstractQueuedSynchronizer subclasses (the
+fair one disabling barging) and setting each ReentrantLock
+instance to use the appropriate one upon construction.</p>
+<p>The ReentrantReadWriteLock class uses 16 bits of the
+synchronization state to hold the write lock count, and the
+remaining 16 bits to hold the read lock count. The WriteLock
+is otherwise structured in the same way as ReentrantLock.
+The ReadLock uses the acquireShared methods to enable
+multiple readers.</p>
+<p>The Semaphore class (a counting semaphore) uses the
+synchronization state to hold the current count. It defines
+acquireShared to decrement the count or block if
+nonpositive, and tryRelease to increment the count, possibly
+unblocking threads if it is now positive.</p>
+<p>The CountDownLatch class uses the synchronization state to
+represent the count. All acquires pass when it reaches zero.
+The FutureTask class uses the synchronization state to
+represent the run-state of a future (initial, running, cancelled,
+done). Setting or cancelling a future invokes release,
+unblocking threads waiting for its computed value via acquire.
+The SynchronousQueue class (a CSP-style handoff) uses
+internal wait-nodes that match up producers and consumers. It
+uses the synchronization state to allow a producer to proceed
+when a consumer takes the item, and vice-versa.</p>
+<p>Users of the java.util.concurrent package may of course define
+their own synchronizers for custom applications. For example,
+among those that were considered but not adopted in the package
+are classes providing the semantics of various flavors of WIN32
+events, binary latches, centrally managed locks, and tree-based
+barriers.</p>
 <ol class="arabic simple" start="2001">
 <li></li>
 </ol>
@@ -707,18 +1112,18 @@ successor.</p>
 </ol>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id23" role="doc-footnote">
+<aside class="footnote brackets" id="id25" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
 <p>Andrews, G. Concurrent Programming. Wiley, 1991.</p>
 </aside>
-<aside class="footnote brackets" id="id24" role="doc-footnote">
+<aside class="footnote brackets" id="id26" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
 <p>Holmes, D. Synchronisation Rings, PhD Thesis, Macquarie
 University, 1999.</p>
 </aside>
-<aside class="footnote brackets" id="id25" role="doc-footnote">
+<aside class="footnote brackets" id="id27" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
 <p>Agesen, O., D. Detlefs, A. Garthwaite, R. Knippel, Y. S.
@@ -726,27 +1131,27 @@ Ramakrishna, and D. White. An Efficient Meta-lock for
 Implementing Ubiquitous Synchronization. ACM OOPSLA
 Proceedings, 1999.</p>
 </aside>
-<aside class="footnote brackets" id="id26" role="doc-footnote">
+<aside class="footnote brackets" id="id28" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id9">2</a>)</span>
 <p>Bacon, D. Thin Locks: Featherweight Synchronization for
 Java. ACM PLDI Proceedings, 1998.</p>
 </aside>
-<aside class="footnote brackets" id="id27" role="doc-footnote">
+<aside class="footnote brackets" id="id29" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
 <p>Zhang, H., S. Liang, and L. Bak. Monitor Conversion in a
 Multithreaded Computer System. United States Patent
 6,691,304. 2004.</p>
 </aside>
-<aside class="footnote brackets" id="id28" role="doc-footnote">
+<aside class="footnote brackets" id="id30" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id11">1</a>,<a role="doc-backlink" href="#id12">2</a>)</span>
 <p>Sun Microsystems. Multithreading in the Solaris Operating
 Environment . White paper available at
 http://wwws.sun.com/software/solaris/whitepapers.html</p>
 </aside>
-<aside class="footnote brackets" id="id29" role="doc-footnote">
+<aside class="footnote brackets" id="id31" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id17">2</a>)</span>
 <p>Mellor-Crummey, J.M., and M. L. Scott. Algorithms for
@@ -754,7 +1159,7 @@ Scalable Synchronization on Shared-Memory
 Multiprocessors. ACM Trans. on Computer Systems,
 February 1991</p>
 </aside>
-<aside class="footnote brackets" id="id30" role="doc-footnote">
+<aside class="footnote brackets" id="id32" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id14">1</a>,<a role="doc-backlink" href="#id18">2</a>)</span>
 <p>Craig, T. S. Building FIFO and priority-queueing spin locks
@@ -762,19 +1167,25 @@ from atomic swap. Technical Report TR 93-02-02,
 Department of Computer Science, University of
 Washington, Feb. 1993.</p>
 </aside>
-<aside class="footnote brackets" id="id31" role="doc-footnote">
+<aside class="footnote brackets" id="id33" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id15">1</a>,<a role="doc-backlink" href="#id19">2</a>)</span>
 <p>Magnussen, P., A. Landin, and E. Hagersten. Queue locks
 on cache coherent multiprocessors. 8th Intl. Parallel
 Processing Symposium, Cancun, Mexico, Apr. 1994.</p>
 </aside>
-<aside class="footnote brackets" id="id32" role="doc-footnote">
+<aside class="footnote brackets" id="id34" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id16">1</a>,<a role="doc-backlink" href="#id20">2</a>,<a role="doc-backlink" href="#id21">3</a>,<a role="doc-backlink" href="#id22">4</a>)</span>
 <p>M. L. Scott and W N. Scherer III. Scalable Queue-Based
 Spin Locks with Timeout. 8th ACM Symp. on Principles
 and Practice of Parallel Programming, Snowbird, UT, June</p>
+</aside>
+<aside class="footnote brackets" id="id35" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id23">1</a>,<a role="doc-backlink" href="#id24">2</a>)</span>
+<p>Buhr, P. M. Fortier, and M. Coffin. Monitor Classification,
+ACM Computing Surveys, March 1995.</p>
 </aside>
 </aside>
 </section>
@@ -859,6 +1270,11 @@ and Practice of Parallel Programming, Snowbird, UT, June</p>
 <li><a class="reference internal" href="#blocking">3.2 Blocking 阻塞</a></li>
 <li><a class="reference internal" href="#queues">3.3 Queues 队列</a></li>
 <li><a class="reference internal" href="#condition-queues">3.4 Condition Queues 条件队列</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage">4. USAGE 使用</a><ul>
+<li><a class="reference internal" href="#controlling-fairness">4.1 Controlling Fairness 控制公平</a></li>
+<li><a class="reference internal" href="#synchronizers">4.2 Synchronizers 同步器</a></li>
 </ul>
 </li>
 </ul>

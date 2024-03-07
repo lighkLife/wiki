@@ -65,8 +65,8 @@ classes that users may define themselves.
 
 众所周知(见例子, [^2]) ，大多数同步器之间可以互相实现。例如，可以使用重入锁实现信号量，反之亦然。然而，
 这样做做往往相当复杂，开销过大，不灵活，只能作为次等的工程选择。此外，这在概念上也不吸引人。
-如果每一本质上更基本的同步器，那么开发人员就不应该被强迫任意选择一种同步器作为构建其他同步器的基础。
-所以，JSR166 建立了一个以 `AbstractQueuedSynchro-nizer` 类为中心的小型框架，改类为并发包中的
+如果没有一个本质上更基本的同步器，那么开发人员就不该被迫任选一种同步器，作为构建其他同步器的基础。
+所以，JSR166 建立了一个以 `AbstractQueuedSynchro-nizer` 类为中心的小型框架，该类为并发包中的
 大多数同步器提供了一个通用的机制，也可被用户自定义类使用。
 
 The remainder of this paper discusses the requirements for this
@@ -109,7 +109,7 @@ version of acquire that is cancellable, and one that isn't.
 定义的（例如 Lock ），但其他只包含特定的版本。因此，获取和释放操作，在不同的类中
 采用了不同的名称和形式。例如这些方法 `Lock.lock`，`Semaphore.acquire`，
 `CountDownLatch.await` 和 `FutureTask.get` 都映射为框架中的获取操作。
-然而，这个包在类之间保持了一致的约定，来支持一系列的使用选项。如果有意义，每个同步器都支持：
+但是，这个包就在类之间保持了一致的约定，来支持一系列的使用选项。如果有意义，每个同步器都支持：
 - 非阻塞的同步尝试（例如 `tryLock`）, 以及阻塞的版本
 - 可选的超时机制，以便应用程序可以放弃等待。
 - 通过中断实现取消功能，获取操作通常分为一个可取消的版本，以及一个不能取消的版本。
@@ -124,7 +124,7 @@ threads as the count permits. To be widely useful, the framework
 must support both modes of operation.
 
 同步器可能根据他们管理的状态是独占状态还是共享状态而有所不同。独占状态是指
-一次只有一个线程可以继续通过可能的阻塞点，而共享状态则允许多个线程至少有时可以继续处理。
+一次只有一个线程可以继续通过可能的阻塞点，而共享状态则允许多个线程至少某些时刻可以同时处理任务。
 当然，常规的锁类只维护独占状态，但是，例如信号量，只要许可证数量足够，就可以被读多个线程获取。
 为了广泛应用，框架必须支持这两种操作模式。
 
@@ -181,10 +181,10 @@ applicable.
 
 相反，这里的主要性能目标是可伸缩性：即在同步器被争用时，能够可预测的保持效率。
 理想情况下，无论多少线程正在尝试通过同步点，其所需要的开销应该是恒定的。主要目标之一
-是尽量减少某个线程被允许通过同步点，但尚未这样做的总时间量（译注：竞态下获取资源的时间）。
-然而，这些操作必须对资源利用均衡考量，包括需要 CPU 的总时间，内存流量和线程调度开销。
-例如，自旋锁通常提高比阻塞锁更短的获取时间，但通常会浪费 CPU 周期和内存竞争，因此
-并不普适。
+是尽量减少某个线程被允许通过同步点，但尚未这样做的总时间量（译注：竞态下，
+资源足以分配给当前线程时， 当前线程获取资源的时间）。然而，这些操作必须对资源利用
+均衡考量，包括需要 CPU 的总时间，内存流量和线程调度开销。例如，获取自旋锁通常
+比获取阻塞锁使用的时间更短，但获取自旋锁通常会浪费 CPU 周期和内存竞争，因此并不普适。
 
 These goals carry across two general styles of use. Most
 applications should maximize aggregate throughput, tolerating, at
@@ -195,10 +195,9 @@ aggregate throughput. No framework can decide between these
 conflicting goals on behalf of users; instead different fairness
 policies must be accommodated.
 
-这些目标贯穿两种基本的使用方式。大多数应用应该最大化总通吐量，最多只能容忍不发生饥饿
-的概率上保证。然而，在资源控制等应用程序中，更重要的是在线程之间维持公平的资源访问，
-可以容忍牺牲总通吐量。没有一个框架可以代表户在这些相互冲突的目标中作出决定；相反，
-必须提供不同的公平策略来适应不同场景。
+这些目标贯穿两种基本的使用方式。大多数应用应该最大化总通吐量，最多只能容忍概率上保证不发生饥饿。
+然而，在资源控制等应用程序中，更重要的是在线程之间维持公平的资源访问，可以容忍牺牲总通吐量。
+没有一个框架可以代表户在这些相互冲突的目标中作出决定；相反，必须提供不同的公平策略来适应不同场景。
 
 No matter how well-crafted they are internally, synchronizers
 will create performance bottlenecks in some applications. Thus,
@@ -210,7 +209,6 @@ determine how many threads are blocked。
 无论同步器内部设计的多么精良，他们都会成为某些应用的性能瓶颈。因此，框架必须提供监控和
 检查内部操作的功能，以便用户能够发现和缓解瓶颈。至少应该（也是最有用的）包括提供一种
 方法来确定有多少线程被阻塞。
-
 
 ## 3. DESIGN AND IMPLEMENTATION 设计和实现
 
@@ -249,7 +247,7 @@ and the signatures of exported methods depend on the nature of
 synchronization state.
 
 也许可以创建一个框架，允许这三者独立变化。但是，这样性能不高，也无法使用。
-例如，队列节点中保留的信息必须和解除阻塞所需要的信息所匹配，并且导出方法的
+例如，队列节点中保留的信息必须和解除阻塞所需要的信息所匹配，并且对外暴露方法的
 签名，取决于同步状态的性质。
 
 The central design decision in the synchronizer framework was
@@ -489,24 +487,463 @@ successor, so links are unnecessary. But in a blocking
 synchronizer, a node needs to explicitly wake up (`unpark`) its
 successor.
 
-将 CLH 队列
+将 CLH 队列用于阻塞同步器的主要修改就是，为一个节点提供一个高效定位后继节点的方式。
+在自旋锁中，一个节点只需要修改自己的状态，其后继节点会在下一次自旋时注意到这个状态变化。
+所以节点之间的链接不是必须的。但是在阻塞同步器中，一个节点需要明确的唤醒（`unpark`）它的后继节点。
 
+An `AbstractQueuedSynchronizer` queue node contains a
+`next` link to its successor. But because there are no applicable
+techniques for lock-free atomic insertion of double-linked list
+nodes using compareAndSet, this link is not atomically set as
+part of insertion; it is simply assigned:
 
+`AbstractQueuedSynchronizer` 队列节点包含一个指向其后继节点的 next 链接。
+但是，因为没有适用于使用 compareAndSet 进行双向链表节点的无锁原子插入的技术，
+所以这个链接在插入过程中不会被原子地设置；它只是简单地赋值：
 
+```java
+pred.next = node;
+```
+after the insertion. This is reflected in all usages. The `next` link
+is treated only as an optimized path. If a node's successor does
+not appear to exist (or appears to be cancelled) via its `next` field,
+it is always possible to start at the tail of the list and traverse
+backwards using the `pred` field to accurately check if there
+really is one.
 
+在插入操作之后就会反映在所有用法中。next 链接仅被视为一条优化路径。如果通过一个节点的的 `next` 
+字段来看，这个节点的后继节点已经不存在（或者看起来已经被取消），始终可以从列表的尾部开始，
+并使用 `pred` 字段往回遍历，以准确地检查是否真的存在一个后继节点。
 
+A second set of modifications is to use the status field kept in
+each node for purposes of controlling blocking, not spinning. In
+the synchronizer framework, a queued thread can only return
+from an acquire operation if it passes the `tryAcquire` method
+defined in a concrete subclass; a single "released" bit does not
+suffice. But control is still needed to ensure that an active thread
+is only allowed to invoke `tryAcquire` when it is at the head of
+the queue; in which case it may fail to acquire, and (re)block.
+This does not require a per-node status flag because permission
+can be determined by checking that the current node's
+predecessor is the `head`. And unlike the case of spinlocks, there
+is not enough memory contention reading `head` to warrant
+replication. However, cancellation status must still be present in
+the status field.
 
+第二组修改是利用每个节点中保存的状态字段来控制阻塞，而不是自旋。在同步器框架中，
+在排队的线程，只有在调用具体子类中定义的 `tryAcquire` 方法通过后，才能从获取操作中返回；
+单独的“已释放”位是不够的。仍然需要进行控制，以确保只有在队列的头部的活动线程才可以
+调用 `tryAcquire`；在这种情况下，它也可能无法获取，并且（重新）阻塞。这不需要查看
+每个节点的状态标志，因为可以通过检查当前节点的前驱是否是`head`来确定权限。
+与自旋锁的情况不同，读取头部进行复制时，不会存在的内存争。但是，状态字段中
+必须存在取消状态。
 
+The queue node status field is also used to avoid needless calls to
+`park` and `unpark`. While these methods are relatively fast as
+blocking primitives go, they encounter avoidable overhead in the
+boundary crossing between Java and the JVM runtime and/or OS.
+Before invoking `park`, a thread sets a "signal me" bit, and then
+rechecks synchronization and node status once more before
+invoking `park`. A releasing thread clears status. This saves
+threads from needlessly attempting to block often enough to be
+worthwhile, especially for lock classes in which lost time waiting
+for the next eligible thread to acquire a lock accentuates other
+contention effects. This also avoids requiring a releasing thread
+to determine its successor unless the successor has set the signal
+bit, which in turn eliminates those cases where it must traverse
+multiple nodes to cope with an apparently null `next` field unless
+signalling occurs in conjunction with cancellation.
 
+队列节点的状态字段还用于避免不必要地调用 `park` 和 `unpark` 方法。虽然这些方法在
+阻塞原语中相对较快，但这些是在 Java 、JVM 运行时、操作系统之间的边界交叉中可以
+避免的开销。在调用`park`之前，线程会设置一个“signal me”的 bit 位，然后再检查
+同步和节点状态。释放线程会清除状态。尤其是对某些锁类来说，这样做通常是值得的，
+因为可以使线程避免不必要的阻塞，避免浪费时间去等待下一个符合条件的线程去获取锁，
+这样会加重其他竞争效应。这也避免了释放线程需要确定其后继节点，除非后继节点设置了信号位，
+除开取消操作和发信号同时发生之外，必须遍历多个节点，以应对`next`字段明显为空的情况也被避免了。
 
+Perhaps the main difference between the variant of CLH locks
+used in the synchronizer framework and those employed in other
+languages is that garbage collection is relied on for managing
+storage reclamation of nodes, which avoids complexity and
+overhead. However, reliance on GC does still entail nulling of
+link fields when they are sure to never to be needed. This can
+normally be done when dequeuing. Otherwise, unused nodes
+would still be reachable, causing them to be uncollectable.
+Some further minor tunings, including lazy initialization of the
+initial dummy node required by CLH queues upon first
+contention, are described in the source code documentation in the
+J2SE1.5 release.
 
+在同步器框架中使用 CLH 锁的变体和在其他语言中使用的主要区别在于，后者依赖于垃圾收集
+来管理节点的存储回收，这避免了复杂性和开销。然而，依赖 GC 就需要在确定不再需要链接
+字段时将其置空。这一般可以在出队时完成。然而，未使用的节点将依然可达，导致其不能被回收。
+在 J2SE1.5 发布的源代码文档中，对其进一步的微调进行了描述，包括在首次竞争时，
+对 CLH 队列所需的初始虚拟节点进行延迟初始化。
 
+Omitting such details, the general form of the resulting
+implementation of the basic acquire operation (exclusive,
+noninterruptible, untimed case only) is:
 
+忽略这些细节，最终得到的基本获取操作的一般形式（独占、无中断、无超时）如下：
 
+```java
+if (!tryAcquire(arg)) {
+    node = create and enqueue new node;
+    pred = node's effective predecessor;
+    while (pred is not head node || !tryAcquire(arg)) {
+        if (pred's signal bit is set)
+            park();
+        else
+            compareAndSet pred's signal bit to true;
+        pred = node's effective predecessor;
+    }
+    head = node;
+}
+```
 
+And the release operation is:
+释放的操作如下：
+
+```java
+if (tryRelease(arg) && head node's signal bit is set) {
+    compareAndSet head's signal bit to false;
+    unpark head's successor, if one exists
+}
+```
+
+The number of iterations of the main acquire loop depends, of
+course, on the nature of `tryAcquire`. Otherwise, in the
+absence of cancellation, each component of acquire and release is
+a constant-time O(1) operation, amortized across threads,
+disregarding any OS thread scheduling occuring within `park`.
+
+获取循环的迭代次数取决于 `tryAcquire` 的性质。否则，在没有取消的情况下，
+忽略发生在 `park` 内部的所有操作系统线程调度，分摊到各个线程上，获取和释放操作
+都是常量时间复杂度为 O(1) 的操作。
+
+Cancellation support mainly entails checking for interrupt or
+timeout upon each return from `park` inside the acquire loop. A
+cancelled thread due to timeout or interrupt sets its node status
+and unparks its successor so it may reset links. With cancellation,
+determining predecessors and successors and resetting status may
+include O(n) traversals (where n is the length of the queue).
+Because a thread never again blocks for a cancelled operation,
+links and status fields tend to restabilize quickly.
+
+支持取消，主要涉及在获取循环中，每次从 `park` 返回时去检查中断或超时。
+由于超时或中断而取消的线程，会设置其节点状态，并唤醒其后继节点，以便其可以重置链接。
+在取消的情况下，确定前驱和后继节点，以及重置状态可能包括 O(n) 的遍历（其中 n 是队列的长度）。
+因为线程不会因为取消操作再次阻塞，链接和状态字段往往会迅速恢复稳定。
 
 ### 3.4 Condition Queues 条件队列
 
+The synchronizer framework provides a `ConditionObject`
+class for use by synchronizers that maintain exclusive
+synchronization and conform to the `Lock` interface. Any number
+of condition objects may be attached to a lock object, providing
+classic monitor-style `await`, `signal`, and `signalAll`
+operations, including those with timeouts, along with some
+inspection and monitoring methods.
+
+同步器框架提供了一个 `ConditionObject` 类，供那些维护独占同步，并且符合
+`Lock` 接口的同步器使用。可以将任意数量的条件对象附加到锁对象上，提供经典
+的监视器风格的 `await`、`signal` 和 `signalAll` 操作，包括超时操作，
+以及一些检查和监控方法。
+
+The `ConditionObject` class enables conditions to be
+efficiently integrated with other synchronization operations,
+again by fixing some design decisions. This class supports only
+Java-style monitor access rules in which condition operations are
+legal only when the lock owning the condition is held by the
+current thread (See [^4] for discussion of alternatives). Thus, a
+`ConditionObject` attached to a `ReentrantLock` acts in
+the same way as do built-in monitors (via `Object.wait` etc),
+differing only in method names, extra functionality, and the fact
+that users can declare multiple conditions per lock.
+
+再修改一些设计方案，`ConditionObject` 类就可以将条件与其他同步操作高效地集成。
+该类仅支持 Java 风格的监视器访问规则，其中条件操作仅在当前线程持有条件的锁时才合法
+（请参阅 [^4]，了解其他选择的讨论）。因此，附加到 `ReentrantLock` 的
+`ConditionObject` 的行为与内置的监视器（通过 `Object.wait` 等）相同，与内置的监视器
+不同的只是方法名称、额外功能，以及用户可以为每个锁声明多个条件。
+
+A `ConditionObject` uses the same internal queue nodes as
+synchronizers, but maintains them on a separate condition queue.
+The signal operation is implemented as a queue transfer from the
+condition queue to the lock queue, without necessarily waking up
+the signalled thread before it has re-acquired its lock.
+
+`ConditionObject` 使用与同步器相同的内部队列节点，但是将它们被维护在单独的条件队列中。
+`singal`操作的实现是将节点从条件队列转移到锁队列，无需在信号线程重新获取它的锁之前唤醒它。
+
+The basic await operation is:
+await 操作的基本如下：
+```java
+create and add new node to condition queue;
+release lock;
+block until node is on lock queue;
+re-acquire lock;
+```
+
+And the signal operation is:
+signal 操作如下
+```java
+transfer the first node from condition queue to lock queue;
+```
+
+Because these operations are performed only when the lock is
+held, they can use sequential linked queue operations (using a
+`nextWaiter` field in nodes) to maintain the condition queue.
+The transfer operation simply unlinks the first node from the
+condition queue, and then uses CLH insertion to attach it to the
+lock queue.
+
+因为这些操作只在持有锁时执行，它们可以使用顺序链接队列操作（使用节点中的 
+`nextWaiter` 字段）来维护条件队列。转移操作就是简单地从条件队列中删除头节点，
+然后使用 CLH 将其连接到插入到锁队列。
+
+The main complication in implementing these operations is
+dealing with cancellation of condition waits due to timeouts or
+`Thread.interrupt`. A cancellation and signal occuring at
+approximately the same time encounter a race whose outcome
+conforms to the specifications for built-in monitors. As revised in
+JSR133, these require that if an interrupt occurs before a signal,
+then the `await` method must, after re-acquiring the lock, throw
+`InterruptedException`. But if it is interrupted after a
+signal, then the method must return without throwing an
+exception, but with its thread interrupt status set.
+
+实现这些操作时主要的复杂性，在于因超时或 `Thread.interrupt`而导致条件等待的取消。
+在几乎同时发生取消和通知信号的情况下，会遇到竞争，其结果符合内置监视器的规范。
+在 JSR133 的修订中，这些规范要求，如果在通知信号之前发生中断，则 `await` 方法
+在重新获取锁之后必须抛出 `InterruptedException`。但如果在通知信号之后中断，
+则该方法必须在不抛出异常的情况下返回，并将其线程中断状态设置为已中断。
+
+To maintain proper ordering, a bit in the queue node status
+records whether the node has been (or is in the process of being)
+transferred. Both the signalling code and the cancelling code try
+to compareAndSet this status. If a signal operation loses this race,
+it instead transfers the next node on the queue, if one exists. If a
+cancellation loses, it must abort the transfer, and then await lock
+re-acquisition. This latter case introduces a potentially
+unbounded spin. A cancelled wait cannot commence lock re-
+acquisition until the node has been successfully inserted on the
+lock queue, so must spin waiting for the CLH queue insertion
+compareAndSet being performed by the signalling thread to
+succeed. The need to spin here is rare, and employs a
+`Thread.yield` to provide a scheduling hint that some other
+thread, ideally the one doing the signal, should instead run. While
+it would be possible to implement here a helping strategy for the
+cancellation to insert the node, the case is much too rare to justify
+the added overhead that this would entail. In all other cases, the
+basic mechanics here and elsewhere use no spins or yields, which
+maintains reasonable performance on uniprocessors.
+
+为了保持正确的顺序，队列节点状态中的一个位记录了节点是否已经（或正在）被转移。
+通知信号代码和取消代码都尝试比较并设置这个状态。如果通知信号操作竞争失败，
+它会转移队列中的下一个节点（如果存在的话）。如果取消操作竞争失败，它必须停止转移，
+然后等待到重新获取锁。后一种情况可能会导致永久自旋。取消等待无法重新开始获取锁，
+直到节点成功插入到锁队列中，因此在由通知信号线程执行的 CLH 队列插入比较并设置操作成功前，
+必须自旋等待。在这里需要自旋的情况很少见，并且使用了 `Thread.yield` 来提供一个调度提示，
+表示其他线程应该运行，理想情况下是执行通知信号的线程运行。虽然在这里可以实现一个辅助策略
+来进行取消操作，但是这种情况发生的频率太低，无法证明为此增加的开销是合理的。
+在其他情况下，这里和其他地方的基本机制都不使用自旋或让出，如此可以保持在单处理器上的性能。
+
+## 4. USAGE 使用
+
+Class `AbstractQueuedSynchronizer` ties together the
+above functionality and serves as a "template method pattern" [6]
+base class for synchronizers. Subclasses define only the methods
+that implement the state inspections and updates that control
+acquire and release. However, subclasses of 
+`AbstractQueuedSynchronizer` are not themselves usable as
+synchronizer ADTs, because the class necessarily exports the
+methods needed to internally control acquire and release policies,
+which should not be made visible to users of these classes. All
+java.util.concurrent synchronizer classes declare a private inner
+`AbstractQueuedSynchronizer` subclass and delegate all
+synchronization methods to it. This also allows public methods to
+be given names appropriate to the synchronizer.
+
+For example, here is a minimal `Mutex` class, that uses
+synchronization state zero to mean unlocked, and one to mean
+locked. This class does not need the value arguments supported
+for synchronization methods, so uses zero, and otherwise ignores
+them.
+
+```java
+class Mutex {
+    class Sync extends AbstractQueuedSynchronizer {
+        public boolean tryAcquire(int ignore) {
+            return compareAndSetState(0, 1);
+        }
+        public boolean tryRelease(int ignore) {
+            setState(0); 
+            return true;
+        }
+    }
+    private final Sync sync = new Sync();
+    public void lock() { sync.acquire(0); }
+    public void unlock() { sync.release(0); }
+}
+```
+
+A fuller version of this example, along with other usage guidance
+may be found in the J2SE documentation. Many variants are of
+course possible. For example, `tryAcquire` could employ "test-
+and-test-and-set" by checking the state value before trying to
+change it.
+
+It may be surprising that a construct as performance-sensitive as
+a mutual exclusion lock is intended to be defined using a
+combination of delegation and virtual methods. However, these
+are the sorts of OO design constructions that modern dynamic
+compilers have long focussed on. They tend to be good at
+optimizing away this overhead, at least in code in which
+synchronizers are invoked frequently.
+
+Class `AbstractQueuedSynchronizer` also supplies a
+number of methods that assist synchronizer classes in policy
+control. For example, it includes timeout and interruptible
+versions of the basic acquire method. And while discussion so far
+has focussed on exclusive-mode synchronizers such as locks, the
+`AbstractQueuedSynchronizer` class also contains a
+parallel set of methods (such as acquireShared) that differ in
+that the `tryAcquireShared` and `tryReleaseShared`
+methods can inform the framework (via their return values) that
+further acquires may be possible, ultimately causing it to wake up
+multiple threads by cascading signals.
+
+Although it is not usually sensible to serialize (persistently store
+or transmit) a synchronizer, these classes are often used in turn to
+construct other classes, such as thread-safe collections, that are
+commonly serialized. The `AbstractQueuedSynchronizer`
+and `ConditionObject` classes provide methods to serialize
+synchronization state, but not the underlying blocked threads or
+other intrinsically transient bookkeeping. Even so, most
+synchronizer classes merely reset synchronization state to initial
+values on deserialization, in keeping with the implicit policy of
+built-in locks of always deserializing to an unlocked state. This
+amounts to a no-op, but must still be explicitly supported to
+enable deserialization of `final` fields.
+
+### 4.1 Controlling Fairness 控制公平
+
+Even though they are based on FIFO queues, synchronizers are
+not necessarily fair. Notice that in the basic acquire algorithm
+(Section 3.3), tryAcquire checks are performed before
+queuing. Thus a newly acquiring thread can “steal” access that is
+"intended" for the first thread at the head of the queue.
+This barging FIFO strategy generally provides higher aggregate
+throughput than other techniques. It reduces the time during
+which a contended lock is available but no thread has it because
+the intended next thread is in the process of unblocking. At the
+same time, it avoids excessive, unproductive contention by only
+allowing one (the first) queued thread to wake up and try to
+acquire upon any release. Developers creating synchronizers
+may further accentuate barging effects in cases where
+synchronizers are expected to be held only briefly by defining
+tryAcquire to itself retry a few times before passing back
+control.
+Barging FIFO synchronizers have only probablistic fairness
+properties. An unparked thread at the head of the lock queue has
+
+![tryAcquire](./img/aqs/tryAcquire.png)
+
+an unbiased chance of winning a race with any incoming barging
+thread, reblocking and retrying if it loses. However, if incoming
+threads arrive faster than it takes an unparked thread to unblock,
+the first thread in the queue will only rarely win the race, so will
+almost always reblock, and its successors will remain blocked.
+With briefly-held synchronizers, it is common for multiple
+bargings and releases to occur on multiprocessors during the time
+the first thread takes to unblock. As seen below, the net effect is
+to maintain high rates of progress of one or more threads while
+still at least probabilistically avoiding starvation.
+
+When greater fairness is required, it is a relatively simple matter
+to arrange it. Programmers requiring strict fairness can define
+tryAcquire to fail (return false) if the current thread is not at
+the head of the queue, checking for this using method
+getFirstQueuedThread, one of a handful of supplied
+inspection methods.
+
+A faster, less strict variant is to also allow tryAcquire to
+succeed if the the queue is (momentarily) empty. In this case,
+multiple threads encountering an empty queue may race to be the
+first to acquire, normally without enqueuing at least one of them.
+This strategy is adopted in all java.util.concurrent synchronizers
+supporting a "fair" mode.
+
+While they tend to be useful in practice, fairness settings have no
+guarantees, because the Java Language Specification does not
+provide scheduling guarantees. For example, even with a strictly
+fair synchronizer, a JVM could decide to run a set of threads
+purely sequentially if they never otherwise need to block waiting
+for each other. In practice, on a uniprocessor, such threads are
+likely to each run for a time quantum before being pre-emptively
+context-switched. If such a thread is holding an exclusive lock, it
+will soon be momentarily switched back, only to release the lock
+and block now that it is known that another thread needs the lock,
+thus further increasing the periods during which a synchronizer is
+available but not acquired. Synchronizer fairness settings tend to
+have even greater impact on multiprocessors, which generate
+more interleavings, and hence more opportunities for one thread
+to discover that a lock is needed by another thread.
+Even though they may perform poorly under high contention
+when protecting briefly-held code bodies, fair locks work well,
+for example, when they protect relatively long code bodies
+and/or with relatively long inter-lock intervals, in which case
+barging provides little performance advantage and but greater
+risk of indefinite postponement. The synchronizer framework
+leaves such engineering decisions to its users.
+
+### 4.2 Synchronizers 同步器
+Here are sketches of how java.util.concurrent synchronizer
+classes are defined using this framework:
+
+The ReentrantLock class uses synchronization state to hold
+the (recursive) lock count. When a lock is acquired, it also
+records the identity of the current thread to check recursions and
+detect illegal state exceptions when the wrong thread tries to
+unlock. The class also uses the provided ConditionObject,
+and exports other monitoring and inspection methods. The class
+supports an optional "fair" mode by internally declaring two
+different AbstractQueuedSynchronizer subclasses (the
+fair one disabling barging) and setting each ReentrantLock
+instance to use the appropriate one upon construction.
+
+The ReentrantReadWriteLock class uses 16 bits of the
+synchronization state to hold the write lock count, and the
+remaining 16 bits to hold the read lock count. The WriteLock
+is otherwise structured in the same way as ReentrantLock.
+The ReadLock uses the acquireShared methods to enable
+multiple readers.
+
+The Semaphore class (a counting semaphore) uses the
+synchronization state to hold the current count. It defines
+acquireShared to decrement the count or block if
+nonpositive, and tryRelease to increment the count, possibly
+unblocking threads if it is now positive.
+
+The CountDownLatch class uses the synchronization state to
+represent the count. All acquires pass when it reaches zero.
+The FutureTask class uses the synchronization state to
+represent the run-state of a future (initial, running, cancelled,
+done). Setting or cancelling a future invokes release,
+unblocking threads waiting for its computed value via acquire.
+The SynchronousQueue class (a CSP-style handoff) uses
+internal wait-nodes that match up producers and consumers. It
+uses the synchronization state to allow a producer to proceed
+when a consumer takes the item, and vice-versa.
+
+Users of the java.util.concurrent package may of course define
+their own synchronizers for custom applications. For example,
+among those that were considered but not adopted in the package
+are classes providing the semantics of various flavors of WIN32
+events, binary latches, centrally managed locks, and tree-based
+barriers.
 
 
 [^1]: Agesen, O., D. Detlefs, A. Garthwaite, R. Knippel, Y. S.
