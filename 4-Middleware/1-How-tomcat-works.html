@@ -163,6 +163,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html">JDK 动态代理</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/02-Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java四种引用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/04-String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/05-HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Java/06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -208,6 +211,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
 </ul>
 </li>
 </ul>
@@ -266,37 +270,35 @@
 但并不总为每个请求创建新的 <code class="docutils literal notranslate"><span class="pre">HttpProcessor</span></code> 实例，而是使用了池化技术。</p>
 <p><img alt="default-http-connector" src="../_images/default-http-connector.png" /></p>
 </section>
-<section id="id2">
-<h2>核心组件<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<section id="servlet">
-<h3>Servlet<a class="headerlink" href="#servlet" title="Link to this heading">#</a></h3>
-<p class="plantuml">
-<img src="../_images/plantuml-815079bfd1a6564059cb73d42ff6160019e8fe30.png" alt="&#64;startuml
-skinparam DefaultFontName Source Code Pro
-skinparam DefaultFontSize 15
-skinparam RankSep 50
-
-package &quot;Commerce&quot; {
-  node &quot;High Level Components&quot; {
-    component ProductCatalog
-  }
-
-  node &quot;Abstractions&quot; {
-    component ProductFactory
-  }
-
-  node &quot;Low Level Components&quot; {
-    component SQLProductRepository
-  }
-
-  ProductCatalog ..&gt; ProductFactory: depends on
-  ProductFactory ..&gt; SQLProductRepository: depends on
-}
-&#64;enduml"/>
-</p>
-</section>
 <section id="container">
-<h3>Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h3>
+<h2>容器 Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h2>
+<p>容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Container
+interface Engine extends Container
+interface Host extends Container
+interface Context extends Container
+interface Wrapper extends Container
+
+class StandardEngine implements Engine
+class StandardHost implements Host
+class StandardContext implements Context
+class StandardWrapper implements Wrapper
+
+StandardEngine &quot;1&quot; *-- &quot;many&quot; StandardHost
+StandardHost &quot;1&quot; *-- &quot;many&quot; StandardContext
+StandardContext &quot;1&quot; *-- &quot;many&quot; StandardWrapper
+
+note top of Engine : 整个 Catalina Servlet 引擎
+note bottom of Host : 一个虚拟主机
+note bottom of Context : 一个 web 应用
+note top of Wrapper : 一个 Servlet 请求(接口)
+</pre></div>
+</div>
+<section id="pipelining">
+<h3>管道 Pipelining<a class="headerlink" href="#pipelining" title="Link to this heading">#</a></h3>
+</section>
+<section id="id2">
+<h3>Container<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -367,9 +369,9 @@ package &quot;Commerce&quot; {
 <li><a class="reference internal" href="#id1">一个简单的请求处理程序</a></li>
 <li><a class="reference internal" href="#httpconnector">引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code></a></li>
 <li><a class="reference internal" href="#tomcat">Tomcat 的默认连接器</a></li>
-<li><a class="reference internal" href="#id2">核心组件</a><ul>
-<li><a class="reference internal" href="#servlet">Servlet</a></li>
-<li><a class="reference internal" href="#container">Container</a></li>
+<li><a class="reference internal" href="#container">容器 Container</a><ul>
+<li><a class="reference internal" href="#pipelining">管道 Pipelining</a></li>
+<li><a class="reference internal" href="#id2">Container</a></li>
 </ul>
 </li>
 </ul>

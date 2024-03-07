@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="使用 Sphinx 搭建知识库" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html" /><link rel="prev" title="设计模式的六大原则" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="HashMap实现" href="05-HashMap%E5%AE%9E%E7%8E%B0.html" /><link rel="prev" title="Java四种引用" href="03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>寻芳拾香 - 文档</title>
+        <title>String 实现 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -157,15 +157,15 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/00-Q%26A.html">Q&amp;A</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html">JDK 动态代理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/02-Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java四种引用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/04-String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/05-HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Java 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-Q%26A.html">Q&amp;A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html">JDK 动态代理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java四种引用</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">String 实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -206,12 +206,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">寻芳拾香</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 寻芳拾香</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html">MapReduce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/0-index.html">寻芳拾香</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 寻芳拾香</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
 </ul>
 </li>
 </ul>
@@ -242,53 +242,53 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="id1">
-<h1>寻芳拾香<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html#id1">介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html#id2">安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html#id3">插件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html#id4">提示块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html#id6">代码块</a></li>
+          <section id="string">
+<h1>String 实现<a class="headerlink" href="#string" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>存储结构<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Java 9 以前，String 使用 char[] 来存储字符串，字符串的长度就是 char[] 的大小；</p></li>
+<li><p>Java 9 及以后，String 使用 byte[] 来存储字符串，并且新增<code class="docutils literal notranslate"><span class="pre">COMPACT_STRINGS</span></code>
+代表当前是否采用压缩存储，<code class="docutils literal notranslate"><span class="pre">coder</span></code>代表当前存储方式（<code class="docutils literal notranslate"><span class="pre">LATIN1</span></code> 或 <code class="docutils literal notranslate"><span class="pre">UTF16</span></code>），具体一个字符占用多少个字节还是取决于字符编码和字符本身的码值。</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html#id2">需求描述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html#id4">方案一：使用字符串搜索</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#id1">记住用户名密码</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#id2">设置代理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#ssh-github">ssh 方式访问 github 失败</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#id3">覆盖更新</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#id4">舍弃追踪某个文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html#id5">历史树别名</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="04-MapReduce.html">MapReduce</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#id1">1. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>是什么？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#id2">2. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>解决了什么问题？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#id3">3. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>怎么解决的？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#id4">4. <code class="docutils literal notranslate"><span class="pre">MapReduce</span></code>由包含哪些组成部分？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#example">5. Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-MapReduce.html#execution-overview">6. Execution Overview</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html#id2">企业数字化转型</a></li>
-</ul>
-</li>
-</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">LATIN1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">UTF16</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">COMPACT_STRINGS</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">coder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">String</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">codePoints</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">COMPACT_STRINGS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">coder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LATIN1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">coder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UTF16</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">length</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">coder</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
 </div>
+</section>
+<section id="char">
+<h2>为什么改为 char[]<a class="headerlink" href="#char" title="Link to this heading">#</a></h2>
+<p>采用更节省空间的字符串内部表示形式。参考 <a class="reference external" href="https://openjdk.org/jeps/254">JEP254</a> 。</p>
+<p>String 类的当前实现将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，而且大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。</p>
+<p>参考：</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://javabetter.cn/basic-extra-meal/jdk9-char-byte-string.html">Java 9为什么要将String的底层实现由char数组改成了byte数组?</a></p></li>
+<li><p><a class="reference external" href="https://www.cnblogs.com/lslk89/p/6898526.html">Java一个汉字占几个字节（详解与原理）</a></p></li>
+</ol>
+</section>
 </section>
 
         </article>
@@ -296,23 +296,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">
+          <a class="next-page" href="05-HashMap%E5%AE%9E%E7%8E%B0.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">使用 Sphinx 搭建知识库</div>
+                <div class="title">HashMap实现</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/00-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">
+          <a class="prev-page" href="03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">设计模式的六大原则</div>
+                <div class="title">Java四种引用</div>
                 
               </div>
             </a>
@@ -341,8 +341,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">String 实现</a><ul>
+<li><a class="reference internal" href="#id1">存储结构</a></li>
+<li><a class="reference internal" href="#char">为什么改为 char[]</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

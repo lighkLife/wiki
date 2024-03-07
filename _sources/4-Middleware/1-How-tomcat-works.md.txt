@@ -18,35 +18,32 @@
 
 ![default-http-connector](./tomcat-image/default-http-connector.png)
 
-## 核心组件
+## 容器 Container
+容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。
 
-### Servlet
+```uml
+interface Container
+interface Engine extends Container
+interface Host extends Container
+interface Context extends Container
+interface Wrapper extends Container
 
-```{uml}
-@startuml
-skinparam DefaultFontName Source Code Pro
-skinparam DefaultFontSize 15
-skinparam RankSep 50
+class StandardEngine implements Engine
+class StandardHost implements Host
+class StandardContext implements Context
+class StandardWrapper implements Wrapper
 
-package "Commerce" {
-  node "High Level Components" {
-    component ProductCatalog
-  }
+StandardEngine "1" *-- "many" StandardHost
+StandardHost "1" *-- "many" StandardContext
+StandardContext "1" *-- "many" StandardWrapper
 
-  node "Abstractions" {
-    component ProductFactory
-  }
-
-  node "Low Level Components" {
-    component SQLProductRepository
-  }
-
-  ProductCatalog ..> ProductFactory: depends on
-  ProductFactory ..> SQLProductRepository: depends on
-}
-@enduml
+note top of Engine : 整个 Catalina Servlet 引擎
+note bottom of Host : 一个虚拟主机
+note bottom of Context : 一个 web 应用
+note top of Wrapper : 一个 Servlet 请求(接口)
 ```
 
+### 管道 Pipelining 
 
 
 ### Container
