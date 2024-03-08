@@ -753,7 +753,7 @@ maintains reasonable performance on uniprocessors.
 ## 4. USAGE 使用
 
 Class `AbstractQueuedSynchronizer` ties together the
-above functionality and serves as a "template method pattern" [6]
+above functionality and serves as a "template method pattern" [^6]
 base class for synchronizers. Subclasses define only the methods
 that implement the state inspections and updates that control
 acquire and release. However, subclasses of 
@@ -766,11 +766,21 @@ java.util.concurrent synchronizer classes declare a private inner
 synchronization methods to it. This also allows public methods to
 be given names appropriate to the synchronizer.
 
+类`AbstractQueuedSynchronizer`将上述功能联系在一起，并作为同步器的“模板模式”[^6]的基类。
+子类只需要实现检查和更新状态的方法，从而控制`accquire`和`release`。但是，
+`AbstractQueuedSynchronizer` 的子类本身不能用作同步器的抽象数据结构，因为这些子类
+必然暴露了内部控制`accuire`和`release`的方法，而这些方法是不该对这些类的用户类可见的。
+所有的 java.util.concurrent 中的同步器类，都声明了一个私有内部 `AbstractQueuedSynchronizer`
+子类，并将所有同步方法委托给它。这也让同步器可以给公共方法进行合适的命名。
+
 For example, here is a minimal `Mutex` class, that uses
 synchronization state zero to mean unlocked, and one to mean
 locked. This class does not need the value arguments supported
 for synchronization methods, so uses zero, and otherwise ignores
 them.
+
+例如，这是一个最小的`Mutex`类，它使用同步状态 0 表示未锁定，1 表示已锁定。
+该类不需要关心同步方法的参数值，因此使用零，并忽略其他值。
 
 ```java
 class Mutex {
@@ -788,12 +798,15 @@ class Mutex {
     public void unlock() { sync.release(0); }
 }
 ```
-
 A fuller version of this example, along with other usage guidance
 may be found in the J2SE documentation. Many variants are of
 course possible. For example, `tryAcquire` could employ "test-
 and-test-and-set" by checking the state value before trying to
 change it.
+
+J2SE 文档中可以找到这个示例的更完整版本，以及其他用法指导。当然也可能找到例子的
+一些变体。比如，`tryAcquire` 可以使用 “test-and-test-and-set” ，即在尝试
+改变状态的值之前，先检查状态的值，
 
 It may be surprising that a construct as performance-sensitive as
 a mutual exclusion lock is intended to be defined using a
@@ -802,6 +815,10 @@ are the sorts of OO design constructions that modern dynamic
 compilers have long focussed on. They tend to be good at
 optimizing away this overhead, at least in code in which
 synchronizers are invoked frequently.
+
+一个像互斥锁这样性能敏感的结构，使用委托和虚拟方法的组合来定义可能会令人惊讶。
+然而，现代动态编译器长期专注于面向对象设计，起码在调用频繁的同步器代码中，
+它们很擅长优化掉这种开销。
 
 Class `AbstractQueuedSynchronizer` also supplies a
 number of methods that assist synchronizer classes in policy
@@ -814,6 +831,13 @@ that the `tryAcquireShared` and `tryReleaseShared`
 methods can inform the framework (via their return values) that
 further acquires may be possible, ultimately causing it to wake up
 multiple threads by cascading signals.
+
+`AbstractQueuedSynchronizer` 类还提供了许多方法，以帮助同步器类进行策略控制。
+例如，它在基本的`accquire`方法上包括超时和可中断的版本。虽然到目前为止的讨论，
+集中在像锁这样的独占模式同步器上，但`AbstractQueuedSynchronizer`类还包含一组
+平行的方法（例如 `acquireShared`），这些方法与独占访问不同，`tryAcquireShared`和
+`tryReleaseShared`方法可以通过它们的返回值，通知框架可能存在进一步的获取，
+最终通过级联信号唤醒多个线程。
 
 Although it is not usually sensible to serialize (persistently store
 or transmit) a synchronizer, these classes are often used in turn to
@@ -828,14 +852,26 @@ built-in locks of always deserializing to an unlocked state. This
 amounts to a no-op, but must still be explicitly supported to
 enable deserialization of `final` fields.
 
+虽然对同步器进行序列化（持久存储或传输）通常没有意义，但这些类经常被用于构造其他类，
+例如线程安全的集合，这些线程安全的集合通常支持被序列化。`AbstractQueuedSynchronizer`
+和 `ConditionObject` 类提供了序列化同步状态的方法，但不包括底层阻塞的线程或
+其他内部临时数据。即使如此，大多数同步器类仅在反序列化时，将同步状态重置为初始值，
+以保持内置锁的隐式策略，始终反序列化为未锁定状态。这相当于一个`no-op`操作，
+但仍必须明确支持，以便启用`final`字段的反序列化。
+
 ### 4.1 Controlling Fairness 控制公平
 
 Even though they are based on FIFO queues, synchronizers are
 not necessarily fair. Notice that in the basic acquire algorithm
-(Section 3.3), tryAcquire checks are performed before
+(Section 3.3), `tryAcquire` checks are performed before
 queuing. Thus a newly acquiring thread can “steal” access that is
 "intended" for the first thread at the head of the queue.
-This barging FIFO strategy generally provides higher aggregate
+
+尽管基于FIFO队列，但同步器并不一定公平。请注意，在基础的`acquire`算法（第3.3节）中，
+在排队之前执行`tryAcquire`检查。因此，新获取的线程可以“窃取”原本“预定”给队列头部的
+第一个线程的访问权限。
+
+This *barging* FIFO strategy generally provides higher aggregate
 throughput than other techniques. It reduces the time during
 which a contended lock is available but no thread has it because
 the intended next thread is in the process of unblocking. At the
@@ -844,13 +880,19 @@ allowing one (the first) queued thread to wake up and try to
 acquire upon any release. Developers creating synchronizers
 may further accentuate barging effects in cases where
 synchronizers are expected to be held only briefly by defining
-tryAcquire to itself retry a few times before passing back
+`tryAcquire` to itself retry a few times before passing back
 control.
+
+这种 *抢占式* 的 FIFO 策略通常比其他技术提供更高的全局吞吐量。它减少了争用锁可用，
+但还没有线程占有的时间，因为预定的下一个线程正在解除阻塞中。同时，避免了过度的无效争用，
+它只允许一个（第一个）排队的线程唤醒，然后在锁释放后就尝试获取。只想让在同步器短暂持有锁时，
+创建同步器的开发人员可以在自定义的 `tryAcquire` 返回主控流程之前多重试几次，
+来进一步增强这种 *抢占式* 的效果。
+
 Barging FIFO synchronizers have only probablistic fairness
 properties. An unparked thread at the head of the lock queue has
 
 ![tryAcquire](./img/aqs/tryAcquire.png)
-
 an unbiased chance of winning a race with any incoming barging
 thread, reblocking and retrying if it loses. However, if incoming
 threads arrive faster than it takes an unparked thread to unblock,
@@ -862,14 +904,24 @@ the first thread takes to unblock. As seen below, the net effect is
 to maintain high rates of progress of one or more threads while
 still at least probabilistically avoiding starvation.
 
+*抢占式* 式的 FIFO 同步器仅具有概率上的公平性属性。在锁队头的 `unparked` 线程
+与任何进入的抢占线程竞争时，有一个相同的胜出机会，如果竞争失败就重新阻塞并重试。
+然而，如果抢进的线程抵达的速度快于`unparked`线程解除阻塞所需的时间，队列中的第一个线程
+很难能赢得竞争，因此几乎总是会重新阻塞，其后继线程也会保持阻塞状态。对于持有时间很短的
+同步器来说，在第一个线程解除阻塞所需的时间内，多处理器上通常会发生多次抢占和释放。如下所示，其总效果是在至少概率上避免饥饿的同时，保持一个或多个线程的高进度率。
+
 When greater fairness is required, it is a relatively simple matter
 to arrange it. Programmers requiring strict fairness can define
-tryAcquire to fail (return false) if the current thread is not at
+`tryAcquire` to fail (return false) if the current thread is not at
 the head of the queue, checking for this using method
-getFirstQueuedThread, one of a handful of supplied
+`getFirstQueuedThread`, one of a handful of supplied
 inspection methods.
 
-A faster, less strict variant is to also allow tryAcquire to
+当需要更大的公平性时，安排这样的公平性相对简单。需要严格公平性的程序员可以定义tryAcquire在当前线程不在队列头部时失败（返回false），使用方法getFirstQueuedThread检查这一点，这是提供的少数几个检查方法之一。
+一个更快但不那么严格的变体是，如果队列（暂时）为空，也允许tryAcquire成功。在这种情况下，多个线程遇到空队列可能会竞争成为第一个获取锁的线程，通常至少有一个线程不会排队。这种策略被所有支持"公平"模式的java.util.concurrent同步器采用。
+虽然它们在实践中往往是有用的，但公平设置没有保证，因为Java语言规范没有提供调度保证。例如，即使是严格公平的同步器
+
+A faster, less strict variant is to also allow `tryAcquire` to
 succeed if the the queue is (momentarily) empty. In this case,
 multiple threads encountering an empty queue may race to be the
 first to acquire, normally without enqueuing at least one of them.
@@ -903,7 +955,7 @@ leaves such engineering decisions to its users.
 Here are sketches of how java.util.concurrent synchronizer
 classes are defined using this framework:
 
-The ReentrantLock class uses synchronization state to hold
+The `ReentrantLock` class uses synchronization state to hold
 the (recursive) lock count. When a lock is acquired, it also
 records the identity of the current thread to check recursions and
 detect illegal state exceptions when the wrong thread tries to
@@ -914,20 +966,20 @@ different AbstractQueuedSynchronizer subclasses (the
 fair one disabling barging) and setting each ReentrantLock
 instance to use the appropriate one upon construction.
 
-The ReentrantReadWriteLock class uses 16 bits of the
+The `ReentrantReadWriteLock` class uses 16 bits of the
 synchronization state to hold the write lock count, and the
 remaining 16 bits to hold the read lock count. The WriteLock
 is otherwise structured in the same way as ReentrantLock.
 The ReadLock uses the acquireShared methods to enable
 multiple readers.
 
-The Semaphore class (a counting semaphore) uses the
+The `Semaphore` class (a counting semaphore) uses the
 synchronization state to hold the current count. It defines
 acquireShared to decrement the count or block if
 nonpositive, and tryRelease to increment the count, possibly
 unblocking threads if it is now positive.
 
-The CountDownLatch class uses the synchronization state to
+The `CountDownLatch` class uses the synchronization state to
 represent the count. All acquires pass when it reaches zero.
 The FutureTask class uses the synchronization state to
 represent the run-state of a future (initial, running, cancelled,
