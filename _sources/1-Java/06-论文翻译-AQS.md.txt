@@ -904,11 +904,12 @@ the first thread takes to unblock. As seen below, the net effect is
 to maintain high rates of progress of one or more threads while
 still at least probabilistically avoiding starvation.
 
-*抢占式* 式的 FIFO 同步器仅具有概率上的公平性属性。在锁队头的 `unparked` 线程
-与任何进入的抢占线程竞争时，有一个相同的胜出机会，如果竞争失败就重新阻塞并重试。
+*抢占式* 式的 FIFO 同步器仅具有概率上的公平性属性。锁队头的 `unparked` 线程
+与任何进入的抢占线程竞争时，有着相同的胜出机会，如果竞争失败就重新阻塞并重试。
 然而，如果抢进的线程抵达的速度快于`unparked`线程解除阻塞所需的时间，队列中的第一个线程
 很难能赢得竞争，因此几乎总是会重新阻塞，其后继线程也会保持阻塞状态。对于持有时间很短的
-同步器来说，在第一个线程解除阻塞所需的时间内，多处理器上通常会发生多次抢占和释放。如下所示，其总效果是在至少概率上避免饥饿的同时，保持一个或多个线程的高进度率。
+同步器来说，在第一个线程解除阻塞所需的时间内，多处理器上通常会发生多次抢占和释放。
+如下所示，其总体效果来看，至少在概率上避免饥饿的同时，保持一个或多个线程的高速率进展。
 
 When greater fairness is required, it is a relatively simple matter
 to arrange it. Programmers requiring strict fairness can define
@@ -917,9 +918,9 @@ the head of the queue, checking for this using method
 `getFirstQueuedThread`, one of a handful of supplied
 inspection methods.
 
-当需要更大的公平性时，安排这样的公平性相对简单。需要严格公平性的程序员可以定义tryAcquire在当前线程不在队列头部时失败（返回false），使用方法getFirstQueuedThread检查这一点，这是提供的少数几个检查方法之一。
-一个更快但不那么严格的变体是，如果队列（暂时）为空，也允许tryAcquire成功。在这种情况下，多个线程遇到空队列可能会竞争成为第一个获取锁的线程，通常至少有一个线程不会排队。这种策略被所有支持"公平"模式的java.util.concurrent同步器采用。
-虽然它们在实践中往往是有用的，但公平设置没有保证，因为Java语言规范没有提供调度保证。例如，即使是严格公平的同步器
+当需要更大的公平性时，安排这样的公平性就过于简单了。程序员需要严格的公平性，
+当前线程不在队列头部时，`tryAcquire` 就应该失败（返回false），可以使用方法
+`getFirstQueuedThread` 检查这一点，这是提供的几个检查方法之一。
 
 A faster, less strict variant is to also allow `tryAcquire` to
 succeed if the the queue is (momentarily) empty. In this case,
@@ -927,6 +928,10 @@ multiple threads encountering an empty queue may race to be the
 first to acquire, normally without enqueuing at least one of them.
 This strategy is adopted in all java.util.concurrent synchronizers
 supporting a "fair" mode.
+
+一个更快但不那么严格的变体是，如果队列（暂时）为空，也允许 `tryAcquire` 成功。
+在这种情况下，多个线程遇到空队列时，就可能会竞争获取锁，一般至少有一个线程不需要排队。
+这种策略被所有支持 "fair" 模式的 `java.util.concurrent` 同步器采用。
 
 While they tend to be useful in practice, fairness settings have no
 guarantees, because the Java Language Specification does not
@@ -943,6 +948,15 @@ available but not acquired. Synchronizer fairness settings tend to
 have even greater impact on multiprocessors, which generate
 more interleavings, and hence more opportunities for one thread
 to discover that a lock is needed by another thread.
+
+虽然它们在实践中往往很有用，但由于 Java 语言规范没有提供调度保证，因此同步器的
+公平设置没有保证。例如，即使使用严格公平的同步器，如果一组线程不会阻塞等待彼此,
+JVM 也可以决定完全顺序地运行一组线程。在单处理器上，这些线程很可能先运行一个时间片，
+再被抢占，进行上下文切换。如果这样的线程持有独占锁，它很快就会被瞬间切换回来，
+只是为了释放锁并阻塞，因为现在已知另一个线程需要锁，从而进一步增加同步器可用
+但未被获取的时间段。同步器公平设置对多处理器的影响更大，因为它们会产生更多的交错，
+因此更容易让一个线程发现另一个线程需要锁
+
 Even though they may perform poorly under high contention
 when protecting briefly-held code bodies, fair locks work well,
 for example, when they protect relatively long code bodies
@@ -951,51 +965,169 @@ barging provides little performance advantage and but greater
 risk of indefinite postponement. The synchronizer framework
 leaves such engineering decisions to its users.
 
+即使在高竞争条件下，保护短暂持有的代码块时表现不佳，公平锁在其他情况下还是工作得很好，
+例如，当它们用来保护相对较长的代码块和/或具有相对较长的锁间隔时间时，在这种情况下，
+插队提供的性能优势很小，但却有更大的无限期推迟风险。同步器框架将此类工程决策留给其用户。
+
 ### 4.2 Synchronizers 同步器
 Here are sketches of how java.util.concurrent synchronizer
 classes are defined using this framework:
+
+这是使用这个框架定义的 `java.util.concurrent` 同步器类的概述：
 
 The `ReentrantLock` class uses synchronization state to hold
 the (recursive) lock count. When a lock is acquired, it also
 records the identity of the current thread to check recursions and
 detect illegal state exceptions when the wrong thread tries to
-unlock. The class also uses the provided ConditionObject,
+unlock. The class also uses the provided `ConditionObject`,
 and exports other monitoring and inspection methods. The class
 supports an optional "fair" mode by internally declaring two
-different AbstractQueuedSynchronizer subclasses (the
-fair one disabling barging) and setting each ReentrantLock
+different `AbstractQueuedSynchronizer` subclasses (the
+fair one disabling barging) and setting each `ReentrantLock`
 instance to use the appropriate one upon construction.
+
+`ReentrantLock` 类使用同步状态来保存（递归的）锁计数。当锁被获取时，
+它还会记录当前线程的身份，以检查递归和检测错误线程尝试解锁时的非法状态异常。
+该类还使用提供的 `ConditionObject`，并暴露其他监视和检查方法。该类支持一个
+可选的“公平”模式，通过内部声明两个不同的 `AbstractQueuedSynchronizer` 子类
+（公平的那个子类禁止插队），并在构造时设置每个 `ReentrantLock` 实例使用适当的一个。
 
 The `ReentrantReadWriteLock` class uses 16 bits of the
 synchronization state to hold the write lock count, and the
-remaining 16 bits to hold the read lock count. The WriteLock
-is otherwise structured in the same way as ReentrantLock.
-The ReadLock uses the acquireShared methods to enable
+remaining 16 bits to hold the read lock count. The `WriteLock`
+is otherwise structured in the same way as `ReentrantLock`.
+The `ReadLock` uses the `acquireShared` methods to enable
 multiple readers.
+
+`ReentrantReadWriteLock` 类使用 16 位的同步状态，来保存写锁计数，
+剩余的16位来保存读锁计数。`WriteLock` 在结构上与 `ReentrantLock`相同。
+`ReadLock` 使用 `acquireShared` 方法来允许多个读取器。
 
 The `Semaphore` class (a counting semaphore) uses the
 synchronization state to hold the current count. It defines
-acquireShared to decrement the count or block if
-nonpositive, and tryRelease to increment the count, possibly
+`acquireShared` to decrement the count or block if
+nonpositive, and `tryRelease` to increment the count, possibly
 unblocking threads if it is now positive.
+
+`Semaphore` 类（一个计数信号量）使用同步状态来保存当前计数。它定义了
+`acquireShared` 来减少计数，或者在非正数时阻塞，以及 `tryRelease` 来增加计数，
+可能在现在为正数时解除线程的阻塞。
 
 The `CountDownLatch` class uses the synchronization state to
 represent the count. All acquires pass when it reaches zero.
-The FutureTask class uses the synchronization state to
+The `FutureTask` class uses the synchronization state to
 represent the run-state of a future (initial, running, cancelled,
-done). Setting or cancelling a future invokes release,
-unblocking threads waiting for its computed value via acquire.
-The SynchronousQueue class (a CSP-style handoff) uses
+done). Setting or cancelling a future invokes `release`,
+unblocking threads waiting for its computed value via `acquire`.
+The `SynchronousQueue` class (a CSP-style handoff) uses
 internal wait-nodes that match up producers and consumers. It
 uses the synchronization state to allow a producer to proceed
 when a consumer takes the item, and vice-versa.
 
-Users of the java.util.concurrent package may of course define
+`CountDownLatch` 类使用同步状态来表示计数。所有的获取操作在它达到零时通过。
+`FutureTask` 类使用同步状态来表示一个 future 的运行状态（初始、运行中、取消、完成）。
+调用 `release` 会设置或取消一个 future ，通过 `acquire` 解除其计算线程的阻塞。
+`SynchronousQueue` 类（一种CSP风格的传递方式）使用内部等待节点，来匹配生产者和消费者。
+它使用同步状态，来允许生产者在消费者取走物品时继续进行，反之亦然。
+
+Users of the `java.util.concurrent` package may of course define
 their own synchronizers for custom applications. For example,
 among those that were considered but not adopted in the package
 are classes providing the semantics of various flavors of WIN32
 events, binary latches, centrally managed locks, and tree-based
 barriers.
+
+`java.util.concurrent` 包的用户当然可以为自定义应用程序定义他们自己的同步器。
+例如，在包中考虑但未采纳的类，包括提供 WIN32 事件、二进制门闩、集中管理锁和
+基于树的屏障等各种语义的类。
+
+## 5. PERFORMANCE 性能
+
+While the synchronizer framework supports many other styles of
+ synchronization in addition to mutual exclusion locks, lock
+ performance is simplest to measure and compare. Even so, there
+ are many different approaches to measurement. The experiments
+ here are designed to reveal overhead and throughput. 
+
+同步器框架除了支持互斥锁之外，还支持许多其他类型的同步方式，但锁性能是
+最简单的衡量和比较对象。即便如此，衡量的方法也有很多种。这里的实验旨在
+揭示开销和吞吐量。
+
+ In each test,  each thread repeatedly updates a pseudo-random
+ number computed using function `nextRandom(int seed)`:
+ 在每次测试中，每个线程重复更新一个使用函数 `nextRandom(int seed)` 计算出的
+ 伪随机数：
+
+ ```java
+   int t = (seed % 127773) * 16807 – (seed / 127773) * 2836;
+   return (t > 0)? t : t + 0x7fffffff;
+ ```
+ On each iteration a thread updates, with probability **S**, a shared
+ generator under a mutual exclusion lock, else it updates its own
+ local generator, without a lock. This results in short-duration
+ locked regions, minimizing extraneous effects when threads are
+ preempted while holding locks. The randomness of the function
+ serves two purposes: it is used in deciding whether to lock or not
+ (it is a good enough generator for current purposes), and also
+ makes code within loops impossible to trivially optimize away.
+
+在每次迭代中，线程有**S**的概率使用互斥锁，更新共享生成器并，否则它不使用锁，
+更新自己的本地生成器。这产生了短暂的锁定区域，当线程持有锁时，也可以让被抢占的
+外部影响最小化。该函数的随机性有两个目的：它用于决定是否加锁（它对当前目的来说
+是足够好的生成器），同时也使得循环内的代码无法被轻易优化掉。
+
+ Four kinds of locks were compared: Builtin, using `synchronized`
+ blocks; *Mutex*, using a simple `Mutex` class like that illustrated in
+ section 4; *Reentrant*, using `ReentrantLock`; and *Fair*, using
+ `ReentrantLock` set in its "fair" mode. All tests used build 46
+ (approximately the same as beta2) of the Sun J2SE1.5 JDK in
+ "server" mode. Test programs performed 20 uncontended runs
+ before collecting measurements, to eliminate warm-up effects.
+ Tests ran for ten million iterations per thread, except Fair mode
+ tests were run only one million iterations.
+
+ 比较了四种锁：*内置锁*，使用 `synchronized` 块；*互斥锁*，使用一个简单的 `Mutex`类，
+ 就像第 4 节中所示的那样；*可重入锁*，使用 `ReentrantLock`；*公平锁*，使用设置为“公平”模式
+ 的`ReentrantLock`。所有测试都使用了 Sun J2SE1.5 JDK 的 build 46（大约与 beta2 相同）
+ ，并在“服务器”模式下进行。测试程序在收集测量数据前，无竞争的运行了 20 次，以消除预热效应。
+ 除了公平模式的测试只运行了一百万次迭代，其他测试每个线程都运行了一千万次迭代。
+
+ Tests were performed on four x86-based machines and four
+ UltraSparc-based machines. All x86 machines were running
+ Linux using a RedHat NPTL-based 2.4 kernel and libraries. All
+ UltraSparc machines were running Solaris-9. All systems were at
+ most lightly loaded while testing. The nature of the tests did not
+ demand that they be otherwise completely idle. The "4P" name
+ reflects the fact a dual hyperthreaded (HT) Xeon acts more like a
+ 4-way than a 2-way machine. No attempt was made to normalize
+ across the differences here. As seen below, the relative costs of
+ synchronization do not bear a simple relationship to numbers of
+ processors, their types, or speeds.
+
+测试在四台基于 x86 的机器和四台基于 UltraSparc 的机器上进行。所有x86机器都运行着 Linux，
+使用基于 RedHat NPTL 的 2.4 内核和库。所有 UltraSparc 机器都运行着 Solaris-9。
+所有系统在测试时都最多是轻载状态。测试的性质不要求它们完全空闲。"4P"名称反映了这样一个事实：
+一个双超线程（HT）的 Xeon 表现得更像是 4 路机器而不是 2 路机器。这里没有试图标准化这些差异。
+如下所示，同步的相对成本与处理器的数量、类型或速度没有简单的关系。
+
+
+**Table 1 Test Platforms**
+| Name | Processors | Type          | Speed (Mhz) |
+| ---- | ---------- | ------------- | ----------- |
+| 1P   | 1          | Pentium3      | 900         |
+| 2P   | 2          | Pentium3      | 1400        |
+| 2A   | 2          | Athlon        | 2000        |
+| 4P   | 2 HT       | Pentium4/Xeon | 2400        |
+| 1U   | 1          | UltraSparc2   | 650         |
+| 4U   | 4          | UltraSparc2   | 450         |
+| 8U   | 8          | UltraSparc3   | 750         |
+| 24U  | 24         | UltraSparc3   | 750         |
+
+ ### 5.1 Overhead 负载
+
+ ### 5.2 Throughput 吞吐量
+ 
+
 
 
 [^1]: Agesen, O., D. Detlefs, A. Garthwaite, R. Knippel, Y. S.
