@@ -587,7 +587,7 @@ noninterruptible, untimed case only) is:
 
 忽略这些细节，最终得到的基本获取操作的一般形式（独占、无中断、无超时）如下：
 
-```java
+```
 if (!tryAcquire(arg)) {
     node = create and enqueue new node;
     pred = node's effective predecessor;
@@ -605,7 +605,7 @@ if (!tryAcquire(arg)) {
 And the release operation is:
 释放的操作如下：
 
-```java
+```
 if (tryRelease(arg) && head node's signal bit is set) {
     compareAndSet head's signal bit to false;
     unpark head's successor, if one exists
@@ -679,7 +679,7 @@ the signalled thread before it has re-acquired its lock.
 
 The basic await operation is:
 await 操作的基本如下：
-```java
+```
 create and add new node to condition queue;
 release lock;
 block until node is on lock queue;
@@ -688,7 +688,7 @@ re-acquire lock;
 
 And the signal operation is:
 signal 操作如下
-```java
+```
 transfer the first node from condition queue to lock queue;
 ```
 
@@ -1059,7 +1059,7 @@ While the synchronizer framework supports many other styles of
  伪随机数：
 
  ```java
-   int t = (seed % 127773) * 16807 – (seed / 127773) * 2836;
+   int t = (seed % 127773) * 16807 - (seed / 127773) * 2836;
    return (t > 0)? t : t + 0x7fffffff;
  ```
  On each iteration a thread updates, with probability **S**, a shared
@@ -1125,11 +1125,244 @@ While the synchronizer framework supports many other styles of
 
  ### 5.1 Overhead 负载
 
+Uncontended overhead was measured by running only one
+thread, subtracting the time per iteration taken with a version
+setting S=0 (zero probability of accessing shared random) from a
+run with S=1. Table 2 displays these estimates of the per-lock
+overhead of synchronized code over unsynchronized code, in
+nanoseconds. The Mutex class comes closest to testing the basic
+cost of the framework. The additional overhead for Reentrant
+locks indicates the cost of recording the current owner thread and
+of error-checking, and for Fair locks the additional cost of first
+checking whether the queue is empty.
+
+无竞争情况下的开销只通过运行一个线程来测量，在每次迭代中，从 S=1 的运行时间中减去
+S=0（访问共享随机数的概率为零）的版本所花费的时间。表 2 显示了同步代码相对于
+非同步代码的每次锁开销估计值，以纳秒为单位。`Mutex` 类最接近于测试框架的基本成本。
+可重入锁的额外开销表明了记录当前拥有线程和错误检查的成本，对于公平锁，还有首先检查
+队列是否为空的额外成本。
+
+Table 2 also shows the cost of `tryAcquire` versus the "fast
+path" of a built-in lock. Differences here mostly reflect the costs
+of using different atomic instructions and memory barriers across
+locks and machines. On multiprocessors, these instructions tend
+to completely overwhelm all others. The main differences
+between Builtin and synchronizer classes are apparently due to
+Hotspot locks using a `compareAndSet`` for both locking and
+unlocking, while these synchronizers use a `compareAndSet` for
+acquire and a volatile write (i.e., with a memory barrier on
+multiprocessors, and reordering constraints on all processors) on
+release. The absolute and relative costs of each vary across
+machines.
+
+表 2 还显示了`tryAcquire`与内置锁的“快速获取方式”成本。这里的差异主要反映了不同的
+原子指令，在各种锁和各种机器上的的内存屏障成本。在多处理器上，这些指令和屏障的执行成本
+往往比其他操作更高，占据了整体性能的主要部分。内置锁和同步器类之间的主要差异在于， 
+Hotspot 锁在锁定和解锁时都使用 `compareAndSet`，而这些同步器在获取时使用 `compareAndSet`，
+在释放时使用 `volatile` 写入（即，在多处理器上使用内存屏障，以及对所有处理器使用指令重排约束）。
+每种锁的绝对和相对成本在不同机器上有所不同。
+
+At the other extreme, Table 3 shows per-lock overheads with S=1
+and running 256 concurrent threads, creating massive lock
+contention. Under complete saturation, barging-FIFO locks have
+about an order of magnitude less overhead (and equivalently
+greater throughput) than Builtin locks, and often two orders of
+magnitude less than Fair locks. This demonstrates the
+effectiveness of the barging-FIFO policy in maintaining thread
+progress even under extreme contention.
+
+在另一个极端，表 3 显示了在 S=1 时，运行 256 个并发线程的情况下，造成了巨大的锁竞争时，
+每次锁的开销。在完全饱和的情况下，抢占式 FIFO 锁的开销比内置锁少一个数量级（相应地吞吐量更大），
+通常比公平锁少两个数量级。这证明了即使在极端竞争下，抢占式 FIFO 策略也能有效地维持线程向前推进。
+
+**Table 2 Uncontended Per-Lock Overhead in Nanoseconds**
+| *Machine* | *Builtin* | *Mutex* | *Reentrant* | *Fair* |
+|-----------|-----------|---------|-------------|--------|
+| 1P        | 18        | 9       | 31          | 37     |
+| 2P        | 54        | 71      | 77          | 81     | 
+| 2A        | 13        | 21      | 31          | 30     | 
+| 4P        | 116       | 95      | 109         | 117    |
+| 1U        | 90        | 40      | 58          | 67     |
+| 4U        | 122       | 82      | 100         | 115    |
+| 8U        | 160       | 83      | 103         | 123    |
+| 24U       | 2161      | 84      | 108         | 119    |
+
+**Table 3 Saturated Per-Lock Overhead in Nanoseconds**
+| _Machine_ | _Builtin_ | _Mutex_ | _Reentrant_ | _Fair_ |
+|-----------|-----------|---------|-------------|--------|
+| 1P        | 521       | 46      | 67          | 8327   |
+| 2P        | 930       | 108     | 132         | 14967  |
+| 2A        | 748       | 79      | 84          | 33910  |
+| 4P        | 1146      | 188     | 247         | 15328  |
+| 1U        | 879       | 153     | 177         | 41394  |
+| 4U        | 2590      | 347     | 368         | 30004  |
+| 8U        | 1274      | 157     | 174         | 31084  |
+| 24U       | 1983      | 160     | 182         | 32291  |
+
+Table 3 also illustrates that even with low internal overhead,
+context switching time completely determines performance for
+Fair locks. The listed times are roughly proportional to those for
+blocking and unblocking threads on the various platforms.
+
+表 3 还说明，即使内部开销很低，上下文切换时间也完全决定了公平锁的性能。
+表中列出的时间大致与各平台上线程阻塞和解除阻塞的时间成正比。
+
+Additionally, a follow-up experiment (using machine 4P only)
+shows that with the very briefly held locks used here, fairness
+settings had only a small impact on overall variance. Differences
+in termination times of threads were recorded as a coarse-grained
+measure of variability. Times on machine 4P had standard
+deviation of 0.7% of mean for Fair, and 6.0% for Reentrant. As a
+contrast, to simulate long-held locks, a version of the test was run
+in which each thread computed 16K random numbers while
+holding each lock. Here, total run times were nearly identical
+(9.79s for Fair, 9.72s for Reentrant). Fair mode variability
+remained small, with standard deviation of 0.1% of mean, while
+Reentrant rose to 29.5% of mean.
+
+此外，一个后续实验（仅使用4P机器）表明，持有时间非常短暂的锁，公平性设置
+对总体方差只有很小的影响。线程终止时间的差异被记录下来作为一种粗粒度的波动性度量。
+在4P机器上，公平模式的标准差为平均值的 0.7%，而可重入模式为 6.0%。相比之下，
+为了模拟长时间持有的锁，运行了一个版本的测试，在其中每个线程在持有每个锁时计算了16K个随机数。
+在这里，总运行时间几乎相同（公平模式为9.79秒，可重入模式为9.72秒）。
+公平模式的变异性保持较小，标准差为平均值的 0.1%，而可重入模式增加到了平均值的 29.5%。
+
  ### 5.2 Throughput 吞吐量
  
+Usage of most synchronizers will range between the extremes of
+no contention and saturation. This can be experimentally
+examined along two dimensions, by altering the contention
+probability of a fixed set of threads, and/or by adding more
+threads to a set with a fixed contention probability. To illustrate
+these effects, tests were run with different contention
+probablilities and numbers of threads, all using Reentrant locks.
+The accompanying figures use a `slowdown` metric:
 
+大多数同步器的使用情况将在没有竞争和饱和两个极端之间变化。可以通过两个维度进行实验检验，
+即通过改变一组固定线程的竞争概率，或通过向一组具有固定竞争概率的线程添加更多线程。
+为了说明这些效果，使用了不同的竞争概率和线程数进行了测试，所有测试都使用了可重入锁。
+随附的图表使用了一个`slowdown`指标：
 
+$$
+slowdown= \frac{t}{S⋅b⋅n +(1−S)⋅b⋅max(1,\frac{n}{p})}
+$$ 
 
+Here, `t` is the total observed execution time, `b` is the baseline time
+for one thread with no contention or synchronization, `n` is the
+number of threads, `p` is the number of processors, and `S` remains
+the proportion of shared accesses. This value is the ratio of
+observed time to the (generally unattainable) ideal execution time
+as computed using Amdahl's law for a mix of sequential and
+parallel tasks. The ideal time models an execution in which,
+without any synchronization overhead, no thread blocks due to
+conflicts with any other. Even so, under very low contention, a
+few test results displayed very small speedups compared to this
+ideal, presumably due to slight differences in optimization,
+pipelining, etc., across baseline versus test runs.
+
+在这里，`t` 是观察到的总执行时间，`b` 是没有竞争或同步时一个线程的基准时间，`n` 是线程数，
+`p` 是处理器数，`S` 仍然是共享访问的比例。这个值是观察到的时间与（通常是无法实现的）
+理想执行时间的比值，理想执行时间是使用 Amdahl's 定律计算的，用于混合了顺序和并行任务的情况。
+理想时间模拟了一种情况，即在没有任何同步开销的情况下，没有任何线程由于与其他线程的冲突而被阻塞。
+即使如此，在非常低的竞争情况下，一些测试结果与理想情况相比显示出了非常小的加速，
+这可能是由于基准与测试运行之间轻微的优化差异、流水线等方面的差异造成的。
+
+The figures use a base 2 log scale. For example, a value of 1.0
+means that a measured time was twice as long as ideally possible,
+and a value of 4.0 means 16 times slower. Use of logs
+ameliorates reliance on an arbitrary base time (here, the time to
+compute random numbers), so results with different base
+computations should show similar trends. The tests used
+contention probabilities from 1/128 (labelled as "0.008") to 1,
+stepping in powers of 2, and numbers of threads from 1 to 1024,
+stepping in half-powers of 2.
+
+这些图表使用了以 2 为底的对数刻度。例如，数值 1.0 表示测量时间是理论上可能的两倍长，
+而数值 4.0 表示慢了16倍。使用对数可以减少对任意基准时间（这里是计算随机数的时间）的依赖，
+因此具有不同基准计算的结果应该显示出类似的趋势。测试中使用了从 1/128（标记为 "0.008"）
+到 1 的竞争概率，以 2 的幂次步进，以及从 1 到 1024 的线程数，以半幂次步进。
+
+On uniprocessors (1P and 1U) performance degrades with
+increasing contention, but generally not with increasing numbers
+of threads. Multiprocessors generally encounter much worse
+slowdowns under contention. The graphs for multiprocessors
+show an early peak in which contention involving only a few
+threads usually produces the worst relative performance. This
+reflects a transitional region of performance, in which barging
+and signalled threads are about equally likely to obtain locks,
+thus frequently forcing each other to block. In most cases, this is
+followed by a smoother region, as the locks are almost never
+available, causing access to resemble the near-sequential pattern
+of uniprocessors; approaching this sooner on machines with more
+processors. Notice for example that the values for full contention
+(labelled "1.000") exhibit relatively worse slowdowns on
+machines with fewer processors.
+
+在单处理器（1P 和 1U）上，性能随着竞争的增加而下降，但通常不随着线程数量的增加而下降。
+而多处理器情况下，竞争会严重降低性能。多处理器的图表显示了一个早期的峰值，在这个峰值中，
+涉及到少量线程的竞争通常会导致相对最差的性能。这反映了性能的过渡区域，在这个区域内，
+争抢锁和发出信号的线程都同样有可能获得锁，因此经常会互相强制阻塞。在大多数情况下，
+这之后会出现一个更加平滑的区域，因为锁几乎从未可用，导致访问类似于单处理器的接近顺序的模式；
+在拥有更多处理器的机器上，这个现象会更早地出现。请注意，例如，在处理器较少的机器上，
+全竞争（标记为 "1.000"）的值表现出相对更严重的减速。
+
+![slowdown](./img/aqs/slowdown.png)
+![slowdown2](./img/aqs/slowdown2.png)
+
+On the basis of these results, it appears likely that further tuning
+of blocking (park/unpark) support to reduce context switching
+and related overhead could provide small but noticeable
+improvements in this framework. Additionally, it may pay off for
+synchronizer classes to employ some form of adaptive spinning
+for briefly-held highly-contended locks on multiprocessors, to
+avoid some of the flailing seen here. While adaptive spins tend to
+be very difficult to make work well across different contexts, it
+is possible to build custom forms of locks using this framework,
+targetted for specific applications that encounter these kinds of
+usage profiles.
+
+根据这些结果，进一步调整阻塞（`park`/`unpark`）支持以减少上下文切换和相关开销，
+可能会在这个框架中带来一些小但明显的改进。此外，对于在多处理器上持续持有高度竞争锁的情况，
+同步器类采用某种形式的自适应自旋可能会很有效，以避免出现一些类似于这里看到的问题。
+虽然自适应自旋往往很难在不同的上下文中得到很好的工作，但针对遇到这种使用情况的特定应用程序，
+可以使用这个框架构建定制形式的锁。
+
+## 6. CONCLUSIONS 结论
+As of this writing, the `java.util.concurrent` synchronizer
+framework is too new to evaluate in practice. It is unlikely to see
+widespread usage until well after final release of J2SE1.5, and
+there will surely be unexpected consequences of its design, API,
+implementation, and performance. However, at this point, the
+framework appears successful in meeting the goals of providing
+an efficient basis for creating new synchronizers.
+
+截至撰写本文时，`java.util.concurrent` 同步器框架还太新，尚无法在实践中进行评估。
+在 J2SE1.5 最终发布之前，它可能不会被广泛使用，并且其设计、API、实现和性能肯定会出现
+意想不到的后果。然而，到目前为止，该框架似乎成功地实现了提供创建新同步器的有效基础的目标。
+
+## 7. ACKNOWLEDGMENTS 鸣谢
+Thanks to Dave Dice for countless ideas and advice during the
+development of this framework, to Mark Moir and Michael Scott
+for urging consideration of CLH queues, to David Holmes for
+critiquing early versions of the code and API, to Victor
+Luchangco and Bill Scherer for reviewing previous incarnations
+of the source code, and to the other members of the JSR166
+Expert Group (Joe Bowbeer, Josh Bloch, Brian Goetz, David
+Holmes, and Tim Peierls) as well as Bill Pugh, for helping with
+design and specifications and commenting on drafts of this paper.
+Portions of this work were made possible by a DARPA PCES
+grant, NSF grant EIA-0080206 (for access to the 24way Sparc)
+and a Sun Collaborative Research Grant.
+
+感谢 Dave Dice 在开发这个框架过程中提供无数的想法和建议，感谢 Mark Moir 
+和 Michael Scott 敦促考虑 CLH 队列，感谢 David Holmes 对代码和 API 
+的早期版本提出批评，感谢 Victor Luchangco 和 Bill Scherer 对之前版本
+的源代码进行审查，感谢 JSR166 专家组的其他成员（Joe Bowbeer、Josh Bloch、
+Brian Goetz、David Holmes 和 Tim Peierls）以及 Bill Pugh，对设计和
+规范提供帮助，并对本文的草稿提出评论。部分工作得益于 DARPA PCES 资助、NSF 
+资助 EIA-0080206（为了访问 24way Sparc）和 Sun 合作研究资助。
+
+## 8.REFERENCES 参考
 [^1]: Agesen, O., D. Detlefs, A. Garthwaite, R. Knippel, Y. S.
 Ramakrishna, and D. White. An Efficient Meta-lock for
 Implementing Ubiquitous Synchronization. ACM OOPSLA
@@ -1156,12 +1389,10 @@ Multiprocessors. ACM Trans. on Computer Systems,
 February 1991
 [^10]: M. L. Scott and W N. Scherer III. Scalable Queue-Based
 Spin Locks with Timeout. 8th ACM Symp. on Principles
-and Practice of Parallel Programming, Snowbird, UT, June
-2001.
+and Practice of Parallel Programming, Snowbird, UT, June 2001.
 [^11]: Sun Microsystems. Multithreading in the Solaris Operating
 Environment . White paper available at
-http://wwws.sun.com/software/solaris/whitepapers.html
-2002.
+http://wwws.sun.com/software/solaris/whitepapers.html 2002.
 [^12]: Zhang, H., S. Liang, and L. Bak. Monitor Conversion in a
 Multithreaded Computer System. United States Patent
 6,691,304. 2004.
