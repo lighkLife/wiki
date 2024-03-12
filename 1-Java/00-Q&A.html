@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="04-String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-ClassLoader.html">ClassLoader</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -248,10 +249,10 @@
           </label>
         </div>
         <article role="main">
-          <section id="q-a">
+          <section class="tex2jax_ignore mathjax_ignore" id="q-a">
 <h1>Q&amp;A<a class="headerlink" href="#q-a" title="Link to this heading">#</a></h1>
 <section id="volatile">
-<h2>为什么双重检测还需要加<code class="docutils literal notranslate"><span class="pre">volatile</span></code><a class="headerlink" href="#volatile" title="Link to this heading">#</a></h2>
+<h2>为什么双重检测还需要加<code class="docutils literal notranslate"><span class="pre">volatile</span></code>？<a class="headerlink" href="#volatile" title="Link to this heading">#</a></h2>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
@@ -276,7 +277,7 @@
 还没有完全构建成功（指令优化导致乱序，引用赋值被提前执行）。</p>
 </section>
 <section id="thread-start-run">
-<h2><code class="docutils literal notranslate"><span class="pre">Thread</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">start()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 区别<a class="headerlink" href="#thread-start-run" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">Thread</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">start()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 又何区别？<a class="headerlink" href="#thread-start-run" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">start()</span></code> 才会真正的启动一个新线程，JVM 会在新线程中调用线程的 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 方法。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">run()</span></code> 方法只是在当前线程中调用自己的成员 <code class="docutils literal notranslate"><span class="pre">target</span></code> 的 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 方法，如果 <code class="docutils literal notranslate"><span class="pre">target</span></code> 为空，就直接返回，没有做任何事情</p></li>
@@ -348,8 +349,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Q&amp;A</a><ul>
-<li><a class="reference internal" href="#volatile">为什么双重检测还需要加<code class="docutils literal notranslate"><span class="pre">volatile</span></code></a></li>
-<li><a class="reference internal" href="#thread-start-run"><code class="docutils literal notranslate"><span class="pre">Thread</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">start()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 区别</a></li>
+<li><a class="reference internal" href="#volatile">为什么双重检测还需要加<code class="docutils literal notranslate"><span class="pre">volatile</span></code>？</a></li>
+<li><a class="reference internal" href="#thread-start-run"><code class="docutils literal notranslate"><span class="pre">Thread</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">start()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">run()</span></code> 又何区别？</a></li>
 </ul>
 </li>
 </ul>

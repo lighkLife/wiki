@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Rust 相关" href="../2-Rust/index.html" /><link rel="prev" title="HashMap实现" href="05-HashMap%E5%AE%9E%E7%8E%B0.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="ClassLoader" href="07-ClassLoader.html" /><link rel="prev" title="HashMap实现" href="05-HashMap%E5%AE%9E%E7%8E%B0.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>论文翻译-AQS - 文档</title>
@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="04-String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">论文翻译-AQS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-ClassLoader.html">ClassLoader</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -248,7 +249,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="aqs">
+          <section class="tex2jax_ignore mathjax_ignore" id="aqs">
 <h1>论文翻译-AQS<a class="headerlink" href="#aqs" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -781,25 +782,25 @@ J2SE1.5 release.</p>
 implementation of the basic acquire operation (exclusive,
 noninterruptible, untimed case only) is:</p>
 <p>忽略这些细节，最终得到的基本获取操作的一般形式（独占、无中断、无超时）如下：</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">tryAcquire</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">enqueue</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
-<span class="w">    </span><span class="n">pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="n">predecessor</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pred</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">tryAcquire</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pred</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="p">)</span>
-<span class="w">            </span><span class="n">park</span><span class="p">();</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="n">compareAndSet</span><span class="w"> </span><span class="n">pred</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<span class="w">        </span><span class="n">pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="n">predecessor</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if (!tryAcquire(arg)) {
+    node = create and enqueue new node;
+    pred = node&#39;s effective predecessor;
+    while (pred is not head node || !tryAcquire(arg)) {
+        if (pred&#39;s signal bit is set)
+            park();
+        else
+            compareAndSet pred&#39;s signal bit to true;
+        pred = node&#39;s effective predecessor;
+    }
+    head = node;
+}
 </pre></div>
 </div>
 <p>And the release operation is:
 释放的操作如下：</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tryRelease</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="n">node</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">compareAndSet</span><span class="w"> </span><span class="n">head</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">    </span><span class="n">unpark</span><span class="w"> </span><span class="n">head</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">successor</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">exists</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">tryRelease</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">head</span> <span class="n">node</span><span class="s1">&#39;s signal bit is set) {</span>
+    <span class="n">compareAndSet</span> <span class="n">head</span><span class="s1">&#39;s signal bit to false;</span>
+    <span class="n">unpark</span> <span class="n">head</span><span class="s1">&#39;s successor, if one exists</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -861,15 +862,15 @@ the signalled thread before it has re-acquired its lock.</p>
 <code class="docutils literal notranslate"><span class="pre">singal</span></code>操作的实现是将节点从条件队列转移到锁队列，无需在信号线程重新获取它的锁之前唤醒它。</p>
 <p>The basic await operation is:
 await 操作的基本如下：</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
-<span class="n">release</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span>
-<span class="n">block</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
-<span class="n">re</span><span class="o">-</span><span class="n">acquire</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="ow">and</span> <span class="n">add</span> <span class="n">new</span> <span class="n">node</span> <span class="n">to</span> <span class="n">condition</span> <span class="n">queue</span><span class="p">;</span>
+<span class="n">release</span> <span class="n">lock</span><span class="p">;</span>
+<span class="n">block</span> <span class="n">until</span> <span class="n">node</span> <span class="ow">is</span> <span class="n">on</span> <span class="n">lock</span> <span class="n">queue</span><span class="p">;</span>
+<span class="n">re</span><span class="o">-</span><span class="n">acquire</span> <span class="n">lock</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>And the signal operation is:
 signal 操作如下</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">transfer</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transfer</span> <span class="n">the</span> <span class="n">first</span> <span class="n">node</span> <span class="kn">from</span> <span class="nn">condition</span> <span class="n">queue</span> <span class="n">to</span> <span class="n">lock</span> <span class="n">queue</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Because these operations are performed only when the lock is
@@ -1196,7 +1197,7 @@ here are designed to reveal overhead and throughput.</p>
 number computed using function <code class="docutils literal notranslate"><span class="pre">nextRandom(int</span> <span class="pre">seed)</span></code>:
 在每次测试中，每个线程重复更新一个使用函数 <code class="docutils literal notranslate"><span class="pre">nextRandom(int</span> <span class="pre">seed)</span></code> 计算出的
 伪随机数：</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">127773</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">16807</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">127773</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2836</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">127773</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">16807</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">127773</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2836</span><span class="p">;</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x7fffffff</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1298,15 +1299,330 @@ processors, their types, or speeds.</p>
 </div>
 <section id="overhead">
 <h3>5.1 Overhead 负载<a class="headerlink" href="#overhead" title="Link to this heading">#</a></h3>
+<p>Uncontended overhead was measured by running only one
+thread, subtracting the time per iteration taken with a version
+setting S=0 (zero probability of accessing shared random) from a
+run with S=1. Table 2 displays these estimates of the per-lock
+overhead of synchronized code over unsynchronized code, in
+nanoseconds. The Mutex class comes closest to testing the basic
+cost of the framework. The additional overhead for Reentrant
+locks indicates the cost of recording the current owner thread and
+of error-checking, and for Fair locks the additional cost of first
+checking whether the queue is empty.</p>
+<p>无竞争情况下的开销只通过运行一个线程来测量，在每次迭代中，从 S=1 的运行时间中减去
+S=0（访问共享随机数的概率为零）的版本所花费的时间。表 2 显示了同步代码相对于
+非同步代码的每次锁开销估计值，以纳秒为单位。<code class="docutils literal notranslate"><span class="pre">Mutex</span></code> 类最接近于测试框架的基本成本。
+可重入锁的额外开销表明了记录当前拥有线程和错误检查的成本，对于公平锁，还有首先检查
+队列是否为空的额外成本。</p>
+<p>Table 2 also shows the cost of <code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code> versus the “fast
+path” of a built-in lock. Differences here mostly reflect the costs
+of using different atomic instructions and memory barriers across
+locks and machines. On multiprocessors, these instructions tend
+to completely overwhelm all others. The main differences
+between Builtin and synchronizer classes are apparently due to
+Hotspot locks using a <code class="docutils literal notranslate"><span class="pre">compareAndSet``</span> <span class="pre">for</span> <span class="pre">both</span> <span class="pre">locking</span> <span class="pre">and</span> <span class="pre">unlocking,</span> <span class="pre">while</span> <span class="pre">these</span> <span class="pre">synchronizers</span> <span class="pre">use</span> <span class="pre">a</span> </code>compareAndSet` for
+acquire and a volatile write (i.e., with a memory barrier on
+multiprocessors, and reordering constraints on all processors) on
+release. The absolute and relative costs of each vary across
+machines.</p>
+<p>表 2 还显示了<code class="docutils literal notranslate"><span class="pre">tryAcquire</span></code>与内置锁的“快速获取方式”成本。这里的差异主要反映了不同的
+原子指令，在各种锁和各种机器上的的内存屏障成本。在多处理器上，这些指令和屏障的执行成本
+往往比其他操作更高，占据了整体性能的主要部分。内置锁和同步器类之间的主要差异在于，
+Hotspot 锁在锁定和解锁时都使用 <code class="docutils literal notranslate"><span class="pre">compareAndSet</span></code>，而这些同步器在获取时使用 <code class="docutils literal notranslate"><span class="pre">compareAndSet</span></code>，
+在释放时使用 <code class="docutils literal notranslate"><span class="pre">volatile</span></code> 写入（即，在多处理器上使用内存屏障，以及对所有处理器使用指令重排约束）。
+每种锁的绝对和相对成本在不同机器上有所不同。</p>
+<p>At the other extreme, Table 3 shows per-lock overheads with S=1
+and running 256 concurrent threads, creating massive lock
+contention. Under complete saturation, barging-FIFO locks have
+about an order of magnitude less overhead (and equivalently
+greater throughput) than Builtin locks, and often two orders of
+magnitude less than Fair locks. This demonstrates the
+effectiveness of the barging-FIFO policy in maintaining thread
+progress even under extreme contention.</p>
+<p>在另一个极端，表 3 显示了在 S=1 时，运行 256 个并发线程的情况下，造成了巨大的锁竞争时，
+每次锁的开销。在完全饱和的情况下，抢占式 FIFO 锁的开销比内置锁少一个数量级（相应地吞吐量更大），
+通常比公平锁少两个数量级。这证明了即使在极端竞争下，抢占式 FIFO 策略也能有效地维持线程向前推进。</p>
+<p><strong>Table 2 Uncontended Per-Lock Overhead in Nanoseconds</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><em>Machine</em></p></th>
+<th class="head"><p><em>Builtin</em></p></th>
+<th class="head"><p><em>Mutex</em></p></th>
+<th class="head"><p><em>Reentrant</em></p></th>
+<th class="head"><p><em>Fair</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1P</p></td>
+<td><p>18</p></td>
+<td><p>9</p></td>
+<td><p>31</p></td>
+<td><p>37</p></td>
+</tr>
+<tr class="row-odd"><td><p>2P</p></td>
+<td><p>54</p></td>
+<td><p>71</p></td>
+<td><p>77</p></td>
+<td><p>81</p></td>
+</tr>
+<tr class="row-even"><td><p>2A</p></td>
+<td><p>13</p></td>
+<td><p>21</p></td>
+<td><p>31</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-odd"><td><p>4P</p></td>
+<td><p>116</p></td>
+<td><p>95</p></td>
+<td><p>109</p></td>
+<td><p>117</p></td>
+</tr>
+<tr class="row-even"><td><p>1U</p></td>
+<td><p>90</p></td>
+<td><p>40</p></td>
+<td><p>58</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-odd"><td><p>4U</p></td>
+<td><p>122</p></td>
+<td><p>82</p></td>
+<td><p>100</p></td>
+<td><p>115</p></td>
+</tr>
+<tr class="row-even"><td><p>8U</p></td>
+<td><p>160</p></td>
+<td><p>83</p></td>
+<td><p>103</p></td>
+<td><p>123</p></td>
+</tr>
+<tr class="row-odd"><td><p>24U</p></td>
+<td><p>2161</p></td>
+<td><p>84</p></td>
+<td><p>108</p></td>
+<td><p>119</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Table 3 Saturated Per-Lock Overhead in Nanoseconds</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><em>Machine</em></p></th>
+<th class="head"><p><em>Builtin</em></p></th>
+<th class="head"><p><em>Mutex</em></p></th>
+<th class="head"><p><em>Reentrant</em></p></th>
+<th class="head"><p><em>Fair</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1P</p></td>
+<td><p>521</p></td>
+<td><p>46</p></td>
+<td><p>67</p></td>
+<td><p>8327</p></td>
+</tr>
+<tr class="row-odd"><td><p>2P</p></td>
+<td><p>930</p></td>
+<td><p>108</p></td>
+<td><p>132</p></td>
+<td><p>14967</p></td>
+</tr>
+<tr class="row-even"><td><p>2A</p></td>
+<td><p>748</p></td>
+<td><p>79</p></td>
+<td><p>84</p></td>
+<td><p>33910</p></td>
+</tr>
+<tr class="row-odd"><td><p>4P</p></td>
+<td><p>1146</p></td>
+<td><p>188</p></td>
+<td><p>247</p></td>
+<td><p>15328</p></td>
+</tr>
+<tr class="row-even"><td><p>1U</p></td>
+<td><p>879</p></td>
+<td><p>153</p></td>
+<td><p>177</p></td>
+<td><p>41394</p></td>
+</tr>
+<tr class="row-odd"><td><p>4U</p></td>
+<td><p>2590</p></td>
+<td><p>347</p></td>
+<td><p>368</p></td>
+<td><p>30004</p></td>
+</tr>
+<tr class="row-even"><td><p>8U</p></td>
+<td><p>1274</p></td>
+<td><p>157</p></td>
+<td><p>174</p></td>
+<td><p>31084</p></td>
+</tr>
+<tr class="row-odd"><td><p>24U</p></td>
+<td><p>1983</p></td>
+<td><p>160</p></td>
+<td><p>182</p></td>
+<td><p>32291</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Table 3 also illustrates that even with low internal overhead,
+context switching time completely determines performance for
+Fair locks. The listed times are roughly proportional to those for
+blocking and unblocking threads on the various platforms.</p>
+<p>表 3 还说明，即使内部开销很低，上下文切换时间也完全决定了公平锁的性能。
+表中列出的时间大致与各平台上线程阻塞和解除阻塞的时间成正比。</p>
+<p>Additionally, a follow-up experiment (using machine 4P only)
+shows that with the very briefly held locks used here, fairness
+settings had only a small impact on overall variance. Differences
+in termination times of threads were recorded as a coarse-grained
+measure of variability. Times on machine 4P had standard
+deviation of 0.7% of mean for Fair, and 6.0% for Reentrant. As a
+contrast, to simulate long-held locks, a version of the test was run
+in which each thread computed 16K random numbers while
+holding each lock. Here, total run times were nearly identical
+(9.79s for Fair, 9.72s for Reentrant). Fair mode variability
+remained small, with standard deviation of 0.1% of mean, while
+Reentrant rose to 29.5% of mean.</p>
+<p>此外，一个后续实验（仅使用4P机器）表明，持有时间非常短暂的锁，公平性设置
+对总体方差只有很小的影响。线程终止时间的差异被记录下来作为一种粗粒度的波动性度量。
+在4P机器上，公平模式的标准差为平均值的 0.7%，而可重入模式为 6.0%。相比之下，
+为了模拟长时间持有的锁，运行了一个版本的测试，在其中每个线程在持有每个锁时计算了16K个随机数。
+在这里，总运行时间几乎相同（公平模式为9.79秒，可重入模式为9.72秒）。
+公平模式的变异性保持较小，标准差为平均值的 0.1%，而可重入模式增加到了平均值的 29.5%。</p>
 </section>
 <section id="throughput">
 <h3>5.2 Throughput 吞吐量<a class="headerlink" href="#throughput" title="Link to this heading">#</a></h3>
-<ol class="arabic simple" start="2001">
-<li></li>
-</ol>
-<ol class="arabic simple" start="2002">
-<li></li>
-</ol>
+<p>Usage of most synchronizers will range between the extremes of
+no contention and saturation. This can be experimentally
+examined along two dimensions, by altering the contention
+probability of a fixed set of threads, and/or by adding more
+threads to a set with a fixed contention probability. To illustrate
+these effects, tests were run with different contention
+probablilities and numbers of threads, all using Reentrant locks.
+The accompanying figures use a <code class="docutils literal notranslate"><span class="pre">slowdown</span></code> metric:</p>
+<p>大多数同步器的使用情况将在没有竞争和饱和两个极端之间变化。可以通过两个维度进行实验检验，
+即通过改变一组固定线程的竞争概率，或通过向一组具有固定竞争概率的线程添加更多线程。
+为了说明这些效果，使用了不同的竞争概率和线程数进行了测试，所有测试都使用了可重入锁。
+随附的图表使用了一个<code class="docutils literal notranslate"><span class="pre">slowdown</span></code>指标：</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+slowdown= \frac{t}{S⋅b⋅n +(1−S)⋅b⋅max(1,\frac{n}{p})}
+\]</div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">t</span></code> is the total observed execution time, <code class="docutils literal notranslate"><span class="pre">b</span></code> is the baseline time
+for one thread with no contention or synchronization, <code class="docutils literal notranslate"><span class="pre">n</span></code> is the
+number of threads, <code class="docutils literal notranslate"><span class="pre">p</span></code> is the number of processors, and <code class="docutils literal notranslate"><span class="pre">S</span></code> remains
+the proportion of shared accesses. This value is the ratio of
+observed time to the (generally unattainable) ideal execution time
+as computed using Amdahl’s law for a mix of sequential and
+parallel tasks. The ideal time models an execution in which,
+without any synchronization overhead, no thread blocks due to
+conflicts with any other. Even so, under very low contention, a
+few test results displayed very small speedups compared to this
+ideal, presumably due to slight differences in optimization,
+pipelining, etc., across baseline versus test runs.</p>
+<p>在这里，<code class="docutils literal notranslate"><span class="pre">t</span></code> 是观察到的总执行时间，<code class="docutils literal notranslate"><span class="pre">b</span></code> 是没有竞争或同步时一个线程的基准时间，<code class="docutils literal notranslate"><span class="pre">n</span></code> 是线程数，
+<code class="docutils literal notranslate"><span class="pre">p</span></code> 是处理器数，<code class="docutils literal notranslate"><span class="pre">S</span></code> 仍然是共享访问的比例。这个值是观察到的时间与（通常是无法实现的）
+理想执行时间的比值，理想执行时间是使用 Amdahl’s 定律计算的，用于混合了顺序和并行任务的情况。
+理想时间模拟了一种情况，即在没有任何同步开销的情况下，没有任何线程由于与其他线程的冲突而被阻塞。
+即使如此，在非常低的竞争情况下，一些测试结果与理想情况相比显示出了非常小的加速，
+这可能是由于基准与测试运行之间轻微的优化差异、流水线等方面的差异造成的。</p>
+<p>The figures use a base 2 log scale. For example, a value of 1.0
+means that a measured time was twice as long as ideally possible,
+and a value of 4.0 means 16 times slower. Use of logs
+ameliorates reliance on an arbitrary base time (here, the time to
+compute random numbers), so results with different base
+computations should show similar trends. The tests used
+contention probabilities from 1/128 (labelled as “0.008”) to 1,
+stepping in powers of 2, and numbers of threads from 1 to 1024,
+stepping in half-powers of 2.</p>
+<p>这些图表使用了以 2 为底的对数刻度。例如，数值 1.0 表示测量时间是理论上可能的两倍长，
+而数值 4.0 表示慢了16倍。使用对数可以减少对任意基准时间（这里是计算随机数的时间）的依赖，
+因此具有不同基准计算的结果应该显示出类似的趋势。测试中使用了从 1/128（标记为 “0.008”）
+到 1 的竞争概率，以 2 的幂次步进，以及从 1 到 1024 的线程数，以半幂次步进。</p>
+<p>On uniprocessors (1P and 1U) performance degrades with
+increasing contention, but generally not with increasing numbers
+of threads. Multiprocessors generally encounter much worse
+slowdowns under contention. The graphs for multiprocessors
+show an early peak in which contention involving only a few
+threads usually produces the worst relative performance. This
+reflects a transitional region of performance, in which barging
+and signalled threads are about equally likely to obtain locks,
+thus frequently forcing each other to block. In most cases, this is
+followed by a smoother region, as the locks are almost never
+available, causing access to resemble the near-sequential pattern
+of uniprocessors; approaching this sooner on machines with more
+processors. Notice for example that the values for full contention
+(labelled “1.000”) exhibit relatively worse slowdowns on
+machines with fewer processors.</p>
+<p>在单处理器（1P 和 1U）上，性能随着竞争的增加而下降，但通常不随着线程数量的增加而下降。
+而多处理器情况下，竞争会严重降低性能。多处理器的图表显示了一个早期的峰值，在这个峰值中，
+涉及到少量线程的竞争通常会导致相对最差的性能。这反映了性能的过渡区域，在这个区域内，
+争抢锁和发出信号的线程都同样有可能获得锁，因此经常会互相强制阻塞。在大多数情况下，
+这之后会出现一个更加平滑的区域，因为锁几乎从未可用，导致访问类似于单处理器的接近顺序的模式；
+在拥有更多处理器的机器上，这个现象会更早地出现。请注意，例如，在处理器较少的机器上，
+全竞争（标记为 “1.000”）的值表现出相对更严重的减速。</p>
+<p><img alt="slowdown" src="../_images/slowdown.png" />
+<img alt="slowdown2" src="../_images/slowdown2.png" /></p>
+<p>On the basis of these results, it appears likely that further tuning
+of blocking (park/unpark) support to reduce context switching
+and related overhead could provide small but noticeable
+improvements in this framework. Additionally, it may pay off for
+synchronizer classes to employ some form of adaptive spinning
+for briefly-held highly-contended locks on multiprocessors, to
+avoid some of the flailing seen here. While adaptive spins tend to
+be very difficult to make work well across different contexts, it
+is possible to build custom forms of locks using this framework,
+targetted for specific applications that encounter these kinds of
+usage profiles.</p>
+<p>根据这些结果，进一步调整阻塞（<code class="docutils literal notranslate"><span class="pre">park</span></code>/<code class="docutils literal notranslate"><span class="pre">unpark</span></code>）支持以减少上下文切换和相关开销，
+可能会在这个框架中带来一些小但明显的改进。此外，对于在多处理器上持续持有高度竞争锁的情况，
+同步器类采用某种形式的自适应自旋可能会很有效，以避免出现一些类似于这里看到的问题。
+虽然自适应自旋往往很难在不同的上下文中得到很好的工作，但针对遇到这种使用情况的特定应用程序，
+可以使用这个框架构建定制形式的锁。</p>
+</section>
+</section>
+<section id="conclusions">
+<h2>6. CONCLUSIONS 结论<a class="headerlink" href="#conclusions" title="Link to this heading">#</a></h2>
+<p>As of this writing, the <code class="docutils literal notranslate"><span class="pre">java.util.concurrent</span></code> synchronizer
+framework is too new to evaluate in practice. It is unlikely to see
+widespread usage until well after final release of J2SE1.5, and
+there will surely be unexpected consequences of its design, API,
+implementation, and performance. However, at this point, the
+framework appears successful in meeting the goals of providing
+an efficient basis for creating new synchronizers.</p>
+<p>截至撰写本文时，<code class="docutils literal notranslate"><span class="pre">java.util.concurrent</span></code> 同步器框架还太新，尚无法在实践中进行评估。
+在 J2SE1.5 最终发布之前，它可能不会被广泛使用，并且其设计、API、实现和性能肯定会出现
+意想不到的后果。然而，到目前为止，该框架似乎成功地实现了提供创建新同步器的有效基础的目标。</p>
+</section>
+<section id="acknowledgments">
+<h2>7. ACKNOWLEDGMENTS 鸣谢<a class="headerlink" href="#acknowledgments" title="Link to this heading">#</a></h2>
+<p>Thanks to Dave Dice for countless ideas and advice during the
+development of this framework, to Mark Moir and Michael Scott
+for urging consideration of CLH queues, to David Holmes for
+critiquing early versions of the code and API, to Victor
+Luchangco and Bill Scherer for reviewing previous incarnations
+of the source code, and to the other members of the JSR166
+Expert Group (Joe Bowbeer, Josh Bloch, Brian Goetz, David
+Holmes, and Tim Peierls) as well as Bill Pugh, for helping with
+design and specifications and commenting on drafts of this paper.
+Portions of this work were made possible by a DARPA PCES
+grant, NSF grant EIA-0080206 (for access to the 24way Sparc)
+and a Sun Collaborative Research Grant.</p>
+<p>感谢 Dave Dice 在开发这个框架过程中提供无数的想法和建议，感谢 Mark Moir
+和 Michael Scott 敦促考虑 CLH 队列，感谢 David Holmes 对代码和 API
+的早期版本提出批评，感谢 Victor Luchangco 和 Bill Scherer 对之前版本
+的源代码进行审查，感谢 JSR166 专家组的其他成员（Joe Bowbeer、Josh Bloch、
+Brian Goetz、David Holmes 和 Tim Peierls）以及 Bill Pugh，对设计和
+规范提供帮助，并对本文的草稿提出评论。部分工作得益于 DARPA PCES 资助、NSF
+资助 EIA-0080206（为了访问 24way Sparc）和 Sun 合作研究资助。</p>
+</section>
+<section id="references">
+<h2>8.REFERENCES 参考<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id27" role="doc-footnote">
@@ -1346,7 +1662,7 @@ Multithreaded Computer System. United States Patent
 <span class="backrefs">(<a role="doc-backlink" href="#id11">1</a>,<a role="doc-backlink" href="#id12">2</a>)</span>
 <p>Sun Microsystems. Multithreading in the Solaris Operating
 Environment . White paper available at
-http://wwws.sun.com/software/solaris/whitepapers.html</p>
+http://wwws.sun.com/software/solaris/whitepapers.html 2002.</p>
 </aside>
 <aside class="footnote brackets" id="id33" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
@@ -1376,7 +1692,7 @@ Processing Symposium, Cancun, Mexico, Apr. 1994.</p>
 <span class="backrefs">(<a role="doc-backlink" href="#id16">1</a>,<a role="doc-backlink" href="#id20">2</a>,<a role="doc-backlink" href="#id21">3</a>,<a role="doc-backlink" href="#id22">4</a>)</span>
 <p>M. L. Scott and W N. Scherer III. Scalable Queue-Based
 Spin Locks with Timeout. 8th ACM Symp. on Principles
-and Practice of Parallel Programming, Snowbird, UT, June</p>
+and Practice of Parallel Programming, Snowbird, UT, June 2001.</p>
 </aside>
 <aside class="footnote brackets" id="id37" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
@@ -1393,19 +1709,18 @@ Patterns, Addison Wesley, 1996.</p>
 </aside>
 </section>
 </section>
-</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../2-Rust/index.html">
+          <a class="next-page" href="07-ClassLoader.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Rust 相关</div>
+                <div class="title">ClassLoader</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -1485,6 +1800,9 @@ Patterns, Addison Wesley, 1996.</p>
 <li><a class="reference internal" href="#throughput">5.2 Throughput 吞吐量</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#conclusions">6. CONCLUSIONS 结论</a></li>
+<li><a class="reference internal" href="#acknowledgments">7. ACKNOWLEDGMENTS 鸣谢</a></li>
+<li><a class="reference internal" href="#references">8.REFERENCES 参考</a></li>
 </ul>
 </li>
 </ul>
@@ -1537,5 +1855,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
     <script src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
