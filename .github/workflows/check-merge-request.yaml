@@ -1,0 +1,28 @@
+name: Merge Request Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  deploy-doc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          ls
+          chmod +x scripts/plantuml.jar
+          sudo apt-get install plantuml -y
+          sudo apt-get install graphviz -y
+          pip install -r requirements.txt
+
+      - name: build doc
+        run: make html
+      
