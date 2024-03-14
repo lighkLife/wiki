@@ -20,6 +20,8 @@
   body {
     --color-code-background: #f8f8f8;
   --color-code-foreground: black;
+  --font-stack: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+  --font-stack--monospace: FiraCode Nerd Font, Courier, monospace;
   
   }
   @media not print {
@@ -274,7 +276,8 @@
 <section id="container">
 <h2>容器 Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h2>
 <p>容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Container
+<p class="plantuml">
+<img src="../_images/plantuml-acbd8adf334f964fbee6e17f982f7694671f91c7.png" alt="interface Container
 interface Engine extends Container
 interface Host extends Container
 interface Context extends Container
@@ -292,9 +295,8 @@ StandardContext &quot;1&quot; *-- &quot;many&quot; StandardWrapper
 note top of Engine : 整个 Catalina Servlet 引擎
 note bottom of Host : 一个虚拟主机
 note bottom of Context : 一个 web 应用
-note top of Wrapper : 一个 Servlet 请求(接口)
-</pre></div>
-</div>
+note top of Wrapper : 一个 Servlet 请求(接口)"/>
+</p>
 <section id="pipelining">
 <h3>管道 Pipelining<a class="headerlink" href="#pipelining" title="Link to this heading">#</a></h3>
 </section>

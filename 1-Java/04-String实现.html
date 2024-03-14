@@ -20,6 +20,8 @@
   body {
     --color-code-background: #f8f8f8;
   --color-code-foreground: black;
+  --font-stack: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+  --font-stack--monospace: FiraCode Nerd Font, Courier, monospace;
   
   }
   @media not print {
@@ -280,10 +282,11 @@
 </pre></div>
 </div>
 </section>
-<section id="char">
-<h2>为什么改为 char[]<a class="headerlink" href="#char" title="Link to this heading">#</a></h2>
+<section id="byte">
+<h2>为什么改为 byte[]<a class="headerlink" href="#byte" title="Link to this heading">#</a></h2>
 <p>采用更节省空间的字符串内部表示形式。参考 <a class="reference external" href="https://openjdk.org/jeps/254">JEP254</a> 。</p>
-<p>String 类的当前实现将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，而且大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。</p>
+<p>String 类的当前实现将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，
+而且大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。</p>
 <p>参考：</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://javabetter.cn/basic-extra-meal/jdk9-char-byte-string.html">Java 9为什么要将String的底层实现由char数组改成了byte数组?</a></p></li>
@@ -356,7 +359,7 @@
             <ul>
 <li><a class="reference internal" href="#">String 实现</a><ul>
 <li><a class="reference internal" href="#id1">存储结构</a></li>
-<li><a class="reference internal" href="#char">为什么改为 char[]</a></li>
+<li><a class="reference internal" href="#byte">为什么改为 byte[]</a></li>
 </ul>
 </li>
 </ul>
