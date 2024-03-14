@@ -21,7 +21,7 @@
 ## 容器 Container
 容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。
 
-```uml
+```{uml}
 interface Container
 interface Engine extends Container
 interface Host extends Container

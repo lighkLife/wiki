@@ -53,6 +53,10 @@ html_theme_options = {
             "class": "",
         },
     ],
+    "light_css_variables": {
+        "font-stack": "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif",
+        "font-stack--monospace": "FiraCode Nerd Font, Courier, monospace",
+    },
 }
 
 images_config = {

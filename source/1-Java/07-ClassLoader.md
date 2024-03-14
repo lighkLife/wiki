@@ -18,7 +18,7 @@
 
 ## 查找已加载的类
 ```java
-private native final Class<?> findLoadedClass0(String name)`
+private native final Class<?> findLoadedClass0(String name)
 ```
 这个方法是ClassLoader类的一个私有方法，只能被ClassLoader类的子类或者同一包中的类访问。
 
