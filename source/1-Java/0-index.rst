@@ -12,3 +12,4 @@ Java 相关
    05-HashMap实现
    06-论文翻译-AQS
    07-ClassLoader
+   08-JVM运行时内存区域
