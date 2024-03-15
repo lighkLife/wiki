@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Rust 相关" href="../2-Rust/index.html" /><link rel="prev" title="ClassLoader" href="07-ClassLoader.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="垃圾收集与内存非配策略" href="09-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html" /><link rel="prev" title="ClassLoader" href="07-ClassLoader.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>JVM 运行时内存区域 - 文档</title>
@@ -170,6 +170,7 @@
 <li class="toctree-l2"><a class="reference internal" href="06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-ClassLoader.html">ClassLoader</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">JVM 运行时内存区域</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -258,12 +259,12 @@
 <h2>0.概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>Java 虚拟机定义了程序执行期间使用的各种运行时数据区域。其中一些数据区域是在 Java 虚拟机启动时创建的，
 并且仅在 Java 虚拟机终止时才被销毁。其他数据区域是每个线程的。每个线程的数据区域在创建线程时创建，
-并在线程终止时销毁<a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。</p>
+并在线程终止时销毁<a class="footnote-reference brackets" href="#id8" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。</p>
 <p><img alt="jvm-area" src="../_images/jvm-area.png" /></p>
 </section>
 <section id="the-pc-register">
 <h2>1.The PC Register<a class="headerlink" href="#the-pc-register" title="Link to this heading">#</a></h2>
-<p>Java 虚拟机可以同时支持多个执行线程。因此，每个Java虚拟机线程都有自己的 pc （程序计数器）寄存器。
+<p>Java 虚拟机支持同时执行多个线程。因此，每个Java虚拟机线程都有自己的 pc （程序计数器）寄存器。
 如果该方法不是 <code class="docutils literal notranslate"><span class="pre">native</span></code> ，则 pc 寄存器包含当前正在执行的 Java 虚拟机指令的地址。如果线程当前正在执行
 的方法是 <code class="docutils literal notranslate"><span class="pre">native</span></code> ，则 Java 虚拟机的 pc 寄存器的值是未定义的。 Java 虚拟机的 pc 寄存器足够宽，
 可以容纳 <code class="docutils literal notranslate"><span class="pre">returnAddress</span></code> 或特定平台上的本机指针。</p>
@@ -276,11 +277,11 @@
 <section id="jvm-stacks">
 <h2>2.JVM Stacks<a class="headerlink" href="#jvm-stacks" title="Link to this heading">#</a></h2>
 <p>每个线程在创建的时候都会创建一个虚拟机栈，其内部保存一个个的栈帧(Stack Frame)，对应着一次次 Java 方法调用，
-是线程私有的，生命周期和线程一致<a class="footnote-reference brackets" href="#id7" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>。</p>
+是线程私有的，生命周期和线程一致<a class="footnote-reference brackets" href="#id9" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>。</p>
 <p><strong>作用</strong>
 主管 Java 程序的运行，它保存方法的局部变量、部分结果，并参与方法的调用和返回。</p>
 <p><strong>设置参数</strong>
-可以通过参数-Xss来设置线程的最大栈空间</p>
+可以通过参数 <code class="docutils literal notranslate"><span class="pre">-Xss</span></code> 来设置线程的最大栈空间</p>
 <section id="stack-frame">
 <h3>Stack Frame<a class="headerlink" href="#stack-frame" title="Link to this heading">#</a></h3>
 <p>在 Java 虚拟机（JVM）中，栈帧（Stack Frame）是用于支持方法调用和方法执行的数据结构，每个方法调用
@@ -336,7 +337,7 @@
 <p>“几乎”所有的对象实例以及数组都应当在堆上分配
 “几乎”是指从实现角度来看，随着Java语言的发展，现在已经能看到些许迹象表明日后可能出现值类型的支持，
 即使只考虑现在，由于即时编译技术的进步，尤其是逃逸分析技术的日渐强大，栈上分配、标量替换优化手段
-已经导致一些微妙的变化悄然发生，所以说Java对象实例都分配在堆上也渐渐变得不是那么绝对.<a class="footnote-reference brackets" href="#id8" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+已经导致一些微妙的变化悄然发生，所以说Java对象实例都分配在堆上也渐渐变得不是那么绝对.<a class="footnote-reference brackets" href="#id10" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
 </div>
 <p>Java堆既可以被实现成固定大小的，也可以是可扩展的，不过当前主流的 Java 虚拟机都是按照可扩展来实现的。</p>
 <ul class="simple">
@@ -367,6 +368,27 @@
 类似于操作系统进程中的“文本”段。它存储每个类的结构，例如运行时常量池、字段和方法数据，以及方法和构造函数
 的代码，包括类和接口初始化以及实例初始化中使用的特殊方法。</p>
 <p>方法区是在虚拟机启动时创建的。尽管方法区在逻辑上是堆的一部分，但简单的实现可以选择不进行垃圾收集或压缩它。</p>
+<section id="hotspot-2-4">
+<h3>HotSpot 中的方法区<a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a><a class="headerlink" href="#hotspot-2-4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>jdk1.6及之前有永久代，运行时常量池（包括字符串常量池），静态变量存放在永久代上,</p>
+<ul>
+<li><p>这个时期方法区在HotSpot中是由永久代来实现的，以至于这个时期说方法区就是指永久代.</p></li>
+</ul>
+</li>
+<li><p>jdk1.7有永久代，但已经逐步“去永久代”，字符串常量池、静态变量移除，保存在堆中；</p>
+<ul>
+<li><p>这个时期方法区在HotSpot中由永久代（类型信息、字段、方法、常量）和堆（字符串常量池、静态变量）共同实现.</p></li>
+</ul>
+</li>
+<li><p>jdk1.8及之后取消永久代，类型信息、字段、方法、常量保存在本地内存的元空间，但字符串常量池、静态变量仍在堆中;</p>
+<ul>
+<li><p>这个时期方法区在HotSpot中由本地内存的元空间（类型信息、字段、方法、常量）和堆（字符串常量池、静态变量）共同实现</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="method-area-constant-pool" src="../_images/method-area-constant-pool.png" /></p>
+</section>
 </section>
 <section id="run-time-constant-pool">
 <h2>6.Run-Time Constant Pool<a class="headerlink" href="#run-time-constant-pool" title="Link to this heading">#</a></h2>
@@ -376,17 +398,22 @@
 <p>每个运行时常量池都是从 Java 虚拟机的方法区分配的。类或接口的运行时常量池是在 Java 虚拟机创建类或接口时构造的。</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="doc-footnote">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-2.html#jvms-2.5">The Java Virtual Machine Specification, Java SE 21 Edition</a></p>
 </aside>
-<aside class="footnote brackets" id="id7" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
 <p><a class="reference external" href="https://pdai.tech/md/java/jvm/java-jvm-struct.html#%E5%9B%9B%E3%80%81%E5%A0%86%E5%86%85%E5%AD%98">JVM 基础 - JVM 内存结构</a></p>
 </aside>
-<aside class="footnote brackets" id="id8" role="doc-footnote">
+<aside class="footnote brackets" id="id10" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://book.douban.com/subject/34907497">深入理解Java虚拟机（第3版）</a>. 周志明 2019.</p>
+</aside>
+<aside class="footnote brackets" id="id11" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://javabetter.cn/string/constant-pool.html#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E4%BB%80%E4%B9%88%E4%BD%8D%E7%BD%AE%E5%91%A2">字符串常量池. 二哥的Java进阶之路</a></p>
 </aside>
 </aside>
 </section>
@@ -397,12 +424,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../2-Rust/index.html">
+          <a class="next-page" href="09-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Rust 相关</div>
+                <div class="title">垃圾收集与内存非配策略</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -467,7 +494,10 @@
 <li><a class="reference internal" href="#thread-local-allocation-buffer">Thread Local Allocation Buffer</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#methods-area">5.Methods Area</a></li>
+<li><a class="reference internal" href="#methods-area">5.Methods Area</a><ul>
+<li><a class="reference internal" href="#hotspot-2-4">HotSpot 中的方法区 </a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#run-time-constant-pool">6.Run-Time Constant Pool</a></li>
 </ul>
 </li>

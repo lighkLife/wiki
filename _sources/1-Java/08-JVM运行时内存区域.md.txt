@@ -8,7 +8,7 @@ Java 虚拟机定义了程序执行期间使用的各种运行时数据区域。
 ![jvm-area](./img/jvm-area.png)
 
 ## 1.The PC Register
-Java 虚拟机可以同时支持多个执行线程。因此，每个Java虚拟机线程都有自己的 pc （程序计数器）寄存器。
+Java 虚拟机支持同时执行多个线程。因此，每个Java虚拟机线程都有自己的 pc （程序计数器）寄存器。
 如果该方法不是 `native` ，则 pc 寄存器包含当前正在执行的 Java 虚拟机指令的地址。如果线程当前正在执行
 的方法是 `native` ，则 Java 虚拟机的 pc 寄存器的值是未定义的。 Java 虚拟机的 pc 寄存器足够宽，
 可以容纳 `returnAddress` 或特定平台上的本机指针。
@@ -25,7 +25,7 @@ Java 虚拟机可以同时支持多个执行线程。因此，每个Java虚拟�
 主管 Java 程序的运行，它保存方法的局部变量、部分结果，并参与方法的调用和返回。
 
 **设置参数**
-可以通过参数-Xss来设置线程的最大栈空间
+可以通过参数 `-Xss` 来设置线程的最大栈空间
 
 ### Stack Frame
 在 Java 虚拟机（JVM）中，栈帧（Stack Frame）是用于支持方法调用和方法执行的数据结构，每个方法调用
@@ -97,6 +97,16 @@ Java 虚拟机有一个在所有 Java 虚拟机线程之间共享的方法区。
 
 方法区是在虚拟机启动时创建的。尽管方法区在逻辑上是堆的一部分，但简单的实现可以选择不进行垃圾收集或压缩它。
 
+### HotSpot 中的方法区[^2] [^4]
+- jdk1.6及之前有永久代，运行时常量池（包括字符串常量池），静态变量存放在永久代上, 
+  - 这个时期方法区在HotSpot中是由永久代来实现的，以至于这个时期说方法区就是指永久代.
+- jdk1.7有永久代，但已经逐步“去永久代”，字符串常量池、静态变量移除，保存在堆中；
+  - 这个时期方法区在HotSpot中由永久代（类型信息、字段、方法、常量）和堆（字符串常量池、静态变量）共同实现.
+- jdk1.8及之后取消永久代，类型信息、字段、方法、常量保存在本地内存的元空间，但字符串常量池、静态变量仍在堆中;
+  - 这个时期方法区在HotSpot中由本地内存的元空间（类型信息、字段、方法、常量）和堆（字符串常量池、静态变量）共同实现
+
+![method-area-constant-pool](./img/method-area-constant-pool.png)
+
 ## 6.Run-Time Constant Pool
 运行时常量池是 `class` 文件中每个类和接口的 `constant_pool` 表的运行时表示。它包含多种常量，
 从编译时已知的数字、文字到必须在运行时解析的方法和字段引用。运行时常量池的功能类似于传统编程语言的符号表，
@@ -108,3 +118,4 @@ Java 虚拟机有一个在所有 Java 虚拟机线程之间共享的方法区。
 [^1]: [The Java Virtual Machine Specification, Java SE 21 Edition](https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-2.html#jvms-2.5)
 [^2]: [JVM 基础 - JVM 内存结构](https://pdai.tech/md/java/jvm/java-jvm-struct.html#%E5%9B%9B%E3%80%81%E5%A0%86%E5%86%85%E5%AD%98)
 [^3]: [深入理解Java虚拟机（第3版）](https://book.douban.com/subject/34907497). 周志明 2019.
+[^4]: [字符串常量池. 二哥的Java进阶之路](https://javabetter.cn/string/constant-pool.html#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E4%BB%80%E4%B9%88%E4%BD%8D%E7%BD%AE%E5%91%A2)
