@@ -218,6 +218,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/06-Mysql-Use-Case.html">Mysql-Use-Case</a></li>
 </ul>
 </li>
 </ul>
@@ -256,23 +257,69 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>设计模式的六大原则<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<section id="single-responsibility-principle-srp">
-<h2>单一职责原则(Single Responsibility Principle, SRP)<a class="headerlink" href="#single-responsibility-principle-srp" title="Link to this heading">#</a></h2>
+<p><img alt="principle" src="../_images/principle.png" /></p>
+<section id="id2">
+<h2>1.单一职责原则<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>一个类只负责一个功能领域的相应职责。换而言之，就一个类而言，应该只有一个引起它变换的原因。</p>
 </section>
-<section id="liskov-substitution-principle-lsp">
-<h2>里式替换原则(Liskov Substitution Principle, LSP)<a class="headerlink" href="#liskov-substitution-principle-lsp" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h2>2.开闭原则<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>一个软件实体应该对扩展开放，对修改关闭。也就是说软件实体应该在尽量不修改源码情况下进行扩展。</p>
+<p>开闭原则可以看作使用设计模式的目标（也是使用面向对象设计的目标），大部分设计模式都符合开闭原则。
+为满足开闭原则，需要对系统进行抽象化设计。比如 Java 中使用接口定义抽象行为，而使用具体的实现类
+来实现具体的操作细节，客户端可以使用接口进行编程，需要改变具体行为时，只需要新增一个接口实现即可。</p>
 </section>
-<section id="dependence-inversion-principle-dip">
-<h2>依赖倒置原则(Dependence Inversion Principle, DIP)<a class="headerlink" href="#dependence-inversion-principle-dip" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h2>3.里式替换原则<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+<p>里氏代换原则是实现开闭原则的重要方式之一。由于使用基类对象的地方都可以使用子类对象，
+因此在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。
+在运用里氏代换原则时，应该将父类设计为抽象类或者接口，让子类继承父类或实现父接口，
+并实现在父类中声明的方法。程序运行时，子类实例替换父类实例，可以很方便地扩展系统的功能，
+无须修改原有子类的代码，增加新的功能可以通过增加一个新的子类来实现。</p>
 </section>
-<section id="interface-segregation-principle-isp">
-<h2>接口隔离原则(Interface Segregation Principle, ISP)<a class="headerlink" href="#interface-segregation-principle-isp" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h2>4.依赖倒置原则<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>抽象不应该依赖于细节，细节应该依赖于抽象。换言之，要针对接口编程，而不是针对实现编程，</p>
+<p>如果说开闭原则是面向对象设计的目标的话，那么依赖倒转原则就是面向对象设计的主要实现机制之一，
+它是系统抽象化的具体实现。</p>
+<p>依赖倒转原则要求在程序代码中传递参数时或在关联关系中，尽量引用层次高的抽象层类，而不要用具体类，
+比如，即使用接口和抽象类进行：</p>
+<ul class="simple">
+<li><p>变量类型声明</p></li>
+<li><p>参数类型声明</p></li>
+<li><p>方法返回类型声明</p></li>
+<li><p>数据类型的转换等</p></li>
+</ul>
+<p>在实现依赖倒转原则时，需要针对抽象层编程，而将具体类的对象通过依赖注入（Dependency Injection，DI）
+的方式注入其他对象中。依赖注入（DI）是一种实现依赖倒置的方式，它是指将依赖关系从代码内部移动到外部容器中，
+通过容器来动态地注入依赖对象，从而实现松耦合的设计。常用的注入方式有3种：构造注入、设值注入（Setter注入）
+和接口注入。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>Spring 只支持构造注入和设置注入，接口注入是指通过实现在接口中声明的业务方法来传入具体类的对象。
+这些方法在定义时使用的是抽象类型，在运行时再传入具体类型的对象，由子类对象来覆盖父类对象。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection#Interface_injection">Dependency injection #Interface injection</a></p>
+</div>
 </section>
-<section id="least-knowledge-principle-lkp">
-<h2>迪米特法则(Least Knowledge Principle, LKP, 最小知道原则)<a class="headerlink" href="#least-knowledge-principle-lkp" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h2>5.接口隔离原则<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
+<p>把接口理解为角色时，接口隔离可以理解为“角色隔离”原则。接口是为客户端服务的，因此也可以理解为
+“定制服务”原则。</p>
 </section>
-<section id="open-closed-principle-ocp">
-<h2>开闭原则(Open Closed Principle, OCP)<a class="headerlink" href="#open-closed-principle-ocp" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h2>6.迪米特法则(最小知道原则)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>一个软件实体应当尽可能少地与其他实体发生相互作用。</p>
+<p>迪米特法则还有几种定义形式：不要和“陌生人”说话，只与你的直接朋友通信等。在迪米特法则中，
+对于一个对象，其“朋友”包括以下几类：</p>
+<ol class="arabic simple">
+<li><p>当前对象本身（this）</p></li>
+<li><p>以参数形式传入到当前对象方法中的对象</p></li>
+<li><p>当前对象的成员对象</p></li>
+<li><p>如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友</p></li>
+<li><p>当前对象所创建的对象</p></li>
+</ol>
 </section>
 </section>
 
@@ -339,12 +386,12 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">设计模式的六大原则</a><ul>
-<li><a class="reference internal" href="#single-responsibility-principle-srp">单一职责原则(Single Responsibility Principle, SRP)</a></li>
-<li><a class="reference internal" href="#liskov-substitution-principle-lsp">里式替换原则(Liskov Substitution Principle, LSP)</a></li>
-<li><a class="reference internal" href="#dependence-inversion-principle-dip">依赖倒置原则(Dependence Inversion Principle, DIP)</a></li>
-<li><a class="reference internal" href="#interface-segregation-principle-isp">接口隔离原则(Interface Segregation Principle, ISP)</a></li>
-<li><a class="reference internal" href="#least-knowledge-principle-lkp">迪米特法则(Least Knowledge Principle, LKP, 最小知道原则)</a></li>
-<li><a class="reference internal" href="#open-closed-principle-ocp">开闭原则(Open Closed Principle, OCP)</a></li>
+<li><a class="reference internal" href="#id2">1.单一职责原则</a></li>
+<li><a class="reference internal" href="#id3">2.开闭原则</a></li>
+<li><a class="reference internal" href="#id4">3.里式替换原则</a></li>
+<li><a class="reference internal" href="#id5">4.依赖倒置原则</a></li>
+<li><a class="reference internal" href="#id6">5.接口隔离原则</a></li>
+<li><a class="reference internal" href="#id7">6.迪米特法则(最小知道原则)</a></li>
 </ul>
 </li>
 </ul>
