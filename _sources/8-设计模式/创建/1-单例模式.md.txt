@@ -1,0 +1,100 @@
+# 单例模式
+
+## 产生背景
+为了节约系统资源，有时需要确保系统中某个类只有唯一一个实例，当这个唯一实例创建成功之后，
+无法再创建一个同类型的其他对象，所有的操作都只能基于这个唯一实例。
+
+## 定义
+单例模式（Singleton Pattern）：确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，
+这个类称为单例类，它提供全局访问的方法。
+
+```{uml}
+class Singleton {
+    - {static} instance: Singleton
+    + getInstance(): Singleton
+}
+
+Singleton::getInstance *--> Singleton
+```
+
+## 实现方式
+### 饿汉模式
+在定义静态变量时，直接实例化单例对象。
+```{uml}
+class Singleton {
+    - {static} instance:Singleton = new Singleton()
+    + getInstance(): Singleton
+}
+
+Singleton::getInstance *--> Singleton
+```
+
+```java
+class EagerSingleton {
+    private static final EagerSingleton instance = new EagerSingleton();
+
+    public static EagerSingleton getInstance(){
+        return instance;
+    }
+}
+```
+其优点是实现简单，缺点时消耗资源，无论是否需要，都会被实例化。
+
+### 懒汉模式
+在真正使用时，也就是`getInstance()`方法被调用时，才去初始化单例对象。也称为“延迟加载”技术。
+```{uml}
+class Singleton {
+    - {static} instance:Singleton
+    + getInstance(): Singleton
+}
+note left of Singleton::"getInstance()"
+    if(instance == null) {
+        instance = new LazySingleton();
+    }
+end note
+Singleton::getInstance *--> Singleton
+```
+
+## 懒汉模式的实现
+### 使用`synchronized`锁方法实现
+```Java
+class LazySingleton {
+    private static final LazySingleton instance = new LazySingleton();
+
+    synchronized public static LazySingleton getInstance(){
+        if(instance == null){
+            instance = new LazySingleton();
+        }
+        return instance;
+    }
+}
+```
+
+### 锁方法改为锁块
+```Java
+class LazySingleton {
+    private volatile static LazySingleton instance = null;
+
+    public static EagerSingleton getInstance(){
+        if(instance == null){
+            synchronized(LazySingleton.class) {
+                if(instance == null){
+                    instance = new LazySingleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+### 借助类加载机制实现
+```Java
+class LazySingleton {
+    private static class HolderClass {
+        private final static LazySingleton instance = new LazySingleton();
+    }
+    public static EagerSingleton getInstance(){
+        HolderClass.instance;
+    }
+}
+```

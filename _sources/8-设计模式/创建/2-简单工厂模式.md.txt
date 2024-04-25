@@ -1,0 +1,81 @@
+# 简单工厂模式
+
+## 背景
+Sunny软件公司欲基于Java语言开发一套图表库，该图表库可以为应用系统提供各种不同外观的图表，
+例如柱状图、饼状图、折线图等。Sunny软件公司图表库设计人员希望为应用系统开发人员提供一套
+灵活易用的图表库，而且可以较为方便地对图表库进行扩展，以便能够在将来增加一些新类型的图表。
+
+## 定义
+简单工厂模式（Simple Factory Pattern）：定义一个工厂类，它可以根据参数的不同返回不同类的实例，
+被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是静态（static）方法，
+因此简单工厂模式又被称为静态工厂方法（Static Factory Method）模式，它属于类创建型模式。
+
+```{uml}
+abstract class Product{}
+class ProductFactory {
+    + createProudct(type): Product
+}
+Product <|-- ConcreteProductA
+Product <|-- ConcreteProductB
+
+ConcreteProductA <.. ProductFactory:create
+ConcreteProductB <.. ProductFactory:create
+
+class Client #palegreen
+ProductFactory <..[#red] Client:use
+Product <..[#red] Client:use
+```
+## 实现
+```{uml}
+interface Chart {
+    + display()
+}
+
+class HistogramChart{
+    + HistogramChart()
+    + display()
+}
+
+class LineChart{
+    + LineChart()
+    + display()
+}
+
+class PieChart{
+    + PieChart()
+    + display()
+}
+
+class ChartFactory {
+    + {static} createChart(type: String): Chart
+}
+note left of ChartFactory
+if("Histogram".equals(type)) {
+    return new HistogramChart();
+}
+else if("Line".equals(type)) {
+    return new LineChart();
+} 
+else if("Line".equals(type)) {
+    return new PieChart();
+} 
+else {...}
+end note
+
+Chart <|.. HistogramChart
+Chart <|.. LineChart
+Chart <|.. PieChart
+HistogramChart <.. ChartFactory:create
+LineChart <.. ChartFactory:create
+PieChart <.. ChartFactory:create
+
+class Client #palegreen
+ChartFactory <..[#red] Client:use
+Chart <..[#red] Client:use
+```
+
+## 评价
+- 工厂类集中了所有的产品创建逻辑，职责过重
+- 添加新的产品类，必须修改工厂方法不符合开闭原则
+- 使用静态方法创建产品，使得工厂角色无法使用继承的等级结构
+
