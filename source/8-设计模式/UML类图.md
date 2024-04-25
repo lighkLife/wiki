@@ -101,6 +101,41 @@ class Strudent {
 Strudent <-- Class::students
 ```
 
+### 组合
+组合（Composition）关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可
+以控制成员对象的生命周期。一旦整体对象不存在，成员对象也将不存在，成员对象与整体
+对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。
+
+```{uml}
+class Mouth{}
+class Head{
+    - mouth: Mouth
+    + Head()
+}
+note left of Head::"Head()"
+    this.mouth = new Mouth(); 
+end note
+
+Mouth <--* Head
+```
+在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入整体对象中。
+
+### 聚合
+聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，
+但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。
+`Car::engine o--> Engine`
+```{uml}
+class Car{
+    - engine: Engine
+    + Car(Engine engine)
+    + setEngine(Engine engine)
+
+}
+class Engine {}
+Engine <--o Car
+```
+在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入整体对象中。
+
 ## 依赖关系
 依赖（Dependency）关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，
 在需要表示一个事物使用另一个事物时使用依赖关系。大多数情况下，依赖关系体现在某个类的方法
