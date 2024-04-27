@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="MinIO多节点部署" href="MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" /><link rel="prev" title="中间件" href="../0-index.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="行为型模式" href="../%E8%A1%8C%E4%B8%BA/0-index.html" /><link rel="prev" title="适配器模式" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
-        <title>MinIO介绍与单节点部署 - 文档</title>
+        <title>桥接模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -181,11 +181,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/test.html">测试文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">中间件</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">MinIO介绍与单节点部署</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../01-How-tomcat-works.html">How-tomcat-works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02-Hudi.html">Hudi</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../4-Middleware/0-index.html">中间件</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/01-How-tomcat-works.html">How-tomcat-works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/02-Hudi.html">Hudi</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../5-IoT/index.html">物联网</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 物联网</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -208,24 +208,24 @@
 <li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">桥接模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -273,94 +273,148 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="minio">
-<h1>MinIO介绍与单节点部署<a class="headerlink" href="#minio" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>MinIO 是一款兼容 AWS S3 的存储软件，支持加密、版本管理、删除保留、分布式部署等功能。</p>
-<p>MinIO 支持多种安装方式：</p>
-<ul class="simple">
-<li><p>单节点单硬盘（适用于本地安装，没有任何可靠性，存在单点故障）</p></li>
-<li><p>单节点多硬盘（允许一半的硬盘故障，但性能受限）</p></li>
-<li><p>多节点多硬盘（适用于企业级对象存储，允许一半的节点/硬盘发生故障）</p></li>
-</ul>
-</section>
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>桥接模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2>单节点单硬盘部署<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<section id="id3">
-<h3>下载安装<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## rpm</span>
-wget<span class="w"> </span>https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20231207041600.0.0.x86_64.rpm<span class="w"> </span>-O<span class="w"> </span>minio.rpm
-rpm<span class="w"> </span>-i<span class="w"> </span>install<span class="w"> </span>minio.rpm
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## deb</span>
-wget<span class="w"> </span>https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20231207041600.0.0_amd64.deb<span class="w"> </span>-O<span class="w"> </span>minio.deb
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>minio.deb
-</pre></div>
-</div>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>开发一个跨平台图像浏览系统，要求该系统能够显示BMP、JPG、GIF、PNG等多种格式的文件，并且能够在Windows、Linux、UNIX等多个操作系统上运行。系统首先将各种格式的文件解析为像素矩阵（Matrix），不同操作系统调用自己平台的绘制函数来绘制像素矩阵。</p>
+<p>解决此问题，首先想到的是定义一个抽象的 Image， 然后再实现:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WindowsBMP、WindowsJPG、WindowsGIF、WindowsPNG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LinuxBMP、LinuxJPG、LinuxGIF、LinuxPNG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UnixBMP、UnixJPG、UnixGIF、UnixPNG</span></code></p></li>
+</ul>
+<p>这样需要定义 3 * 4 个类，而且要增加一种新的图像格式就需要为每个操作系统实现一个类，当软件适配 Mac 系统，就需要为每种图像实现一个类，这样势必造成“类爆炸”，其实在实现过程种，就会发现同一平台对像素矩阵的渲染是一样，而同一种图像格式的文件格式都是一样的，那么不难想到将文件格式的解析和像素矩阵的渲染分开定义，两者通过聚合完成抽象图像的渲染，具体的图像文件解析、矩阵渲染交给各自的实现类完成。这种思路就是桥接模式。</p>
 </section>
-<section id="systemd">
-<h3>systemd 配置<a class="headerlink" href="#systemd" title="Link to this heading">#</a></h3>
-<p>rpm 或 dpkg 会自动创建 systemd 服务的配置文件，路径为 <code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/system/minio.service</span></code>，并默认以 minio-user 用户和用户组运行，所以需要创建用户，并赋权：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>groupadd<span class="w"> </span>-r<span class="w"> </span>minio-user
-useradd<span class="w"> </span>-M<span class="w"> </span>-r<span class="w"> </span>-g<span class="w"> </span>minio-user<span class="w"> </span>minio-user
-<span class="c1">## /mnt/disk1 /mnt/disk2 /mnt/disk3 是为 MinIO 所挂载的硬盘目录 </span>
-chown<span class="w"> </span>minio-user:minio-user<span class="w"> </span>/mnt/disk1<span class="w"> </span>/mnt/disk2<span class="w"> </span>/mnt/disk3
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>桥接模式（Bridge Pattern）：将抽象部分与其实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体（Handle and Body）模式或接口（Interface）模式.</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Abstraction {
+  # impl: Implementor
+  + opertion()
+}
+note left of Abstraction::&quot;opertion()&quot;
+    impl.opertionImpl()
+end note
+
+abstract RefinedAbstraction1 extends Abstraction{
+  + opertion()
+}
+abstract RefinedAbstraction2 extends Abstraction{
+  + opertion()
+}
+
+Implementor &lt;--o Abstraction::impl 
+interface Implementor {
+  + opertionImpl()
+}
+
+class ConcreteImplementorA implements Implementor{
+    + opertionImpl()
+}
+class ConcreteImplementorB implements Implementor{
+    + opertionImpl()
+}
+
+class Client #palegreen
+Client ..[#red]&gt; Implementor
+Client ..[#red]&gt; Abstraction
 </pre></div>
 </div>
 </section>
 <section id="id4">
-<h3>创建环境变量<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>在文件 <code class="docutils literal notranslate"><span class="pre">/etc/default/minio</span></code> 中可添加 MinIO 运行的环境变量。</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># 超管用户名和密码，可以用于登录其自带的 UI 管理系统</span>
-<span class="na">MINIO_ROOT_USER</span><span class="o">=</span><span class="s">admin</span>
-<span class="na">MINIO_ROOT_PASSWORD</span><span class="o">=</span><span class="s">password</span>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>图像可以视为抽象，不同的图像格式就是不同的具体实现，渲染图像时，需要先将图像字节流转换为像素矩阵，对像素矩阵的渲染就可以看作实现，不同平台的渲染就是不同的具体实现。</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Image {
+    # render: Render
+    + dispaly(Path)
+}
+Render &lt;--o Image::render  
+class PngImage extends Image {
+    + display(Path)
+}
+note left of PngImage::&quot;display(path: Path)&quot;
+    Matrix matrix = parse(path)
+    render.doPaint(matrix)
+end note
+class GifImage extends Image {
+    + display(Path)
+}
+class JpgImage extends Image {
+    + display(Path)
+}
+class BmpImage extends Image {
+    + display(Path)
+}
 
-<span class="c1"># 存储目录，代表设置 /data-1,/data-2,/data-3,/data-4 为 minio 的存储卷</span>
-<span class="c1"># 这里要注意第一次启动时，下面的设置的文件夹必须存在，且为空</span>
-<span class="na">MINIO_VOLUMES</span><span class="o">=</span><span class="s">&quot;/data-{1...4}&quot;</span>
+interface Render {
+    + doPaint(Matrix)
+}
 
-<span class="c1"># 服务地址</span>
-<span class="na">MINIO_SERVER_URL</span><span class="o">=</span><span class="s">&quot;http://172.16.11.136:9000&quot;</span>
+class WindowsRender implements Render {
+    + doPaint(Matrix)
+}
+class LinuxRender implements Render {
+    + doPaint(Matrix)
+}
+class UnixRender implements Render {
+    + doPaint(Matrix)
+}
+
+class Client #palegreen
+Client ..[#red]&gt; Render
+Client ..[#red]&gt; Image
 </pre></div>
 </div>
 </section>
 <section id="id5">
-<h3>启动 minio 服务<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置开机自启动</span>
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>minio.service
-<span class="c1"># 启动 MinIO Server</span>
-sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>minio.service
-<span class="c1"># 查看运行状态</span>
-sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>minio.service
-</pre></div>
-</div>
-<p>启动成功后，可以在浏览器中访问上面配置的 <code class="docutils literal notranslate"><span class="pre">MINIO_SERVER_URL</span></code> 进行体验。</p>
-</section>
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>优点</p>
+<ol class="arabic simple">
+<li><p>客户端代码仅与高层抽象部分进行互动， 不会接触到平台的详细信息。</p></li>
+<li><p>开闭原则。 你可以新增抽象部分和实现部分， 且它们之间不会相互影响。</p></li>
+<li><p>单一职责原则。 抽象部分专注于处理高层逻辑， 实现部分处理平台细节。</p></li>
+<li><p>在很多情况下，桥接模式可以取代多层继承方案</p></li>
+</ol>
+<p>缺点
+桥接模式要求正确识别出系统中两个独立变化的维度，因此其使用范围具有一定的局限性，如何正确识别两个独立维度也需要一定的经验积累</p>
 </section>
 <section id="id6">
-<h2>单节点多硬盘部署<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<section id="id7">
-<h3>注意事项<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>强烈推荐使用 XFS 文件系统来保证性能、可靠性、可预测性和一致性。</p></li>
-<li><p>确保使用相同类型（NVMe, SSD, or HDD）和相同容量的硬盘。</p></li>
-</ul>
-<blockquote>
-<div><p>即使混合使用不同类型的硬盘，MinIO仍然可以正常工作，只是不会因此获得额外的性能提升。
-如使用大小不同的硬盘，最大容量受制与容量最小的硬盘。</p>
-</div></blockquote>
-</section>
-<section id="id8">
-<h3>部署<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
-<p>部署步骤与单节点单硬盘相同，区别在设置 <code class="docutils literal notranslate"><span class="pre">/etc/default/minio</span></code> 中的环境变量时，<code class="docutils literal notranslate"><span class="pre">MINIO_VOLUMES</span></code> 设置的时多个硬盘的挂载点。</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># 存储目录，代表设置 /data-1,/data-2,/data-3,/data-4 为 minio 的存储卷</span>
-<span class="c1"># 这里要注意第一次启动时，下面的设置的文件夹必须存在，且为空</span>
-<span class="na">MINIO_VOLUMES</span><span class="o">=</span><span class="s">&quot;/data-{1...4}&quot;</span>
+<h2>练习<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>开发一个数据转换工具，可以将数据库中的数据转换成多种文件格式，例如txt、xml、pdf等格式，同时该工具需要支持多种不同的数据库。试使用桥接模式对其进行设计。</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Database {
+    - converter: Converter
+    + read(tableName): List&lt;Record&gt;
+    + convert(tableName): File
+}
+Converter &lt;--o Database::converter 
+class MysqlDatabase extends Database{
+    + read(tableName): List&lt;Record&gt;
+    + convert(tableName): File
+}
+class OracleDatabase extends Database{
+    + read(tableName): List&lt;Record&gt;
+    + convert(tableName): File
+}
+
+interface Converter {
+    + convert(List&lt;Record&gt;): File
+}
+class TextConverter implements Converter {
+    + convert(List&lt;Record&gt;): File
+}
+class PdfConverter implements Converter {
+    + convert(List&lt;Record&gt;): File
+}
+class XmlConverter implements Converter {
+    + convert(List&lt;Record&gt;): File
+}
+
+class Client #palegreen
+Client ..[#red]&gt; Converter
+Client ..[#red]&gt; Database
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 
@@ -369,23 +423,23 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">
+          <a class="next-page" href="../%E8%A1%8C%E4%B8%BA/0-index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">MinIO多节点部署</div>
+                <div class="title">行为型模式</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../0-index.html">
+          <a class="prev-page" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">中间件</div>
+                <div class="title">适配器模式</div>
                 
               </div>
             </a>
@@ -426,20 +480,12 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">MinIO介绍与单节点部署</a><ul>
-<li><a class="reference internal" href="#id1">介绍</a></li>
-<li><a class="reference internal" href="#id2">单节点单硬盘部署</a><ul>
-<li><a class="reference internal" href="#id3">下载安装</a></li>
-<li><a class="reference internal" href="#systemd">systemd 配置</a></li>
-<li><a class="reference internal" href="#id4">创建环境变量</a></li>
-<li><a class="reference internal" href="#id5">启动 minio 服务</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id6">单节点多硬盘部署</a><ul>
-<li><a class="reference internal" href="#id7">注意事项</a></li>
-<li><a class="reference internal" href="#id8">部署</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">桥接模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+<li><a class="reference internal" href="#id4">实现</a></li>
+<li><a class="reference internal" href="#id5">评价</a></li>
+<li><a class="reference internal" href="#id6">练习</a></li>
 </ul>
 </li>
 </ul>
