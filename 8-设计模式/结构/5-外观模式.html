@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="行为型模式" href="../%E8%A1%8C%E4%B8%BA/0-index.html" /><link rel="prev" title="组合模式" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
-        <title>装饰器模式 - 文档</title>
+        <title>外观模式（门面模式） - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -158,7 +158,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/00-Q%26A.html">Q&amp;A</a></li>
@@ -208,7 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -220,11 +220,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">装饰器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -276,174 +276,94 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>装饰器模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>外观模式（门面模式）<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
 <h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>开发一套图形界面组件库，该组件库提供了大量基本组件，如窗体、文本框、列表框等。由于在使用该组件库时，用户经常要求定制一些特殊的显示效果，例如带滚动条的窗体、带黑色边框的文本框、既带滚动条又带黑色边框的列表框等，因此经常需要对该构件库进行扩展以增强其功能。常规的设计方式可能如下：</p>
+<p>开发一个可应用于多个软件的文件加密模块，该模块可以对文件中的数据进行加密并将加密之后的数据存储在一个新文件中。具体的流程包括3个部分，分别是读取源文件、加密、保存加密之后的文件。其中，读取文件和保存文件使用流来实现，加密操作通过求模运算实现。这3个操作相对独立，为了实现代码的独立重用，让设计更符合单一职责原则，这3个操作的业务代码封装在3个不同的类中。</p>
 <p class="plantuml">
-<img src="../../_images/plantuml-d10ad85f4643e2c1625d3abc57340ad82c36cd15.png" alt="abstract Component {
-    + display()
-}
-class Window extends Component {
-    + display()
-}
-class TextBox extends Component {
-    + display()
-}
-class ListBox extends Component {
-    + display()
-}
+<img src="../../_images/plantuml-ecbb43fcb7cd9d9cfd43de74d252dba4676900a3.png" alt="allowmixing
+class FileReader
+class AesEncrypt
+class FileWriter
 
-class ScrollBarWindow extends Window {
-    + display()
-    + setScrollBar()
-}
-class BlackBorderWindow extends Window {
-    + display()
-    + setBlackBorder()
-}
-class ScrollBarBlackBorderWindow extends ScrollBarWindow,BlackBorderWindow {
-    + setBlackBorder()
-}
+component 财务管理软件
+component 公文审批系统
+component 邮件管理软件
 
-class ScrollBarTextBox extends TextBox {
-    + display()
-    + setScrollBar()
-}
-class BlackBorderTextBox extends TextBox {
-    + display()
-    + setBlackBorder()
-}
-class ScrollBarBlackBorderTextBox extends ScrollBarTextBox,BlackBorderTextBox {
-    + setBlackBorder()
-}
-
-class ScrollBarListBox extends ListBox {
-    + display()
-    + setScrollBar()
-}
-class BlackBorderListBox extends ListBox {
-    + display()
-    + setBlackBorder()
-}
-class ScrollBarBlackBorderListBox extends ScrollBarListBox,BlackBorderListBox {
-    + setBlackBorder()
-}"/>
+财务管理软件 --  FileReader
+财务管理软件 --  AesEncrypt
+财务管理软件 --  FileWriter
+公文审批系统 --  FileReader
+公文审批系统 --  AesEncrypt
+公文审批系统 --  FileWriter
+邮件管理软件 --  FileReader
+邮件管理软件 --  AesEncrypt
+邮件管理软件 --  FileWriter"/>
 </p>
-<p>根据需求，很容易设计出上面的层级机构，但存在以下几个问题：</p>
+<p>这个设计一旦真正使用起来，就会发现以下问题：</p>
 <ol class="arabic simple">
-<li><p>扩展麻烦，某些编程语言不支持多继承，无法实现此结构。</p></li>
-<li><p>存在很多重复代码。窗体需要设置滚动条，文本框、列表框等都需要设置滚动条。</p></li>
-<li><p>系统过于庞大，类数目过多。</p></li>
+<li><p>使用加密模块时，FileReader、AesEncrypt、FileWriter 经常一起出现，而且使用方式也相同，造成很多重复代码。</p></li>
+<li><p>客户端使用加密模块时，需要提前知晓加密模块提供了哪些类，要如何组合使用这些类。</p></li>
+<li><p>如果需要更换一个加密类，则所有使用加密模块的客户端都需要修改代码，使得系统扩展性差，难以维护。</p></li>
 </ol>
-<p>思考上述缺点，不难想到为  ScrollBar 和 BlackBorder 顶一个父类，将其分别与 Window、TextBox、ListBox 组合，即可更优雅的解决上述需求。这里为 ScrollBar 和 BlackBorder 定义的父类就是装饰器。</p>
+<p>如何解决上述问题呢？一种显而易见的方式就是加密对外提供一个统一的抽象接口，客户端无需关系具体实现，这就是门面模式。</p>
 </section>
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>装饰模式（Decorator Pattern）：动态地给一个对象增加一些额外的职责，就增加对象功能来说，装饰模式比生成子类实现更为灵活。装饰模式是一种对象结构型模式。</p>
-<p>装饰模式可以在不改变一个对象本身功能的基础上给对象增加额外的新行为。在现实生活中，这种情况也到处存在。例如一张照片，可以不改变照片本身，给它增加一个相框，使得它具有防潮的功能，而且用户可以根据需要给它增加不同类型的相框，甚至可以在一个小相框的外面再套一个大相框。</p>
-<p>装饰模式是一种用于替代继承的技术，它通过一种无须定义子类的方式来给对象动态增加职责，使用对象之间的关联关系取代类之间的继承关系。在装饰模式中引入了装饰类，在装饰类中既可以调用待装饰的原有类的方法，还可以增加新的方法，以扩充原有类的功能</p>
+<p>外观模式（Facade Pattern）：外部与一个子系统的通信通过一个统一的外观角色进行，为子系统中的一组接口提供一个一致的入口。外观模式定义了一个高层接口，这个接口使得子系统更加容易使用。外观模式又称为门面模式，它是一种对象结构型模式。</p>
 <p class="plantuml">
-<img src="../../_images/plantuml-cbc39df91104fe6fe6bf60795902e262190f64ab.png" alt="abstract Component {
-    + operation()
-}
-class ConcreteComponent extends Component {
-    + operation()
-}
-class Decorator extends Component {
-    - component: Component
-    + operation()
-}
-Component &lt;--o Decorator::component 
-
-class ConcreteDecoratorA extends Decorator {
-    - aState
-    + operation()
-    + aBehavior()
-}
-note left of ConcreteDecoratorA::&quot;operation()&quot;
-    super.operation();
-    extra();
-end note
-class ConcreteDecoratorB extends Decorator {
-    - bState
-    + operation()
-    + bBehavior()
-}
-note right of ConcreteDecoratorB::&quot;operation()&quot;
-    super.operation();
-    extra();
-end note
+<img src="../../_images/plantuml-133a7650d04321c5234f170f686fa75869e7ad8c.png" alt="class Facade
+Facade --&gt; SubSystemA
+Facade --&gt; SubSystemB
+Facade --&gt; SubSystemC
 
 class Client #palegreen
-note left of Client
-    it = new ConcreteComponent()
-    a = new ConcreteDecoratorA(it);
-    b = new ConcreteDecoratorA(a);
-    b.operation();
-end note
-Client ..[#red]&gt; Component"/>
+Client --&gt; Facade"/>
 </p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>为 ScrollBar 和 BlackBorder 抽象为一个父类，作为抽象装饰器，ScrollBar 和 BlackBorder 就作为具体的装饰器实现。</p>
+<p>加密模块对外提供一个统一的</p>
 <p class="plantuml">
-<img src="../../_images/plantuml-dbfcb7ca92d9e877a5acbd28324222d387241222.png" alt="abstract Component {
-    + display()
+<img src="../../_images/plantuml-1dcdd240e9379df8acb314b7cf026066f8412bba.png" alt="class EncryptFacade {
+    - reader    : FileReader
+    - writer    : FileWriter
+    - encrypt   : AesEncrypt
+    + EncryptFacade()
+    + fileEncrypt(source: Path, target: Path)
 }
-class Window extends Component {
-    + display()
+class FileReader {
+    - read(source: Path): byte[]
 }
-class TextBox extends Component {
-    + display()
+class AesEncrypt {
+    - encrypt(data: byte[]): byte[]
 }
-class ListBox extends Component {
-    + display()
+class FileWriter {
+    + write(target: Path, cipher: byte[])
 }
-
-abstract Decorator extends Component{
-    - component: Component
-    + Decorator(Component)
-    + display()
-}
-Component &lt;--o Decorator::component
-class ScrollBarDecorator extends Decorator {
-    + ScrollBarDecorator(Component)
-    + display()
-}
-class BlackBorderDecorator extends Decorator {
-    + BlackBorderDecorator(Component)
-    + display()
-}
+EncryptFacade --&gt; FileReader
+EncryptFacade --&gt; AesEncrypt
+EncryptFacade --&gt; FileWriter
 
 class Client #palegreen
-note top of Client
-    window = new Window()
-    scrollBarWindow = new ScrollBarDecorator(window);
-    blackBorderScrollBarWindow = new BlackBorderDecorator(scrollBarWindow);
-    blackBorderScrollBarWindow.display();
-end note
-Client ..[#red]&gt; Component"/>
+Client --&gt; EncryptFacade"/>
 </p>
+<p>如果考虑更强的扩展性，还可以将 EncryptFacade 定义为接口，以便支持数据库读写，为加密算法增加抽象定义和具体实现，以便支持其他加密算法。</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <section id="id6">
 <h3>优点<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>对于扩展一个对象的功能，装饰模式比继承更加灵活性，不会导致类的个数急剧增加。</p></li>
-<li><p>可以通过一种动态的方式来扩展一个对象的功能。通过配置文件可以在运行时选择不同的具体装饰类，从而实现不同的行为。</p></li>
-<li><p>可以对一个对象进行多次装饰。通过使用不同的具体装饰类以及这些装饰类的排列组合，可以创造出很多不同行为的组合，得到功能更为强大的对象。</p></li>
-<li><p>具体构件类与具体装饰类可以独立变化，用户可以根据需要增加新的具体构件类和具体装饰类，原有类库代码无须改变，符合开闭原则。</p></li>
+<li><p>对客户端屏蔽了子系统组件，减少了客户端所需处理的对象数目并使得子系统使用起来更加容易。通过引入外观模式，客户端代码将变得很简单，与之关联的对象也很少。</p></li>
+<li><p>实现了子系统与客户端之间的松耦合关系，这使得子系统的变化不会影响到调用它的客户端，只需要调整外观类即可。</p></li>
+<li><p>一个子系统的修改对其他子系统没有任何影响，而且子系统内部变化也不会影响到外观对象。</p></li>
+<li><p>只是提供了一个访问子系统的统一入口，并不影响客户端直接使用子系统类。</p></li>
 </ol>
 </section>
 <section id="id7">
 <h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>层层套娃，会产生很多小对象，优点浪费资源。</p></li>
-<li><p>层层套娃，容易出错，排错也要像剥洋葱一样，一层一层的，有点麻烦。</p></li>
-</ol>
+<p>如果设计不当，增加新的子系统可能需要修改外观类的源代码，这违背了开闭原则，所以门面的定义需要经过反复推敲。</p>
 </section>
 </section>
 </section>
@@ -453,26 +373,8 @@ Client ..[#red]&gt; Component"/>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../%E8%A1%8C%E4%B8%BA/0-index.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">行为型模式</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">组合模式</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -510,7 +412,7 @@ Client ..[#red]&gt; Component"/>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">装饰器模式</a><ul>
+<li><a class="reference internal" href="#">外观模式（门面模式）</a><ul>
 <li><a class="reference internal" href="#id2">背景</a></li>
 <li><a class="reference internal" href="#id3">定义</a></li>
 <li><a class="reference internal" href="#id4">实现</a></li>
