@@ -280,7 +280,8 @@
 <section id="id2">
 <h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>开发一套图形界面组件库，该组件库提供了大量基本组件，如窗体、文本框、列表框等。由于在使用该组件库时，用户经常要求定制一些特殊的显示效果，例如带滚动条的窗体、带黑色边框的文本框、既带滚动条又带黑色边框的列表框等，因此经常需要对该构件库进行扩展以增强其功能。常规的设计方式可能如下：</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Component {
+<p class="plantuml">
+<img src="../../_images/plantuml-d10ad85f4643e2c1625d3abc57340ad82c36cd15.png" alt="abstract Component {
     + display()
 }
 class Window extends Component {
@@ -327,9 +328,8 @@ class BlackBorderListBox extends ListBox {
 }
 class ScrollBarBlackBorderListBox extends ScrollBarListBox,BlackBorderListBox {
     + setBlackBorder()
-}
-</pre></div>
-</div>
+}"/>
+</p>
 <p>根据需求，很容易设计出上面的层级机构，但存在以下几个问题：</p>
 <ol class="arabic simple">
 <li><p>扩展麻烦，某些编程语言不支持多继承，无法实现此结构。</p></li>
@@ -343,7 +343,8 @@ class ScrollBarBlackBorderListBox extends ScrollBarListBox,BlackBorderListBox {
 <p>装饰模式（Decorator Pattern）：动态地给一个对象增加一些额外的职责，就增加对象功能来说，装饰模式比生成子类实现更为灵活。装饰模式是一种对象结构型模式。</p>
 <p>装饰模式可以在不改变一个对象本身功能的基础上给对象增加额外的新行为。在现实生活中，这种情况也到处存在。例如一张照片，可以不改变照片本身，给它增加一个相框，使得它具有防潮的功能，而且用户可以根据需要给它增加不同类型的相框，甚至可以在一个小相框的外面再套一个大相框。</p>
 <p>装饰模式是一种用于替代继承的技术，它通过一种无须定义子类的方式来给对象动态增加职责，使用对象之间的关联关系取代类之间的继承关系。在装饰模式中引入了装饰类，在装饰类中既可以调用待装饰的原有类的方法，还可以增加新的方法，以扩充原有类的功能</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Component {
+<p class="plantuml">
+<img src="../../_images/plantuml-cbc39df91104fe6fe6bf60795902e262190f64ab.png" alt="abstract Component {
     + operation()
 }
 class ConcreteComponent extends Component {
@@ -381,14 +382,14 @@ note left of Client
     b = new ConcreteDecoratorA(a);
     b.operation();
 end note
-Client ..[#red]&gt; Component
-</pre></div>
-</div>
+Client ..[#red]&gt; Component"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>为 ScrollBar 和 BlackBorder 抽象为一个父类，作为抽象装饰器，ScrollBar 和 BlackBorder 就作为具体的装饰器实现。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Component {
+<p class="plantuml">
+<img src="../../_images/plantuml-dbfcb7ca92d9e877a5acbd28324222d387241222.png" alt="abstract Component {
     + display()
 }
 class Window extends Component {
@@ -423,9 +424,8 @@ note top of Client
     blackBorderScrollBarWindow = new BlackBorderDecorator(scrollBarWindow);
     blackBorderScrollBarWindow.display();
 end note
-Client ..[#red]&gt; Component
-</pre></div>
-</div>
+Client ..[#red]&gt; Component"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>

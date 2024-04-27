@@ -285,7 +285,8 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>组合模式（Composite Pattern）：组合多个对象形成树形结构以表示具有“部分—整体”关系的层次结构。组合模式对单个对象（即叶子对象）和组合对象（即容器对象）的使用具有一致性，又可以称为“部分—整体”（Part-Whole）模式。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Component {
+<p class="plantuml">
+<img src="../../_images/plantuml-b53d4fc96c68e43a3b3962dea7c9c8c2d4ee0c0f.png" alt="interface Component {
     + operation()
     --
     + add(Component)
@@ -311,13 +312,13 @@ end note
 Component &lt;--o Composite::children
 
 class Client #palegreen
-Client ..[#red]&gt; Component
-</pre></div>
-</div>
+Client ..[#red]&gt; Component"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract AbstractFile {
+<p class="plantuml">
+<img src="../../_images/plantuml-f32955703a77473c7fbc660a0837fc73862c26ca.png" alt="abstract AbstractFile {
     + add(AbstractFile)
     + remove(AbstractFile)
     + getChildren(): AbstractFile[]
@@ -345,9 +346,8 @@ note left of Folder::&quot;killVirus()&quot;
 end note
 
 class Client #palegreen
-Client ..[#red]&gt; AbstractFile
-</pre></div>
-</div>
+Client ..[#red]&gt; AbstractFile"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
