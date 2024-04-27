@@ -16,7 +16,7 @@
 ## 定义
 适配器模式（Adapter Pattern）：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器（Wrapper）。
 
-```uml
+```{uml}
 interface Target {
     + request(args)
 }
@@ -40,7 +40,7 @@ Client --[#red]> Target
 ## 实现
 要在当前程序中整合一个第三方智能分析函数库，只需要使用一个适配器，进行数据转换即可
 
-```uml
+```{uml}
 interface MyLib {
     + analysis(Xml)
 }

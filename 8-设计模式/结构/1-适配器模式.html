@@ -223,6 +223,8 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">适配器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -289,7 +291,8 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>适配器模式（Adapter Pattern）：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器（Wrapper）。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Target {
+<p class="plantuml">
+<img src="../../_images/plantuml-b9a52186250c2bb9e3482da833a6b2ba290c0116.png" alt="interface Target {
     + request(args)
 }
 class Adapter implements Target {
@@ -306,14 +309,14 @@ class Adaptee {
 Adaptee &lt;-- Adapter
 
 class Client #palegreen
-Client --[#red]&gt; Target
-</pre></div>
-</div>
+Client --[#red]&gt; Target"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>要在当前程序中整合一个第三方智能分析函数库，只需要使用一个适配器，进行数据转换即可</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface MyLib {
+<p class="plantuml">
+<img src="../../_images/plantuml-2c4c35ed2a6ec3dd261ade3bbcfee49f63a49b2d.png" alt="interface MyLib {
     + analysis(Xml)
 }
 class JsonLibAdapter implements MyLib{
@@ -331,9 +334,8 @@ class ThirdLib {
 ThirdLib &lt;-- JsonLibAdapter
 
 class Client #palegreen
-Client --[#red]&gt; MyLib
-</pre></div>
-</div>
+Client --[#red]&gt; MyLib"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>

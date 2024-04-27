@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="行为型模式" href="../%E8%A1%8C%E4%B8%BA/0-index.html" /><link rel="prev" title="适配器模式" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="组合模式" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="适配器模式" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>桥接模式 - 文档</title>
@@ -223,6 +223,8 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">桥接模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -289,7 +291,8 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>桥接模式（Bridge Pattern）：将抽象部分与其实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体（Handle and Body）模式或接口（Interface）模式.</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Abstraction {
+<p class="plantuml">
+<img src="../../_images/plantuml-735afd6b7cc698696c80dbf70ab3acc1631e65a9.png" alt="abstract Abstraction {
   # impl: Implementor
   + opertion()
 }
@@ -318,14 +321,14 @@ class ConcreteImplementorB implements Implementor{
 
 class Client #palegreen
 Client ..[#red]&gt; Implementor
-Client ..[#red]&gt; Abstraction
-</pre></div>
-</div>
+Client ..[#red]&gt; Abstraction"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>图像可以视为抽象，不同的图像格式就是不同的具体实现，渲染图像时，需要先将图像字节流转换为像素矩阵，对像素矩阵的渲染就可以看作实现，不同平台的渲染就是不同的具体实现。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Image {
+<p class="plantuml">
+<img src="../../_images/plantuml-6472e1d73aeb3ecc29d987b26bf17a26bd570d2f.png" alt="abstract Image {
     # render: Render
     + dispaly(Path)
 }
@@ -363,9 +366,8 @@ class UnixRender implements Render {
 
 class Client #palegreen
 Client ..[#red]&gt; Render
-Client ..[#red]&gt; Image
-</pre></div>
-</div>
+Client ..[#red]&gt; Image"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
@@ -382,7 +384,8 @@ Client ..[#red]&gt; Image
 <section id="id6">
 <h2>练习<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>开发一个数据转换工具，可以将数据库中的数据转换成多种文件格式，例如txt、xml、pdf等格式，同时该工具需要支持多种不同的数据库。试使用桥接模式对其进行设计。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Database {
+<p class="plantuml">
+<img src="../../_images/plantuml-de3a470e6c1d5ef4a50f564be28a5cadefe8ea53.png" alt="abstract Database {
     - converter: Converter
     + read(tableName): List&lt;Record&gt;
     + convert(tableName): File
@@ -412,9 +415,8 @@ class XmlConverter implements Converter {
 
 class Client #palegreen
 Client ..[#red]&gt; Converter
-Client ..[#red]&gt; Database
-</pre></div>
-</div>
+Client ..[#red]&gt; Database"/>
+</p>
 </section>
 </section>
 
@@ -423,12 +425,12 @@ Client ..[#red]&gt; Database
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../%E8%A1%8C%E4%B8%BA/0-index.html">
+          <a class="next-page" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">行为型模式</div>
+                <div class="title">组合模式</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
