@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="垃圾收集与内存非配策略" href="09-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html" /><link rel="prev" title="ClassLoader" href="07-ClassLoader.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>JVM 运行时内存区域 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,16 +276,16 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="jvm">
-<h1>JVM 运行时内存区域<a class="headerlink" href="#jvm" title="Link to this heading">#</a></h1>
+<h1>JVM 运行时内存区域<a class="headerlink" href="#jvm" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>0.概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>0.概述<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Java 虚拟机定义了程序执行期间使用的各种运行时数据区域。其中一些数据区域是在 Java 虚拟机启动时创建的，
 并且仅在 Java 虚拟机终止时才被销毁。其他数据区域是每个线程的。每个线程的数据区域在创建线程时创建，
 并在线程终止时销毁<a class="footnote-reference brackets" href="#id8" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。</p>
 <p><img alt="jvm-area" src="../_images/jvm-area.png" /></p>
 </section>
 <section id="the-pc-register">
-<h2>1.The PC Register<a class="headerlink" href="#the-pc-register" title="Link to this heading">#</a></h2>
+<h2>1.The PC Register<a class="headerlink" href="#the-pc-register" title="Link to this heading">¶</a></h2>
 <p>Java 虚拟机支持同时执行多个线程。因此，每个Java虚拟机线程都有自己的 pc （程序计数器）寄存器。
 如果该方法不是 <code class="docutils literal notranslate"><span class="pre">native</span></code> ，则 pc 寄存器包含当前正在执行的 Java 虚拟机指令的地址。如果线程当前正在执行
 的方法是 <code class="docutils literal notranslate"><span class="pre">native</span></code> ，则 Java 虚拟机的 pc 寄存器的值是未定义的。 Java 虚拟机的 pc 寄存器足够宽，
@@ -297,7 +297,7 @@
 </ul>
 </section>
 <section id="jvm-stacks">
-<h2>2.JVM Stacks<a class="headerlink" href="#jvm-stacks" title="Link to this heading">#</a></h2>
+<h2>2.JVM Stacks<a class="headerlink" href="#jvm-stacks" title="Link to this heading">¶</a></h2>
 <p>每个线程在创建的时候都会创建一个虚拟机栈，其内部保存一个个的栈帧(Stack Frame)，对应着一次次 Java 方法调用，
 是线程私有的，生命周期和线程一致<a class="footnote-reference brackets" href="#id9" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>。</p>
 <p><strong>作用</strong>
@@ -305,7 +305,7 @@
 <p><strong>设置参数</strong>
 可以通过参数 <code class="docutils literal notranslate"><span class="pre">-Xss</span></code> 来设置线程的最大栈空间</p>
 <section id="stack-frame">
-<h3>Stack Frame<a class="headerlink" href="#stack-frame" title="Link to this heading">#</a></h3>
+<h3>Stack Frame<a class="headerlink" href="#stack-frame" title="Link to this heading">¶</a></h3>
 <p>在 Java 虚拟机（JVM）中，栈帧（Stack Frame）是用于支持方法调用和方法执行的数据结构，每个方法调用
 都会创建一个对应的栈帧。栈帧中包含了多种信息，主要有以下几个部分：
 <img alt="stack-frame" src="../_images/stack-frame.png" /></p>
@@ -341,7 +341,7 @@
 </section>
 </section>
 <section id="native-method-stacks">
-<h2>3.Native Method stacks<a class="headerlink" href="#native-method-stacks" title="Link to this heading">#</a></h2>
+<h2>3.Native Method stacks<a class="headerlink" href="#native-method-stacks" title="Link to this heading">¶</a></h2>
 <p>Java虚拟机的实现可以使用传统的堆栈（通俗地称为“C堆栈”）来支持 native 方法（以除Java编程语言之外的语言编写的方法）。</p>
 <ul class="simple">
 <li><p>在 Hotspot JVM 中，直接将本地方法栈和虚拟机栈合二为一。</p></li>
@@ -351,7 +351,7 @@
 </ul>
 </section>
 <section id="heap">
-<h2>4.Heap<a class="headerlink" href="#heap" title="Link to this heading">#</a></h2>
+<h2>4.Heap<a class="headerlink" href="#heap" title="Link to this heading">¶</a></h2>
 <p>Java 虚拟机有一个在所有 Java 虚拟机线程之间共享的堆。堆是运行时数据区域，“几乎”所有类实例和数组的
 内存都从这里分配。堆是在虚拟机启动时创建的。对象的堆存储由 GC（称为垃圾收集器）回收。</p>
 <div class="admonition note">
@@ -367,7 +367,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">-Xmx</span></code> 用来表示堆的最大内存，等价于 <code class="docutils literal notranslate"><span class="pre">-XX:MaxHeapSize</span></code></p></li>
 </ul>
 <section id="id5">
-<h3>堆区域划分<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>堆区域划分<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>JVM 规范中并没有进一步划分堆区域。由于常见 GC 都是基于分代收集理论设计的，因此经常看到 Eden 空间、From Survivor空间、To Survivor空间、新生代、老年代、永久代）等名词，其是都是这些 GC 的对 Heap
 的区域划分。</p>
 <div class="admonition warning">
@@ -379,19 +379,19 @@
 <p><img alt="gc-area" src="../_images/gc-area.png" /></p>
 </section>
 <section id="thread-local-allocation-buffer">
-<h3>Thread Local Allocation Buffer<a class="headerlink" href="#thread-local-allocation-buffer" title="Link to this heading">#</a></h3>
+<h3>Thread Local Allocation Buffer<a class="headerlink" href="#thread-local-allocation-buffer" title="Link to this heading">¶</a></h3>
 <p>Thread Local Allocation Buffer（TLAB）是一种用于提高线程私有对象分配效率的技术，它是 Java 虚拟机内存管理的一部分。TLAB 主要用于优化并发环境下的对象分配，尤其是针对多线程同时分配对象时的性能问题。</p>
 <p>TLAB 的主要思想是为每个线程预分配一块私有的内存空间，用于线程独立地进行对象分配。每个线程都有自己的 TLAB 区域，这样可以避免不同线程之间频繁地竞争分配内存的锁，从而提高了对象分配的效率和并发性能。</p>
 </section>
 </section>
 <section id="methods-area">
-<h2>5.Methods Area<a class="headerlink" href="#methods-area" title="Link to this heading">#</a></h2>
+<h2>5.Methods Area<a class="headerlink" href="#methods-area" title="Link to this heading">¶</a></h2>
 <p>Java 虚拟机有一个在所有 Java 虚拟机线程之间共享的方法区。方法区类似于传统语言的编译代码的存储区或者
 类似于操作系统进程中的“文本”段。它存储每个类的结构，例如运行时常量池、字段和方法数据，以及方法和构造函数
 的代码，包括类和接口初始化以及实例初始化中使用的特殊方法。</p>
 <p>方法区是在虚拟机启动时创建的。尽管方法区在逻辑上是堆的一部分，但简单的实现可以选择不进行垃圾收集或压缩它。</p>
 <section id="hotspot-2-4">
-<h3>HotSpot 中的方法区<a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a><a class="headerlink" href="#hotspot-2-4" title="Link to this heading">#</a></h3>
+<h3>HotSpot 中的方法区<a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a><a class="headerlink" href="#hotspot-2-4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>jdk1.6及之前有永久代，运行时常量池（包括字符串常量池），静态变量存放在永久代上,</p>
 <ul>
@@ -413,7 +413,7 @@
 </section>
 </section>
 <section id="run-time-constant-pool">
-<h2>6.Run-Time Constant Pool<a class="headerlink" href="#run-time-constant-pool" title="Link to this heading">#</a></h2>
+<h2>6.Run-Time Constant Pool<a class="headerlink" href="#run-time-constant-pool" title="Link to this heading">¶</a></h2>
 <p>运行时常量池是 <code class="docutils literal notranslate"><span class="pre">class</span></code> 文件中每个类和接口的 <code class="docutils literal notranslate"><span class="pre">constant_pool</span></code> 表的运行时表示。它包含多种常量，
 从编译时已知的数字、文字到必须在运行时解析的方法和字段引用。运行时常量池的功能类似于传统编程语言的符号表，
 但它包含比典型符号表更广泛的数据。</p>
@@ -533,7 +533,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

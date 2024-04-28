@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="物联网" href="../5-IoT/index.html" /><link rel="prev" title="How-tomcat-works" href="01-How-tomcat-works.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Hudi - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="hudi">
-<h1>Hudi<a class="headerlink" href="#hudi" title="Link to this heading">#</a></h1>
+<h1>Hudi<a class="headerlink" href="#hudi" title="Link to this heading">¶</a></h1>
 <section id="whats-hudi">
-<h2>What‘s Hudi<a class="headerlink" href="#whats-hudi" title="Link to this heading">#</a></h2>
+<h2>What‘s Hudi<a class="headerlink" href="#whats-hudi" title="Link to this heading">¶</a></h2>
 <p>通俗说：</p>
 <ul class="simple">
 <li><p>Hudi 是一种表格式</p></li>
@@ -288,7 +288,7 @@
 <p><img alt="Alt text" src="../_images/hudi-stack.png" /></p>
 </section>
 <section id="id1">
-<h2>文件布局<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>文件布局<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>数据<strong>表</strong>对应分布式文件系统上的<strong>文件夹</strong></p></li>
 <li><p><strong>表</strong>被划分为不同的<strong>分区（<code class="docutils literal notranslate"><span class="pre">partitions</span></code>）</strong></p></li>
@@ -300,9 +300,9 @@
 <p><img alt="Alt text" src="../_images/layout.png" /></p>
 </section>
 <section id="id2">
-<h2>表类型<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>表类型<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="copy-on-write">
-<h3>Copy on Write<a class="headerlink" href="#copy-on-write" title="Link to this heading">#</a></h3>
+<h3>Copy on Write<a class="headerlink" href="#copy-on-write" title="Link to this heading">¶</a></h3>
 <p>Copy-On-Write 表中的文件片仅包含基文件，每次提交都会生成新版本的基文件。当数据被写入时：</p>
 <ul class="simple">
 <li><p>对现有文件组的更新，会为该文件组生成一个带有提交时间标记的新切片</p></li>
@@ -311,7 +311,7 @@
 <p><img alt="Alt text" src="../_images/copy-on-write.png" /></p>
 </section>
 <section id="merge-on-read">
-<h3>Merge on Read<a class="headerlink" href="#merge-on-read" title="Link to this heading">#</a></h3>
+<h3>Merge on Read<a class="headerlink" href="#merge-on-read" title="Link to this heading">¶</a></h3>
 <p>将每个文件组的 upsert 存储到基于行的增量日志中，以通过在查询期间动态地将增量日志应用到每个文件 ID 的最新版本来支持快照查询.</p>
 <ul class="simple">
 <li><p>读取优化查询时，只读取已经合并的基文件，不会发生合并操作，但也可能会导致读取不到最新数据。</p></li>
@@ -404,7 +404,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

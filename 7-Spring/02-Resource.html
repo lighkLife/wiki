@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="验证、数据绑定和类型转换" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" /><link rel="prev" title="Spring 容器配置" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Resource - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="resource">
-<h1>Resource<a class="headerlink" href="#resource" title="Link to this heading">#</a></h1>
+<h1>Resource<a class="headerlink" href="#resource" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>内置的一些实现<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>内置的一些实现<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>UrlResource</p></li>
 <li><p>ClassPathResource</p></li>
@@ -290,7 +290,7 @@
 </ul>
 </section>
 <section id="resourceloader">
-<h2>使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 的实现获取资源<a class="headerlink" href="#resourceloader" title="Link to this heading">#</a></h2>
+<h2>使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 的实现获取资源<a class="headerlink" href="#resourceloader" title="Link to this heading">¶</a></h2>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Resource</span><span class="w"> </span><span class="nf">getResource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">location</span><span class="p">);</span>
 <span class="w">    </span><span class="n">ClassLoader</span><span class="w"> </span><span class="nf">getClassLoader</span><span class="p">();</span>
@@ -328,7 +328,7 @@
 </div>
 </section>
 <section id="resourcepatternresolver-location-pattern">
-<h2><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> 处理 <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">pattern</span></code><a class="headerlink" href="#resourcepatternresolver-location-pattern" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">ResourcePatternResolver</span></code> 处理 <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">pattern</span></code><a class="headerlink" href="#resourcepatternresolver-location-pattern" title="Link to this heading">¶</a></h2>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourcePatternResolver</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
 <span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">CLASSPATH_ALL_URL_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classpath*:&quot;</span><span class="p">;</span>
 <span class="w">	</span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="nf">getResources</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">locationPattern</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
@@ -338,7 +338,7 @@
 <p>ResourcePatternResolver 支持解析位置模式，如 Ant-style path pattern。标准 ApplicationContext 中的默认 ResourceLoader 实际上是实现了 ResourcePatternResolver 接口的 PathMatchingResourcePatternResolver。</p>
 </section>
 <section id="id2">
-<h2>获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>可以通过多种方式获取 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code>，继而获取资源，如</p>
 <ul class="simple">
 <li><p>自动注入 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code></p></li>
@@ -359,7 +359,7 @@
 </div>
 </section>
 <section id="id3">
-<h2>Resource 作为依赖<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>Resource 作为依赖<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>如果资源时动态的，那么适合使用 <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> 来加载，但是，如果资源是静态的，那么可以借助<code class="docutils literal notranslate"><span class="pre">&#64;Value</span></code>来获取资源，特殊的 <code class="docutils literal notranslate"><span class="pre">PropertyEditor</span></code> 会将字符串转换为 <code class="docutils literal notranslate"><span class="pre">Resource</span></code> 对象，如：</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBean</span><span class="w"> </span><span class="p">{</span>
@@ -463,7 +463,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

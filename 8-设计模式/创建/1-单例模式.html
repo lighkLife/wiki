@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="简单工厂模式" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="创建型模式" href="0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>单例模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,14 +276,14 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>单例模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>单例模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>产生背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>产生背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>为了节约系统资源，有时需要确保系统中某个类只有唯一一个实例，当这个唯一实例创建成功之后，
 无法再创建一个同类型的其他对象，所有的操作都只能基于这个唯一实例。</p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>单例模式（Singleton Pattern）：确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，
 这个类称为单例类，它提供全局访问的方法。</p>
 <p class="plantuml">
@@ -296,9 +296,9 @@ Singleton::getInstance *--&gt; Singleton"/>
 </p>
 </section>
 <section id="id4">
-<h2>实现方式<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现方式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h3>饿汉模式<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>饿汉模式<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>在定义静态变量时，直接实例化单例对象。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-60b9be7b823638f792bc8307f658d97f3c4eab20.png" alt="class Singleton {
@@ -320,7 +320,7 @@ Singleton::getInstance *--&gt; Singleton"/>
 <p>其优点是实现简单，缺点时消耗资源，无论是否需要，都会被实例化。</p>
 </section>
 <section id="id6">
-<h3>懒汉模式<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>懒汉模式<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>在真正使用时，也就是<code class="docutils literal notranslate"><span class="pre">getInstance()</span></code>方法被调用时，才去初始化单例对象。也称为“延迟加载”技术。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-efc095eaeac77248d14067eb9c8a6587e4546951.png" alt="class Singleton {
@@ -337,9 +337,9 @@ Singleton::getInstance *--&gt; Singleton"/>
 </section>
 </section>
 <section id="id7">
-<h2>懒汉模式的实现<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>懒汉模式的实现<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <section id="synchronized">
-<h3>使用<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>锁方法实现<a class="headerlink" href="#synchronized" title="Link to this heading">#</a></h3>
+<h3>使用<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>锁方法实现<a class="headerlink" href="#synchronized" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LazySingleton</span><span class="p">();</span>
 
@@ -354,7 +354,7 @@ Singleton::getInstance *--&gt; Singleton"/>
 </div>
 </section>
 <section id="id8">
-<h3>锁方法改为锁块<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3>锁方法改为锁块<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 
@@ -373,7 +373,7 @@ Singleton::getInstance *--&gt; Singleton"/>
 </div>
 </section>
 <section id="id9">
-<h3>借助类加载机制实现<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3>借助类加载机制实现<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HolderClass</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LazySingleton</span><span class="p">();</span>
@@ -476,7 +476,7 @@ Singleton::getInstance *--&gt; Singleton"/>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

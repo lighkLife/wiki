@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Java四种引用" href="03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html" /><link rel="prev" title="JDK 动态代理" href="01-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Java 桥接方法 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="java">
-<h1>Java 桥接方法<a class="headerlink" href="#java" title="Link to this heading">#</a></h1>
+<h1>Java 桥接方法<a class="headerlink" href="#java" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>什么是的 Java 桥接方法<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>什么是的 Java 桥接方法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Java中的桥接方法（Bridge Method）是一种为了实现某些Java语言特性而由编译器自动生成的方法。
 可以通过 Method 类的 <code class="docutils literal notranslate"><span class="pre">isBridge</span></code> 方法来判断一个方法是否是桥接方法。
 在字节码文件中，桥接方法会被标记为 <code class="docutils literal notranslate"><span class="pre">ACC_BRIDGE</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ACC_SYNTHETIC</span></code>.</p>
@@ -297,7 +297,7 @@
 </ul>
 </section>
 <section id="id2">
-<h2>协变返回值类型<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>协变返回值类型<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>在面向对象程序设计中，实例函数的协变返回值类型指的是：
 子类中的成员函数的返回值类型不必严格等同与该函数所重写的父类中的函数的返回值类型，而可以是更 “狭窄” 的类型。</p>
 <p>例如：</p>
@@ -361,9 +361,9 @@
 </div>
 </section>
 <section id="id3">
-<h2>类型擦除<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>类型擦除<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <section id="id4">
-<h3>方法参数为泛型<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>方法参数为泛型<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Root</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getValue</span><span class="p">(){</span>
@@ -421,7 +421,7 @@
 （5: invokevirtual #4）。可见，再泛型系统中，桥接方法可以进行编译时类型检查。</p>
 </section>
 <section id="id5">
-<h3>方法返回结果为泛型<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>方法返回结果为泛型<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Root</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getValue</span><span class="p">(){</span>
@@ -475,7 +475,7 @@
 </section>
 </section>
 <section id="id6">
-<h2>改变基类可见性<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>改变基类可见性<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>父类可见新与子类的可见性不同时，为了保证父类的方法可以正常调用，会为子类生成桥接方法，在桥接方法内部调用父类方法。</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Root</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -605,7 +605,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

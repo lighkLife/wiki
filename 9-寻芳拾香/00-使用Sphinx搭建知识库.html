@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="字符串中的变量处理" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html" /><link rel="prev" title="寻芳拾香" href="0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>使用 Sphinx 搭建知识库 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="sphinx">
-<h1>使用 Sphinx 搭建知识库<a class="headerlink" href="#sphinx" title="Link to this heading">#</a></h1>
+<h1>使用 Sphinx 搭建知识库<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Sphinx 可以轻松创建智能且美观的文档。</p>
 <p>以下是 Sphinx 的一些主要功能：</p>
 <ul class="simple">
@@ -294,15 +294,15 @@
 <p>Sphinx默认 使用reStructuredText标记语言，并且可以通过第三方扩展读取MyST markdown 。这两者都功能强大且易于使用，并且具有用于复杂文档和发布工作流程的功能。它们都基于 Docutils构建来解析和编写文档。</p>
 </section>
 <section id="id2">
-<h2>安装<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>安装<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>Sphinx
 </pre></div>
 </div>
 </section>
 <section id="id3">
-<h2>插件<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>插件<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <section id="sphinx-autobuild">
-<h3>自动构建 sphinx-autobuild<a class="headerlink" href="#sphinx-autobuild" title="Link to this heading">#</a></h3>
+<h3>自动构建 sphinx-autobuild<a class="headerlink" href="#sphinx-autobuild" title="Link to this heading">¶</a></h3>
 <p>作用：用于监听指定目录的文件变化，自动构建，“实时”生成 html。</p>
 <p>使用方式：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 直接在 Makefie 中添加如下命令，再使用 make livehtml 即可</span>
@@ -313,7 +313,7 @@ livehtml:
 </section>
 </section>
 <section id="id4">
-<h2>提示块<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>提示块<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>例子</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```{note} 
 This is **{note}** look like.
@@ -376,9 +376,9 @@ Maaa! I made it look the same by setting the class.
 </div>
 </section>
 <section id="id6">
-<h2>代码块<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>代码块<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <section id="id7">
-<h3>高亮展示<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>高亮展示<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>在<code class="docutils literal notranslate"><span class="pre">config.py</span></code>添加 <code class="docutils literal notranslate"><span class="pre">myst</span></code> 扩展, 并启用 <code class="docutils literal notranslate"><span class="pre">attrs_block</span></code> 功能</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;myst_parser&#39;</span><span class="p">]</span>
 
@@ -490,7 +490,7 @@ c = 3
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

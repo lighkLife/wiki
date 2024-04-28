@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="装饰器模式" href="4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="桥接模式" href="2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>组合模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,14 +276,14 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>组合模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>组合模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>树形结构在软件中随处可见，例如操作系统中的目录结构、应用软件中的菜单、办公系统中的公司组织结构等。如何运用面向对象的方式来处理这种树形结构是组合模式需要解决的问题。组合模式通过一种巧妙的设计方案使得用户可以一致性地处理整个树形结构或者树形结构的一部分，也可以一致性地处理树形结构中的叶子节点（不包含子节点的节点）和容器节点（包含子节点的节点）。</p>
 <p>开发一个杀毒（AntiVirus）软件，该软件既可以对某个文件夹（Folder）杀毒，也可以对某个指定的文件（File）进行杀毒。该杀毒软件还可以根据各类文件的特点，为不同类型的文件提供不同的杀毒方式，例如图像文件（ImageFile）和文本文件（TextFile）的杀毒方式就有所差异。</p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>组合模式（Composite Pattern）：组合多个对象形成树形结构以表示具有“部分—整体”关系的层次结构。组合模式对单个对象（即叶子对象）和组合对象（即容器对象）的使用具有一致性，又可以称为“部分—整体”（Part-Whole）模式。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-b53d4fc96c68e43a3b3962dea7c9c8c2d4ee0c0f.png" alt="interface Component {
@@ -316,7 +316,7 @@ Client ..[#red]&gt; Component"/>
 </p>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p class="plantuml">
 <img src="../../_images/plantuml-f32955703a77473c7fbc660a0837fc73862c26ca.png" alt="abstract AbstractFile {
     + add(AbstractFile)
@@ -350,16 +350,16 @@ Client ..[#red]&gt; AbstractFile"/>
 </p>
 </section>
 <section id="id5">
-<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <section id="id6">
-<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>合模式可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次。它让客户端忽略了层次的差异，方便对整个层次结构进行控制。</p></li>
 <li><p>在组合模式中增加新的容器构件和叶子构件都很方便，无须对现有类库进行任何修改，符合开闭原则。</p></li>
 </ol>
 </section>
 <section id="id7">
-<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>在增加新构件时很难对容器中的构件类型进行限制。有时希望一个容器中只能有某些特定类型的对象，例如在某个文件夹中只能包含文本文件。使用组合模式时，不能依赖类型系统来施加这些约束，因为它们都来自相同的抽象层。在这种情况下，必须通过在运行时进行类型检查来实现，这个实现过程较为复杂</p>
 </section>
 </section>
@@ -448,7 +448,7 @@ Client ..[#red]&gt; AbstractFile"/>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

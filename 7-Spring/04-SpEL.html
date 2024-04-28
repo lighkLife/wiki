@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="AOP编程" href="05-AOP%E7%BC%96%E7%A8%8B.html" /><link rel="prev" title="验证、数据绑定和类型转换" href="03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>SpEL - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="spel">
-<h1>SpEL<a class="headerlink" href="#spel" title="Link to this heading">#</a></h1>
+<h1>SpEL<a class="headerlink" href="#spel" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>使用 SpEL<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>使用 SpEL<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// 方式一</span>
 <span class="n">ExpressionParser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SpelExpressionParser</span><span class="p">();</span>
 <span class="n">Expression</span><span class="w"> </span><span class="n">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="p">.</span><span class="na">parseExpression</span><span class="p">(</span><span class="s">&quot;&#39;Hello World&#39;&quot;</span><span class="p">);</span><span class="w"> </span>
@@ -307,7 +307,7 @@
 <p>表达式长度最大为 10,000 个字符，可以通过参数 <code class="docutils literal notranslate"><span class="pre">spring.context.expression.maxLength</span></code> 修改。</p>
 </section>
 <section id="id2">
-<h2>编译表达式<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>编译表达式<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>可以通过 <code class="docutils literal notranslate"><span class="pre">spring.expression.compiler.mode</span></code> 配置设置模式</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">SpelCompilerMode</span><span class="w"> </span><span class="p">{</span>
 
@@ -343,7 +343,7 @@
 </ul>
 </section>
 <section id="id3">
-<h2>SpEL语法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>SpEL语法<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>对象属性： <code class="docutils literal notranslate"><span class="pre">user.name.firstName</span></code></p></li>
 <li><p>数组、列表访问： <code class="docutils literal notranslate"><span class="pre">array[3]</span></code></p></li>
@@ -465,7 +465,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

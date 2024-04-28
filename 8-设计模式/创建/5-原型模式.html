@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="建造者模式" href="6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="抽象工厂模式" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>原型模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>原型模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>原型模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>如果你有一个对象， 并希望生成与其完全相同的一个复制品，该如何实现呢？
 首先，你必须新建一个属于相同类的对象。然后，你必须遍历原始对象的所有成员变量，
 并将成员变量值复制到新对象中。</p>
@@ -291,7 +291,7 @@
 </ul>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>原型模式（Prototype Pattern）：使用原型实例指定创建对象的种类，并且通过克隆这些原型创建新的对象。</p>
 <div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Prototype {
     + clone(): Prototype
@@ -316,14 +316,14 @@ Client --[#red]&gt; Prototype
 </div>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h3>浅克隆<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>浅克隆<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>在浅克隆中，如果原型对象的成员变量是值类型，将复制一份给克隆对象；如果原型对象的成员变量是引用类型，
 则将引用对象的地址复制一份给克隆对象，也就是说原型对象和克隆对象的成员变量指向相同的内存地址。</p>
 </section>
 <section id="id6">
-<h3>深克隆<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>深克隆<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>在深克隆中，无论原型对象的成员变量是值类型还是引用类型，都将复制一份给克隆对象，深克隆将原型对象的
 所有引用对象也复制一份给克隆对象。在Java语言中，如果需要实现深克隆，可以通过序列化（Serialization）
 等方式来实现。</p>
@@ -413,7 +413,7 @@ Client --[#red]&gt; Prototype
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

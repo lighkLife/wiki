@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="SpEL" href="04-SpEL.html" /><link rel="prev" title="Resource" href="02-Resource.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>验证、数据绑定和类型转换 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>验证、数据绑定和类型转换<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>验证、数据绑定和类型转换<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>验证<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>验证<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>Spring 提供 <code class="docutils literal notranslate"><span class="pre">Validator</span></code> 接口来验证对象，如下的例子：</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">supports(Class)</span></code>: 这个 Validator 可以验证提供的 Class 的实例吗？</p></li>
@@ -307,7 +307,7 @@
 </div>
 </section>
 <section id="id3">
-<h2>数据绑定<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>数据绑定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>数据绑定可以将用户输入绑定到目标对象，比如：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> `User Input` --`DataBinder`--&gt; `Domain Model`。
 </pre></div>
@@ -393,15 +393,15 @@
 </ul>
 </section>
 <section id="id4">
-<h2>类型转换<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>类型转换<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">core.convert</span></code> 是一个通用类型转换系统。它提供了统一的 <code class="docutils literal notranslate"><span class="pre">ConversionService</span></code> API 以及强类型 Converter SPI（Service Provider Interface），用于实现从一种类型到另一种类型的转换逻辑。</p>
 <p>Spring 容器使用该系统来绑定 bean 属性值。此外，Spring 表达式语言 (SpEL) 和 DataBinder 都使用此系统来绑定字段值。例如，当 SpEL 需要将 Short 强制为 Long 来完成 <code class="docutils literal notranslate"><span class="pre">expression.setValue(Object</span> <span class="pre">bean,</span> <span class="pre">Object</span> <span class="pre">value)</span></code> 尝试时， <code class="docutils literal notranslate"><span class="pre">core.convert</span></code> 系统会执行强制转换。</p>
 <p><img alt="converService" src="../_images/convertService.png" /></p>
 </section>
 <section id="id5">
-<h2>字段格式化<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>字段格式化<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <section id="formatter-spi">
-<h3><code class="docutils literal notranslate"><span class="pre">Formatter</span> <span class="pre">SPI</span></code><a class="headerlink" href="#formatter-spi" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">Formatter</span> <span class="pre">SPI</span></code><a class="headerlink" href="#formatter-spi" title="Link to this heading">¶</a></h3>
 <p>为支持解析和打印本地化字段值，引入<code class="docutils literal notranslate"><span class="pre">Formatter</span> <span class="pre">SPI</span></code>。</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Formatter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Printer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Parser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{}</span>
 
@@ -416,7 +416,7 @@
 </div>
 </section>
 <section id="id6">
-<h3>使用注解驱动格式化<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>使用注解驱动格式化<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@NumberFormat</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">Style</span><span class="p">.</span><span class="na">CURRENCY</span><span class="p">)</span>
 <span class="kd">private</span><span class="w"> </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">decimal</span><span class="p">;</span>
 </pre></div>
@@ -457,9 +457,9 @@
 </section>
 </section>
 <section id="java-bean">
-<h2>Java Bean 验证<a class="headerlink" href="#java-bean" title="Link to this heading">#</a></h2>
+<h2>Java Bean 验证<a class="headerlink" href="#java-bean" title="Link to this heading">¶</a></h2>
 <section id="id7">
-<h3>使用约束<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>使用约束<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>可以再 POJO 字段直接使用 <code class="docutils literal notranslate"><span class="pre">&#64;Constraint</span></code> 注解， 如</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PersonForm</span><span class="w"> </span><span class="p">{</span>
 
@@ -484,7 +484,7 @@
 </section>
 </section>
 <section id="id8">
-<h2>配置自定义约束<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>配置自定义约束<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <p>Bean 验证由两部分组成</p>
 <ul class="simple">
 <li><p>一个 <code class="docutils literal notranslate"><span class="pre">&#64;Constraint</span></code> 注解，声明了约束及其可配置的属性。</p></li>
@@ -597,7 +597,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

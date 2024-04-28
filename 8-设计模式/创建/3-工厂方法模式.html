@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="抽象工厂模式" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="简单工厂模式" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>工厂方法模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,15 +276,15 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>工厂方法模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>工厂方法模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>使用简单工厂模式，客户端无需负责具体产品的创建，通过工厂方法进行创建，客户端只是使用产品。
 但是，如果需要新增产品类型，就需要修改工厂类，如何实现增加新产品而不影响已有代码？</p>
 <p>开发一个系统运行日志记录器（Logger），该记录器可以通过多种途径保存系统的运行日志，例如通过文件记录或数据库记录，用户可以通过修改配置文件灵活地更换日志记录方式，也支持新增记录方式，如 socket 记录方式。</p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>工厂方法模式（Factory Method Pattern）：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。
 工厂方法模式让一个类的实例化延迟到其子类。</p>
 <p class="plantuml">
@@ -311,7 +311,7 @@ Client ..[#red]&gt;  Product:use"/>
 </p>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p class="plantuml">
 <img src="../../_images/plantuml-8197c1a16d6aed881d505d1dd586330d360cd99e.png" alt="interface Logger
 class DatabaseLogger implements Logger
@@ -345,7 +345,7 @@ Client ..[#red]&gt;  Factory:use"/>
 </p>
 </section>
 <section id="id5">
-<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>优点</p>
 <ul class="simple">
 <li><p>符合单一职责原则，每个产品工厂只创建自己的对应的产品</p></li>
@@ -437,7 +437,7 @@ Client ..[#red]&gt;  Factory:use"/>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

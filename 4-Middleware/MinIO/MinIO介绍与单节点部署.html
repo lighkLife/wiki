@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="MinIO多节点部署" href="MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" /><link rel="prev" title="中间件" href="../0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>MinIO介绍与单节点部署 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="minio">
-<h1>MinIO介绍与单节点部署<a class="headerlink" href="#minio" title="Link to this heading">#</a></h1>
+<h1>MinIO介绍与单节点部署<a class="headerlink" href="#minio" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>MinIO 是一款兼容 AWS S3 的存储软件，支持加密、版本管理、删除保留、分布式部署等功能。</p>
 <p>MinIO 支持多种安装方式：</p>
 <ul class="simple">
@@ -288,9 +288,9 @@
 </ul>
 </section>
 <section id="id2">
-<h2>单节点单硬盘部署<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>单节点单硬盘部署<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h3>下载安装<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>下载安装<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## rpm</span>
 wget<span class="w"> </span>https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20231207041600.0.0.x86_64.rpm<span class="w"> </span>-O<span class="w"> </span>minio.rpm
 rpm<span class="w"> </span>-i<span class="w"> </span>install<span class="w"> </span>minio.rpm
@@ -303,7 +303,7 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 </div>
 </section>
 <section id="systemd">
-<h3>systemd 配置<a class="headerlink" href="#systemd" title="Link to this heading">#</a></h3>
+<h3>systemd 配置<a class="headerlink" href="#systemd" title="Link to this heading">¶</a></h3>
 <p>rpm 或 dpkg 会自动创建 systemd 服务的配置文件，路径为 <code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/system/minio.service</span></code>，并默认以 minio-user 用户和用户组运行，所以需要创建用户，并赋权：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>groupadd<span class="w"> </span>-r<span class="w"> </span>minio-user
 useradd<span class="w"> </span>-M<span class="w"> </span>-r<span class="w"> </span>-g<span class="w"> </span>minio-user<span class="w"> </span>minio-user
@@ -313,7 +313,7 @@ chown<span class="w"> </span>minio-user:minio-user<span class="w"> </span>/mnt/d
 </div>
 </section>
 <section id="id4">
-<h3>创建环境变量<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>创建环境变量<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>在文件 <code class="docutils literal notranslate"><span class="pre">/etc/default/minio</span></code> 中可添加 MinIO 运行的环境变量。</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># 超管用户名和密码，可以用于登录其自带的 UI 管理系统</span>
 <span class="na">MINIO_ROOT_USER</span><span class="o">=</span><span class="s">admin</span>
@@ -329,7 +329,7 @@ chown<span class="w"> </span>minio-user:minio-user<span class="w"> </span>/mnt/d
 </div>
 </section>
 <section id="id5">
-<h3>启动 minio 服务<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>启动 minio 服务<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置开机自启动</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>minio.service
 <span class="c1"># 启动 MinIO Server</span>
@@ -342,9 +342,9 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
 </section>
 </section>
 <section id="id6">
-<h2>单节点多硬盘部署<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>单节点多硬盘部署<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <section id="id7">
-<h3>注意事项<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>注意事项<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>强烈推荐使用 XFS 文件系统来保证性能、可靠性、可预测性和一致性。</p></li>
 <li><p>确保使用相同类型（NVMe, SSD, or HDD）和相同容量的硬盘。</p></li>
@@ -355,7 +355,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
 </div></blockquote>
 </section>
 <section id="id8">
-<h3>部署<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3>部署<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>部署步骤与单节点单硬盘相同，区别在设置 <code class="docutils literal notranslate"><span class="pre">/etc/default/minio</span></code> 中的环境变量时，<code class="docutils literal notranslate"><span class="pre">MINIO_VOLUMES</span></code> 设置的时多个硬盘的挂载点。</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># 存储目录，代表设置 /data-1,/data-2,/data-3,/data-4 为 minio 的存储卷</span>
 <span class="c1"># 这里要注意第一次启动时，下面的设置的文件夹必须存在，且为空</span>
@@ -454,7 +454,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

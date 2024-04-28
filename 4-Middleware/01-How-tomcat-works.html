@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Hudi" href="02-Hudi.html" /><link rel="prev" title="MinIO多节点部署" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>How-tomcat-works - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,17 +276,17 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="how-tomcat-works">
-<h1>How-tomcat-works<a class="headerlink" href="#how-tomcat-works" title="Link to this heading">#</a></h1>
+<h1>How-tomcat-works<a class="headerlink" href="#how-tomcat-works" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>一个简单的请求处理程序<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>一个简单的请求处理程序<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p><img alt="simple-server" src="../_images/simple-server.png" /></p>
 </section>
 <section id="httpconnector">
-<h2>引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code><a class="headerlink" href="#httpconnector" title="Link to this heading">#</a></h2>
+<h2>引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code><a class="headerlink" href="#httpconnector" title="Link to this heading">¶</a></h2>
 <p><img alt="HttpConnector" src="../_images/HttpConnector.png" /></p>
 </section>
 <section id="tomcat">
-<h2>Tomcat 的默认连接器<a class="headerlink" href="#tomcat" title="Link to this heading">#</a></h2>
+<h2>Tomcat 的默认连接器<a class="headerlink" href="#tomcat" title="Link to this heading">¶</a></h2>
 <p>默认连接器支持 HTTP 1.1 新特性</p>
 <ul class="simple">
 <li><p>持久连接： <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">keep-alive</span></code></p></li>
@@ -298,7 +298,7 @@
 <p><img alt="default-http-connector" src="../_images/default-http-connector.png" /></p>
 </section>
 <section id="container">
-<h2>容器 Container<a class="headerlink" href="#container" title="Link to this heading">#</a></h2>
+<h2>容器 Container<a class="headerlink" href="#container" title="Link to this heading">¶</a></h2>
 <p>容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。</p>
 <p class="plantuml">
 <img src="../_images/plantuml-acbd8adf334f964fbee6e17f982f7694671f91c7.png" alt="interface Container
@@ -322,10 +322,10 @@ note bottom of Context : 一个 web 应用
 note top of Wrapper : 一个 Servlet 请求(接口)"/>
 </p>
 <section id="pipelining">
-<h3>管道 Pipelining<a class="headerlink" href="#pipelining" title="Link to this heading">#</a></h3>
+<h3>管道 Pipelining<a class="headerlink" href="#pipelining" title="Link to this heading">¶</a></h3>
 </section>
 <section id="id2">
-<h3>Container<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Container<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 </section>
 </section>
 </section>
@@ -413,7 +413,7 @@ note top of Wrapper : 一个 Servlet 请求(接口)"/>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

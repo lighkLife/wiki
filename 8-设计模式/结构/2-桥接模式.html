@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="组合模式" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="适配器模式" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>桥接模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>桥接模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>桥接模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>开发一个跨平台图像浏览系统，要求该系统能够显示BMP、JPG、GIF、PNG等多种格式的文件，并且能够在Windows、Linux、UNIX等多个操作系统上运行。系统首先将各种格式的文件解析为像素矩阵（Matrix），不同操作系统调用自己平台的绘制函数来绘制像素矩阵。</p>
 <p>解决此问题，首先想到的是定义一个抽象的 Image， 然后再实现:</p>
 <ul class="simple">
@@ -289,7 +289,7 @@
 <p>这样需要定义 3 * 4 个类，而且要增加一种新的图像格式就需要为每个操作系统实现一个类，当软件适配 Mac 系统，就需要为每种图像实现一个类，这样势必造成“类爆炸”，其实在实现过程种，就会发现同一平台对像素矩阵的渲染是一样，而同一种图像格式的文件格式都是一样的，那么不难想到将文件格式的解析和像素矩阵的渲染分开定义，两者通过聚合完成抽象图像的渲染，具体的图像文件解析、矩阵渲染交给各自的实现类完成。这种思路就是桥接模式。</p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>桥接模式（Bridge Pattern）：将抽象部分与其实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体（Handle and Body）模式或接口（Interface）模式.</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-735afd6b7cc698696c80dbf70ab3acc1631e65a9.png" alt="abstract Abstraction {
@@ -325,7 +325,7 @@ Client ..[#red]&gt; Abstraction"/>
 </p>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>图像可以视为抽象，不同的图像格式就是不同的具体实现，渲染图像时，需要先将图像字节流转换为像素矩阵，对像素矩阵的渲染就可以看作实现，不同平台的渲染就是不同的具体实现。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-6472e1d73aeb3ecc29d987b26bf17a26bd570d2f.png" alt="abstract Image {
@@ -370,7 +370,7 @@ Client ..[#red]&gt; Image"/>
 </p>
 </section>
 <section id="id5">
-<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>优点</p>
 <ol class="arabic simple">
 <li><p>客户端代码仅与高层抽象部分进行互动， 不会接触到平台的详细信息。</p></li>
@@ -382,7 +382,7 @@ Client ..[#red]&gt; Image"/>
 桥接模式要求正确识别出系统中两个独立变化的维度，因此其使用范围具有一定的局限性，如何正确识别两个独立维度也需要一定的经验积累</p>
 </section>
 <section id="id6">
-<h2>练习<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>练习<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>开发一个数据转换工具，可以将数据库中的数据转换成多种文件格式，例如txt、xml、pdf等格式，同时该工具需要支持多种不同的数据库。试使用桥接模式对其进行设计。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-de3a470e6c1d5ef4a50f564be28a5cadefe8ea53.png" alt="abstract Database {
@@ -500,7 +500,7 @@ Client ..[#red]&gt; Database"/>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

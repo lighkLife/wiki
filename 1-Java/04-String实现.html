@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="HashMap实现" href="05-HashMap%E5%AE%9E%E7%8E%B0.html" /><link rel="prev" title="Java四种引用" href="03-Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>String 实现 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="string">
-<h1>String 实现<a class="headerlink" href="#string" title="Link to this heading">#</a></h1>
+<h1>String 实现<a class="headerlink" href="#string" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>存储结构<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>存储结构<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Java 9 以前，String 使用 char[] 来存储字符串，字符串的长度就是 char[] 的大小；</p></li>
 <li><p>Java 9 及以后，String 使用 byte[] 来存储字符串，并且新增<code class="docutils literal notranslate"><span class="pre">COMPACT_STRINGS</span></code>
@@ -307,7 +307,7 @@
 </div>
 </section>
 <section id="byte">
-<h2>为什么改为 byte[]<a class="headerlink" href="#byte" title="Link to this heading">#</a></h2>
+<h2>为什么改为 byte[]<a class="headerlink" href="#byte" title="Link to this heading">¶</a></h2>
 <p>采用更节省空间的字符串内部表示形式。参考 <a class="reference external" href="https://openjdk.org/jeps/254">JEP254</a> 。</p>
 <p>String 类的当前实现将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，
 而且大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。</p>
@@ -396,7 +396,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="行为型模式" href="../%E8%A1%8C%E4%B8%BA/0-index.html" /><link rel="prev" title="组合模式" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>装饰器模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>装饰器模式<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>装饰器模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>开发一套图形界面组件库，该组件库提供了大量基本组件，如窗体、文本框、列表框等。由于在使用该组件库时，用户经常要求定制一些特殊的显示效果，例如带滚动条的窗体、带黑色边框的文本框、既带滚动条又带黑色边框的列表框等，因此经常需要对该构件库进行扩展以增强其功能。常规的设计方式可能如下：</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-d10ad85f4643e2c1625d3abc57340ad82c36cd15.png" alt="abstract Component {
@@ -339,7 +339,7 @@ class ScrollBarBlackBorderListBox extends ScrollBarListBox,BlackBorderListBox {
 <p>思考上述缺点，不难想到为  ScrollBar 和 BlackBorder 顶一个父类，将其分别与 Window、TextBox、ListBox 组合，即可更优雅的解决上述需求。这里为 ScrollBar 和 BlackBorder 定义的父类就是装饰器。</p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>装饰模式（Decorator Pattern）：动态地给一个对象增加一些额外的职责，就增加对象功能来说，装饰模式比生成子类实现更为灵活。装饰模式是一种对象结构型模式。</p>
 <p>装饰模式可以在不改变一个对象本身功能的基础上给对象增加额外的新行为。在现实生活中，这种情况也到处存在。例如一张照片，可以不改变照片本身，给它增加一个相框，使得它具有防潮的功能，而且用户可以根据需要给它增加不同类型的相框，甚至可以在一个小相框的外面再套一个大相框。</p>
 <p>装饰模式是一种用于替代继承的技术，它通过一种无须定义子类的方式来给对象动态增加职责，使用对象之间的关联关系取代类之间的继承关系。在装饰模式中引入了装饰类，在装饰类中既可以调用待装饰的原有类的方法，还可以增加新的方法，以扩充原有类的功能</p>
@@ -386,7 +386,7 @@ Client ..[#red]&gt; Component"/>
 </p>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>为 ScrollBar 和 BlackBorder 抽象为一个父类，作为抽象装饰器，ScrollBar 和 BlackBorder 就作为具体的装饰器实现。</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-dbfcb7ca92d9e877a5acbd28324222d387241222.png" alt="abstract Component {
@@ -428,9 +428,9 @@ Client ..[#red]&gt; Component"/>
 </p>
 </section>
 <section id="id5">
-<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <section id="id6">
-<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>对于扩展一个对象的功能，装饰模式比继承更加灵活性，不会导致类的个数急剧增加。</p></li>
 <li><p>可以通过一种动态的方式来扩展一个对象的功能。通过配置文件可以在运行时选择不同的具体装饰类，从而实现不同的行为。</p></li>
@@ -439,7 +439,7 @@ Client ..[#red]&gt; Component"/>
 </ol>
 </section>
 <section id="id7">
-<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>层层套娃，会产生很多小对象，优点浪费资源。</p></li>
 <li><p>层层套娃，容易出错，排错也要像剥洋葱一样，一层一层的，有点麻烦。</p></li>
@@ -531,7 +531,7 @@ Client ..[#red]&gt; Component"/>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

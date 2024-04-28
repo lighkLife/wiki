@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Git 使用记录" href="03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html" /><link rel="prev" title="使用 Sphinx 搭建知识库" href="00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>字符串中的变量处理 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,12 +276,12 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>字符串中的变量处理<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>字符串中的变量处理<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>需求描述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>需求描述<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>支持动态设置 SQL 中的 Where 条件。</p>
 <section id="id3">
-<h3>需求具象化<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>需求具象化<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>使用特殊符号来设置列和参数，例如：<code class="docutils literal notranslate"><span class="pre">$&lt;name&gt;</span> <span class="pre">=</span> <span class="pre">#{myName}</span> <span class="pre">and</span> <span class="pre">$&lt;sex&gt;</span> <span class="pre">=</span> <span class="pre">#{mySex}</span></code></p>
 <ul class="simple">
 <li><p>列名：<code class="docutils literal notranslate"><span class="pre">$&lt;...&gt;</span></code></p></li>
@@ -294,9 +294,9 @@
 </section>
 </section>
 <section id="id4">
-<h2>方案一：使用字符串搜索<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>方案一：使用字符串搜索<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h3>思路<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>思路<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>1.识别所有的列名表达式： arg，形如 “&#64;{…}”, 并记录其开始位置：{argIndex, arg}}
 2.识别所有的参数表达式: column，形如 “#{…}”, 并记录其位置：{columnIndex, column}
 3.将列名和参数合并成对:</p>
@@ -398,7 +398,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

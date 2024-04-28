@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="论文翻译-AQS" href="06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html" /><link rel="prev" title="String 实现" href="04-String%E5%AE%9E%E7%8E%B0.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>HashMap实现 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,13 +276,13 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="hashmap">
-<h1>HashMap实现<a class="headerlink" href="#hashmap" title="Link to this heading">#</a></h1>
+<h1>HashMap实现<a class="headerlink" href="#hashmap" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>结构<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>结构<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p><img alt="hashnap" src="../_images/hashmap.png" /></p>
 </section>
 <section id="key">
-<h2>计算 key 在哈希桶中的索引位置<a class="headerlink" href="#key" title="Link to this heading">#</a></h2>
+<h2>计算 key 在哈希桶中的索引位置<a class="headerlink" href="#key" title="Link to this heading">¶</a></h2>
 <p><strong>1.计算 hash 值</strong></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
@@ -300,7 +300,7 @@
 <img alt="hash" src="../_images/hash-compute.png" /></p>
 </section>
 <section id="id2">
-<h2>插入<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>插入<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>哈希桶为空时扩容, 桶大小从 0 扩大为 16</p></li>
 <li><p>根据 key 计算 hash 值，得到哈希桶索引值时 i</p>
@@ -323,7 +323,7 @@
 </ul>
 </section>
 <section id="id3">
-<h2>扩容<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>扩容<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>参考：</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://tech.meituan.com/2016/06/24/java-hashmap.html">Java 8系列之重新认识HashMap</a></p></li>
@@ -411,7 +411,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

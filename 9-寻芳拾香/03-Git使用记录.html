@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="MapReduce" href="04-MapReduce.html" /><link rel="prev" title="字符串中的变量处理" href="02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Git 使用记录 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,22 +276,22 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="git">
-<h1>Git 使用记录<a class="headerlink" href="#git" title="Link to this heading">#</a></h1>
+<h1>Git 使用记录<a class="headerlink" href="#git" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>记住用户名密码<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>记住用户名密码<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span>store
 </pre></div>
 </div>
 </section>
 <section id="id2">
-<h2>设置代理<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>设置代理<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>http.proxy<span class="w"> </span>http://127.0.0.1:7890
 git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>https.proxy<span class="w"> </span>http://127.0.0.1:7890
 </pre></div>
 </div>
 </section>
 <section id="ssh-github">
-<h2>ssh 方式访问 github 失败<a class="headerlink" href="#ssh-github" title="Link to this heading">#</a></h2>
+<h2>ssh 方式访问 github 失败<a class="headerlink" href="#ssh-github" title="Link to this heading">¶</a></h2>
 <p>直接配置 <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Host<span class="w"> </span>github.com
 <span class="w">    </span>Hostname<span class="w"> </span>ssh.github.com
@@ -302,14 +302,14 @@ git<span class="w"> </span>config<span class="w"> </span>--local<span class="w">
 </div>
 </section>
 <section id="id3">
-<h2>覆盖更新<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>覆盖更新<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>--all
 git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>origin/master
 </pre></div>
 </div>
 </section>
 <section id="id4">
-<h2>舍弃追踪某个文件<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>舍弃追踪某个文件<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 舍弃追踪 </span>
 git<span class="w"> </span>update-index<span class="w"> </span>--assume-unchanged<span class="w"> </span>utils/DB.py
 
@@ -319,7 +319,7 @@ git<span class="w"> </span>update-index<span class="w"> </span>--no-assume-uncha
 </div>
 </section>
 <section id="id5">
-<h2>历史树别名<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>历史树别名<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">&quot;log --graph --all --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date=relative&quot;</span>
 </pre></div>
 </div>
@@ -407,7 +407,7 @@ git<span class="w"> </span>update-index<span class="w"> </span>--no-assume-uncha
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

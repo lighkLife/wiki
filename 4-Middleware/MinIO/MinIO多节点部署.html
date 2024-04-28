@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="How-tomcat-works" href="../01-How-tomcat-works.html" /><link rel="prev" title="MinIO介绍与单节点部署" href="MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>MinIO多节点部署 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -276,16 +276,16 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="minio">
-<h1>MinIO多节点部署<a class="headerlink" href="#minio" title="Link to this heading">#</a></h1>
+<h1>MinIO多节点部署<a class="headerlink" href="#minio" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>环境准备<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>环境准备<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <section id="id2">
-<h3>网络和防火墙<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>网络和防火墙<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>开放 minio 服务端口
 开放 minio 管理端口</p>
 </section>
 <section id="id3">
-<h3>连续的主机名<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>连续的主机名<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>MinIO 不支持分布式部署的非连续主机名或 IP 地址，创建服务器时，MinIO需要使用扩展符号{x…y}来表示一系列连续的 MinIO 主机。如 <code class="docutils literal notranslate"><span class="pre">minio-0{1...4}.example.com</span></code>对应：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">minio</span><span class="o">-</span><span class="mf">01.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
 <span class="n">minio</span><span class="o">-</span><span class="mf">02.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
@@ -386,7 +386,7 @@
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

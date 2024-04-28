@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Spring 容器配置" href="01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html" /><link rel="prev" title="Spring 框架" href="0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Spring IoC 容器 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="spring-ioc">
-<h1>Spring IoC 容器<a class="headerlink" href="#spring-ioc" title="Link to this heading">#</a></h1>
+<h1>Spring IoC 容器<a class="headerlink" href="#spring-ioc" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Spring 使用依赖注入（Dependency injection ）来实现控制反转（ Inversion of Control ）原则。
 对象可以通过以下方式定义其依赖项：</p>
 <ul class="simple">
@@ -298,7 +298,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="id2">
-<h2>容器<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>容器<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">org.springframework.beans</span></code> 和 <code class="docutils literal notranslate"><span class="pre">org.springframework.context</span></code> 包是 Spring Framework 的 IoC 容器的基础。BeanFactory 提供了配置框架和基本功能， ApplicationContext 添加了更多企业特定的功能。</p>
 <p><img alt="ApplicationContexta" src="../_images/ApplicationContext.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">org.springframework.context.ApplicationContext</span></code> 接口代表 Spring IoC 容器，负责实例化、配置和组装 bean。容器通过读取配置元数据来获取要实例化、配置和组装哪些对象的指令。配置元数据以 XML、Java 注释或 Java 代码表示。</p>
@@ -309,7 +309,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="bean">
-<h2>Bean<a class="headerlink" href="#bean" title="Link to this heading">#</a></h2>
+<h2>Bean<a class="headerlink" href="#bean" title="Link to this heading">¶</a></h2>
 <p>由 Spring IoC 容器实例化、组装和管理的对象，就成为 Spring bean。在容器本身内，这些 bean 定义表示为 BeanDefinition 对象。bean 的定义本质上是创建一个或多个对象的配方，可以通过以下方式实例化 bean</p>
 <ul class="simple">
 <li><p>构造方法</p></li>
@@ -318,7 +318,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </ul>
 </section>
 <section id="id3">
-<h2>依赖<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>依赖<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>DI 存在两种主要方式：</p>
 <ul class="simple">
 <li><p>基于构造函数的依赖注入</p></li>
@@ -331,7 +331,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="id4">
-<h2>自动注入<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>自动注入<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -372,7 +372,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="bean-scope">
-<h2>Bean Scope<a class="headerlink" href="#bean-scope" title="Link to this heading">#</a></h2>
+<h2>Bean Scope<a class="headerlink" href="#bean-scope" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>singleton</p></li>
 <li><p>prototype</p></li>
@@ -387,7 +387,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="id5">
-<h2>自定义 Bean 的生命周期<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>自定义 Bean 的生命周期<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code> 注解。<strong>推荐使用</strong>。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">InitializingBean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DisposableBean</span></code> callback 接口。</p></li>
@@ -407,7 +407,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </ol>
 </section>
 <section id="id6">
-<h2>启动关闭回调<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>启动关闭回调<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Lifecycle</span></code> 接口定义（可以用来启动和停止一些后台进程）。</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Lifecycle</span><span class="w"> </span><span class="p">{</span>
 
@@ -435,7 +435,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="aware">
-<h2>Aware 接口<a class="headerlink" href="#aware" title="Link to this heading">#</a></h2>
+<h2>Aware 接口<a class="headerlink" href="#aware" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -490,9 +490,9 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="id7">
-<h2>容器扩展点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>容器扩展点<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <section id="beanpostprocessor-bean">
-<h3><code class="docutils literal notranslate"><span class="pre">BeanPostProcessor</span></code> 自定义 Bean<a class="headerlink" href="#beanpostprocessor-bean" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">BeanPostProcessor</span></code> 自定义 Bean<a class="headerlink" href="#beanpostprocessor-bean" title="Link to this heading">¶</a></h3>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InstantiationTracingBeanPostProcessor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">BeanPostProcessor</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// simply return the instantiated bean as-is</span>
@@ -509,7 +509,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="beanfactorypostprocessor">
-<h3><code class="docutils literal notranslate"><span class="pre">BeanFactoryPostProcessor</span></code> 定制配置元数据<a class="headerlink" href="#beanfactorypostprocessor" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">BeanFactoryPostProcessor</span></code> 定制配置元数据<a class="headerlink" href="#beanfactorypostprocessor" title="Link to this heading">¶</a></h3>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BeanFactoryPostProcessor</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">	</span><span class="cm">/**</span>
@@ -526,7 +526,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 </div>
 </section>
 <section id="factorybean">
-<h3><code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 自定义实例化逻辑<a class="headerlink" href="#factorybean" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">FactoryBean</span></code> 自定义实例化逻辑<a class="headerlink" href="#factorybean" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">FactoryBean&lt;T&gt;</span></code> 接口提供三个方法。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">getObject()</span></code>: 返回本工厂创建的对象的一个实例。该实例可能会被共享，这取决于该工厂是返回<code class="docutils literal notranslate"><span class="pre">singleton</span></code>还是<code class="docutils literal notranslate"><span class="pre">prototype</span></code>。</p></li>
@@ -627,7 +627,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="创建型模式" href="%E5%88%9B%E5%BB%BA/0-index.html" /><link rel="prev" title="UML 类图" href="UML%E7%B1%BB%E5%9B%BE.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>设计模式的六大原则 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,21 +276,21 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>设计模式的六大原则<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>设计模式的六大原则<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p><img alt="principle" src="../_images/principle.png" /></p>
 <section id="id2">
-<h2>1.单一职责原则<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>1.单一职责原则<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>一个类只负责一个功能领域的相应职责。换而言之，就一个类而言，应该只有一个引起它变换的原因。</p>
 </section>
 <section id="id3">
-<h2>2.开闭原则<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>2.开闭原则<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>一个软件实体应该对扩展开放，对修改关闭。也就是说软件实体应该在尽量不修改源码情况下进行扩展。</p>
 <p>开闭原则可以看作使用设计模式的目标（也是使用面向对象设计的目标），大部分设计模式都符合开闭原则。
 为满足开闭原则，需要对系统进行抽象化设计。比如 Java 中使用接口定义抽象行为，而使用具体的实现类
 来实现具体的操作细节，客户端可以使用接口进行编程，需要改变具体行为时，只需要新增一个接口实现即可。</p>
 </section>
 <section id="id4">
-<h2>3.里式替换原则<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>3.里式替换原则<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
 <p>里氏代换原则是实现开闭原则的重要方式之一。由于使用基类对象的地方都可以使用子类对象，
 因此在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。
@@ -299,7 +299,7 @@
 无须修改原有子类的代码，增加新的功能可以通过增加一个新的子类来实现。</p>
 </section>
 <section id="id5">
-<h2>4.依赖倒置原则<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>4.依赖倒置原则<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>抽象不应该依赖于细节，细节应该依赖于抽象。换言之，要针对接口编程，而不是针对实现编程，</p>
 <p>如果说开闭原则是面向对象设计的目标的话，那么依赖倒转原则就是面向对象设计的主要实现机制之一，
 它是系统抽象化的具体实现。</p>
@@ -323,13 +323,13 @@
 </div>
 </section>
 <section id="id6">
-<h2>5.接口隔离原则<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>5.接口隔离原则<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
 <p>把接口理解为角色时，接口隔离可以理解为“角色隔离”原则。接口是为客户端服务的，因此也可以理解为
 “定制服务”原则。</p>
 </section>
 <section id="id7">
-<h2>6.迪米特法则(最小知道原则)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>6.迪米特法则(最小知道原则)<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <p>一个软件实体应当尽可能少地与其他实体发生相互作用。</p>
 <p>迪米特法则还有几种定义形式：不要和“陌生人”说话，只与你的直接朋友通信等。在迪米特法则中，
 对于一个对象，其“朋友”包括以下几类：</p>
@@ -424,7 +424,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

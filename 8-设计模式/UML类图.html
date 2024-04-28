@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="设计模式的六大原则" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" /><link rel="prev" title="设计模式" href="0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>UML 类图 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="uml">
-<h1>UML 类图<a class="headerlink" href="#uml" title="Link to this heading">#</a></h1>
+<h1>UML 类图<a class="headerlink" href="#uml" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>类封装了数据和行为, 其中类属性表达数据，类方法表达行为。类图主要用来展示类之间的关系，当然也支持描述类属性和方法。其中，类之间的关系主要包含以下四种：</p>
 <ul class="simple">
 <li><p>关联关系</p></li>
@@ -308,7 +308,7 @@ Company &lt;-- Game::creater
 </p>
 </section>
 <section id="id2">
-<h2>类定义<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>类定义<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>以 <a class="reference external" href="https://plantuml.com/zh/class-diagram">plantuml</a> 为例子，说明类定义方式。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@startuml
 abstract        abstract
@@ -366,7 +366,7 @@ struct          struct
 </div>
 </section>
 <section id="id3">
-<h2>关联关系<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>关联关系<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>关联（Association）关系是类与类之间最常用的一种关系，它是一种结构化关系，用于表示一类对象与
 另一类对象之间有联系，如汽车和轮胎、师傅和徒弟、班级和学生等。</p>
 <p><code class="docutils literal notranslate"><span class="pre">Strudent</span> <span class="pre">&lt;--</span> <span class="pre">Class::students</span></code></p>
@@ -382,7 +382,7 @@ class Strudent {
 Strudent &lt;-- Class::students"/>
 </p>
 <section id="id4">
-<h3>组合<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>组合<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>组合（Composition）关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可
 以控制成员对象的生命周期。一旦整体对象不存在，成员对象也将不存在，成员对象与整体
 对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。</p>
@@ -401,7 +401,7 @@ Mouth &lt;--* Head"/>
 <p>在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入整体对象中。</p>
 </section>
 <section id="id5">
-<h3>聚合<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3>聚合<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，
 但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。
 <code class="docutils literal notranslate"><span class="pre">Car::engine</span> <span class="pre">o--&gt;</span> <span class="pre">Engine</span></code></p>
@@ -419,7 +419,7 @@ Engine &lt;--o Car"/>
 </section>
 </section>
 <section id="id6">
-<h2>依赖关系<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>依赖关系<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>依赖（Dependency）关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，
 在需要表示一个事物使用另一个事物时使用依赖关系。大多数情况下，依赖关系体现在某个类的方法
 使用另一个类的对象作为参数</p>
@@ -437,7 +437,7 @@ Car &lt;.. Driver::driver"/>
 </p>
 </section>
 <section id="id7">
-<h2>泛化关系<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>泛化关系<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <p>泛化（Generalization）关系也就是继承关系，用于描述父类与子类之间的关系.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Person</span> <span class="pre">&lt;|--</span> <span class="pre">Student</span></code></p>
 <p class="plantuml">
@@ -463,7 +463,7 @@ Person &lt;|-- Teacher"/>
 </p>
 </section>
 <section id="id8">
-<h2>接口与实现关系<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>接口与实现关系<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <p>类实现了接口，类中的操作实现了接口中所声明的操作。</p>
 <p><code class="docutils literal notranslate"><span class="pre">Animal</span> <span class="pre">&lt;|..</span> <span class="pre">Panda::eat</span></code></p>
 <p class="plantuml">
@@ -570,7 +570,7 @@ Animal &lt;|.. Panda::eat"/>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

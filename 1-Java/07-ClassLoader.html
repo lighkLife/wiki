@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="JVM 运行时内存区域" href="08-JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.html" /><link rel="prev" title="论文翻译-AQS" href="06-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>ClassLoader - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,29 +276,29 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="classloader">
-<h1>ClassLoader<a class="headerlink" href="#classloader" title="Link to this heading">#</a></h1>
+<h1>ClassLoader<a class="headerlink" href="#classloader" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>双亲委派<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>双亲委派<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>在Java中，类加载器采用了双亲委派模型，这意味着当一个类加载器需要加载一个类时，它首先会将这个任务委托给它的父类加载器，
 如果父类加载器无法加载这个类，那么这个任务将被传递给它的父类加载器，直到最终传递到顶层的启动类加载器。
 只有在所有的父类加载器都无法加载这个类的情况下，子类加载器才会尝试自己加载这个类。</p>
 </section>
 <section id="id2">
-<h2>为什么使用双亲委派？<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>为什么使用双亲委派？<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h3>防止内存中出现多份同样的字节码<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>防止内存中出现多份同样的字节码<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>因为如果一个类已经被父类加载器加载了，那么子类加载器就不会再次加载这个类，而是直接使用父类加载器加载的那个类。
 这样可以节省内存，并且可以确保Java程序的安全稳定运行，因为这样可以避免在不同的类加载器中加载同一个类的不同版本，从而导致类的行为不一致或者出现安全漏洞。</p>
 </section>
 <section id="java">
-<h3>保证Java程序安全稳定运行<a class="headerlink" href="#java" title="Link to this heading">#</a></h3>
+<h3>保证Java程序安全稳定运行<a class="headerlink" href="#java" title="Link to this heading">¶</a></h3>
 <p>另外，双亲委派模型还可以保证Java核心类库的安全性，因为Java核心类库通常是由启动类加载器加载的，而其他的类加载器都是由启动类加载器派生出来的。
 因此，如果一个恶意程序试图加载一个与Java核心类库同名的类，那么它会被双亲委派模型拦截，因为启动类加载器已经加载了这个类，而其他的类加载器都无法加载这个类。
 这样可以确保Java核心类库的安全性，避免恶意程序篡改核心类库中的类，从而导致Java程序出现安全漏洞。</p>
 </section>
 </section>
 <section id="id4">
-<h2>查找已加载的类<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>查找已加载的类<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">findLoadedClass0</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -308,7 +308,7 @@
 <p>需要注意的是，这个方法只能查找该类加载器已经加载的类，而不能查找其他类加载器加载的类。</p>
 </section>
 <section id="id5">
-<h2>类加载流程<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>类加载流程<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>Java类加载过程是指将Java字节码文件加载到Java虚拟机中并进行解析、验证、准备、解析和初始化的过程。Java类加载过程可以分为以下三个步骤：</p>
 <ul class="simple">
 <li><p><strong>加载</strong>：类加载器将字节码文件加载到内存中，并生成对应的Class对象。</p></li>
@@ -403,7 +403,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

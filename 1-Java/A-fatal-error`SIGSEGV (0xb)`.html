@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Q&amp;A" href="00-Q%26A.html" /><link rel="prev" title="Java 相关" href="0-index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>A fatal error SIGSEGV (0xb) - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="a-fatal-error-sigsegv-0xb">
-<h1>A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#a-fatal-error-sigsegv-0xb" title="Link to this heading">#</a></h1>
+<h1>A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#a-fatal-error-sigsegv-0xb" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>问题说明<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>问题说明<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>JVM 直接崩溃退出，进程挂掉，发现报错日志：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
 <span class="c1"># A fatal error has been detected by the Java Runtime Environment:</span>
@@ -298,7 +298,7 @@
 </div>
 </section>
 <section id="sigsegv-0xb">
-<h2><code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#sigsegv-0xb" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code><a class="headerlink" href="#sigsegv-0xb" title="Link to this heading">¶</a></h2>
 <p>SIGSEGV 是一个信号，全称是 Segmentation Violation，中文翻译为“段错误”。这个信号是在 Unix-like 系统（包括 Linux 和 macOS）中用于通知进程出现了严重的内存访问错误。</p>
 <p>JVM（Java 虚拟机）在遇到某些严重错误时，如访问无效的内存地址，可能会向操作系统发送 SIGSEGV 信号。</p>
 <p>报错信息中的 pc=0x00007fb1568ea880 是引发 SIGSEGV 信号的指令的地址。这通常可以帮助你定位是哪个代码位置导致了这个问题。</p>
@@ -312,7 +312,7 @@
 </ul>
 </section>
 <section id="id2">
-<h2>操作系统日志查看<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>操作系统日志查看<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -394,7 +394,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Resource" href="02-Resource.html" /><link rel="prev" title="Spring IoC 容器" href="00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
         <title>Spring 容器配置 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -276,9 +276,9 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="spring">
-<h1>Spring 容器配置<a class="headerlink" href="#spring" title="Link to this heading">#</a></h1>
+<h1>Spring 容器配置<a class="headerlink" href="#spring" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>基于注解的容器配置<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>基于注解的容器配置<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> ：自动注入，可设置在字段（支持数组和集合）、构造函数、setter 方法、任意名称的多个参数的方法上</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code>： 指定优先注入候选者</p></li>
@@ -297,7 +297,7 @@
 </ul>
 </section>
 <section id="java">
-<h2>基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置<a class="headerlink" href="#java" title="Link to this heading">#</a></h2>
+<h2>基于<code class="docutils literal notranslate"><span class="pre">Java</span></code>的容器配置<a class="headerlink" href="#java" title="Link to this heading">¶</a></h2>
 <p>使用<code class="docutils literal notranslate"><span class="pre">AnnotationConfigApplicationContext</span></code>即可支持<code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> 进行容器配置。</p>
 <div class="admonition caution">
 <p class="admonition-title">小心</p>
@@ -321,7 +321,7 @@
 <code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code> 实际上是通过使用更灵活的注释 <code class="docutils literal notranslate"><span class="pre">&#64;Conditional</span></code> 来实现的</p>
 </section>
 <section id="classpath-components">
-<h2>Classpath 扫描和 Components 管理<a class="headerlink" href="#classpath-components" title="Link to this heading">#</a></h2>
+<h2>Classpath 扫描和 Components 管理<a class="headerlink" href="#classpath-components" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> 是元注解，&#64;Repository 、 &#64;Service 和 &#64;Controller 是使用 &#64;Component 标记的注解。</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
 <span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
@@ -442,7 +442,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=7d86a446"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script kind="utterances">
