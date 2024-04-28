@@ -379,6 +379,7 @@ NPTL 线程库，因此这在常见的 Java 运行平台上都可以高效运行
 `park`操作还支持设置超时选项，可以是绝对时间和相对时间，并且于 JVM 的`Thread.interrupt`
 集成——中断一个线程会解除其阻塞。
 
+
 ```{note}
 **pthread condvar**: POSIX 线程库（Pthreads）中的条件变量（condition variable）。
 

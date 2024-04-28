@@ -171,6 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/07-ClassLoader.html">ClassLoader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/08-JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.html">JVM 运行时内存区域</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/09-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1-Java/10-Java-Memory-Model.html">Java 内存模型</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -293,7 +294,8 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>原型模式（Prototype Pattern）：使用原型实例指定创建对象的种类，并且通过克隆这些原型创建新的对象。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Prototype {
+<p class="plantuml">
+<img src="../../_images/plantuml-7591cc68c0d9bd29b2859a0237e8716f1f714c2c.png" alt="interface Prototype {
     + clone(): Prototype
 }
 
@@ -311,9 +313,8 @@ note left of Client::&quot;operation()&quot;
     p = prototype.clone()
 end note
 
-Client --[#red]&gt; Prototype
-</pre></div>
-</div>
+Client --[#red]&gt; Prototype"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>

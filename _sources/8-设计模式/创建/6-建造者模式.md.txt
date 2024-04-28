@@ -1,16 +1,18 @@
 # 建造者模式
 
 ## 背景
-创建一个产品，可能需要为其设置多个参数，比如对游戏角色进行设计，不同类型的游戏角色，其性别、脸型、服装、发型等外部特性都有所差异，例如“天使”拥有美丽的面容和披肩的长发，并身穿一袭白裙；而“恶魔”极其丑陋，留着光头并穿一件刺眼的黑衣，而且随着该游戏的升级将不断增加新的角色。
+创建一个产品，可能需要为其设置多个参数，比如开发一个视频播放软件, 为了方便用户使用，该播放软件提供多种界面显示模式，
+例如完整模式、精简模式、记忆模式、网络模式等。在不同的显示模式下主界面的组成元素有所差异。例如，在完整模式下将显示菜单、
+播放列表、主窗口、控制条等，在精简模式下只显示主窗口和控制条，而在记忆模式下将显示主窗口、控制条、收藏列表等。
 
-这些初始化代码通常深藏于一个包含众多参数且让人基本看不懂的构造函数中； 甚至还有更糟糕的情况，
-那就是这些代码散落在客户端代码的多个位置，很不利于代码维护。
+需要根据不同产品类型，调研不同的初始化代码，这些初始化代码通常深藏于一个包含众多参数且让人基本看不懂的构造函数中； 
+甚至还有更糟糕的情况，那就是这些代码散落在客户端代码的多个位置，很不利于代码维护。这时就可以引入建造者模式解决此问题。
 
 ## 定义
 建造者模式（Builder Pattern）：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
 建造者模式模式将对象构造代码从产品类中抽取出来， 并将其放在一个名为生成器的独立对象中。
 
-```uml
+```{uml}
 interface Builder {
     + buildPartA()
     + buildPartB()
@@ -19,20 +21,111 @@ interface Builder {
 }
 
 class ConcreteBuilderA implements Builder {
-    - result: 
+    - result: ProductA
     + buildPartA()
     + buildPartB()
     + buildPartC()
-    + getResult()
+    + getResult(): ProductA
 }
 
 class ConcreteBuilderB implements Builder {
+    - result: ProductB
     + buildPartA()
     + buildPartB()
     + buildPartC()
-    + getResult()
+    + getResult(): ProductB
 }
 
+ConcreteBuilderA --> ProductA 
+ConcreteBuilderB --> ProductB 
+
+class Director {
+    - builder: Builder
+    + build()
+}
+Director::builder o--> Builder
+note left of Director::"build()"
+    builder.buildPartA();
+    builder.buildPartB();
+    builder.buildPartC();
+    builder.getResult();
+end note
+
+class Client #palegreen
+Client ..[#red]> Director
+Client ..[#red]> ConcreteBuilderA
 ```
 
 ## 实现
+```{uml}
+interface PlayerBuilder {
+    + buildMenu()
+    + needMenu(): boolean
+    --
+    + buildPlayList()
+    + needPlayList(): boolean
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+class CompletedPlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): true
+    --
+    + buildPlayList()
+    + needPlayList(): true
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class MemoryPlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): false
+    --
+    + buildPlayList()
+    + needPlayList(): boolean
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class SimplePlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): false
+    --
+    + buildPlayList()
+    + needPlayList(): false
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class Director {
+    - builder: PlayerBuilder
+    + build(): Player
+}
+Director::builder o--> PlayerBuilder
+note left of Director::"build()"
+    if(builder.needMenu()){
+        builder.buildMenu();
+    }
+    if(builder.needPlayList()){
+        builder.buildPlayList()
+    }
+    builder.buildWidow();
+    builder.buildControlBar();
+    return builder.getResult();
+end note
+
+class Client #palegreen
+Client ..[#red]> Director
+Client ..[#red]> CompletedPlayerBuilder
+```
