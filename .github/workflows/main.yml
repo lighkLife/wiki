@@ -33,7 +33,7 @@ jobs:
         run: python scripts/fix-comments.py
 
       - name: Push to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/html
