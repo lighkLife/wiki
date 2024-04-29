@@ -106,6 +106,7 @@ Strudent <-- Class::students
 以控制成员对象的生命周期。一旦整体对象不存在，成员对象也将不存在，成员对象与整体
 对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。
 
+`Car::engine *--> Engine`
 ```{uml}
 class Mouth{}
 class Head{
@@ -123,6 +124,7 @@ Mouth <--* Head
 ### 聚合
 聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，
 但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。
+
 `Car::engine o--> Engine`
 ```{uml}
 class Car{

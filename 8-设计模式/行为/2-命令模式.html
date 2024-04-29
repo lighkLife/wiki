@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="单例模式" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="设计模式的六大原则" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>创建型模式 - 文档</title>
+        <title>命令模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -138,7 +138,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -158,7 +158,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/00-Q%26A.html">Q&amp;A</a></li>
@@ -209,16 +209,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">创建型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -229,7 +229,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../%E7%BB%93%E6%9E%84/6-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.html">享元模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -271,70 +271,64 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="id1">
-<h1>创建型模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
-</ul>
-</div>
-<p>创建型模式关注对象的创建过程。创建型模式将对象的创建和使用分离，
-在使用对象时无须关心对象的创建细节，从而降低系统的耦合度，让设计方案更易于修改和扩展。</p>
-<p>每个创建型模式都通过采用不同的解决方案来回答3个问题:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>命令模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>开发一个桌面版应用程序，该应用程序为用户提供了一系列自定义功能键，用户可以通过这些功能键来实现一些快捷操作。
+在设置功能键的时候每个人都有自己的喜好，例如有的人喜欢将第一个功能键设置为“打开帮助文档”，有的人则喜欢将该功能键设置为“最小化至托盘”。为了让用户能够灵活地进行功能键的设置，开发人员提供了一个“功能键设置”窗口，如图：</p>
+<p><img alt="快捷键" src="../../_images/quikkey.png" /></p>
+<p>如何设计才能满足灵活绑定功能键与具体功能之间的关系？</p>
 <ul class="simple">
-<li><p>创建什么–What</p></li>
-<li><p>由谁创建–Who</p></li>
-<li><p>何时创建–When</p></li>
+<li><p>很容易想到将不同的功能命令封住为不同的类，如 ShowHelpCmd、MinimizeCmd、ScreenshotCmd，基于面向抽象编程的理念，为这些命令抽象一个接口 Cmd</p></li>
+<li><p>要实现功能键与具体功能灵活组合，很容易想到使用聚合关系，不同的功能对象和不同的 Cmd 实现进行组合，就可以相对优雅的解决上述需求</p></li>
 </ul>
-<a class=""
-               data-lightbox="group-84490352-f78b-4a8a-a474-4ffdd99578a4"
-               href="../../_images/creater1.jpeg"
-               title=""
-               data-title=""
-               
-               ><img src="../../_images/creater1.jpeg"
-                     class=""
-                     width="100%"
-                     height="auto"
-                     alt=""/>
-                </a></section>
+<p>上面的这种思路就是命令模式。在软件开发中，经常需要向某些对象发送请求（调用其中的某个或某些方法），但是并不知道请求的接收者是谁，也不知道被请求的操作是哪个。此时，特别希望能够以一种松耦合的方式来设计软件，使得请求发送者与请求接收者能够消除彼此之间的耦合，让对象之间的调用关系更加灵活，可以灵活地指定请求接收者以及被请求的操作。命令模式为此类问题提供了一个较为完美的解决方案。</p>
+</section>
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>命令模式（Command Pattern）：将一个请求封装为一个对象，从而可用不同的请求对客户进行参数化；对请求排队或者记录请求日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。</p>
+<p>命令模式可以将请求发送者和接收者完全解耦。发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求。</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Command {
+    + execute()
+}
+class ConcreteCommandA implements Command {
+    + execute()
+}
+class ConcreteCommandB implements Command {
+    + execute()
+}
+class Invoker {
+    - command: Command
+    + setCommand(cmd: Command)
+}
+Invoker::command o--&gt;  Command
+
+
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Command（抽象命令类）：抽象命令类一般是一个抽象类或接口，在其中声明了用于执行请求的execute（）等方法，通过这些方法可以调用请求接收者的相关操作。</p></li>
+<li><p>ConcreteCommand（具体命令类）：具体命令类是抽象命令类的子类，实现了在抽象命令类中声明的方法。它对应具体的接收者对象，将接收者对象的动作绑定其中。在实现execute（）方法时，将调用接收者对象的相关操作（Action）。</p></li>
+<li><p>Invoker（调用者）：调用者即请求发送者，它通过命令对象来执行请求。一个调用者并不需要在设计时确定其接收者，因此它只与抽象命令类之间存在关联关系。在程序运行时可以将一个具体命令对象注入其中，再调用具体命令对象的execute（）方法，从而实现间接调用请求接收者的相关操作。</p></li>
+<li><p>Receiver（接收者）：接收者执行与请求相关的操作，它具体实现对请求的业务处理。</p></li>
+</ol>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">单例模式</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">设计模式的六大原则</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -360,8 +354,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">命令模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

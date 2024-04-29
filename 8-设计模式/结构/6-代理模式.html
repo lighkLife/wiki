@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>适配器模式 - 文档</title>
+        <title>代理模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -138,7 +138,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -271,15 +271,102 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>适配器模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p><img alt="demo" src="../../_images/structure.excalidraw.png" /></p>
+<h1>代理模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>某信息咨询公司的收费商务信息查询系统的开发任务，该系统的基本需求如下：</p>
+<ol class="arabic simple">
+<li><p>在进行商务信息查询之前用户需要通过身份验证，只有合法用户才能够使用该查询系统。</p></li>
+<li><p>在进行商务信息查询时，系统需要记录查询日志，以便根据查询次数收取查询费用。</p></li>
+</ol>
+<p>现在的问题在于开发人员已完成了商务信息查询模块的开发任务，他们希望能够以一种松耦合的方式向原有系统增加身份验证和日志记录功能。这个时候就可以考虑代理模式。</p>
+<p><img alt="proxy" src="../../_images/proxy.png" /></p>
+<p>由于某些原因，客户端不想或不能直接访问某个对象，此时可以通过一个被称为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。</p>
+</section>
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>代理模式（Proxy Pattern）：给某一个对象提供一个代理，并由代理对象控制对原对象的引用。代理模式是一种对象结构型模式。</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-8b058c1996c2a8762418386c2e24c6e56c8b3842.png" alt="interface Subject {
+    + reuqest()
+}
+class RealSubject implements Subject {
+    + reuqest()
+}
+class ProxySubject implements Subject {
+    - realSubject: RealSubject
+    + preRequest()
+    + request()
+    + postRequest()
+}
+RealSubject &lt;-- ProxySubject::realSubject
+note left of ProxySubject::&quot;request&quot;
+    preRequest();
+    realSubject.request();
+    postRequest();  
+end note
+
+class Client #palegreen
+Client ..&gt; Subject"/>
+</p>
+</section>
+<section id="id4">
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>在不改动已有的代码基础上，为请求增加认证和日志记录功能，只需为真实的请求对象增加代理对象即可</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-5e7a81f3fe28ec38d28806b93bf721616b73aa13.png" alt="interface Searcher {
+    + search(userId String, String keyword): String
+}
+class RealSearcher implements Searcher{
+    + search(userId String, String keyword): String
+}
+class SearchProxy implements Searcher {
+    - realSearcher: RealSearcher
+    - validator: AccessValidator
+    - logger: Logger
+    + search(userId String, String keyword): String
+    + validate(userId: String): boolean
+    + log(String userId)
+}
+RealSearcher &lt;-- SearchProxy::realSearcher
+SearchProxy --&gt; RealAccessValidator
+SearchProxy --&gt; Logger
+
+note left of SearchProxy::&quot;search(userId String, String keyword): String&quot;
+    validator.validate(userId);
+    realSearcher.search(userId, keyword);
+    logger.log(userId);
+end note
+
+class Client #palegreen
+Client ..&gt; Searcher"/>
+</p>
+</section>
+<section id="id5">
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>代理模式能够协调调用者和被调用者，在一定程度上降低了系统的耦合度，满足迪米特法则。</p></li>
+<li><p>客户端可以针对抽象主题角色进行编程，增加和更换代理类无须修改源代码，符合开闭原则，系统具有较好的灵活性和可扩展性。</p></li>
+<li><p>远程代理为位于两个不同地址空间对象的访问提供了一种实现机制，可以将一些消耗资源较多的对象和操作移至性能更好的计算机上，提高系统的整体运行效率。</p></li>
+<li><p>虚拟代理通过一个消耗资源较少的对象来代表一个消耗资源较多的对象，可以在一定程度上节省系统的运行开销。</p></li>
+<li><p>保护代理可以控制对一个对象的访问权限，为不同用户提供不同级别的使用权限。</p></li>
+</ol>
+<p>缺点：</p>
+<ol class="arabic simple">
+<li><p>代码可能会变得复杂， 因为需要新建许多类。</p></li>
+<li><p>服务响应可能会延迟。</p></li>
+</ol>
+</section>
+</section>
 </section>
 
         </article>
@@ -314,8 +401,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">代理模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+<li><a class="reference internal" href="#id4">实现</a></li>
+<li><a class="reference internal" href="#id5">评价</a><ul>
+<li><a class="reference internal" href="#id6">优点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

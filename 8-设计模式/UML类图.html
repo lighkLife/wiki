@@ -388,6 +388,7 @@ Strudent &lt;-- Class::students"/>
 <p>组合（Composition）关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可
 以控制成员对象的生命周期。一旦整体对象不存在，成员对象也将不存在，成员对象与整体
 对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Car::engine</span> <span class="pre">*--&gt;</span> <span class="pre">Engine</span></code></p>
 <p class="plantuml">
 <img src="../_images/plantuml-6a1ef436b853cf5cb4216f03262f2a53bcde48ca.png" alt="class Mouth{}
 class Head{
@@ -405,8 +406,8 @@ Mouth &lt;--* Head"/>
 <section id="id5">
 <h3>聚合<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，
-但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。
-<code class="docutils literal notranslate"><span class="pre">Car::engine</span> <span class="pre">o--&gt;</span> <span class="pre">Engine</span></code></p>
+但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Car::engine</span> <span class="pre">o--&gt;</span> <span class="pre">Engine</span></code></p>
 <p class="plantuml">
 <img src="../_images/plantuml-7832a0a43c63a87331b30317b44a569739bbc789.png" alt="class Car{
     - engine: Engine

@@ -1,0 +1,90 @@
+# 职责链模式
+
+## 背景
+设计一个采购审批子系统，采购审批是分级进行的，即根据采购金额的不同由不同层次的主管人员来审批。
+- 主任可以审批5万元以下（不包括5万元）的采购单
+- 副董事长可以审批5万～10万元（不包括10万元）的采购单
+- 董事长可以审批10万～50万元（不包括50万元）的采购单
+- 50万元及以上的采购单就需要开董事会讨论决定。
+
+采购单分级审批示意图如下所示：
+
+![审批](../img/appral.png)
+
+常规的方式就是采用`if else` 来实现逻辑处理，但会导致这个逻辑处理类职责过多，而且后期扩展也不方便，需要增加或减少分支，就必须修改这个类，不符合开闭原则，那如何才能更优雅的处理这个问题呢？ 答案是使用责任链模式。
+
+## 定义
+职责链模式（Chain of Responsibility Pattern）：避免将请求发送者与接收者耦合在一起，让多个对象都有机会接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。
+
+```uml
+abstract Handler {
+    # next： Handler
+    + setNext(next: Handler)
+    + handleRequest()
+}
+Handler <--o Handler: next
+
+class ConcreteHandlerA extends Handler {
+    + handleRequest()
+}
+class ConcreteHandlerB extends Handler {
+    + handleRequest()
+}
+note left of ConcreteHandlerA::"handleRequest()"
+    if(needHandle) {
+        // current action
+        ...
+    } else {
+        next.handleRequest();
+    }
+end note
+
+class Client #palegreen
+Client ..> Handler
+```
+
+## 实现
+```uml
+interface Approval {
+    # next: Approval
+    # maxProcessAmount: int
+    + setNext(next: Approval)
+    + process(amount: int)
+}
+Approval <--o Approval: next
+class Director implements Approval {
+    + Director(amount: int)
+    + process(amount: int)
+}
+note left of Approval::"process(amount: int)"
+    if(amount < this.maxProcessAmount) {
+        // current action
+        ...
+    } else {
+        next.process(amount);
+    }
+end note
+class VicePresident implements Approval {
+    + VicePresident(amount: int)
+    + process(amount: int)
+}
+class President implements Approval {
+    + President(amount: int)
+    + process(amount: int)
+}
+
+class Client #palegreen
+Client ..> Approval
+```
+
+## 评价
+
+### 优点
+
+1. 可以控制请求处理的顺序。
+2. 单一职责原则。 你可对发起操作和执行操作的类进行解耦。
+3. 开闭原则。 你可以在不更改现有代码的情况下在程序中新增处理者。
+
+### 缺点
+1. 部分请求可能未被处理。
+2. 如果建链不当，可能会造成循环调用，将导致系统陷入死循环。
