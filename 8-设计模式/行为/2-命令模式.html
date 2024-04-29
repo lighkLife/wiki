@@ -301,18 +301,29 @@
     + execute()
 }
 class ConcreteCommandA implements Command {
+    - receiver: Receiver
     + execute()
 }
 class ConcreteCommandB implements Command {
+    - receiver: Receiver
     + execute()
 }
+ConcreteCommandA::receiver --&gt; Receiver
+ConcreteCommandB::receiver --&gt; Receiver
+
 class Invoker {
     - command: Command
     + setCommand(cmd: Command)
 }
-Invoker::command o--&gt;  Command
+Invoker o--&gt;  Command
 
+class Receiver {
+    + action()
+}
 
+class Client #palegreen
+Client ..&gt; Invoker
+Client ..&gt; Command
 </pre></div>
 </div>
 <ol class="arabic simple">
@@ -321,6 +332,7 @@ Invoker::command o--&gt;  Command
 <li><p>Invoker（调用者）：调用者即请求发送者，它通过命令对象来执行请求。一个调用者并不需要在设计时确定其接收者，因此它只与抽象命令类之间存在关联关系。在程序运行时可以将一个具体命令对象注入其中，再调用具体命令对象的execute（）方法，从而实现间接调用请求接收者的相关操作。</p></li>
 <li><p>Receiver（接收者）：接收者执行与请求相关的操作，它具体实现对请求的业务处理。</p></li>
 </ol>
+<p>命令模式的本质是对请求进行封装。一个请求对应于一个命令，将发出命令的责任和执行命令的责任分割开。每个命令都是一个操作：请求的一方发出请求要求执行一个操作；接收的一方收到请求，并执行相应的操作。命令模式允许请求的一方和接收的一方独立开来，使得请求的一方不必知道接收请求的一方的接口，更不必知道请求如何被接收、操作是否被执行、何时被执行，以及是怎么被执行的。</p>
 </section>
 </section>
 
