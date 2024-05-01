@@ -301,7 +301,8 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>职责链模式（Chain of Responsibility Pattern）：避免将请求发送者与接收者耦合在一起，让多个对象都有机会接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract Handler {
+<p class="plantuml">
+<img src="../../_images/plantuml-0bd863a40ab98554aafc54261e5ad20f2dacacf6.png" alt="abstract Handler {
     # next： Handler
     + setNext(next: Handler)
     + handleRequest()
@@ -324,13 +325,13 @@ note left of ConcreteHandlerA::&quot;handleRequest()&quot;
 end note
 
 class Client #palegreen
-Client ..&gt; Handler
-</pre></div>
-</div>
+Client ..&gt; Handler"/>
+</p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>interface Approval {
+<p class="plantuml">
+<img src="../../_images/plantuml-6a25ee0f1fd8d8ce4a69c872270bc163d35e913a.png" alt="interface Approval {
     # next: Approval
     # maxProcessAmount: int
     + setNext(next: Approval)
@@ -359,9 +360,8 @@ class President implements Approval {
 }
 
 class Client #palegreen
-Client ..&gt; Approval
-</pre></div>
-</div>
+Client ..&gt; Approval"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="单例模式" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="设计模式的六大原则" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
-        <title>创建型模式 - 文档</title>
+        <title>解释器模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -140,7 +140,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -160,7 +160,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/0-index.html">Java 相关</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/A-fatal-error%60SIGSEGV%20%280xb%29%60.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/00-Q%26A.html">Q&amp;A</a></li>
@@ -211,16 +211,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">创建型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -233,9 +233,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 </ul>
 </li>
 </ul>
@@ -277,70 +277,168 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="id1">
-<h1>创建型模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
-</ul>
-</div>
-<p>创建型模式关注对象的创建过程。创建型模式将对象的创建和使用分离，
-在使用对象时无须关心对象的创建细节，从而降低系统的耦合度，让设计方案更易于修改和扩展。</p>
-<p>每个创建型模式都通过采用不同的解决方案来回答3个问题:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>解释器模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>开发一套机器人控制程序。在该机器人控制程序中包含一些简单的英文控制指令，每个指令对应一个表达式（expression），该表达式可以是简单表达式，也可以是复合表达式。</p>
+<p>每个简单表达式由移动方向（direction）、移动方式（action）和移动距离（distance）三部分组成：</p>
 <ul class="simple">
-<li><p>创建什么–What</p></li>
-<li><p>由谁创建–Who</p></li>
-<li><p>何时创建–When</p></li>
+<li><p>移动方向包括上（up）、下（down）、左（left）、右（right）；</p></li>
+<li><p>移动方式包括移动（move）和快速移动（run）；</p></li>
+<li><p>移动距离为一个正整数。</p></li>
 </ul>
-<a class=""
-               data-lightbox="group-ead1a7d3-1e7f-4c8a-8f96-22344881aa83"
-               href="../../_images/creater1.jpeg"
-               title=""
-               data-title=""
-               
-               ><img src="../../_images/creater1.jpeg"
-                     class=""
-                     width="100%"
-                     height="auto"
-                     alt=""/>
-                </a></section>
+<p>两个表达式之间可以通过与（and）连接，形成复合（composite）表达式。例如输入控制指令“down run 10 and left move 20”，则向下快速移动10个单位再向左移动20个单位。其文法规则如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">expression</span> <span class="p">:</span><span class="o">:=</span> <span class="n">direction</span> <span class="n">action</span> <span class="n">distance</span> <span class="o">|</span> <span class="n">composite</span> <span class="o">//</span> <span class="n">表达式</span>
+<span class="n">composite</span> <span class="p">:</span><span class="o">:=</span> <span class="n">expresion</span> <span class="s1">&#39;and&#39;</span> <span class="n">expression</span>             <span class="o">//</span> <span class="n">符合表达式</span>
+<span class="n">direction</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;up&#39;</span> <span class="o">|</span> <span class="s1">&#39;down&#39;</span> <span class="o">|</span> <span class="s1">&#39;left&#39;</span> <span class="o">|</span> <span class="s1">&#39;right&#39;</span>       <span class="o">//</span> <span class="n">移动方向</span>
+<span class="n">action</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;move&#39;</span> <span class="o">|</span> <span class="s1">&#39;run&#39;</span>                            <span class="o">//</span> <span class="n">移动方式</span>
+<span class="n">distance</span> <span class="p">:</span><span class="o">:=</span> <span class="n">an</span> <span class="n">integer</span>                              <span class="o">//</span> <span class="n">移动距离</span> 
+</pre></div>
+</div>
+<p>上述语言一共定义了5条文法规则，对应5个语言单位。这些语言单位可以分为两类：一类为终结符（也称为终结符表达式），例如direction、action和distance，它们是语言的最小组成单位，不能再进行拆分；另一类为非终结符（也称为非终结符表达式），例如expression和composite，它们都是一个完整的句子，包含一系列终结符或非终结符。</p>
+<p>根据上述规则定义出的语言可以构成很多语句，计算机程序将根据这些语句进行某种操作。为了实现对语句的解释，可以使用解释器模式。在解释器模式中每一条文法规则都将对应一个类，扩展、改变文法以及增加新的文法规则都很方便。</p>
+</section>
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>解释器模式（Interpreter Pattern）：定义一个语言的文法，并且建立一个解释器来解释该语言中的句子，这里的“语言”是指使用规定格式和语法的代码。解释器模式是一种类行为型模式。</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-e1bdf0ff8c7d23bf041e0cbb380f9931cac0abf0.png" alt="abstract AbstractExpression {
+    + intercept(Context)
+}
+Context &lt;.. AbstractExpression
+
+class TerminalExpression extends AbstractExpression {
+     + intercept(Context)
+}
+class NonterminalExpression extends AbstractExpression {
+     + intercept(Context)
+}
+
+class Client #palegreen
+Client ..&gt; AbstractExpression
+Client ..&gt; Context"/>
+</p>
+<p>解释器模式结构图中包含的4个角色：</p>
+<ol class="arabic simple">
+<li><p>AbstractExpression（抽象表达式）：</p>
+<ul class="simple">
+<li><p>在抽象表达式中声明了抽象的解释操作，它是所有终结符表达式和非终结符表达式的公共父类。</p></li>
+</ul>
+</li>
+<li><p>TerminalExpression（终结符表达式）：</p>
+<ul class="simple">
+<li><p>是抽象表达式的子类，它实现了与文法中的终结符相关联的解释操作，在句子中的每一个终结符都是该类的一个实例。</p></li>
+<li><p>通常，在一个解释器模式中只有少数几个终结符表达式类，它们的实例可以通过非终结符表达式组成较为复杂的句子。</p></li>
+</ul>
+</li>
+<li><p>NonterminalExpression（非终结符表达式）：</p>
+<ul class="simple">
+<li><p>也是抽象表达式的子类，它实现了文法中非终结符的解释操作。</p></li>
+<li><p>由于在非终结符表达式中可以包含终结符表达式，也可以继续包含非终结符表达式，因此其解释操作一般通过递归的方式来完成。</p></li>
+</ul>
+</li>
+<li><p>Context（环境类）：</p>
+<ul class="simple">
+<li><p>环境类又称为上下文类，它用于存储解释器之外的一些全局信息，通常它临时存储了需要解释的语句。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id4">
+<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>AbstractNode 充当抽象表达式角色，DirectionNode、ActionNode 和 DistanceNode 充当终结符表达式角色， AndNode 和 SentenceNode 充当非终结符表达式角色。</p>
+<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract AbstractNode {
+    + interpret()
+}
+class DirectionNode extends AbstractNode {
+    - direct：DirectEnum
+    + interpret()
+}
+class ActionNode extends AbstractNode {
+    - action: ActionEnum
+    + interpret()
+}
+class DistanceNode extends AbstractNode {
+    - distance: int
+    + interpret()
+}
+
+class AndNode extends AbstractNode {
+    - left: AbstractNode
+    - right: AbstractNode
+    + interpret()
+}
+class SentenceNode extends AbstractNode {
+    - direction: DirectionNode
+    - action: ActionNode
+    - distance: DistanceNode
+    + interpret()
+}
+
+class Client #palegreen {
+    - node: AbstractNode
+    + pasrse(String instruction)
+    + output()
+}
+Client ..&gt; AbstractNode
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>易于改变和扩展文法。</p>
+<ul class="simple">
+<li><p>由于在解释器模式中使用类来表示语言的文法规则，因此可以通过继承等机制来改变或扩展文法。</p></li>
+</ul>
+</li>
+<li><p>每一条文法规则都可以表示为一个类，因此可以方便地实现一个简单的语言。</p></li>
+<li><p>实现文法较为容易。</p>
+<ul class="simple">
+<li><p>在抽象语法树中每一个表达式节点类的实现方式都是相似的，这些类的代码编写都不会特别复杂，还可以通过一些工具自动生成节点类代码。</p></li>
+</ul>
+</li>
+<li><p>增加新的解释表达式较为方便。</p>
+<ul class="simple">
+<li><p>如果用户需要增加新的解释表达式只需要对应增加一个新的终结符表达式或非终结符表达式类，原有表达式类代码无须修改，符合开闭原则。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id7">
+<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>对于复杂文法难以维护。</p>
+<ul class="simple">
+<li><p>在解释器模式中，每一条规则至少需要定义一个类，因此如果一种语言包含太多文法规则，类的个数将会急剧增加，导致系统难以管理和维护，此时可以考虑使用语法分析程序等方式来取代解释器模式。</p></li>
+</ul>
+</li>
+<li><p>执行效率较低</p>
+<ul class="simple">
+<li><p>由于在解释器模式中使用了大量的循环和递归调用，因此在解释较为复杂的句子时其速度很慢，而且代码的调试过程也比较麻烦。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">单例模式</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">设计模式的六大原则</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -366,8 +464,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">解释器模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+<li><a class="reference internal" href="#id4">实现</a></li>
+<li><a class="reference internal" href="#id5">评价</a><ul>
+<li><a class="reference internal" href="#id6">优点</a></li>
+<li><a class="reference internal" href="#id7">缺点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

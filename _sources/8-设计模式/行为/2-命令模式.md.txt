@@ -17,7 +17,7 @@
 
 命令模式可以将请求发送者和接收者完全解耦。发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求。
 
-```uml
+```{uml}
 interface Command {
     + execute()
 }
@@ -53,3 +53,63 @@ Client ..> Command
 4. Receiver（接收者）：接收者执行与请求相关的操作，它具体实现对请求的业务处理。
 
 命令模式的本质是对请求进行封装。一个请求对应于一个命令，将发出命令的责任和执行命令的责任分割开。每个命令都是一个操作：请求的一方发出请求要求执行一个操作；接收的一方收到请求，并执行相应的操作。命令模式允许请求的一方和接收的一方独立开来，使得请求的一方不必知道接收请求的一方的接口，更不必知道请求如何被接收、操作是否被执行、何时被执行，以及是怎么被执行的。
+
+## 实现
+
+```{uml}
+interface Cmd {
+    + execute()
+}
+class ShowHelpCmd implements Cmd {
+    + helper: HelpHandler
+    + execute()
+}
+class HelpHandler {
+    + showHelp()
+}
+ShowHelpCmd *--> HelpHandler
+
+class MinimizeCmd implements Cmd {
+    + helper: WindowHandler
+    + execute()
+}
+class WindowHandler {
+    + minimizWindow()
+}
+MinimizeCmd *--> WindowHandler
+
+class MenuButton {
+    - cmd: Cmd
+    - name: String
+    + setCmd(cmd: Cmd)
+    + onClick()
+}
+note left of MenuButton::"onClick()"
+    cmd.execute();
+end note
+MenuButton --> Cmd
+
+class SettingWindow {
+    - buttons: List<MenuButton>
+    + addButton()
+    - removeButton()
+}
+SettingWindow *--> MenuButton
+
+class Client #palegreen
+Client ..> SettingWindow
+Client ..> MenuButton
+Client ..> Cmd
+```
+
+## 评价
+### 优点
+1. 降低系统的耦合度。
+   - 由于请求者与接收者之间不存在直接引用，因此请求者与接收者之间实现完全解耦，相同的请求者可以对应不同的接收者。同样，相同的接收者也可以供不同的请求者使用，两者之间具有良好的独立性。
+2. 新的命令可以很容易地加入系统中。
+   - 由于增加新的具体命令类不会影响到其他类，因此增加新的具体命令类很容易，无须修改原有系统源代码甚至客户类代码，满足开闭原则的要求。
+3. 可以比较容易地设计一个命令队列或宏命令（组合命令）。
+4. 为请求的撤销（Undo）和恢复（Redo）操作提供了一种设计和实现方案。
+
+### 缺点
+使用命令模式可能会导致某些系统有过多的具体命令类。因为针对每一个对请求接收者的调用操作都需要设计一个具体命令类，因此在某些系统中可能需要提供大量的具体命令类，这将影响命令模式的使用
