@@ -293,6 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">解释器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
 </ul>
 </li>
 </ul>
@@ -417,7 +418,8 @@ Client ..&gt; Context"/>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>AbstractNode 充当抽象表达式角色，DirectionNode、ActionNode 和 DistanceNode 充当终结符表达式角色， AndNode 和 SentenceNode 充当非终结符表达式角色。</p>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>abstract AbstractNode {
+<p class="plantuml">
+<img src="../../_images/plantuml-333255beab2a619aefe60b3629bdae886de8db6c.png" alt="abstract AbstractNode {
     + interpret()
 }
 class DirectionNode extends AbstractNode {
@@ -450,9 +452,8 @@ class Client #palegreen {
     + pasrse(String instruction)
     + output()
 }
-Client ..&gt; AbstractNode
-</pre></div>
-</div>
+Client ..&gt; AbstractNode"/>
+</p>
 </section>
 <section id="id5">
 <h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
