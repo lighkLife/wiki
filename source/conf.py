@@ -55,7 +55,7 @@ html_theme_options = {
     ],
     "light_css_variables": {
         "font-stack": "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif",
-        "font-stack--monospace": "FiraCode Nerd Font, Courier, monospace",
+        "font-stack--monospace": "Andale Mono, FiraCode Nerd Font, Fira Code, Consolas, Monaco, Courier, monospace",
     },
 }
 
