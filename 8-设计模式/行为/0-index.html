@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="职责链模式" href="1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="代理模式" href="../%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>创建型模式 - 文档</title>
+        <title>行为型模式 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -288,12 +288,18 @@
 <li class="toctree-l3"><a class="reference internal" href="../%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">创建型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">行为型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
 </ul>
 </li>
 </ul>
@@ -348,14 +354,20 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>创建型模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>行为型模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
 </ul>
 </div>
 <p>行为型模式(Behavioral Pattern)关注系统中对象之间的交互，研究系统在运行时对象之间的相互通信与协作, 进一步明确对象的职责。行为型模式不仅仅关注类和对象本身, 还重点关注它们之间的相互作用和职责划分。</p>
