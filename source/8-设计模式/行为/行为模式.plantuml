@@ -1,0 +1,7 @@
+@startuml
+class A
+class BackgroundColor
+class caption
+class D
+A --> D
+@enduml
