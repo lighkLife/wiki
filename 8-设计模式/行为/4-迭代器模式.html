@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="中介模式" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="解释器模式" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="中介者模式" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="解释器模式" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>迭代器模式 - 文档</title>
@@ -293,7 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">迭代器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
@@ -355,6 +355,7 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>迭代器模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>亦称： Iterator</p>
 <section id="id2">
 <h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>集合是编程中最常使用的数据类型之一。集合是存储一组对象的容器，也需要对外提供元素访问和遍历的能力，但是某些情况下，需要提供多种方式来遍历集合，比如树集合，可能需要提供深度优先（DFS） 遍历，也可能需要广度优先（BFS）遍历, 如何才能优雅的为树结构集合提供遍历实现呢？</p>
@@ -463,12 +464,12 @@ Client ..[#red]&gt; BfsTreeNodeIterator"/>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">
+          <a class="next-page" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">中介模式</div>
+                <div class="title">中介者模式</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

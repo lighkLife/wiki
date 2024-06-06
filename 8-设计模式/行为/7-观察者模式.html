@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -293,7 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">观察者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
@@ -347,7 +347,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -355,6 +355,107 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>观察者模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>亦称： 事件订阅者、监听者、Event-Subscriber、Listener、Observer</p>
+<section id="id2">
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>“红灯停，绿灯行”， 通信号灯是汽车的观察目标，而汽车是观察者。随着交通信号灯的变化，汽车的行为也将随之变化，一盏交通信号灯可以指挥多辆汽车。一个对象的状态或行为的变化将导致其他对象的状态或行为也发生改变，它们之间将产生联动，正所谓“触一而牵百发”。</p>
+<p>为了更好地描述对象之间存在的这种一对多（包括一对一）的联动，观察者模式应运而生。
+它定义了对象之间一对多的依赖关系，让一个对象的改变能够影响其他对象</p>
+</section>
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>观察者模式（Observer Pattern）：定义对象之间的一种一对多依赖关系，使得每当一个对象状态发生改变时，其相关依赖对象皆得到通知并被自动更新。</p>
+<p>观察者模式也称为：</p>
+<ul class="simple">
+<li><p>发布-订阅（Publish/Subscribe）模式</p></li>
+<li><p>模型-视图（Model/View）模式</p></li>
+<li><p>源-监听器（Source/Listener）模式</p></li>
+<li><p>从属者（Dependents）模式</p></li>
+</ul>
+<p class="plantuml">
+<img src="../../_images/plantuml-0313b249977c3912fc78378c72641c0e288d7413.png" alt="class Publisher {
+    - subscribers: Subscriber[]
+    - mainState
+    + addSubscriber(s: Subscriber)
+    + removeSubscriber(s: Subscriber)
+    + notifySubscribers()
+    + mainBusinessLogic()
+}
+
+note right of Publisher::&quot;notifySubscribers()&quot;
+    foreach(s in subscribers)
+        s.update(this)
+end note
+
+note right of Publisher::&quot;mainBusinessLogic()&quot;
+    this.mainState = newState
+    this.notifySubscribers()
+end note
+
+Publisher o--&gt; Subscriber
+
+interface Subscriber {
+    + update(context)
+}
+
+class ConcreteSubscriber implements Subscriber {
+    + update(context)
+}"/>
+</p>
+</section>
+<section id="id4">
+<h2>评价<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>优点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>解耦</strong>:
+观察者模式可以解耦观察者和主题之间的关系。主题只知道观察者列表的接口，而不需要了解具体的观察者实现，这意味着观察者和主题可以独立变化而不影响对方。</p></li>
+<li><p><strong>动态关联</strong>:
+新的观察者可以随时添加到系统中，并开始接收主题的通知，这为动态关联提供了便利。</p></li>
+<li><p><strong>实时更新</strong>:
+观察者模式允许在状态变化时立即通知所有观察者，这对于需要实时更新的场景（如用户界面）非常有用。</p></li>
+<li><p><strong>重用性和抽象性</strong>:
+观察者和主题之间的抽象性允许重用它们，因为它们并不是紧密耦合的。</p></li>
+<li><p><strong>符合开闭原则</strong>:
+该模式允许系统扩展新的观察者类型而不修改主题的代码，这符合面向对象设计的开闭原则。</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>缺点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>内存泄漏的风险</strong>:
+如果观察者没有正确地注销，可能会导致内存泄漏，特别是在使用事件驱动的编程语言或框架时。</p></li>
+<li><p><strong>实现复杂性</strong>:
+管理观察者和主题之间的关系可能会增加系统的复杂性，需要额外的代码来管理订阅和取消订阅逻辑。</p></li>
+<li><p><strong>更新的开销</strong>:
+如果有大量的观察者，通知所有观察者可能会导致显著的性能开销。</p></li>
+<li><p><strong>不一致的状态</strong>:
+如果观察者在收到通知时需要很长时间来处理更新，可能会导致系统中的不一致状态，尤其是在多线程环境中。</p></li>
+<li><p><strong>意外的更新</strong>:
+由于观察者模式通常是隐式的通知机制，所以可能会导致一些意外的更新，这可能会引起难以跟踪的bug。</p></li>
+<li><p><strong>难以确保更新顺序</strong>:
+在某些情况下，更新通知的顺序可能很重要，但在观察者模式中，确保特定的通知顺序可能会很困难。</p></li>
+</ol>
+</section>
+</section>
+<section id="id7">
+<h2>例子<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>GUI事件监听器</strong>:
+在各种编程框架中，比如Java的AWT或Swing库，观察者模式被用来监听和响应用户界面事件。例如，当用户点击一个按钮时，按钮对象（主题）会通知所有注册了的监听器对象（观察者），然后这些监听器对象执行相应的事件处理代码。</p></li>
+<li><p><strong>模型-视图-控制器（MVC）</strong>:
+MVC架构模式中的模型（Model）组件通常使用观察者模式来通知视图（View）组件数据已经改变，这样视图可以相应地更新其显示内容。</p></li>
+<li><p><strong>发布-订阅系统</strong>:
+在发布-订阅（Pub-Sub）模式中，发布者发出事件而不需要知道哪些订阅者会接收消息，订阅者可以订阅或取消订阅特定类型的消息。这是观察者模式的一个变种，广泛应用于消息队列和事件流处理中。</p></li>
+<li><p><strong>Web框架中的钩子和事件</strong>:
+许多Web框架（如Node.js的Express或Python的Django）允许开发者定义钩子（hooks）或事件监听器，用于在处理HTTP请求的生命周期中的特定时刻接收通知。</p></li>
+<li><p><strong>响应式编程</strong>:
+响应式编程框架，如RxJava或ReactiveX，基于观察者模式，允许开发者以声明方式组合和操作数据流，并响应数据流的变化。</p></li>
+<li><p><strong>JavaScript中的事件处理</strong>:
+JavaScript中常见的事件处理也是观察者模式的一个例子。例如，可以给DOM元素添加事件监听器来响应用户交互，如点击或键盘输入。</p></li>
+</ol>
+<p>观察者模式使得主题和观察者之间的耦合度降低，主题不需要知道观察者的具体实现细节，只需要维护一个观察者列表，并在状态变化时通知这些观察者。观察者模式在实现数据和视图分离、实现事件驱动程序时非常有用。</p>
+</section>
 </section>
 
         </article>
@@ -407,8 +508,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">观察者模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+<li><a class="reference internal" href="#id4">评价</a><ul>
+<li><a class="reference internal" href="#id5">优点</a></li>
+<li><a class="reference internal" href="#id6">缺点</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">例子</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

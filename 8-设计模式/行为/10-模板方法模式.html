@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -293,7 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
@@ -347,7 +347,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -355,6 +355,74 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>模板方法模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>亦称： Template</p>
+<section id="id2">
+<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>在现实生活中很多事情需要通过几个步骤才能够完成。例如请客吃饭，无论吃什么，一般都包含点单、吃东西、买单等几个步骤。通常情况下这几个步骤的次序是：点单→吃东西→买单。在这3个步骤中，点单和买单大同小异，最大的区别在于第2步——吃什么？吃面条和吃满汉全席可大不相同，如图:</p>
+<p><img alt="eat" src="../../_images/eat.png" /></p>
+</section>
+<section id="id3">
+<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p><strong>模板方法模式（Template Method Pattern）</strong>：定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。模板方法模式是一种类行为型模式。</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-9eea4cd0f5515f68c4936ad5497ef0ce0c5c8151.png" alt="abstract class AbstractClass {
+    + templateMethod()
+    + operation1()
+    + operation2()
+    + operation3()
+    + isNeedDoOperation3(): boolean
+}
+
+note right of AbstractClass::&quot;templateMethod()&quot;
+    operation1();
+    operation2();
+    // 钩子方法
+    if(isNeedDoOperation3()) {
+        operation3();
+    }
+end note
+
+class ConcreteClass extends AbstractClass {
+    + operation1()
+    + isNeedDoOperation3(): boolean
+}"/>
+</p>
+</section>
+<section id="id4">
+<h2>评价<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>模板模式是一种常用的设计模式，它定义了一个算法的骨架，并允许子类为一个或多个步骤提供实现。</p>
+<section id="id5">
+<h3>优点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>封装性：模板模式将算法的实现细节封装在模板方法中，使得算法更加清晰、易于理解。</p></li>
+<li><p>扩展性：模板模式允许子类为一个或多个步骤提供实现，从而扩展了算法的功能。</p></li>
+<li><p>重用性：模板模式将算法的骨架封装在模板方法中，使得算法可以在不同的场景下重复使用。</p></li>
+<li><p>灵活性：模板模式允许子类在不改变算法骨架的情况下修改算法的实现，从而提高了算法的灵活性。</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>缺点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>限制子类的实现：模板模式将算法的骨架封装在模板方法中，子类只能在指定的步骤中提供实现，不能随意修改算法的结构。</p></li>
+<li><p>增加了类的数量：模板模式会增加系统中类的数量，增加了系统的复杂度。</p></li>
+</ol>
+</section>
+</section>
+<section id="id7">
+<h2>例子<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Java 中的 <code class="docutils literal notranslate"><span class="pre">Servlet</span></code>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Servlet</span></code> 是 Java Web 应用程序的基础，它使用模板模式定义了一个标准的 HTTP 请求处理流程，具体的请求处理由子类实现。</p></li>
+</ul>
+</li>
+<li><p>Spring 框架中的 <a class="reference external" href="https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/java/org/springframework/jdbc/core/JdbcTemplate.java#L339"><code class="docutils literal notranslate"><span class="pre">JdbcTemplate</span></code></a>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JdbcTemplate</span></code> 是 Spring 框架中用于执行 SQL 语句的模板类，它使用模板模式定义了 SQL 语句的执行流程，具体的 SQL 语句由子类实现。</p></li>
+</ul>
+</li>
+</ol>
+</section>
 </section>
 
         </article>
@@ -407,8 +475,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">模板方法模式</a><ul>
+<li><a class="reference internal" href="#id2">背景</a></li>
+<li><a class="reference internal" href="#id3">定义</a></li>
+<li><a class="reference internal" href="#id4">评价</a><ul>
+<li><a class="reference internal" href="#id5">优点</a></li>
+<li><a class="reference internal" href="#id6">缺点</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">例子</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -1,17 +1,134 @@
 # 中介者模式
 
+亦称： 调解人、控制器、Intermediary、Controller、Mediator
+
 ## 背景
+
 中介者模式是一种行为设计模式， 能让你减少对象之间混乱无序的依赖关系。 该模式会限制对象之间的直接交互， 迫使它们通过一个中介者对象进行合作。
 
 开发一个如下的窗口程序：
-![alt text](image.png)
+![窗口程序](../img/ui-component.png)
 
 界面组件之间存在较为复杂的交互关系：
-- 如果删除一个客户，则将从客户列表（List）中删掉对应的项
-- 客户选择组合框（SelectBox）中客户名称也将减少一个；
-- 如果增加一个客户信息，则客户列表中将增加一个客户，且组合框中也将增加一项
+
+1. 当用户单击“增加”“删除”“修改”或“查询”按钮时，界面左侧的“客户选择组合框”“客户列表”以及界面中的文本框将产生响应。
+2. 当用户通过“客户选择组合框”选中某个客户姓名时，“客户列表”和文本框将产生响应。
+3. 当用户通过“客户列表”选中某个客户姓名时，“客户选择组合框”和文本框将产生响应。
 
 如果直接按照组件依赖进行程序设计，将得到如下的结构：
-```uml
 
+```{uml}
+class Button
+class List
+class TextBox
+class ComboBox
+Button --> List
+Button --> ComboBox
+Button --> TextBox
+ComboBox --> List
+ComboBox --> TextBox
+List --> ComboBox
+List --> TextBox
 ```
+
+像这种当类之间的关系错综复杂，互相关联，这时就应该考虑引入中介模式。
+引入一个额外的中介者，使得依赖关系更加简单和清晰。
+
+```{uml}
+class A
+class B
+class C
+class D
+class E
+class F
+class Mediator
+A -- Mediator
+B -- Mediator
+C -- Mediator
+F -- Mediator
+D -- Mediator
+E -- Mediator
+```
+
+## 定义
+
+中介者模式（Mediator Pattern）：用一个中介对象（中介者）来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。中介者模式又称为调停者模式，它是一种对象行为型模式。
+
+```{uml}
+interface Mediator {
+    + notify(sender)
+}
+
+class ConcreteMediator implements Mediator {
+    - componentA
+    - componentB
+    - componentC
+    - componentD
+    + notify(sender)
+    + reactOnA()
+    + reactOnB()
+    + reactOnC()
+    + reactOnD()
+} 
+note left of ConcreteMediator::"notify(sender)"
+    if(sender == componentA)
+        reactOnA()
+    else if(sender == componentB)
+        reactOnB()
+    ...    
+end note
+
+class ComponentA {
+    - m: Mediator
+    + operationA()
+}
+class ComponentB {
+    - m: Mediator
+    + operationB()
+}
+class ComponentC {
+    - m: Mediator
+    + operationC()
+}
+class ComponentD {
+    - m: Mediator
+    + operationD()
+}
+
+Mediator <-- ComponentA
+Mediator <-- ComponentB
+Mediator <-- ComponentC
+Mediator <-- ComponentD
+
+ComponentA <-- ConcreteMediator
+ComponentB <-- ConcreteMediator
+ComponentC <-- ConcreteMediator
+ComponentD <-- ConcreteMediator
+```
+
+## 评价
+
+### 优点
+
+1. 中介者模式简化了对象之间的交互，它用中介者和同事的一对多交互代替了原来同事之间的多对多交互。一对多关系更容易理解、维护和扩展，将原本难以理解的网状结构转换成相对简单的星形结构。
+2. 中介者模式可将各同事对象解耦。中介者有利于各同事之间的松耦合，可以独立地改变和复用每一个同事和中介者，增加新的中介者和新的同事类都比较方便，更好地符合开闭原则。
+3. 可以减少大量同事子类生成。中介者将原本分布于多个对象间的行为集中在一起，改变这些行为只需要生成新的中介者子类即可，这使得各个同事类可以被重用，无须对同事类进行。
+
+### 缺点
+
+在具体中介者类中包含了大量同事之间的交互细节，可能会导致具体中介者类非常复杂，使得系统难以维护
+
+## 例子
+
+- [`java.util.Timer`](http://docs.oracle.com/javase/8/docs/api/java/util/Timer.html) （所有 schedule­XXX()方法）
+- [`java.util.concurrent.Executor#execute()`](http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executor.html#execute-java.lang.Runnable-)
+- [`java.util.concurrent.ExecutorService`](http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html) （ invoke­XXX()和 submit­()方法）
+- [`java.util.concurrent.ScheduledExecutorService`](http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html) （所有 schedule­XXX()方法）
+- [`java.lang.reflect.Method#invoke()`](http://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html#invoke-java.lang.Object-java.lang.Object...-)
+
+- 图形用户界面（GUI）中的对话框：
+  - 在一个复杂的对话框中，按钮、文本框、复选框等控件可能需要相互通信。中介模式可以通过一个中介对象来管理这些控件之间的交互，简化代码并增强可维护性。
+- 机场的航空交通管制系统：
+  - 每个飞机不直接与其他飞机通信，而是通过航空交通管制塔（中介）来协调航班的起降和飞行路径，避免冲突。
+- 聊天应用：
+  - 在一个群聊中，每个用户不直接向其他用户发送消息，而是通过一个服务器（中介）来转发消息

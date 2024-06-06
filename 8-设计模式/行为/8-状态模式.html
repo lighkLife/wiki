@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -293,7 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F.html">中介模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
 <li class="toctree-l3"><a class="reference internal" href="7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">状态模式</a></li>
@@ -347,7 +347,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -355,6 +355,222 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>状态模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>在软件系统中，有些对象也如冰、水、气体一样具有多种状态，这些状态在某些情况下能够相互转换，而且对象在不同的状态下也将具有不同的行为。为了更好地对这些具有多种状态的对象进行设计，可以使用一种被称为状态模式的设计模式。</p>
+<p>考虑如下的银行账户行为：</p>
+<ol class="arabic simple">
+<li><p>如果账户中余额大于或等于0，则账户的状态为正常状态（Normal State），此时用户既可以向该账户存款也可以从该账户取款。</p></li>
+<li><p>如果账户中余额小于0，并且大于-2000，则账户的状态为透支状态（Overdraft State），此时用户既可以向该账户存款也可以从该账户取款，但需要按天计算利息。</p></li>
+<li><p>如果账户中余额等于-2000，那么账户的状态为受限状态（Restricted State），此时用户只能向该账户存款，不能再从中取款，同时也将按天计算利息。</p></li>
+<li><p>根据余额的不同，以上3种状态可发生相互转换</p></li>
+</ol>
+<p><img alt="account-sate" src="../../_images/account-sate.png" /></p>
+<p>分析需求后，不难发现其规律：</p>
+<ul class="simple">
+<li><p>不同的状态，可以进行对应的一些操作，不同状态对应的操作集可能不同</p></li>
+<li><p>操作后，要根据结果进行状态转换，操作结果的不同可能导致状态流转到不同的状态。</p></li>
+</ul>
+<p>首先能想到是根据<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">else</span></code>来实现上述需求，但是这种写法有以下缺点：</p>
+<ul class="simple">
+<li><p>扩展性差。如果新增一种状态，例如冻结状态，就需要堆原有代码进行大量修改；</p></li>
+<li><p>可读性差。<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">else</span></code>过多，状态转移语句分散，不好梳理流程，代码组织散乱。</p></li>
+</ul>
+<p>为了解决这些问题，可以使用状态模式。在状态模式中，将对象在每个状态下的行为和状态转移语句封装在一个个<strong>状态类</strong>中，通过这些状态类来分散冗长的条件转移语句，让系统具有更好的灵活性和可扩展性。</p>
+<section id="id2">
+<h2>定义<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>状态模式（State Pattern）：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象（Objects for States），状态模式是一种对象行为型模式。</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-bd17369acf2425e6e050efcbe572fe2223b7e544.png" alt="class Context {
+    - state: State
+    + request()
+    + setState(State state)
+}
+note right of Context::&quot;request&quot;
+state.request();
+end note
+
+Context o--&gt; State
+abstract class State {
+    + handle()
+}
+
+class ConcreteStateA extends State {
+    + handle()
+}
+class ConcreteStateB extends State {
+    + handle()
+}"/>
+</p>
+<p>在状态模式中，不同的状态对应不同的<strong>状态类</strong>，将对象在不同状态下的行为封装到不同的状态类中，状态转换的动作可以封装在环境类中，也可以封装在具体的状态类中。</p>
+</section>
+<section id="id3">
+<h2>实现<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AccountState</span></code> 充当抽象状态角色，<code class="docutils literal notranslate"><span class="pre">NormalState</span></code>、<code class="docutils literal notranslate"><span class="pre">OverdraftState</span></code>和<code class="docutils literal notranslate"><span class="pre">RestrictedState</span></code>充当具体状态角色。</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-5f56fb8378de08e3b62df4824d508dd8004d0ca1.png" alt="class Account {
+    - state: AccountState
+    - owner: String
+    - balance: double
+    + Account(String owner, double int)
+    + getBalance(): double
+    + setBalance(double b)
+    + setState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+}
+Account --&gt; AccountState
+Account &lt;-- AccountState
+
+class AccountState {
+    # account: Account
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+
+class OverdraftState extends AccountState {
+    + OverdraftState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+class RestrictedState extends AccountState {
+    + RestrictedState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+class NormalState extends AccountState {
+    + NormalState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}"/>
+</p>
+</section>
+<section id="id4">
+<h2>评价<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>状态模式（State Pattern）是一种行为设计模式，允许对象在其内部状态发生改变时改变其行为。这个模式将状态相关的行为抽象到不同的状态类中，使得状态转换更加明确和易于维护。下面是状态模式的优缺点：</p>
+<section id="id5">
+<h3>优点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>简化复杂状态转换</strong>：</p>
+<ul class="simple">
+<li><p>状态模式将状态转换逻辑分散到不同的状态类中，使得每个状态类只关注其特定的行为和状态转换，简化了复杂的状态转换逻辑。</p></li>
+</ul>
+</li>
+<li><p><strong>提高代码可维护性</strong>：</p>
+<ul class="simple">
+<li><p>由于状态类封装了特定状态的行为，添加新的状态或修改现有状态变得更加容易，不需要修改原有的代码，符合开闭原则（OCP）。</p></li>
+</ul>
+</li>
+<li><p><strong>消除大量条件判断语句</strong>：</p>
+<ul class="simple">
+<li><p>通过使用状态模式，可以避免在上下文类中使用大量的条件判断语句（如<code class="docutils literal notranslate"><span class="pre">if-else</span></code>或<code class="docutils literal notranslate"><span class="pre">switch-case</span></code>），使代码更加简洁和清晰。</p></li>
+</ul>
+</li>
+<li><p><strong>提高代码的可读性和可扩展性</strong>：</p>
+<ul class="simple">
+<li><p>状态模式将不同状态的行为封装到独立的类中，使得代码结构更加清晰，便于理解和扩展。</p></li>
+</ul>
+</li>
+<li><p><strong>状态对象可以共享</strong>：</p>
+<ul class="simple">
+<li><p>如果某些状态是无状态的（即它们不包含特定于实例的数据），这些状态对象可以在不同上下文中共享，减少内存消耗。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id6">
+<h3>缺点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>增加类的数量</strong>：</p>
+<ul class="simple">
+<li><p>状态模式将每个状态封装到独立的类中，可能会导致类的数量增加，增加系统的复杂性。</p></li>
+</ul>
+</li>
+<li><p><strong>状态转换逻辑分散</strong>：</p>
+<ul class="simple">
+<li><p>状态转换逻辑分散到不同的状态类中，可能会使得整体的状态转换逻辑不易跟踪和理解。</p></li>
+</ul>
+</li>
+<li><p><strong>需要维护多个状态类</strong>：</p>
+<ul class="simple">
+<li><p>每个状态都有对应的状态类，需要对这些状态类进行维护，增加了维护成本。</p></li>
+</ul>
+</li>
+<li><p><strong>可能导致过度设计</strong>：</p>
+<ul class="simple">
+<li><p>对于简单的状态转换，使用状态模式可能会显得过于复杂，导致过度设计。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id7">
+<h3>示例代码<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>以下是一个使用状态模式实现简单的电灯开关的示例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// State interface</span>
+<span class="kd">interface</span> <span class="nc">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleRequest</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Concrete States</span>
+<span class="kd">class</span> <span class="nc">OnState</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Turning light off...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">OffState</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Turning light on...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Context class</span>
+<span class="kd">class</span> <span class="nc">LightSwitch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="n">currentState</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">LightSwitch</span><span class="p">(</span><span class="n">State</span><span class="w"> </span><span class="n">initialState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">currentState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialState</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setState</span><span class="p">(</span><span class="n">State</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">currentState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pressSwitch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">currentState</span><span class="p">.</span><span class="na">handleRequest</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentState</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">OnState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">setState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OffState</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">setState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnState</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Client code</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LightSwitch</span><span class="w"> </span><span class="n">lightSwitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LightSwitch</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OffState</span><span class="p">());</span>
+<span class="w">        </span><span class="n">lightSwitch</span><span class="p">.</span><span class="na">pressSwitch</span><span class="p">();</span><span class="w"> </span><span class="c1">// Output: Turning light on...</span>
+<span class="w">        </span><span class="n">lightSwitch</span><span class="p">.</span><span class="na">pressSwitch</span><span class="p">();</span><span class="w"> </span><span class="c1">// Output: Turning light off...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>总结<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>状态模式通过将不同状态的行为封装到独立的状态类中，简化了复杂的状态转换逻辑，提高了代码的可维护性和可扩展性。然而，它也带来了类数量增加和状态转换逻辑分散的问题。在实际应用中，需要根据具体情况权衡使用状态模式的优缺点。</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -407,8 +623,35 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">状态模式</a><ul>
+<li><a class="reference internal" href="#id2">定义</a></li>
+<li><a class="reference internal" href="#id3">实现</a></li>
+<li><a class="reference internal" href="#id4">评价</a><ul>
+<li><a class="reference internal" href="#id5">优点</a></li>
+<li><a class="reference internal" href="#id6">缺点</a></li>
+<li><a class="reference internal" href="#id7">示例代码</a></li>
+<li><a class="reference internal" href="#id8">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
