@@ -1,6 +1,7 @@
 # 使用 Sphinx 搭建知识库
 
 ## 介绍
+
 Sphinx 可以轻松创建智能且美观的文档。
 
 以下是 Sphinx 的一些主要功能：
@@ -13,7 +14,7 @@ Sphinx 可以轻松创建智能且美观的文档。
 
 - 自动索引：通用索引以及特定于语言的模块索引
 
-- 代码处理：使用Pygments荧光笔自动突出显示
+- 代码处理：使用 Pygments 荧光笔自动突出显示
 
 - 扩展：自动测试代码片段，通过内置扩展包含来自 Python 模块（API 文档）的文档字符串，以及通过第三方扩展提供更多功能。
 
@@ -31,62 +32,77 @@ pip install Sphinx
 
 ## 插件
 
-### 自动构建 sphinx-autobuild 
+### 自动构建 sphinx-autobuild
+
 作用：用于监听指定目录的文件变化，自动构建，“实时”生成 html。
 
 使用方式：
+
 ```bash
 # 直接在 Makefie 中添加如下命令，再使用 make livehtml 即可
 livehtml:
-	sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)	
+ sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O) 
 ```
 
 ## 提示块
 
 例子
+
 ```
 ```{note} 
 This is **{note}** look like.
 ```
 
-```{note} 
+```{note}
 This is **{note}** look like.
 ```
+
 ```{admonition} admonition
 This is **{admonition}** look like.
 ```
-```{Attention} 
+
+```{Attention}
 This is **{Attention}** look like.
 ```
-```{caution} 
+
+```{caution}
 This is **caution** look like.
 ```
-```{danger} 
+
+```{danger}
 This is **danger** look like.
 ```
-```{error} 
+
+```{error}
 This is **error** look like.
 ```
-```{hint} 
+
+```{hint}
 This is **hint** look like.
 ```
-```{important} 
+
+```{important}
 This is **important** look like.
 ```
-```{seealso} 
+
+```{seealso}
 This is **seealso** look like.
 ```
-```{tip} 
+
+```{tip}
 This is **tip** look like.
 ```
-```{todo} 
+
+```{todo}
 This is **todo** look like.
 ```
-```{warning} 
+
+```{warning}
 This is **warning** look like.
 ```
 
 自定义
+
 ```
 ```{admonition} 自定义
 :class: note
@@ -97,7 +113,9 @@ Maaa! I made it look the same by setting the class.
 ## 代码块
 
 ### 高亮展示
+
 在`config.py`添加 `myst` 扩展, 并启用 `attrs_block` 功能
+
 ```python
 extensions = ['myst_parser']
 
@@ -107,6 +125,7 @@ myst_enable_extensions = [
 ```
 
 例子
+
 ```
 {lineno-start=1 emphasize-lines="2,3"}
 ```python
@@ -116,10 +135,9 @@ c = 3
 ```
 
 {lineno-start=1 emphasize-lines="2,3"}
+
 ```python
 a = 1
 b = 2
 c = 3
 ```
-
-

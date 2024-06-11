@@ -1,0 +1,722 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="A fatal error SIGSEGV (0xb)" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html" /><link rel="prev" title="JVM 运行时数据区域" href="b1-Runtime-Data-Areas.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>垃圾收集与内存非配策略 - 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my_style.css?v=ec38ee01" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: -apple-system,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei;
+  --font-stack--monospace: Andale Mono, FiraCode Nerd Font, Fira Code, Consolas, Monaco, Courier, monospace;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">  文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">  文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../0-index.html">Java 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Java-Base/0-index.html">Java 基础</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java 基础</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Java-Base/a1-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">问题汇总</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Java-Base/Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java 四种引用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/0-index.html">Java 集合</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Java 集合</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/01-%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0.html">集合概述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="0-index.html">JVM 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of JVM 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="a1-ClassLoader.html">ClassLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1-Runtime-Data-Areas.html">JVM 运行时数据区域</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">垃圾收集与内存非配策略</a></li>
+<li class="toctree-l3"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2-Rust/index.html">Rust 相关</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Rust 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2-Rust/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/index.html">其他语言</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 其他语言</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3-%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../4-Middleware/0-index.html">中间件</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 中间件</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/01-How-tomcat-works.html">How-tomcat-works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/02-Hudi.html">Hudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/mysql/1-Performance-Schema.html">Performance Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../5-IoT/index.html">物联网</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 物联网</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../5-IoT/test.html">测试文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../6-OS/0-index.html">操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 操作系统</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../6-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../6-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../7-Spring/0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/02-Resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/04-SpEL.html">SpEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/05-AOP%E7%BC%96%E7%A8%8B.html">AOP编程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/06-SpringMVC-DispatcherServlet.html">SpringMVC-DispatcherServlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/0-index.html">设计模式</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of 设计模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">外观模式（门面模式）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/6-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.html">享元模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/0-index.html">寻芳拾香</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of 寻芳拾香</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/06-Mysql-Use-Case.html">Mysql-Use-Case</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/1-Java/JVM-相关/d1-垃圾收集与内存非配策略.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>垃圾收集与内存非配策略<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>0.对象已死？<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>垃圾回收之前需要先确定对象是否存活，只有“死去”的对象才可以被垃圾回收器清除，那如何判断对象“已死”？
+目前主流的判定方式有：</p>
+<ul class="simple">
+<li><p>引用计数法</p></li>
+<li><p>可达性分析法</p></li>
+</ul>
+<section id="id3">
+<h3>引用计数算法<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>引用计数法的基本原理是在程序运行过程中，每当有一个指针指向某个对象时，该对象的引用计数加一；
+当指针不再指向该对象时，引用计数减一。当引用计数为零时，即表示该对象不再被引用，可以被垃圾回收器回收。
+一些使用的例子：</p>
+<ul class="simple">
+<li><p>Netty 的 <code class="docutils literal notranslate"><span class="pre">ByteBuf</span></code></p></li>
+<li><p>Rust 中的 <code class="docutils literal notranslate"><span class="pre">RefCell</span></code></p></li>
+</ul>
+<p>引用计数使用简单，实时性好，但是会面临一些问题：</p>
+<ol class="arabic simple">
+<li><p><strong>循环引用问题</strong>：引用计数法无法处理循环引用的情况，即两个对象相互引用，导致它们的引用计数永远不会为零，
+即使它们已经不再被程序所需要，也无法被回收，会导致内存泄漏。（Rust 使用 <code class="docutils literal notranslate"><span class="pre">Weak</span></code> 来解决，<code class="docutils literal notranslate"><span class="pre">Weak</span></code> 不增加引用次数）。</p></li>
+<li><p><strong>引用计数更新开销大</strong>：在多线程环境下，更新引用计数会存在竞争，需要使用锁来保护引用计数的更新，增加了额外的开销。</p></li>
+<li><p><strong>难以处理跨平台指针</strong>：引用计数法通常难以处理跨平台指针的情况，比如 C/C++ 中的指针可能会指向堆中的对象，也可能
+指向栈中的对象，这会导致引用计数不准确，可能会造成错误的回收行为。</p></li>
+</ol>
+</section>
+<section id="id4">
+<h3>可达性分析算法<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>当前主流的商用程序语言（Java、C#，上溯至前面提到的古老的Lisp）的内存管理子系统，都是通过可达性分析
+（Reachability Analysis）算法来判定对象是否存活的。这个算法的基本思路就是通过一系列称为“GC Roots”的根对象
+作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为“引用链”（Reference Chain），
+如果某个对象到GC Roots间没有任何引用链相连，或者用图论的话来说就是 从GC Roots到这个对象不可达时，
+则证明此对象是不可能再被使用的。</p>
+<p><img alt="" src="../../_images/reachable-object.png" /></p>
+<section id="gc-roots">
+<h4>GC-Roots<a class="headerlink" href="#gc-roots" title="Link to this heading">¶</a></h4>
+<p>可作位 GC Roots 的对象包括：</p>
+<ul class="simple">
+<li><p>虚拟机栈中引用的对象</p></li>
+<li><p>本地方法栈中引用的对象</p></li>
+<li><p>方法区的类静态属性引用的对象</p></li>
+<li><p>方法区的常量引用的对象</p></li>
+<li><p>所有被同步锁（<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>关键字）持有的对象（避免被回收）</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h3>方法区的回收<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>方法区回收的性价比一般不高，但针对那些在运行时动态加载和卸载大量类的应用来说还很重要的。包括：</p>
+<ol class="arabic simple">
+<li><p><strong>动态加载类的应用程序</strong>： 一些框架和应用程序需要在运行时动态加载和卸载类，如基于插件的系统、热部署系统等。</p>
+<ul class="simple">
+<li><p>这些应用程序可能会在运行过程中频繁地加载和卸载类，导致方法区内存的不断增长。</p></li>
+<li><p>为了避免方法区溢出或内存泄漏，需要定期清理方法区中的无用类和元数据信息。</p></li>
+</ul>
+</li>
+<li><p><strong>长时间运行的应用程序</strong>：一些长时间运行的应用程序可能会在运行过程中加载大量的类和元数据信息，导致方法区内存的不断增长。</p>
+<ul class="simple">
+<li><p>为了防止方法区溢出，需要定期清理方法区中的无用数据，释放内存空间。</p></li>
+</ul>
+</li>
+<li><p><strong>大型应用服务器</strong>：一些大型的应用服务器（如 Tomcat、Jetty 等）可能会部署大量的 Web 应用程序，每个应用程序都有自己的类加载器和方法区。</p>
+<ul class="simple">
+<li><p>在这种情况下，如果不定期清理方法区，可能会导致整个服务器的内存空间被耗尽，影响到其他应用程序的正常运行。</p></li>
+</ul>
+</li>
+<li><p><strong>使用大量动态代理和反射的应用程序</strong>：一些应用程序可能会使用大量的动态代理和反射技术，动态生成和加载类。</p>
+<ul class="simple">
+<li><p>这些动态生成的类和元数据信息可能会占用大量的方法区内存空间，导致方法区溢出。</p></li>
+<li><p>为了避免这种情况发生，需要定期清理方法区中的无用数据。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="id6">
+<h2>1.垃圾收集算法<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>当前商业虚拟机的垃圾收集器，大多数都遵循了“分代收集”（Generational Collection）的理论进行设计，
+分代收集名为理论，实质是一套符合大多数程序运行实际情况的经验法则，它建立在两个分代假说之上：</p>
+<ul class="simple">
+<li><p>1）弱分代假说（Weak Generational Hypothesis）：绝大多数对象都是朝生夕灭的。</p></li>
+<li><p>2）强分代假说（Strong Generational Hypothesis）：熬过越多次垃圾收集过程的对象就越难以消亡。</p></li>
+</ul>
+<p>分代收集算法一般至少将 Java 堆划分新生代（Young Generation）和老年代（Old Generation）两个区域。
+但是对象不是孤立的，对象之间会存在跨代引用。为了解决这个问题，就需要对分代收集理论添加第三条经验法则：</p>
+<ul class="simple">
+<li><p>3）跨代引用假说（Intergenerational Reference Hypothesis）：跨代引用相对于同代引用来说仅占极少数。</p></li>
+</ul>
+<p>对于不同代的收集性为，一般定义：</p>
+<ul class="simple">
+<li><p>部分收集（Partial GC）：指目标不是完整收集整个Java堆的垃圾收集，其中又分为：</p>
+<ul>
+<li><p>新生代收集（Minor GC/Young GC）：指目标只是新生代的垃圾收集。</p></li>
+<li><p>老年代收集（Major GC/Old GC）：指目标只是老年代的垃圾收集。目前只有CMS收集器会有单独收集老年代的行为。</p></li>
+</ul>
+</li>
+<li><p>混合收集（Mixed GC）：指目标是收集整个新生代以及部分老年代的垃圾收集。目前只有G1收集器会有这种行为。</p></li>
+<li><p>整堆收集（Full GC）：收集整个Java堆和方法区的垃圾收集。</p></li>
+</ul>
+<section id="id7">
+<h3>标记-清除<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>将存活的对象进行标记，然后清理掉未被标记的对象。</p>
+<p><img alt="mark-clear" src="../../_images/mark-clear.png" /></p>
+<p>不足:</p>
+<ul class="simple">
+<li><p>执行效率不稳定，因为标记和清除两个过程的执行效率都随对象数量增长而降低。</p></li>
+<li><p>会产生大量不连续的内存碎片，导致无法给大对象分配内存。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>标记-整理<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+<p><img alt="mark-compact" src="../../_images/mark-compact.png" /></p>
+<p>一般用于老年代 GC，因为老年代的对象一般很少再“死亡了”，所以只涉及少量的对象“整理”。</p>
+<p>不足：</p>
+<ul class="simple">
+<li><p>主要不足是只使用了内存的一半。</p></li>
+<li><p>需要依赖其他内存区域（实际上大多就是老年代）进行分配担保。</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>标记-复制<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，
+然后再把使用过的内存空间进行一次清理。</p>
+<p><img alt="mark-copy" src="../../_images/mark-copy.png" /></p>
+<p>一般用于新生代，因为 GC 复制时，会检测到新生代有大量的对象死亡，能存活下来的对象不多，因此只需要“”少量的对象。</p>
+<p>不足：</p>
+<ul class="simple">
+<li><p>移动对象涉及的操作负担大，尤其是老年代</p></li>
+<li><p>需要 “Stop The World”</p></li>
+</ul>
+</section>
+</section>
+<section id="hotspot">
+<h2>2.HotSpot 的算法细节<a class="headerlink" href="#hotspot" title="Link to this heading">¶</a></h2>
+<p>HotSpot 是基于分代收集理论设计的，必然需要面临如下问题：</p>
+<ul class="simple">
+<li><p>如何快速确定 GC root？（<code class="docutils literal notranslate"><span class="pre">OopMap</span></code>）</p></li>
+<li><p>如何解决不断变化的对象引用？（安全点，安全区）</p></li>
+<li><p>如何处理跨代引用？（记忆表）</p></li>
+<li><p>如何高效进行对象引用标记？（并发标记时，增量更新（Incremental Update）或原始快照（Snapshot At The Beginning，SATB））</p></li>
+</ul>
+<section id="id10">
+<h3>根节点枚举<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>根节点枚举就是要找到所有的 GC Root，迄今为止，所有收集器在根节点枚举这一步骤时都会存在
+“Stop The World”，现在可达性分析算法在查找引用链时，已经可以做到与用户线程一起并发执行。</p>
+<p>在 <a class="reference internal" href="####GC-Roots"><span class="xref myst">GC root 选项中</span></a>，虚拟机栈上的对象引用最多，分布最散乱，
+HotSpot 使用一组称为<code class="docutils literal notranslate"><span class="pre">OopMap</span></code>（Ordinary Object Pointer，OOP）的数据结构来快速查找这些对象引用。
+一个栈帧中可能有一组或多组<code class="docutils literal notranslate"><span class="pre">OopMap</span></code>。</p>
+</section>
+<section id="id11">
+<h3>安全点<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>在OopMap的协助下，HotSpot可以快速准确地完成 GC Roots 枚举。但是引用关系在不断变化，
+为每一个指令都生成一个<code class="docutils literal notranslate"><span class="pre">OopMap</span></code>的代价又太大，于是，HotSpot 只在“特定的位置”记录了这些信息，
+这些位置被称为<strong>安全点</strong>（Safepoint）。</p>
+<p><strong>安全点位置的选取标准</strong>：<br>
+基本上是以“是否具有让程序长时间执行的特征”为标准, 例如方法调用、循环跳转、异常跳转。</p>
+<p>如何让线程在安全点停下来？</p>
+<ul class="simple">
+<li><p>抢占式中断：GC 时，系统首先把所有用户线程中断，如果有用户线程不在安全点上，就让其继续，过一会而再中断，直到其运行到安全点。</p></li>
+<li><p>主动中断：主流方式，GC 需要中断所有用户线程时，简单设置一个标志位，</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>安全区<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p>程序也有不执行的时候，比如处于· Sleep 状态或者 Blocked 状态，这个时候用户线程无法响应虚拟机的中断请求，
+于是引入安全区（Safe Region）的概念。</p>
+<p><img alt="safe-region" src="../../_images/safe-region.PNG" />
+安全区域是指能够确保在某一段代码片段之中，引用关系不会发生变化，因此，在这个区域中任意地方开始垃圾收集都是安全的。我们也可以把安全区域看作被扩展拉伸了的安全点。</p>
+</section>
+<section id="id13">
+<h3>记忆集与卡表<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<p>跨代引用会导致内存泄漏，比如：</p>
+<ul class="simple">
+<li><p>进行 Young GC 时，那些从老年代指向新生代的对象就无法被扫描到；</p></li>
+<li><p>进行 Old GC 时，新生代指向老年代的对象无法被扫描到；</p></li>
+</ul>
+<p>为解决对象跨代引用所带来的问题，垃圾收集器在新生代中建立了名为记忆集（Remembered Set）的数据结构，
+用以避免把整个老年代加进 GC Roots 扫描范围。</p>
+<p>记忆集是一种用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。
+“卡表”（Card Table）是记忆集的一种具体实现。卡表中每一个元素都对应一个“卡页”，
+一个卡页是一块内存区域，其中可能包含多个对象，在 HotSpot 中为 512 字节大小。</p>
+<p>只要卡页内有一个（或更多）对象的字段存在着跨代指针，那就将对应卡表的数组元素的值标识为1，
+称为这个元素变脏（Dirty），没有则标识为0。在垃圾收集发生时，只要筛选出卡表中变脏的元素，
+就能轻易得出哪些卡页内存块中包含跨代指针，把它们加入GC Roots中一并扫描。</p>
+<p><img alt="remberset" src="../../_images/remberset.PNG" /></p>
+<p>在HotSpot虚拟机里是通过写屏障（Write Barrier）技术维护卡表状态的。写屏障可以看作在虚拟机层面对“引用类型字段赋值”这个动作的AOP切面。</p>
+</section>
+<section id="id14">
+<h3>并发的可达性分析<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<p>使用三色标记算法，来并发进行垃圾回收，它将对象分为三种颜色：白色、灰色和黑色，用于标记对象的访问状态。</p>
+<ul class="simple">
+<li><p>白色：表示对象尚未被访问，或者已经被访问但是其引用的对象还未被访问。</p></li>
+<li><p>灰色：表示对象已经被访问，但是其引用的对象还未被访问。</p></li>
+<li><p>黑色：表示对象已经被访问，并且其引用的对象也已经被访问。</p></li>
+</ul>
+<p>发进行垃圾回收，代表用户线程也在运行，那就有发生“对象消失”问题：</p>
+<ul class="simple">
+<li><p>赋值器插入了一条或多条从黑色对象到白色对象的新引用；</p></li>
+<li><p>赋值器删除了全部从灰色对象到该白色对象的直接或间接引用。</p></li>
+</ul>
+<p>我们要解决并发扫描时的对象消失问题，只需破坏这两个条件的任意一个即可。由此分别产生了两种解决方案：增量更新（Incremental Update）和原始快照（Snapshot At The Beginning，SATB）。</p>
+<ul class="simple">
+<li><p>增量更新：黑色对象一旦插入了指向白色对象的引用，黑色对象就变为灰色对象，稍后需要重新扫描这些灰色对象。</p></li>
+<li><p>原始快照：当灰色对象要删除指向白色对象的引用关系时，就将这个要删除的引用记录下来，稍后重新扫描这些灰色对象。</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="b1-Runtime-Data-Areas.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">JVM 运行时数据区域</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, lighk
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/lighkLife" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">垃圾收集与内存非配策略</a><ul>
+<li><a class="reference internal" href="#id2">0.对象已死？</a><ul>
+<li><a class="reference internal" href="#id3">引用计数算法</a></li>
+<li><a class="reference internal" href="#id4">可达性分析算法</a><ul>
+<li><a class="reference internal" href="#gc-roots">GC-Roots</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">方法区的回收</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">1.垃圾收集算法</a><ul>
+<li><a class="reference internal" href="#id7">标记-清除</a></li>
+<li><a class="reference internal" href="#id8">标记-整理</a></li>
+<li><a class="reference internal" href="#id9">标记-复制</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hotspot">2.HotSpot 的算法细节</a><ul>
+<li><a class="reference internal" href="#id10">根节点枚举</a></li>
+<li><a class="reference internal" href="#id11">安全点</a></li>
+<li><a class="reference internal" href="#id12">安全区</a></li>
+<li><a class="reference internal" href="#id13">记忆集与卡表</a></li>
+<li><a class="reference internal" href="#id14">并发的可达性分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "lighkLife/wiki");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    </body>
+</html>
