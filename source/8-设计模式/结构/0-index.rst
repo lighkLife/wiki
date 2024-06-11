@@ -13,4 +13,4 @@
 
 结构型模式(Structural Pattern)关注如何将现有类或对象组织在一起形成更加强大的结构。
 
-.. image:: ../img/结构模式.jpeg
+.. image:: ../img/structure.png

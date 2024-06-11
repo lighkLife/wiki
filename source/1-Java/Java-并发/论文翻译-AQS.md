@@ -379,7 +379,6 @@ NPTL 线程库，因此这在常见的 Java 运行平台上都可以高效运行
 `park`操作还支持设置超时选项，可以是绝对时间和相对时间，并且于 JVM 的`Thread.interrupt`
 集成——中断一个线程会解除其阻塞。
 
-
 ```{note}
 **pthread condvar**: POSIX 线程库（Pthreads）中的条件变量（condition variable）。
 
@@ -1111,7 +1110,6 @@ While the synchronizer framework supports many other styles of
 一个双超线程（HT）的 Xeon 表现得更像是 4 路机器而不是 2 路机器。这里没有试图标准化这些差异。
 如下所示，同步的相对成本与处理器的数量、类型或速度没有简单的关系。
 
-
 **Table 1 Test Platforms**
 | Name | Processors | Type          | Speed (Mhz) |
 | ---- | ---------- | ------------- | ----------- |
@@ -1397,4 +1395,3 @@ http://wwws.sun.com/software/solaris/whitepapers.html 2002.
 [^12]: Zhang, H., S. Liang, and L. Bak. Monitor Conversion in a
 Multithreaded Computer System. United States Patent
 6,691,304. 2004.
-
