@@ -9,6 +9,7 @@
 ## `top` 查看系统实时状况
 
 ### 示例
+
 ```yaml
 top - 17:22:10 up 1 day,  6:38,  2 users,  load average: 2.64, 3.47, 3.30
 Tasks: 315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie
@@ -22,20 +23,25 @@ MiB Swap:  15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem
    2068 lighk     20   0 1435040 103936  64888 S   7.0   0.9  81:56.48 Xorg
 
 ```
+
 ### 启动时间和平均负载
+
 ```yaml
 top - 17:22:10 up 1 day,  6:38,  2 users,  load average: 2.64, 3.47, 3.30
 ```
+
 - 程序或窗口名，取决于展示模式
 - 当前时间和开机时长
 - 总用户数
 - 系统过去 1,5,15 分钟的平均负载
 
 ### 任务和 CPU 状态
+
 ```yaml
 Tasks: 315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie
 %Cpu(s):  6.7 us,  2.3 sy,  0.0 ni, 90.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st
 ```
+
 |标识 | 全称 | 说明 |
 |---|--| --|
 | `us` | `user`               | 没有设置 nice 值的用户进程运行时间|
@@ -48,16 +54,18 @@ Tasks: 315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie
 | `st` | `stolen`             | 虚拟化层夺走的时间|
 
 ### 内存使用
+
 ```yaml
 MiB Mem :  11862.6 total,    339.1 free,   8378.9 used,   3144.5 buff/cache
 MiB Swap:  15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem 
 ```
 
 ### 进程信息
+
 |标识  | 含义   |
 |---   | ---    |
 | PID  | 进程ID  |
-| USER | 用户名  | 
+| USER | 用户名  |
 | PR   | 优先级  |
 | NI   | Nice 值，用于优先级控制  |
 | VIRT | 虚拟内存  |
@@ -70,6 +78,7 @@ MiB Swap:  15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem
 | COMMAND| 命令名 |  
 
 进程状态：
+
 - D = uninterruptible sleep
 - I = idle
 - R = running
@@ -79,11 +88,13 @@ MiB Swap:  15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem
 - Z = zombie
 
 ### 查看线程状态
+
 ```bash
 top -p $PID -H
 ```
 
 ## journalctl 日志工具
+
 journalctl 是一个用于查询 systemd-journald 服务收集的日志的工具。以下是一些常用的 journalctl 命令用法：
 
 - 查看所有日志： journalctl
@@ -96,8 +107,8 @@ journalctl 是一个用于查询 systemd-journald 服务收集的日志的工具
 - 实时查看日志： journalctl -f
 
 ## ftp
- 
-``` shell 
+
+``` shell
 # 登录 
 ftp $host
 
@@ -108,5 +119,4 @@ quote opts utf8 on
 get filename
 # 上传
 put filename
-``` 
-
+```

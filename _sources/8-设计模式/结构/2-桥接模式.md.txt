@@ -1,9 +1,11 @@
 # 桥接模式
 
 ## 背景
+
 开发一个跨平台图像浏览系统，要求该系统能够显示BMP、JPG、GIF、PNG等多种格式的文件，并且能够在Windows、Linux、UNIX等多个操作系统上运行。系统首先将各种格式的文件解析为像素矩阵（Matrix），不同操作系统调用自己平台的绘制函数来绘制像素矩阵。
 
 解决此问题，首先想到的是定义一个抽象的 Image， 然后再实现:
+
 - `WindowsBMP、WindowsJPG、WindowsGIF、WindowsPNG`
 - `LinuxBMP、LinuxJPG、LinuxGIF、LinuxPNG`
 - `UnixBMP、UnixJPG、UnixGIF、UnixPNG`
@@ -11,88 +13,21 @@
 这样需要定义 3 * 4 个类，而且要增加一种新的图像格式就需要为每个操作系统实现一个类，当软件适配 Mac 系统，就需要为每种图像实现一个类，这样势必造成“类爆炸”，其实在实现过程种，就会发现同一平台对像素矩阵的渲染是一样，而同一种图像格式的文件格式都是一样的，那么不难想到将文件格式的解析和像素矩阵的渲染分开定义，两者通过聚合完成抽象图像的渲染，具体的图像文件解析、矩阵渲染交给各自的实现类完成。这种思路就是桥接模式。
 
 ## 定义
+
 桥接模式（Bridge Pattern）：将抽象部分与其实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体（Handle and Body）模式或接口（Interface）模式.
 
-```{uml}
-abstract Abstraction {
-  # impl: Implementor
-  + opertion()
-}
-note left of Abstraction::"opertion()"
-    impl.opertionImpl()
-end note
-
-abstract RefinedAbstraction1 extends Abstraction{
-  + opertion()
-}
-abstract RefinedAbstraction2 extends Abstraction{
-  + opertion()
-}
-
-Implementor <--o Abstraction::impl 
-interface Implementor {
-  + opertionImpl()
-}
-
-class ConcreteImplementorA implements Implementor{
-    + opertionImpl()
-}
-class ConcreteImplementorB implements Implementor{
-    + opertionImpl()
-}
-
-class Client #palegreen
-Client ..[#red]> Implementor
-Client ..[#red]> Abstraction
-```
+![桥接模式](./img/image-2.png)
 
 ## 实现
+
 图像可以视为抽象，不同的图像格式就是不同的具体实现，渲染图像时，需要先将图像字节流转换为像素矩阵，对像素矩阵的渲染就可以看作实现，不同平台的渲染就是不同的具体实现。
 
-```{uml}
-abstract Image {
-    # render: Render
-    + dispaly(Path)
-}
-Render <--o Image::render  
-class PngImage extends Image {
-    + display(Path)
-}
-note left of PngImage::"display(path: Path)"
-    Matrix matrix = parse(path)
-    render.doPaint(matrix)
-end note
-class GifImage extends Image {
-    + display(Path)
-}
-class JpgImage extends Image {
-    + display(Path)
-}
-class BmpImage extends Image {
-    + display(Path)
-}
-
-interface Render {
-    + doPaint(Matrix)
-}
-
-class WindowsRender implements Render {
-    + doPaint(Matrix)
-}
-class LinuxRender implements Render {
-    + doPaint(Matrix)
-}
-class UnixRender implements Render {
-    + doPaint(Matrix)
-}
-
-class Client #palegreen
-Client ..[#red]> Render
-Client ..[#red]> Image
-```
+![桥接模式例子](./img/image-3.png)
 
 ## 评价
+
 优点
+
 1. 客户端代码仅与高层抽象部分进行互动， 不会接触到平台的详细信息。
 2. 开闭原则。 你可以新增抽象部分和实现部分， 且它们之间不会相互影响。
 3. 单一职责原则。 抽象部分专注于处理高层逻辑， 实现部分处理平台细节。
@@ -101,40 +36,8 @@ Client ..[#red]> Image
 缺点
 桥接模式要求正确识别出系统中两个独立变化的维度，因此其使用范围具有一定的局限性，如何正确识别两个独立维度也需要一定的经验积累
 
-
 ## 练习
+
 开发一个数据转换工具，可以将数据库中的数据转换成多种文件格式，例如txt、xml、pdf等格式，同时该工具需要支持多种不同的数据库。试使用桥接模式对其进行设计。
 
-```{uml}
-abstract Database {
-    - converter: Converter
-    + read(tableName): List<Record>
-    + convert(tableName): File
-}
-Converter <--o Database::converter 
-class MysqlDatabase extends Database{
-    + read(tableName): List<Record>
-    + convert(tableName): File
-}
-class OracleDatabase extends Database{
-    + read(tableName): List<Record>
-    + convert(tableName): File
-}
-
-interface Converter {
-    + convert(List<Record>): File
-}
-class TextConverter implements Converter {
-    + convert(List<Record>): File
-}
-class PdfConverter implements Converter {
-    + convert(List<Record>): File
-}
-class XmlConverter implements Converter {
-    + convert(List<Record>): File
-}
-
-class Client #palegreen
-Client ..[#red]> Converter
-Client ..[#red]> Database
-```
+![桥接模式练习](./img/image-4.png)

@@ -21,67 +21,11 @@
 
 职责链模式（Chain of Responsibility Pattern）：避免将请求发送者与接收者耦合在一起，让多个对象都有机会接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。
 
-```{uml}
-abstract Handler {
-    # next： Handler
-    + setNext(next: Handler)
-    + handleRequest()
-}
-Handler <--o Handler: next
-
-class ConcreteHandlerA extends Handler {
-    + handleRequest()
-}
-class ConcreteHandlerB extends Handler {
-    + handleRequest()
-}
-note left of ConcreteHandlerA::"handleRequest()"
-    if(needHandle) {
-        // current action
-        ...
-    } else {
-        next.handleRequest();
-    }
-end note
-
-class Client #palegreen
-Client ..> Handler
-```
+![职责链模式](./img/image.png)
 
 ## 实现
 
-```{uml}
-interface Approval {
-    # next: Approval
-    # maxProcessAmount: int
-    + setNext(next: Approval)
-    + process(amount: int)
-}
-Approval <--o Approval: next
-class Director implements Approval {
-    + Director(amount: int)
-    + process(amount: int)
-}
-note left of Approval::"process(amount: int)"
-    if(amount < this.maxProcessAmount) {
-        // current action
-        ...
-    } else {
-        next.process(amount);
-    }
-end note
-class VicePresident implements Approval {
-    + VicePresident(amount: int)
-    + process(amount: int)
-}
-class President implements Approval {
-    + President(amount: int)
-    + process(amount: int)
-}
-
-class Client #palegreen
-Client ..> Approval
-```
+![职责链模式例子](./img/image-1.png)
 
 ## 评价
 

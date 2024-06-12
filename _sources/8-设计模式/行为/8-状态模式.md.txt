@@ -9,7 +9,6 @@
 3. 如果账户中余额等于-2000，那么账户的状态为受限状态（Restricted State），此时用户只能向该账户存款，不能再从中取款，同时也将按天计算利息。
 4. 根据余额的不同，以上3种状态可发生相互转换
 
-
 ![account-sate](../img/account-sate.png)
 
 分析需求后，不难发现其规律：
@@ -26,30 +25,9 @@
 
 ## 定义
 
-状态模式（State Pattern）：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象（Objects for States），状态模式是一种对象行为型模式。
+**状态模式（State Pattern）**：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象（Objects for States），状态模式是一种对象行为型模式。
 
-```{uml}
-class Context {
-    - state: State
-    + request()
-    + setState(State state)
-}
-note right of Context::"request"
-state.request();
-end note
-
-Context o--> State
-abstract class State {
-    + handle()
-}
-
-class ConcreteStateA extends State {
-    + handle()
-}
-class ConcreteStateB extends State {
-    + handle()
-}
-```
+![状态模式](./img/image-14.png)
 
 在状态模式中，不同的状态对应不同的**状态类**，将对象在不同状态下的行为封装到不同的状态类中，状态转换的动作可以封装在环境类中，也可以封装在具体的状态类中。
 
@@ -57,52 +35,7 @@ class ConcreteStateB extends State {
 
 `AccountState` 充当抽象状态角色，`NormalState`、`OverdraftState`和`RestrictedState`充当具体状态角色。
 
-```{uml}
-class Account {
-    - state: AccountState
-    - owner: String
-    - balance: double
-    + Account(String owner, double int)
-    + getBalance(): double
-    + setBalance(double b)
-    + setState(AccountState state)
-    + deposit(double amount)
-    + withdraw(double amount)
-    + computeInterest()
-}
-Account --> AccountState
-Account <-- AccountState
-
-class AccountState {
-    # account: Account
-    + deposit(double amount)
-    + withdraw(double amount)
-    + computeInterest()
-    + stateCheck()
-}
-
-class OverdraftState extends AccountState {
-    + OverdraftState(AccountState state)
-    + deposit(double amount)
-    + withdraw(double amount)
-    + computeInterest()
-    + stateCheck()
-}
-class RestrictedState extends AccountState {
-    + RestrictedState(AccountState state)
-    + deposit(double amount)
-    + withdraw(double amount)
-    + computeInterest()
-    + stateCheck()
-}
-class NormalState extends AccountState {
-    + NormalState(AccountState state)
-    + deposit(double amount)
-    + withdraw(double amount)
-    + computeInterest()
-    + stateCheck()
-}
-```
+![状态模式例子](./img/image-15.png)
 
 ## 评价
 

@@ -5,6 +5,7 @@
 ```
 
 ## ABSTRACT 摘要
+
 Most synchronizers (locks, barriers, etc.) in the J2SE1.5
 java.util.concurrent package are constructed using a small
 framework based on class `AbstractQueuedSynchro-nizer`.
@@ -20,15 +21,19 @@ framework.
 这篇论文阐述了这个框架的原理、设计、实现、使用和性能。
 
 ## Categories and Subject Descriptors
+
 D.1.3 [Programming Techniques]: Concurrent Programming – Parallel Programming
 
 ## General Terms
+
 Algorithms, Measurement, Performance, Design.
 
 ## Keywords
+
 Synchronization, Java
 
 ## 1. INTRODUCTION 介绍
+
 Java tm release J2SE-1.5 introduces package java.util.concurrent, a
 collection of medium-level concurrency support classes created
 via Java Community Process (JCP) Java Specification Request
@@ -77,7 +82,9 @@ characteristics.
 本文的其余部分讨论了这个框架的要求、其设计和实现背后的主要思想、使用示例，以及展示一些性能指标的测量结果。
 
 ## 2.REQUIREMENTS 要求
+
 ### 2.1 Functionality 功能
+
 Synchronizers possess two kinds of methods [^7]: at least one
 acquire operation that blocks the calling thread unless/until the
 synchronization state allows it to proceed, and at least one
@@ -110,6 +117,7 @@ version of acquire that is cancellable, and one that isn't.
 采用了不同的名称和形式。例如这些方法 `Lock.lock`，`Semaphore.acquire`，
 `CountDownLatch.await` 和 `FutureTask.get` 都映射为框架中的获取操作。
 但是，这个包就在类之间保持了一致的约定，来支持一系列的使用选项。如果有意义，每个同步器都支持：
+
 - 非阻塞的同步尝试（例如 `tryLock`）, 以及阻塞的版本
 - 可选的超时机制，以便应用程序可以放弃等待。
 - 通过中断实现取消功能，获取操作通常分为一个可取消的版本，以及一个不能取消的版本。
@@ -138,6 +146,7 @@ associated `Lock` classes.
 风格的 `await/signal` 操作，这些实现与它们关联的`Lock`类密切相关。
 
 ### 2.2 Performance Goals 性能目标
+
 Java built-in locks (accessed using synchronized methods
 and blocks) have long been a performance concern, and there is a
 sizable literature on their construction (e.g., [^1], [^3]). However,
@@ -227,14 +236,17 @@ dequeue current thread if it was queued;
 
 And a release operation is:
 释放操作如下：
+
 ```java
 update synchronization state;
 if (state may permit a blocked thread to acquire)
     unblock one or more queued threads;
 ```
+
 Support for these operations requires the coordination of three
 basic components:
 支持这些操作需要协调三个基本组件：
+
 - Atomically managing synchronization state 原子的管理同步状态
 - Blocking and unblocking threads 对线程进行阻塞和解除阻塞
 - Maintaining queues 维护队列
@@ -340,7 +352,7 @@ no effect.
 使用它们，因为会遇到一个无法解决的竞争问题：如果一个解除阻塞的线程先调用了 `resume`，
 阻塞线程后执行`suspend` ，那么`resume`操作将没有任何作用。
 
-The `java.util.concurrent.locks` package includes a `LockSup-port` 
+The `java.util.concurrent.locks` package includes a `LockSup-port`
 class with methods that address this problem. Method
 `LockSupport.park` blocks the current thread unless or until
 a `LockSupport.unpark` has been issued. (Spurious wakeups
@@ -433,6 +445,7 @@ CLH 队列并不像传统的队列，因为它的入队和出队操作与它作�
 A new node, `node`, is enqueued using an atomic operation:
 
 `node`是一个新节点，其原子化入队操作：
+
 ```java
 do { pred = tail;
 } while(!tail.compareAndSet(pred, node));
@@ -442,6 +455,7 @@ The release status for each node is kept in its predecessor node.
 So, the "spin" of a spinlock looks like:
 
 每个节点的释放状态都保存在前驱节点中。因此，自旋锁的“自旋”操作如下：
+
 ```java
 while (pred.status != RELEASED) ; // spin
 ```
@@ -450,6 +464,7 @@ A dequeue operation after this spin simply entails setting the
 `head` field to the node that just got the lock:
 
 自旋之后的出队后，只需要将`head`字段设置为刚刚获得锁的节点即可。
+
 ```java
 head = node;
 ```
@@ -477,7 +492,7 @@ previous node's status field.
 
 在最初的 CLH 锁中，节点之间甚至没有链接。在自旋锁中，`pred`变量可以作为局部变量存在。
 然而， Scott 和 Scherer[^10] 表明，通过在节点之间明确维护前驱字段，CLH 锁可以处理
-超时和其他形式的取消操作：如果一个节点的前驱节点取消了，这个节点就可以滑动上去使用前一个节点的状态字段。 
+超时和其他形式的取消操作：如果一个节点的前驱节点取消了，这个节点就可以滑动上去使用前一个节点的状态字段。
 
 The main additional modification needed to use CLH queues for
 blocking synchronizers is to provide an efficient way for one
@@ -504,6 +519,7 @@ part of insertion; it is simply assigned:
 ```java
 pred.next = node;
 ```
+
 after the insertion. This is reflected in all usages. The `next` link
 is treated only as an optimized path. If a node's successor does
 not appear to exist (or appears to be cancelled) via its `next` field,
@@ -511,7 +527,7 @@ it is always possible to start at the tail of the list and traverse
 backwards using the `pred` field to accurately check if there
 really is one.
 
-在插入操作之后就会反映在所有用法中。next 链接仅被视为一条优化路径。如果通过一个节点的的 `next` 
+在插入操作之后就会反映在所有用法中。next 链接仅被视为一条优化路径。如果通过一个节点的的 `next`
 字段来看，这个节点的后继节点已经不存在（或者看起来已经被取消），始终可以从列表的尾部开始，
 并使用 `pred` 字段往回遍历，以准确地检查是否真的存在一个后继节点。
 
@@ -679,6 +695,7 @@ the signalled thread before it has re-acquired its lock.
 
 The basic await operation is:
 await 操作的基本如下：
+
 ```
 create and add new node to condition queue;
 release lock;
@@ -688,6 +705,7 @@ re-acquire lock;
 
 And the signal operation is:
 signal 操作如下
+
 ```
 transfer the first node from condition queue to lock queue;
 ```
@@ -699,7 +717,7 @@ The transfer operation simply unlinks the first node from the
 condition queue, and then uses CLH insertion to attach it to the
 lock queue.
 
-因为这些操作只在持有锁时执行，它们可以使用顺序链接队列操作（使用节点中的 
+因为这些操作只在持有锁时执行，它们可以使用顺序链接队列操作（使用节点中的
 `nextWaiter` 字段）来维护条件队列。转移操作就是简单地从条件队列中删除头节点，
 然后使用 CLH 将其连接到插入到锁队列。
 
@@ -756,7 +774,7 @@ Class `AbstractQueuedSynchronizer` ties together the
 above functionality and serves as a "template method pattern" [^6]
 base class for synchronizers. Subclasses define only the methods
 that implement the state inspections and updates that control
-acquire and release. However, subclasses of 
+acquire and release. However, subclasses of
 `AbstractQueuedSynchronizer` are not themselves usable as
 synchronizer ADTs, because the class necessarily exports the
 methods needed to internally control acquire and release policies,
@@ -798,6 +816,7 @@ class Mutex {
     public void unlock() { sync.release(0); }
 }
 ```
+
 A fuller version of this example, along with other usage guidance
 may be found in the J2SE documentation. Many variants are of
 course possible. For example, `tryAcquire` could employ "test-
@@ -970,6 +989,7 @@ leaves such engineering decisions to its users.
 插队提供的性能优势很小，但却有更大的无限期推迟风险。同步器框架将此类工程决策留给其用户。
 
 ### 4.2 Synchronizers 同步器
+
 Here are sketches of how java.util.concurrent synchronizer
 classes are defined using this framework:
 
@@ -1047,7 +1067,7 @@ While the synchronizer framework supports many other styles of
  synchronization in addition to mutual exclusion locks, lock
  performance is simplest to measure and compare. Even so, there
  are many different approaches to measurement. The experiments
- here are designed to reveal overhead and throughput. 
+ here are designed to reveal overhead and throughput.
 
 同步器框架除了支持互斥锁之外，还支持许多其他类型的同步方式，但锁性能是
 最简单的衡量和比较对象。即便如此，衡量的方法也有很多种。这里的实验旨在
@@ -1062,6 +1082,7 @@ While the synchronizer framework supports many other styles of
    int t = (seed % 127773) * 16807 - (seed / 127773) * 2836;
    return (t > 0)? t : t + 0x7fffffff;
  ```
+
  On each iteration a thread updates, with probability **S**, a shared
  generator under a mutual exclusion lock, else it updates its own
  local generator, without a lock. This results in short-duration
@@ -1122,7 +1143,7 @@ While the synchronizer framework supports many other styles of
 | 8U   | 8          | UltraSparc3   | 750         |
 | 24U  | 24         | UltraSparc3   | 750         |
 
- ### 5.1 Overhead 负载
+### 5.1 Overhead 负载
 
 Uncontended overhead was measured by running only one
 thread, subtracting the time per iteration taken with a version
@@ -1148,7 +1169,7 @@ locks and machines. On multiprocessors, these instructions tend
 to completely overwhelm all others. The main differences
 between Builtin and synchronizer classes are apparently due to
 Hotspot locks using a `compareAndSet`` for both locking and
-unlocking, while these synchronizers use a `compareAndSet` for
+unlocking, while these synchronizers use a`compareAndSet` for
 acquire and a volatile write (i.e., with a memory barrier on
 multiprocessors, and reordering constraints on all processors) on
 release. The absolute and relative costs of each vary across
@@ -1156,7 +1177,7 @@ machines.
 
 表 2 还显示了`tryAcquire`与内置锁的“快速获取方式”成本。这里的差异主要反映了不同的
 原子指令，在各种锁和各种机器上的的内存屏障成本。在多处理器上，这些指令和屏障的执行成本
-往往比其他操作更高，占据了整体性能的主要部分。内置锁和同步器类之间的主要差异在于， 
+往往比其他操作更高，占据了整体性能的主要部分。内置锁和同步器类之间的主要差异在于，
 Hotspot 锁在锁定和解锁时都使用 `compareAndSet`，而这些同步器在获取时使用 `compareAndSet`，
 在释放时使用 `volatile` 写入（即，在多处理器上使用内存屏障，以及对所有处理器使用指令重排约束）。
 每种锁的绝对和相对成本在不同机器上有所不同。
@@ -1178,8 +1199,8 @@ progress even under extreme contention.
 | *Machine* | *Builtin* | *Mutex* | *Reentrant* | *Fair* |
 |-----------|-----------|---------|-------------|--------|
 | 1P        | 18        | 9       | 31          | 37     |
-| 2P        | 54        | 71      | 77          | 81     | 
-| 2A        | 13        | 21      | 31          | 30     | 
+| 2P        | 54        | 71      | 77          | 81     |
+| 2A        | 13        | 21      | 31          | 30     |
 | 4P        | 116       | 95      | 109         | 117    |
 | 1U        | 90        | 40      | 58          | 67     |
 | 4U        | 122       | 82      | 100         | 115    |
@@ -1187,7 +1208,7 @@ progress even under extreme contention.
 | 24U       | 2161      | 84      | 108         | 119    |
 
 **Table 3 Saturated Per-Lock Overhead in Nanoseconds**
-| _Machine_ | _Builtin_ | _Mutex_ | _Reentrant_ | _Fair_ |
+| *Machine* | *Builtin* | *Mutex* | *Reentrant* | *Fair* |
 |-----------|-----------|---------|-------------|--------|
 | 1P        | 521       | 46      | 67          | 8327   |
 | 2P        | 930       | 108     | 132         | 14967  |
@@ -1226,8 +1247,8 @@ Reentrant rose to 29.5% of mean.
 在这里，总运行时间几乎相同（公平模式为9.79秒，可重入模式为9.72秒）。
 公平模式的变异性保持较小，标准差为平均值的 0.1%，而可重入模式增加到了平均值的 29.5%。
 
- ### 5.2 Throughput 吞吐量
- 
+### 5.2 Throughput 吞吐量
+
 Usage of most synchronizers will range between the extremes of
 no contention and saturation. This can be experimentally
 examined along two dimensions, by altering the contention
@@ -1244,7 +1265,7 @@ The accompanying figures use a `slowdown` metric:
 
 $$
 slowdown= \frac{t}{S⋅b⋅n +(1−S)⋅b⋅max(1,\frac{n}{p})}
-$$ 
+$$
 
 Here, `t` is the total observed execution time, `b` is the baseline time
 for one thread with no contention or synchronization, `n` is the
@@ -1327,6 +1348,7 @@ usage profiles.
 可以使用这个框架构建定制形式的锁。
 
 ## 6. CONCLUSIONS 结论
+
 As of this writing, the `java.util.concurrent` synchronizer
 framework is too new to evaluate in practice. It is unlikely to see
 widespread usage until well after final release of J2SE1.5, and
@@ -1340,6 +1362,7 @@ an efficient basis for creating new synchronizers.
 意想不到的后果。然而，到目前为止，该框架似乎成功地实现了提供创建新同步器的有效基础的目标。
 
 ## 7. ACKNOWLEDGMENTS 鸣谢
+
 Thanks to Dave Dice for countless ideas and advice during the
 development of this framework, to Mark Moir and Michael Scott
 for urging consideration of CLH queues, to David Holmes for
@@ -1353,15 +1376,16 @@ Portions of this work were made possible by a DARPA PCES
 grant, NSF grant EIA-0080206 (for access to the 24way Sparc)
 and a Sun Collaborative Research Grant.
 
-感谢 Dave Dice 在开发这个框架过程中提供无数的想法和建议，感谢 Mark Moir 
-和 Michael Scott 敦促考虑 CLH 队列，感谢 David Holmes 对代码和 API 
+感谢 Dave Dice 在开发这个框架过程中提供无数的想法和建议，感谢 Mark Moir
+和 Michael Scott 敦促考虑 CLH 队列，感谢 David Holmes 对代码和 API
 的早期版本提出批评，感谢 Victor Luchangco 和 Bill Scherer 对之前版本
 的源代码进行审查，感谢 JSR166 专家组的其他成员（Joe Bowbeer、Josh Bloch、
 Brian Goetz、David Holmes 和 Tim Peierls）以及 Bill Pugh，对设计和
-规范提供帮助，并对本文的草稿提出评论。部分工作得益于 DARPA PCES 资助、NSF 
+规范提供帮助，并对本文的草稿提出评论。部分工作得益于 DARPA PCES 资助、NSF
 资助 EIA-0080206（为了访问 24way Sparc）和 Sun 合作研究资助。
 
 ## 8.REFERENCES 参考
+
 [^1]: Agesen, O., D. Detlefs, A. Garthwaite, R. Knippel, Y. S.
 Ramakrishna, and D. White. An Efficient Meta-lock for
 Implementing Ubiquitous Synchronization. ACM OOPSLA
@@ -1391,7 +1415,7 @@ Spin Locks with Timeout. 8th ACM Symp. on Principles
 and Practice of Parallel Programming, Snowbird, UT, June 2001.
 [^11]: Sun Microsystems. Multithreading in the Solaris Operating
 Environment . White paper available at
-http://wwws.sun.com/software/solaris/whitepapers.html 2002.
+<http://wwws.sun.com/software/solaris/whitepapers.html> 2002.
 [^12]: Zhang, H., S. Liang, and L. Bak. Monitor Conversion in a
 Multithreaded Computer System. United States Patent
 6,691,304. 2004.
