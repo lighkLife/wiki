@@ -1,0 +1,530 @@
+@startuml 适配器模式
+interface Target {
+    + request(args)
+}
+class Adapter implements Target {
+    - adaptee: Adaptee
+    + request(args)
+}
+note right of Adapter::"request(args)"
+    val specialArgs = convert(args);
+    adaptee.request(specialArgs);
+end note
+class Adaptee {
+    + request(specialArgs)
+}
+Adaptee <-- Adapter
+
+class Client #palegreen
+Client --[#red]> Target
+@enduml
+
+@startuml 适配器模式例子
+interface MyLib {
+    + analysis(Xml)
+}
+class JsonLibAdapter implements MyLib{
+    - lib: ThirdLib
+    + analysis(Xml)
+}
+note right of JsonLibAdapter::"analysis(Xml)"
+    val json = convert(xml);
+    adaptee.request(json);
+end note
+
+class ThirdLib {
+    + analysis(Json)
+}
+ThirdLib <-- JsonLibAdapter
+
+class Client #palegreen
+Client --[#red]> MyLib
+@enduml
+
+@startuml 桥接模式
+abstract Abstraction {
+  # impl: Implementor
+  + opertion()
+}
+note left of Abstraction::"opertion()"
+    impl.opertionImpl()
+end note
+
+abstract RefinedAbstraction1 extends Abstraction{
+  + opertion()
+}
+abstract RefinedAbstraction2 extends Abstraction{
+  + opertion()
+}
+
+Implementor <--o Abstraction::impl 
+interface Implementor {
+  + opertionImpl()
+}
+
+class ConcreteImplementorA implements Implementor{
+    + opertionImpl()
+}
+class ConcreteImplementorB implements Implementor{
+    + opertionImpl()
+}
+
+class Client #palegreen
+Client ..[#red]> Implementor
+Client ..[#red]> Abstraction
+@enduml
+
+@startuml 桥接模式例子
+abstract Image {
+    # render: Render
+    + dispaly(Path)
+}
+Render <--o Image::render  
+class PngImage extends Image {
+    + display(Path)
+}
+note left of PngImage::"display(path: Path)"
+    Matrix matrix = parse(path)
+    render.doPaint(matrix)
+end note
+class GifImage extends Image {
+    + display(Path)
+}
+class JpgImage extends Image {
+    + display(Path)
+}
+class BmpImage extends Image {
+    + display(Path)
+}
+
+interface Render {
+    + doPaint(Matrix)
+}
+
+class WindowsRender implements Render {
+    + doPaint(Matrix)
+}
+class LinuxRender implements Render {
+    + doPaint(Matrix)
+}
+class UnixRender implements Render {
+    + doPaint(Matrix)
+}
+
+class Client #palegreen
+Client ..[#red]> Render
+Client ..[#red]> Image
+@enduml
+
+@startuml 桥接模式练习
+abstract Database {
+    - converter: Converter
+    + read(tableName): List<Record>
+    + convert(tableName): File
+}
+Converter <--o Database::converter 
+class MysqlDatabase extends Database{
+    + read(tableName): List<Record>
+    + convert(tableName): File
+}
+class OracleDatabase extends Database{
+    + read(tableName): List<Record>
+    + convert(tableName): File
+}
+
+interface Converter {
+    + convert(List<Record>): File
+}
+class TextConverter implements Converter {
+    + convert(List<Record>): File
+}
+class PdfConverter implements Converter {
+    + convert(List<Record>): File
+}
+
+class Client #palegreen
+Client ..[#red]> Converter
+Client ..[#red]> Database
+@enduml
+
+@startuml 组合模式
+interface Component {
+    + operation()
+    --
+    + add(Component)
+    + remove(Component)
+    + getChildren(): Component[]
+}
+
+class Leaf implements Component{
+    + operation()
+}
+class Composite implements Component {
+    - children: Component[]
+    + operation()
+    + add(Component)
+    + remove(Component)
+    + getChildren(): Component[]
+}
+note left of Composite::"operation()"
+    for(Component: child: children) {
+        child.operation();
+    }
+end note
+Component <--o Composite::children
+
+class Client #palegreen
+Client ..[#red]> Component
+@enduml
+
+@startuml 组合模式实现
+abstract AbstractFile {
+    + add(AbstractFile)
+    + remove(AbstractFile)
+    + getChildren(): AbstractFile[]
+    + killVirus() 
+}
+class TextFile implements AbstractFile {
+    + killVirus()
+}
+class ImageFile implements AbstractFile {
+    + killVirus()
+}
+class Folder implements AbstractFile {
+    - children: AbstractFile[]
+    + killVirus() 
+    + add(AbstractFile)
+    + remove(AbstractFile)
+    + getChildren(): AbstractFile[]
+
+}
+AbstractFile <--o Folder::children
+note left of Folder::"killVirus()"
+    for(AbstractFile: child: children) {
+        child.killVirus();
+    }
+end note
+
+class Client #palegreen
+Client ..[#red]> AbstractFile
+@enduml
+
+@startuml 装饰器模式-图像组件库
+abstract Component {
+    + display()
+}
+class Window extends Component {
+    + display()
+}
+class TextBox extends Component {
+    + display()
+}
+class ListBox extends Component {
+    + display()
+}
+
+class ScrollBarWindow extends Window {
+    + display()
+    + setScrollBar()
+}
+class BlackBorderWindow extends Window {
+    + display()
+    + setBlackBorder()
+}
+class ScrollBarBlackBorderWindow extends ScrollBarWindow,BlackBorderWindow {
+    + setBlackBorder()
+}
+
+class ScrollBarTextBox extends TextBox {
+    + display()
+    + setScrollBar()
+}
+class BlackBorderTextBox extends TextBox {
+    + display()
+    + setBlackBorder()
+}
+class ScrollBarBlackBorderTextBox extends ScrollBarTextBox,BlackBorderTextBox {
+    + setBlackBorder()
+}
+
+class ScrollBarListBox extends ListBox {
+    + display()
+    + setScrollBar()
+}
+class BlackBorderListBox extends ListBox {
+    + display()
+    + setBlackBorder()
+}
+class ScrollBarBlackBorderListBox extends ScrollBarListBox,BlackBorderListBox {
+    + setBlackBorder()
+}
+@enduml
+
+@startuml 装饰器模式
+abstract Component {
+    + operation()
+}
+class ConcreteComponent extends Component {
+    + operation()
+}
+class Decorator extends Component {
+    - component: Component
+    + operation()
+}
+Component <--o Decorator::component 
+
+class ConcreteDecoratorA extends Decorator {
+    - aState
+    + operation()
+    + aBehavior()
+}
+note left of ConcreteDecoratorA::"operation()"
+    super.operation();
+    extra();
+end note
+class ConcreteDecoratorB extends Decorator {
+    - bState
+    + operation()
+    + bBehavior()
+}
+note right of ConcreteDecoratorB::"operation()"
+    super.operation();
+    extra();
+end note
+
+class Client #palegreen
+note left of Client
+    it = new ConcreteComponent()
+    a = new ConcreteDecoratorA(it);
+    b = new ConcreteDecoratorA(a);
+    b.operation();
+end note
+Client ..[#red]> Component
+@enduml
+
+@startuml 装饰器模式实现
+abstract Component {
+    + display()
+}
+class Window extends Component {
+    + display()
+}
+class TextBox extends Component {
+    + display()
+}
+class ListBox extends Component {
+    + display()
+}
+
+abstract Decorator extends Component{
+    - component: Component
+    + Decorator(Component)
+    + display()
+}
+Component <--o Decorator::component
+class ScrollBarDecorator extends Decorator {
+    + ScrollBarDecorator(Component)
+    + display()
+}
+class BlackBorderDecorator extends Decorator {
+    + BlackBorderDecorator(Component)
+    + display()
+}
+
+class Client #palegreen
+note top of Client
+    window = new Window()
+    scrollBarWindow = new ScrollBarDecorator(window);
+    blackBorderScrollBarWindow = new BlackBorderDecorator(scrollBarWindow);
+    blackBorderScrollBarWindow.display();
+end note
+Client ..[#red]> Component
+@enduml
+
+@startuml 门面模式-加密模块
+allowmixing
+class FileReader
+class AesEncrypt
+class FileWriter
+
+component 财务管理软件
+component 公文审批系统
+component 邮件管理软件
+
+财务管理软件 --  FileReader
+财务管理软件 --  AesEncrypt
+财务管理软件 --  FileWriter
+公文审批系统 --  FileReader
+公文审批系统 --  AesEncrypt
+公文审批系统 --  FileWriter
+邮件管理软件 --  FileReader
+邮件管理软件 --  AesEncrypt
+邮件管理软件 --  FileWriter
+@enduml
+
+@startuml 门面模式
+class Facade
+Facade --> SubSystemA
+Facade --> SubSystemB
+Facade --> SubSystemC
+
+class Client #palegreen
+Client --> Facade
+@enduml
+
+@startuml 门面模式实现
+class EncryptFacade {
+    - reader    : FileReader
+    - writer    : FileWriter
+    - encrypt   : AesEncrypt
+    + EncryptFacade()
+    + fileEncrypt(source: Path, target: Path)
+}
+class FileReader {
+    - read(source: Path): byte[]
+}
+class AesEncrypt {
+    - encrypt(data: byte[]): byte[]
+}
+class FileWriter {
+    + write(target: Path, cipher: byte[])
+}
+EncryptFacade --> FileReader
+EncryptFacade --> AesEncrypt
+EncryptFacade --> FileWriter
+
+class Client #palegreen
+Client --> EncryptFacade
+@enduml
+
+@startuml 享元模式
+class FlyWeight {
+    - repeatState
+    + FlyWeight(repeatState)
+    + operation(uniqueState)
+}
+class FlyWeightFactory {
+    - cache: HashMap<Key,FlyWeight>
+    + getFlyWeight(repeatState): FlyWeight
+}
+FlyWeightFactory o--> FlyWeight 
+
+note left of FlyWeightFactory::"getFlyWeight"
+    key = mapping(repeatState)
+    if(null == cache.get(key)) {
+        cache.put(key, new FlyWeight(repeatState));
+    }
+    return cache.get(key);
+end note
+
+class Context {
+    - uniqueState
+    - flyWeight: FlyWeight
+    + Context(repeatState, uniqueState)
+    + operation()
+}
+note left of Context::"Context(repeatState, uniqueState)"
+    repeatState = repeatState;
+    uniqueState = FlyWeightFactory.getFlyWeight(repeatState);
+end note
+
+Context::Context ..> FlyWeightFactory
+Context::flyWeight *--> FlyWeight
+
+class Client #palegreen
+Client --> Context
+@enduml
+
+@startuml 享元模式实现
+interface GoStone {
+    + getColor()
+    + display(x, y)
+}
+class WhiteGoStone implements GoStone {
+    - color
+}
+class BlackGoStone implements GoStone {
+    - color
+}
+
+class GoStoneFactory {
+    - cache: HashMap
+    + getGoStone(color): GoStone
+}
+GoStoneFactory o--> GoStone
+
+note left of GoStoneFactory::"getGoStone"
+    if(null == cache.get(color)) {
+        cache.put(color, new GoStone(color));
+    }
+    return cache.get(color);
+end note
+
+class GoStonePostion {
+    - x
+    - y
+    - goStone: GoStone
+    + GoStonePostion(color, x, y)
+    + display()
+}
+
+
+GoStonePostion ..>  GoStoneFactory
+GoStonePostion::goStone *-->  GoStone
+
+class Client #palegreen
+Client --> GoStonePostion
+@enduml
+
+@startuml 代理模式
+interface Subject {
+    + reuqest()
+}
+class RealSubject implements Subject {
+    + reuqest()
+}
+class ProxySubject implements Subject {
+    - realSubject: RealSubject
+    + preRequest()
+    + request()
+    + postRequest()
+}
+RealSubject <-- ProxySubject::realSubject
+note left of ProxySubject::"request"
+    preRequest();
+    realSubject.request();
+    postRequest();  
+end note
+
+class Client #palegreen
+Client ..> Subject
+@enduml
+
+@startuml 代理模式例子
+interface Searcher {
+    + search(userId String, String keyword): String
+}
+class RealSearcher implements Searcher{
+    + search(userId String, String keyword): String
+}
+class SearchProxy implements Searcher {
+    - realSearcher: RealSearcher
+    - validator: AccessValidator
+    - logger: Logger
+    + search(userId String, String keyword): String
+    + validate(userId: String): boolean
+    + log(String userId)
+}
+RealSearcher <-- SearchProxy::realSearcher
+SearchProxy --> RealAccessValidator
+SearchProxy --> Logger
+
+note left of SearchProxy::"search(userId String, String keyword): String"
+    validator.validate(userId);
+    realSearcher.search(userId, keyword);
+    logger.log(userId);
+end note
+
+class Client #palegreen
+Client ..> Searcher
+@enduml

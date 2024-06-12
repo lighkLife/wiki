@@ -6,34 +6,69 @@
 Welcome to lighk-wiki
 ======================================
 
-- mybatis
-- tomcat
-- redis
-- mysql
-- kafka
-- zookeeper
-- Netty
-- Spring
+.. toctree::
+   :caption: Java 相关
+   :maxdepth: 2
 
-- java 集合
-- java 并发
-- java IO
-- jvm
-- java 新特性
+   1-Java/Java-Base/0-index
+   1-Java/Java-IO/0-index
+   1-Java/Java-并发/0-index
+   1-Java/Java-集合/0-index
+   1-Java/JVM-相关/0-index
 
+.. toctree::
+   :caption: Spring 框架
+   :maxdepth: 1
 
-
+   7-Spring/0-index
 
 
 .. toctree::
+   :caption: 中间件
    :maxdepth: 2
 
-   1-Java/0-index
-   2-Rust/index
-   3-其他语言/index
-   4-Middleware/0-index
-   5-IoT/index
-   6-OS/0-index
-   7-Spring/0-index
-   8-设计模式/0-index
-   9-寻芳拾香/0-index
+   4-Middleware/MinIO/MinIO介绍与单节点部署
+   4-Middleware/MinIO/MinIO多节点部署
+   4-Middleware/01-How-tomcat-works
+   4-Middleware/02-Hudi
+   4-Middleware/mysql/1-Performance-Schema  
+
+.. toctree::
+   :caption: 设计模式
+   :maxdepth: 2
+
+   8-设计模式/UML类图
+   8-设计模式/设计模式的六大原则
+   8-设计模式/创建/0-index
+   8-设计模式/结构/0-index
+   8-设计模式/行为/0-index
+
+.. toctree::
+   :caption: 物联网
+   :maxdepth: 1
+
+   5-IoT/test
+
+.. toctree::
+   :caption: 操作系统
+   :maxdepth: 1
+
+   6-OS/00-linux常用命令
+   6-OS/01-Ubuntu 使用问题记录
+
+.. toctree::
+   :caption: Rust 相关
+   :maxdepth: 2
+
+   2-Rust/test 
+
+.. toctree::
+   :caption: 寻芳拾香
+   :maxdepth: 1
+
+   9-寻芳拾香/00-使用Sphinx搭建知识库
+   9-寻芳拾香/02-字符串中的变量处理
+   9-寻芳拾香/03-Git使用记录
+   9-寻芳拾香/04-MapReduce
+   9-寻芳拾香/05-数物融合-笔记
+   9-寻芳拾香/06-Mysql-Use-Case     

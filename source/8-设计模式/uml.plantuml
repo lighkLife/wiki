@@ -1,0 +1,125 @@
+@startuml example
+class Company {
+    - name: String
+}
+
+class  Game {
+    - name: String
+    - creater: Company
+    + run(): void
+}
+
+class Boy {
+    + name: String
+    # play(Game): int
+}
+Game <.. Boy::play
+Company <-- Game::creater
+@enduml
+
+@startuml component
+abstract        abstract
+abstract class  "abstract class"
+annotation      annotation
+circle          circle
+()              circle_short_form
+class           class
+class           class_stereo  <<stereotype>>
+diamond         diamond
+<>              diamond_short_form
+entity          entity
+enum            enum
+exception       exception
+interface       interface
+metaclass       metaclass
+protocol        protocol
+stereotype      stereotype
+struct          struct
+@enduml
+
+@startuml 关联关系
+class Class {
+    - students: Student[]
+}
+
+class Student {
+    - name: String
+}
+
+Student <-- Class::students
+@enduml
+
+@startuml 关联-组合关系
+class Mouth{}
+class Head{
+    - mouth: Mouth
+    + Head()
+}
+note left of Head::"Head()"
+    this.mouth = new Mouth(); 
+end note
+
+Mouth <--* Head
+@enduml
+
+@startuml 关联-聚合关系
+class Car{
+    - engine: Engine
+    + Car(Engine engine)
+    + setEngine(Engine engine)
+
+}
+class Engine {}
+Engine <--o Car
+@enduml
+
+@startuml 依赖关系
+class Driver {
+    + dirver(Car car): void
+}
+
+class Car {
+    + move(): void
+}
+
+Car <.. Driver::driver
+@enduml
+
+@startuml 泛化关系
+class Person {
+    # name: String
+    # age : int
+    + move() : void
+    + say()  : void 
+}
+
+class Student {
+    - studentNo : String
+    + study() : void
+}
+
+class Teacher {
+    - teacherNo : String
+    + teach() : void
+}
+
+Person <|-- Student
+Person <|-- Teacher
+@enduml
+
+@startuml 接口实现
+Interface Animal {
+    + eat(): void
+}
+
+Class Human {
+    + eat: void
+}
+
+Class Panda {
+    + eat: void
+}
+
+Animal <|.. Human::eat
+Animal <|.. Panda::eat
+@enduml

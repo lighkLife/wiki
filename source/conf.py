@@ -36,9 +36,7 @@ language = 'zh_CN'
 html_theme = 'furo'
 html_static_path = ['_static']
 html_search_language = 'zh'
-html_css_files = [
-    'my_style.css',
-]
+html_css_files = []
 
 html_theme_options = {
     "footer_icons": [
@@ -56,6 +54,7 @@ html_theme_options = {
     "light_css_variables": {
         "font-stack": "-apple-system,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei",
         "font-stack--monospace": "Andale Mono, FiraCode Nerd Font, Fira Code, Consolas, Monaco, Courier, monospace",
+        "sidebar-caption-font-size": "110%"
     },
 }
 

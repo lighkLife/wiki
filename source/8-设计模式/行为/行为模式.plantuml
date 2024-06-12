@@ -1,0 +1,590 @@
+@startuml 责任链模式
+abstract Handler {
+    # next: Handler
+    + setNext(next: Handler)
+    + handleRequest()
+}
+Handler <--o Handler: next
+
+class ConcreteHandlerA extends Handler {
+    + handleRequest()
+}
+class ConcreteHandlerB extends Handler {
+    + handleRequest()
+}
+note left of ConcreteHandlerA::"handleRequest()"
+    if(needHandle) {
+        // current action
+        ...
+    } else {
+        next.handleRequest();
+    }
+end note
+
+class Client #palegreen
+Client ..> Handler
+@enduml
+
+@startuml 责任链模式例子
+interface Approval {
+    # next: Approval
+    # maxProcessAmount: int
+    + setNext(next: Approval)
+    + process(amount: int)
+}
+Approval <--o Approval: next
+class Director implements Approval {
+    + Director(amount: int)
+    + process(amount: int)
+}
+note left of Approval::"process(amount: int)"
+    if(amount < this.maxProcessAmount) {
+        // current action
+        ...
+    } else {
+        next.process(amount);
+    }
+end note
+class VicePresident implements Approval {
+    + VicePresident(amount: int)
+    + process(amount: int)
+}
+class President implements Approval {
+    + President(amount: int)
+    + process(amount: int)
+}
+
+class Client #palegreen
+Client ..> Approval
+@enduml
+
+@startuml 命令模式
+interface Command {
+    + execute()
+}
+class ConcreteCommandA implements Command {
+    - receiver: Receiver
+    + execute()
+}
+class ConcreteCommandB implements Command {
+    - receiver: Receiver
+    + execute()
+}
+ConcreteCommandA::receiver --> Receiver
+ConcreteCommandB::receiver --> Receiver
+
+class Invoker {
+    - command: Command
+    + setCommand(cmd: Command)
+}
+Invoker o-->  Command
+
+class Receiver {
+    + action()
+}
+
+class Client #palegreen
+Client ..> Invoker
+Client ..> Command
+@enduml
+
+@startuml 命令模式例子
+interface Cmd {
+    + execute()
+}
+class ShowHelpCmd implements Cmd {
+    + helper: HelpHandler
+    + execute()
+}
+class HelpHandler {
+    + showHelp()
+}
+ShowHelpCmd *--> HelpHandler
+
+class MinimizeCmd implements Cmd {
+    + helper: WindowHandler
+    + execute()
+}
+class WindowHandler {
+    + minimizWindow()
+}
+MinimizeCmd *--> WindowHandler
+
+class MenuButton {
+    - cmd: Cmd
+    - name: String
+    + setCmd(cmd: Cmd)
+    + onClick()
+}
+note left of MenuButton::"onClick()"
+    cmd.execute();
+end note
+MenuButton --> Cmd
+
+class SettingWindow {
+    - buttons: List<MenuButton>
+    + addButton()
+    - removeButton()
+}
+SettingWindow *--> MenuButton
+
+class Client #palegreen
+Client ..> SettingWindow
+Client ..> MenuButton
+Client ..> Cmd
+@enduml
+
+@startuml 解释器模式
+abstract AbstractExpression {
+    + intercept(Context)
+}
+Context <.. AbstractExpression
+
+class TerminalExpression extends AbstractExpression {
+    + intercept(Context)
+}
+class NonTerminalExpression extends AbstractExpression {
+    + intercept(Context)
+}
+
+class Client #palegreen
+Client ..> AbstractExpression
+Client ..> Context
+@enduml
+
+@startuml 解释器模式例子
+abstract AbstractNode {
+    + interpret()
+}
+class DirectionNode extends AbstractNode {
+    - direct: DirectEnum
+    + interpret()
+}
+class ActionNode extends AbstractNode {
+    - action: ActionEnum
+    + interpret()
+}
+class DistanceNode extends AbstractNode {
+    - distance: int
+    + interpret()
+}
+
+class AndNode extends AbstractNode {
+    - left: AbstractNode
+    - right: AbstractNode
+    + interpret()
+}
+class SentenceNode extends AbstractNode {
+    - direction: DirectionNode
+    - action: ActionNode
+    - distance: DistanceNode
+    + interpret()
+}
+
+class Client #palegreen {
+    - node: AbstractNode
+    + pasrse(String instruction)
+    + output()
+}
+Client ..> AbstractNode
+@enduml
+
+@startuml 迭代器模式
+interface Iterator {
+    + getNext(): T
+    + hasNext(): boolean
+}
+interface IterableCollection {
+    + createIterator(): Iterator
+}
+IterableCollection ..>  Iterator
+class ConcreteIterator implements Iterator {
+    - collection: ConcreteCollection
+    - iterationState
+    + ConcreteIterator(ConcreteCollection)
+    + getNext(): T
+    + hasNext(): boolean
+}
+
+ConcreteIterator <.. ConcreteCollection
+ConcreteCollection <--> ConcreteIterator
+
+class ConcreteCollection implements IterableCollection {
+    - elements
+    + createIterator(): Iterator
+}
+
+class Client #palegreen
+Client ..> Iterator
+Client ..> IterableCollection
+@enduml
+
+@startuml 迭代器模式例子
+interface Iterator {
+    + getNext(): T
+    + hasNext(): boolean
+}
+interface IterableCollection {
+    + createIterator(): Iterator
+}
+IterableCollection ..>  Iterator
+class DfsTreeNodeIterator implements Iterator {
+    - root: TreeNode
+    - current: TreeNode
+    + DfsTreeNodeIterator(TreeNode root)
+    + getNext(): TreeNode
+    + hasNext(): boolean
+}
+class BfsTreeNodeIterator implements Iterator {
+    - root: TreeNode
+    - current: TreeNode
+    + BfsTreeNodeIterator(TreeNode root)
+    + getNext(): TreeNode
+    + hasNext(): boolean
+}
+
+TreeNode <--o BfsTreeNodeIterator 
+TreeNode <--o DfsTreeNodeIterator  
+
+class TreeNode implements IterableCollection {
+    - root: TreeNode
+    + createIterator(): Iterator
+}
+
+class Client #palegreen
+note left of Client
+    root = new TreeNode();
+    ...
+    Iterator iterator = BfsTreeNodeIterator(root);
+end note
+Client ..[#red]> Iterator
+Client ..[#red]> IterableCollection
+Client ..[#red]> BfsTreeNodeIterator
+@enduml
+
+@startuml 中介模式前
+class Button
+class List
+class TextBox
+class ComboBox
+Button --> List
+Button --> ComboBox
+Button --> TextBox
+ComboBox --> List
+ComboBox --> TextBox
+List --> ComboBox
+List --> TextBox
+@enduml
+
+@startuml 中介模式后
+class A
+class B
+class C
+class D
+class E
+class F
+class Mediator
+A -- Mediator
+B -- Mediator
+C -- Mediator
+F -- Mediator
+D -- Mediator
+E -- Mediator
+@enduml
+
+@startuml 中介模式
+interface Mediator {
+    + notify(sender)
+}
+
+class ConcreteMediator implements Mediator {
+    - componentA
+    - componentB
+    - componentC
+    - componentD
+    + notify(sender)
+    + reactOnA()
+    + reactOnB()
+    + reactOnC()
+    + reactOnD()
+} 
+note left of ConcreteMediator::"notify(sender)"
+    if(sender == componentA)
+        reactOnA()
+    else if(sender == componentB)
+        reactOnB()
+    ...    
+end note
+
+class ComponentA {
+    - m: Mediator
+    + operationA()
+}
+class ComponentB {
+    - m: Mediator
+    + operationB()
+}
+class ComponentC {
+    - m: Mediator
+    + operationC()
+}
+class ComponentD {
+    - m: Mediator
+    + operationD()
+}
+
+Mediator <-- ComponentA
+Mediator <-- ComponentB
+Mediator <-- ComponentC
+Mediator <-- ComponentD
+
+ComponentA <-- ConcreteMediator
+ComponentB <-- ConcreteMediator
+ComponentC <-- ConcreteMediator
+ComponentD <-- ConcreteMediator
+@enduml
+
+@startuml 备忘录模式
+class Originator {
+    + state
+    + restoreMemento(memento)
+    + createMemento(): Memento
+}
+note right of Originator::"restoreMemento(memento)"
+    this.state = m.getState()
+end note
+note right of Originator::"createMemento()"
+    return new Memento(state)
+end note
+
+Originator ..> Memento
+
+class Memento {
+    - state
+    + getState()
+    + setState()
+}
+
+class Caretaker {
+    - mementoList: Memento[]
+}
+Memento <--o Caretaker 
+@enduml
+
+@startuml 备忘录模式例子
+class Chessman {
+    - label: String
+    - x: int
+    - y: int
+    + Chessman(String label, int x, int y)
+    + save(): ChessmanMemento
+    + restore(ChessmanMemento memento)
+}
+Chessman ..> ChessmanMemento
+class ChessmanMemento {
+    - label: String
+    - x: int
+    - y: int
+    + ChessmanMemento(String label, int x, int y)
+}
+
+class MementoCaretaker {
+    - mementoList: []ChessmanMemento
+    + getMemento(int i): ChessmanMemento
+    + setMemento(ChessmanMemento memento)
+}
+ChessmanMemento <--o MementoCaretaker
+@enduml
+
+@startuml 观察者模式
+class Publisher {
+    - subscribers: Subscriber[]
+    - mainState
+    + addSubscriber(s: Subscriber)
+    + removeSubscriber(s: Subscriber)
+    + notifySubscribers()
+    + mainBusinessLogic()
+}
+
+note right of Publisher::"notifySubscribers()"
+    foreach(s in subscribers)
+        s.update(this)
+end note
+
+note right of Publisher::"mainBusinessLogic()"
+    this.mainState = newState
+    this.notifySubscribers()
+end note
+
+Publisher o--> Subscriber
+
+interface Subscriber {
+    + update(context)
+}
+
+class ConcreteSubscriber implements Subscriber {
+    + update(context)
+}
+@enduml
+
+@startuml 状态模式
+class Context {
+    - state: State
+    + request()
+    + setState(State state)
+}
+note right of Context::"request"
+state.request();
+end note
+
+Context o--> State
+abstract class State {
+    + handle()
+}
+
+class ConcreteStateA extends State {
+    + handle()
+}
+class ConcreteStateB extends State {
+    + handle()
+}
+@enduml
+
+@startuml 状态模式例子
+class Account {
+    - state: AccountState
+    - owner: String
+    - balance: double
+    + Account(String owner, double int)
+    + getBalance(): double
+    + setBalance(double b)
+    + setState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+}
+Account --> AccountState
+Account <-- AccountState
+
+class AccountState {
+    # account: Account
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+
+class OverdraftState extends AccountState {
+    + OverdraftState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+class RestrictedState extends AccountState {
+    + RestrictedState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+class NormalState extends AccountState {
+    + NormalState(AccountState state)
+    + deposit(double amount)
+    + withdraw(double amount)
+    + computeInterest()
+    + stateCheck()
+}
+@enduml
+
+@startuml 策略模式
+class Context {
+    - strategy: Strategy
+    + algorithm()
+}
+
+note right of Context::"algorithm()"
+ this.strategy.algorithm()
+end note
+
+Context o--> Strategy
+
+abstract class Strategy {
+    + algorithm()
+}
+
+class ConcreteStrategyA extends Strategy {
+    + algorithm()
+}
+class ConcreteStrategyB extends Strategy {
+    + algorithm()
+}
+@enduml
+
+@startuml 模板模式
+abstract class AbstractClass {
+    + templateMethod()
+    + operation1()
+    + operation2()
+    + operation3()
+    + isNeedDoOperation3(): boolean
+}
+
+note right of AbstractClass::"templateMethod()"
+    operation1();
+    operation2();
+    // 钩子方法
+    if(isNeedDoOperation3()) {
+        operation3();
+    }
+end note
+
+class ConcreteClass extends AbstractClass {
+    + operation1()
+    + isNeedDoOperation3(): boolean
+}
+@enduml
+
+@startuml 访问者模式
+class ObjectStructure
+class Client
+
+interface Element {
+    + accept(Visitor visitor)
+}
+
+class ConcreteElementA implements Element {
+    + accept(Visitor visitor)
+    + operationA()
+}
+note right of ConcreteElementA::"accept(Visitor visitor)"
+    visitor.visitConcreteElementA(this);
+end note
+
+class ConcreteElementB implements Element {
+    + accept(Visitor visitor)
+    + operationB()
+}
+note right of ConcreteElementB::"accept(Visitor visitor)"
+    visitor.visitConcreteElementB(this);
+end note
+
+interface Visitor {
+    + visitConcreteElementA(ConcreteElementA elementA)
+    + visitConcreteElementB(ConcreteElementB elementB)
+}
+
+class ConcreteVisitorA implements Visitor {
+    + visitConcreteElementA(ConcreteElementA elementA)
+    + visitConcreteElementB(ConcreteElementB elementB)
+}
+
+class ConcreteVisitorB implements Visitor {
+    + visitConcreteElementA(ConcreteElementA elementA)
+    + visitConcreteElementB(ConcreteElementB elementB)
+}
+
+Client --> Visitor
+Client --> ObjectStructure
+ObjectStructure --> Element
+@enduml

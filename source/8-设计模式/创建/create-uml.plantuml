@@ -1,4 +1,4 @@
-@startuml 单例模式
+@startuml singleton
 
 class Singleton {
     - {static} instance: Singleton
@@ -9,15 +9,17 @@ Singleton::getInstance *--> Singleton
 @enduml
 
 
+@startuml Singleton-1
 class Singleton {
     - {static} instance:Singleton = new Singleton()
     + getInstance(): Singleton
 }
 
 Singleton::getInstance *--> Singleton
+@enduml
 
 
-
+@startuml Singleton-2
 class Singleton {
     - {static} instance:Singleton
     + getInstance(): Singleton
@@ -28,4 +30,337 @@ note left of Singleton::"getInstance()"
     }
 end note
 Singleton::getInstance *--> Singleton
+@enduml
 
+
+@startuml 简单工厂
+abstract class Product{}
+class ProductFactory {
+    + createProudct(type): Product
+}
+Product <|-- ConcreteProductA
+Product <|-- ConcreteProductB
+
+ConcreteProductA <.. ProductFactory:create
+ConcreteProductB <.. ProductFactory:create
+
+class Client #palegreen
+ProductFactory <..[#red] Client:use
+Product <..[#red] Client:use
+@enduml
+
+@startuml 简单工厂例子
+interface Chart {
+    + display()
+}
+
+class HistogramChart{
+    + HistogramChart()
+    + display()
+}
+
+class LineChart{
+    + LineChart()
+    + display()
+}
+
+class PieChart{
+    + PieChart()
+    + display()
+}
+
+class ChartFactory {
+    + {static} createChart(type: String): Chart
+}
+note left of ChartFactory
+if("Histogram".equals(type)) {
+    return new HistogramChart();
+}
+else if("Line".equals(type)) {
+    return new LineChart();
+} 
+else if("Line".equals(type)) {
+    return new PieChart();
+} 
+else {...}
+end note
+
+Chart <|.. HistogramChart
+Chart <|.. LineChart
+Chart <|.. PieChart
+HistogramChart <.. ChartFactory:create
+LineChart <.. ChartFactory:create
+PieChart <.. ChartFactory:create
+
+class Client #palegreen
+ChartFactory <..[#red] Client:use
+Chart <..[#red] Client:use
+@enduml
+
+@startuml 工厂方法模式
+interface Product
+class ConcreteProductA implements Product
+class ConcreteProductB implements Product
+
+interface Factory{
+    + createProduct(): Product
+}
+class ConcreteFactoryA implements Factory{
+    + createProduct(): Product
+}
+class ConcreteFactoryB implements Factory{
+    + createProduct(): Product
+}
+
+ConcreteProductA <.. ConcreteFactoryA:create
+ConcreteProductB <.. ConcreteFactoryB:create
+
+class Client #palegreen
+Factory <..[#red] Client:use
+Client ..[#red]>  Product:use
+@enduml
+
+@startuml 工厂方法模式例子
+interface Logger
+class DatabaseLogger implements Logger
+class FileLogger implements Logger
+class SocketLogger implements Logger
+
+interface Factory{
+    + createProduct(): Logger
+}
+class DatabaseLoggerFactory{
+    + createProduct(): Logger
+}
+class FileLoggerFactory{
+    + createProduct(): Logger
+}
+class SocketLoggerFactory{
+    + createProduct(): Logger
+}
+
+DatabaseLoggerFactory ..|> Factory
+FileLoggerFactory ..|> Factory
+SocketLoggerFactory ..|> Factory
+
+DatabaseLogger <.. DatabaseLoggerFactory:create
+FileLogger <.. FileLoggerFactory:create
+SocketLogger <.. SocketLoggerFactory:create
+
+class Client #palegreen
+Logger <..[#red] Client:use
+Client ..[#red]>  Factory:use
+@enduml
+
+@startuml 抽象工厂模式
+interface ProductA {}
+interface ProductB {}
+
+ProductA ..|> ConcreteProductA1
+ProductA ..|> ConcreteProductA2
+ProductB ..|> ConcreteProductB1
+ProductB ..|> ConcreteProductB2
+
+
+interface Factory{
+    + createProductA(): ProductA
+    + createProductB(): ProductB
+}
+class ConcreteFactory1 {
+    + createProductA(): ProductA
+    + createProductB(): ProductB
+}
+Factory <|.. ConcreteFactory1
+class ConcreteFactory2 {
+    + createProductA(): ProductA
+    + createProductB(): ProductB
+}
+Factory <|.. ConcreteFactory2
+
+ConcreteProductA1 <.. ConcreteFactory1::createProductA:create
+ConcreteProductB1 <.. ConcreteFactory1::createProductB:create
+
+ConcreteProductA2 <.. ConcreteFactory2::createProductA:create
+ConcreteProductB2 <.. ConcreteFactory2::createProductB:create
+
+class Client #palegreen
+Client ..[#red]> ProductA
+Client ..[#red]> ProductB
+Factory <..[#red] Client
+@enduml
+
+@startuml 抽象工厂模式例子
+interface Sofa {}
+interface Chair {}
+
+Sofa ..|> ModernSofa
+Sofa ..|> ArtSofa
+Chair ..|> ModernChair
+Chair ..|> ArtChair
+
+
+interface Factory {
+    + createSofa(): Sofa
+    + createChair(): Chair
+}
+class ModernFactory {
+    + createSofa(): Sofa
+    + createChair(): Chair
+}
+Factory <|.. ModernFactory
+class ArtFactory {
+    + createSofa(): Sofa
+    + createChair(): Chair
+}
+Factory <|.. ArtFactory
+
+ModernSofa <.. ModernFactory::createSofa:create
+ModernChair <.. ModernFactory::createChair:create
+
+ArtSofa <.. ArtFactory::createSofa:create
+ArtChair <.. ArtFactory::createChair:create
+
+class Client #palegreen
+Client ..[#red]> Sofa
+Client ..[#red]> Chair
+Factory <..[#red] Client
+@enduml
+
+@startuml 原型模式
+interface Prototype {
+    + clone(): Prototype
+}
+
+class ConcretePrototypeA implements Prototype {
+    + clone(): Prototype
+}
+class ConcretePrototypeB implements Prototype {
+    + clone(): Prototype
+}
+
+class Client #palegreen {
+    + operation()
+}
+note left of Client::"operation()"
+    p = prototype.clone()
+end note
+
+Client --[#red]> Prototype
+@enduml
+
+@startuml 建造者模式
+interface Builder {
+    + buildPartA()
+    + buildPartB()
+    + buildPartC()
+    + getResult()
+}
+
+class ConcreteBuilderA implements Builder {
+    - result: ProductA
+    + buildPartA()
+    + buildPartB()
+    + buildPartC()
+    + getResult(): ProductA
+}
+
+class ConcreteBuilderB implements Builder {
+    - result: ProductB
+    + buildPartA()
+    + buildPartB()
+    + buildPartC()
+    + getResult(): ProductB
+}
+
+ConcreteBuilderA --> ProductA 
+ConcreteBuilderB --> ProductB 
+
+class Director {
+    - builder: Builder
+    + build()
+}
+Director::builder o--> Builder
+note left of Director::"build()"
+    builder.buildPartA();
+    builder.buildPartB();
+    builder.buildPartC();
+    builder.getResult();
+end note
+
+class Client #palegreen
+Client ..[#red]> Director
+Client ..[#red]> ConcreteBuilderA
+@enduml
+
+@startuml 建造者模式实现
+interface PlayerBuilder {
+    + buildMenu()
+    + needMenu(): boolean
+    --
+    + buildPlayList()
+    + needPlayList(): boolean
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+class CompletedPlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): true
+    --
+    + buildPlayList()
+    + needPlayList(): true
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class MemoryPlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): false
+    --
+    + buildPlayList()
+    + needPlayList(): boolean
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class SimplePlayerBuilder implements PlayerBuilder{
+    - player: Player
+    + buildMenu()
+    + needMenu(): false
+    --
+    + buildPlayList()
+    + needPlayList(): false
+    --
+    + buildWidow()
+    + buildControlBar()
+    + getResult(): Player
+}
+
+class Director {
+    - builder: PlayerBuilder
+    + build(): Player
+}
+Director::builder o--> PlayerBuilder
+note left of Director::"build()"
+    if(builder.needMenu()){
+        builder.buildMenu();
+    }
+    if(builder.needPlayList()){
+        builder.buildPlayList()
+    }
+    builder.buildWidow();
+    builder.buildControlBar();
+    return builder.getResult();
+end note
+
+class Client #palegreen
+Client ..[#red]> Director
+Client ..[#red]> CompletedPlayerBuilder
+@enduml
