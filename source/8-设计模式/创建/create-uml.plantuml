@@ -1,23 +1,23 @@
-## 单例模式
-```uml
+@startuml 单例模式
+
 class Singleton {
     - {static} instance: Singleton
     + getInstance(): Singleton
 }
 
 Singleton::getInstance *--> Singleton
-```
+@enduml
 
-```uml
+
 class Singleton {
     - {static} instance:Singleton = new Singleton()
     + getInstance(): Singleton
 }
 
 Singleton::getInstance *--> Singleton
-```
 
-```uml
+
+
 class Singleton {
     - {static} instance:Singleton
     + getInstance(): Singleton
@@ -28,4 +28,4 @@ note left of Singleton::"getInstance()"
     }
 end note
 Singleton::getInstance *--> Singleton
-```
+
