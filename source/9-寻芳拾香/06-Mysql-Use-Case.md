@@ -1,6 +1,7 @@
 # Mysql-Use-Case
 
 ## 递归查询
+
 ```sql
 WITH RECURSIVE cte AS (
     SELECT *
