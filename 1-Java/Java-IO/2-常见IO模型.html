@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="&lt;no title&gt;" href="3-Java-NIO.html" /><link rel="prev" title="Java OIO" href="1-Java-OIO.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>&lt;no title&gt; - 文档</title>
+        <title>常见 IO 模型 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -216,7 +216,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Java 相关</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-Base/0-index.html">Java 基础</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 基础</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/a1-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">问题汇总</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java 四种引用</a></li>
@@ -225,8 +225,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Java IO</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1-Java-OIO.html">Java OIO</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">常见 IO 模型</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -361,13 +362,73 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <section class="tex2jax_ignore mathjax_ignore" id="io">
+<h1>常见 IO 模型<a class="headerlink" href="#io" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>概念说明<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>谈及 IO，必然少不了涉及 <strong>阻塞、非阻塞、同步、异步</strong> 这四个术语，到底这些术语代表什么意思？</p>
+<section id="id2">
+<h3>阻塞与非阻塞 IO<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>其实阻塞和非阻塞是站在用户程序的角度去定义的，当用户程序发起 IO 调用后：</p>
+<ul class="simple">
+<li><p>用户程序<strong>必须等待</strong> IO 完成，才能执行后续操作，那么就称这个 IO 调用是 <strong>阻塞 IO</strong></p></li>
+<li><p>用户程序<strong>无须等待</strong> IO 完成就立即返回，用户程序可以执行后续操作，那么就称这个 IO 调</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>同步与异步 IO<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>同步与异步是站在操作系统的角度去定义的，用户程序发起系统调用（<code class="docutils literal notranslate"><span class="pre">sysycall</span></code>）进行 IO 操作：</p>
+<ul class="simple">
+<li><p>OS 需要完成整个 IO 操作后，才会返回系统调用，这种 IO 就是 <strong>同步 IO</strong>.</p></li>
+<li><p>OS 无需完成整个 IO 操作，而是立即返回系统调用，未来完成整个 IO 操作后，再使用某种方式通知用户程序，这种 IO 就是 <strong>异步 IO</strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>阻塞 IO<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>Java 的 <code class="docutils literal notranslate"><span class="pre">java.io</span></code> 包下的类都是这种阻塞 IO.</p>
+<p><img alt="alt text" src="../../_images/image-3.png" /></p>
+</section>
+<section id="id5">
+<h2>同步非阻塞 IO<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-4.png" /></p>
+<p>不断地轮询内核，这将占用大量的CPU时间，效率低下</p>
+</section>
+<section id="id6">
+<h2>IO 多路复用<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>IO 多路复用技术是目前使用最广泛的 IO 模型，比如：</p>
+<ul class="simple">
+<li><p>select</p></li>
+<li><p>poll</p></li>
+<li><p>epoll</p></li>
+</ul>
+<p>IO 多路复用其实是一种 <strong>同步非阻塞 IO</strong>，但在系统调用中做了优化，支持一次系统调用，检查多个 IO 文件描述符的状态，上述系统调用的区别主要在于其内部存储多个 IO 文件描述符的结构不同，从而导致检查多个 IO 的状态的时间复杂度不同。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p><strong>select</strong> 本质上是扫描<code class="docutils literal notranslate"><span class="pre">fds</span></code>这个 bitmap，逐一检查，是否有需要处理的事件，64位 OS 最多支持 2048 个文件描述符(32位 OS 支持1024个).</p></li>
+<li><p><strong>poll</strong> poll其实内部实现基本跟select一样，区别在于它们底层组织<code class="docutils literal notranslate"><span class="pre">fd[]</span></code>的数据结构不太一样，pollfd 结构没有固定长度的数组.</p></li>
+<li><p><strong>epoll</strong></p></li>
+</ul>
+</div>
+<p><img alt="alt text" src="../../_images/image-5.png" /></p>
+</section>
+<section id="id7">
+<h2>信号驱动 IO<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-6.png" /></p>
+</section>
+<section id="id8">
+<h2>异步 IO<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-7.png" /></p>
+</section>
+</section>
+
         </article>
       </div>
       <footer>
@@ -418,8 +479,36 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">常见 IO 模型</a><ul>
+<li><a class="reference internal" href="#id1">概念说明</a><ul>
+<li><a class="reference internal" href="#id2">阻塞与非阻塞 IO</a></li>
+<li><a class="reference internal" href="#id3">同步与异步 IO</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">阻塞 IO</a></li>
+<li><a class="reference internal" href="#id5">同步非阻塞 IO</a></li>
+<li><a class="reference internal" href="#id6">IO 多路复用</a></li>
+<li><a class="reference internal" href="#id7">信号驱动 IO</a></li>
+<li><a class="reference internal" href="#id8">异步 IO</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

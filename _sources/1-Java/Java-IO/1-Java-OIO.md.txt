@@ -173,11 +173,4 @@ print(Object)
 
 InputStreamReader 继承了 Reader，使用装饰器模式，装饰一个 InputStream ，从而可以使原来的字节流具备字符操作的能力。OutputStreamWriter 同理。
 
-```uml
-abstract class Reader
-abstract class InputStream
-
-class InputStreamReader extends Reader {
-    - 
-}
-```
+![InputStreamReader](InputStreamReader.png)
