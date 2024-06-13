@@ -392,13 +392,60 @@
 </section>
 <section id="id3">
 <h2>内部结构<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>操作 ThreadLocal 中的状态（变量） 本质上是操作当前线程的 <code class="docutils literal notranslate"><span class="pre">threadLocals</span></code>（<code class="docutils literal notranslate"><span class="pre">ThreadLocal.ThreadLocalMap</span></code>） 属性,  <code class="docutils literal notranslate"><span class="pre">threadLocals</span></code> 是 <code class="docutils literal notranslate"><span class="pre">ThreadLocal</span></code> 类中定义的一个哈希表，<strong>使用线性探测</strong>处理哈希冲突，ThreadLocal 对象作为 Key, ThreadLocal 里存储的状态（变量）作为 Value。</p>
+<p>操作 ThreadLocal 中的状态（变量） 本质上是操作当前线程的 <code class="docutils literal notranslate"><span class="pre">threadLocals</span></code>（<code class="docutils literal notranslate"><span class="pre">ThreadLocal.ThreadLocalMap</span></code>） 属性,  <code class="docutils literal notranslate"><span class="pre">threadLocals</span></code> 是 <code class="docutils literal notranslate"><span class="pre">ThreadLocal</span></code> 类中定义的一个哈希表，<strong>使用线性探测</strong>处理哈希冲突<a class="footnote-reference brackets" href="#id6" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>，ThreadLocal 对象作为 Key, ThreadLocal 里存储的状态（变量）作为 Value。</p>
 <p><img alt="threadlocalmap" src="../../_images/threadlocalmap.png" /></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// ThreadLocal.set()</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ThreadLocalMap</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getMap</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">map</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">map</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">createMap</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// // ThreadLocal.remove()</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">remove</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">ThreadLocalMap</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getMap</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span>
+<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="n">m</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Entry</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Entry</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/** The value associated with this ThreadLocal. */</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Entry</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+<span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
-<section id="id4">
-<h2>内存泄漏<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<p>ThreadLocalMap Entry 的 key 是</p>
-<p>(哈希表处理冲突)[https://zh.wikipedia.org/zh-cn/%E5%93%88%E5%B8%8C%E8%A1%A8#%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81]</p>
+<section id="id5">
+<h2>内存泄漏<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>内存泄漏的根本原因是在一个声明周期很长的 Thread 中，总是定义新的 ThreadLocal （不断产生新的 Entry 对象，且不会被回收），并存放状态，但是没有进行手动 remove()。</p>
+<p><img alt="thread-local-memory" src="../../_images/threadlocal-memory.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>ThreadLocal 内存泄漏是因为 Entry Key 使用了弱引用吗？</p>
+<p>网上流传如是说，但是仔细分析后，就会发现这种说法难以自圆其说，实际上：</p>
+<ul class="simple">
+<li><p>Entry 的 key（ThreadLocal实例） 使用了弱引用，在没有其他强引用时，就可以被 GC 回收，反而减轻了内存泄漏的程度（如果正在发生ThreadLocal内存泄漏）。</p></li>
+<li><p>Entry 的 Value 是强引用，只要 Thread 实例还存活着，其属性 threadLocals 是 ThreadLocalMap 的强引用， ThreadLocalMap 实例中又包含指向 Entry 的强引用，Entry 又包含指向 Value 的强引用，Value 对象就不会被 GC 回收，所以不手动调用 remove()，才是发生内存泄漏的根本原因。</p></li>
+</ul>
+</div>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<p>哈希表处理冲突. <a class="reference external" href="https://zh.wikipedia.org/zh-cn/%E5%93%88%E5%B8%8C%E8%A1%A8#%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81">zh.wikipedia.org</a></p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -468,7 +515,7 @@
 <li><a class="reference internal" href="#id1">使用方式</a></li>
 <li><a class="reference internal" href="#id2">使用场景</a></li>
 <li><a class="reference internal" href="#id3">内部结构</a></li>
-<li><a class="reference internal" href="#id4">内存泄漏</a></li>
+<li><a class="reference internal" href="#id5">内存泄漏</a></li>
 </ul>
 </li>
 </ul>
