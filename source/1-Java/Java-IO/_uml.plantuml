@@ -1,0 +1,56 @@
+@startmindmap 流向
+* 流向
+    * 输入
+        * InputStream
+        * Reader
+
+    * 输出
+        * OutputStream
+        * Writer
+@endmindmap
+
+@startmindmap 传输方式
+* 传输方式
+    * 字符流
+        * Reader
+        * Writer
+    * 字节流
+        * InputStream
+        * OutputStream
+@endmindmap
+
+@startmindmap 操作方式
+* 操作方式
+    * 文件 File
+        * FileInputStream
+        * FileOutputStream
+        * FileReader
+        * FileWriter
+    * 数组 Array
+        * ByteArrayInputStream
+        * ByteArrayOutputStream
+        * CharArrayReader
+        * CharArrayWriter
+    * 管道操作 Piped
+        * PipedInputStream
+        * PipedOutputStream
+        * PipedReader
+        * PipedWriter
+    * 基本数据类型 Data
+        * DataInputStream
+        * DataOutputStream
+    * 缓冲操作 Buffered
+        * BufferedInputStream
+        * BufferedOutputStream
+        * BufferedReader
+        * BufferedWriter
+    * 打印 Print
+        * PrintOutputStream
+        * PrintWriter
+    * 对象序列化与反序列化 Object
+        * ObjectInputStream
+        * ObjectOutputStream
+    * 转换 
+        * InputStreamReader
+        * OutputStreamWriter
+@endmindmap
