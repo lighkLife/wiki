@@ -54,3 +54,26 @@
         * InputStreamReader
         * OutputStreamWriter
 @endmindmap
+
+@startuml InputStreamReader
+abstract class Reader
+abstract class InputStream
+
+class InputStreamReader extends Reader {
+    - sd: StreamDecoder
+    + InputStreamReader(InputStream in)
+}
+note right of InputStreamReader::"InputStreamReader(InputStream in)"
+    Charset cs = Charset.defaultCharset();
+    sd = StreamDecoder.forInputStreamReader(in, lockFor(this), cs);
+end note 
+
+InputStreamReader *--> StreamDecoder 
+
+class StreamDecoder extends Reader {
+    - in: InputStream
+    + StreamDecoder(InputStream in, Object lock, Charset cs)
+}
+
+StreamDecoder o-->  InputStream
+@enduml
