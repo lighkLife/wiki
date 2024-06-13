@@ -225,7 +225,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/1-Java-OIO.html">Java OIO</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -377,14 +378,14 @@
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>单例模式（Singleton Pattern）：确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，
 这个类称为单例类，它提供全局访问的方法。</p>
-<p><img alt="单例模式" src="../../_images/image.png" /></p>
+<p><img alt="单例模式" src="../../_images/image1.png" /></p>
 </section>
 <section id="id4">
 <h2>实现方式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
 <h3>饿汉模式<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>在定义静态变量时，直接实例化单例对象。</p>
-<p><img alt="饿汉模式" src="../../_images/image-1.png" /></p>
+<p><img alt="饿汉模式" src="../../_images/image-11.png" /></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">EagerSingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="p">();</span>
 
@@ -399,7 +400,7 @@
 <section id="id6">
 <h3>懒汉模式<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>在真正使用时，也就是<code class="docutils literal notranslate"><span class="pre">getInstance()</span></code>方法被调用时，才去初始化单例对象。也称为“延迟加载”技术。</p>
-<p><img alt="懒汉模式" src="../../_images/image-2.png" /></p>
+<p><img alt="懒汉模式" src="../../_images/image-21.png" /></p>
 </section>
 </section>
 <section id="id7">

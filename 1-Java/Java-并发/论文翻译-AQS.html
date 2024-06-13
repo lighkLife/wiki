@@ -225,7 +225,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/1-Java-OIO.html">Java OIO</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Java 并发</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -376,14 +377,14 @@
 <h2>ABSTRACT 摘要<a class="headerlink" href="#abstract" title="Link to this heading">¶</a></h2>
 <p>Most synchronizers (locks, barriers, etc.) in the J2SE1.5
 java.util.concurrent package are constructed using a small
-framework based on class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchro-nizer</span></code>.
+framework based on class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code>.
 This framework provides common mechanics for
 atomically managing synchronization state, blocking and
 unblocking threads, and queuing. The paper describes the
 rationale, design, implementation, usage, and performance of this
 framework.</p>
 <p>在 J2SE1.5 的 java.util.concurrent 包中，大多数同步器（locks、barriers 等）
-都是使用一个基于<code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchro-nizer</span></code> 类的小型框架构建的。
+都是使用一个基于<code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> 类的小型框架构建的。
 这个框架为同步状态的原子化管理、线程的阻塞和解除、队列操作提供了通用机制。
 这篇论文阐述了这个框架的原理、设计、实现、使用和性能。</p>
 </section>
@@ -428,14 +429,14 @@ Further, it is conceptually unattractive. If none of these constructs
 are intrinsically more primitive than the others, developers
 should not be compelled to arbitrarily choose one of them as a
 basis for building others. Instead, JSR166 establishes a small
-framework centered on class AbstractQueuedSynchro-
-nizer, that provides common mechanics that are used by most
+framework centered on class AbstractQueuedSynchronizer,
+that provides common mechanics that are used by most
 of the provided synchronizers in the package, as well as other
 classes that users may define themselves.</p>
 <p>众所周知(见例子, <a class="footnote-reference brackets" href="#id27" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) ，大多数同步器之间可以互相实现。例如，可以使用重入锁实现信号量，反之亦然。然而，
 这样做做往往相当复杂，开销过大，不灵活，只能作为次等的工程选择。此外，这在概念上也不吸引人。
 如果没有一个本质上更基本的同步器，那么开发人员就不该被迫任选一种同步器，作为构建其他同步器的基础。
-所以，JSR166 建立了一个以 <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchro-nizer</span></code> 类为中心的小型框架，该类为并发包中的
+所以，JSR166 建立了一个以 <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> 类为中心的小型框架，该类为并发包中的
 大多数同步器提供了一个通用的机制，也可被用户自定义类使用。</p>
 <p>The remainder of this paper discusses the requirements for this
 framework, the main ideas behind its design and implementation,
@@ -619,8 +620,8 @@ apply.</p>
 这个框架（而不是从头开始构建同步器）。</p>
 <section id="synchronization-state">
 <h3>3.1 Synchronization State 同步状态<a class="headerlink" href="#synchronization-state" title="Link to this heading">¶</a></h3>
-<p>Class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> maintains synchro-
-nization state using only a single (32bit) <code class="docutils literal notranslate"><span class="pre">int</span></code>, and exports
+<p>Class <code class="docutils literal notranslate"><span class="pre">AbstractQueuedSynchronizer</span></code> maintains synchronization
+state using only a single (32bit) <code class="docutils literal notranslate"><span class="pre">int</span></code>, and exports
 <code class="docutils literal notranslate"><span class="pre">getState</span></code>, <code class="docutils literal notranslate"><span class="pre">setState</span></code>, and <code class="docutils literal notranslate"><span class="pre">compareAndSetState</span></code>
 operations to access and update this state. These methods in turn
 rely on <code class="docutils literal notranslate"><span class="pre">java.util.concurrent.atomic</span></code> support providing JSR133

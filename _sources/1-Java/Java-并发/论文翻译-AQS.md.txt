@@ -8,7 +8,7 @@
 
 Most synchronizers (locks, barriers, etc.) in the J2SE1.5
 java.util.concurrent package are constructed using a small
-framework based on class `AbstractQueuedSynchro-nizer`.
+framework based on class `AbstractQueuedSynchronizer`.
 This framework provides common mechanics for
 atomically managing synchronization state, blocking and
 unblocking threads, and queuing. The paper describes the
@@ -16,7 +16,7 @@ rationale, design, implementation, usage, and performance of this
 framework.
 
 在 J2SE1.5 的 java.util.concurrent 包中，大多数同步器（locks、barriers 等）
-都是使用一个基于`AbstractQueuedSynchro-nizer` 类的小型框架构建的。
+都是使用一个基于`AbstractQueuedSynchronizer` 类的小型框架构建的。
 这个框架为同步状态的原子化管理、线程的阻塞和解除、队列操作提供了通用机制。
 这篇论文阐述了这个框架的原理、设计、实现、使用和性能。
 
@@ -63,15 +63,15 @@ Further, it is conceptually unattractive. If none of these constructs
 are intrinsically more primitive than the others, developers
 should not be compelled to arbitrarily choose one of them as a
 basis for building others. Instead, JSR166 establishes a small
-framework centered on class AbstractQueuedSynchro-
-nizer, that provides common mechanics that are used by most
+framework centered on class AbstractQueuedSynchronizer,
+that provides common mechanics that are used by most
 of the provided synchronizers in the package, as well as other
 classes that users may define themselves.
 
 众所周知(见例子, [^2]) ，大多数同步器之间可以互相实现。例如，可以使用重入锁实现信号量，反之亦然。然而，
 这样做做往往相当复杂，开销过大，不灵活，只能作为次等的工程选择。此外，这在概念上也不吸引人。
 如果没有一个本质上更基本的同步器，那么开发人员就不该被迫任选一种同步器，作为构建其他同步器的基础。
-所以，JSR166 建立了一个以 `AbstractQueuedSynchro-nizer` 类为中心的小型框架，该类为并发包中的
+所以，JSR166 建立了一个以 `AbstractQueuedSynchronizer` 类为中心的小型框架，该类为并发包中的
 大多数同步器提供了一个通用的机制，也可被用户自定义类使用。
 
 The remainder of this paper discusses the requirements for this
@@ -277,8 +277,8 @@ apply.
 
 ### 3.1 Synchronization State 同步状态
 
-Class `AbstractQueuedSynchronizer` maintains synchro-
-nization state using only a single (32bit) `int`, and exports
+Class `AbstractQueuedSynchronizer` maintains synchronization
+ state using only a single (32bit) `int`, and exports
 `getState`, `setState`, and `compareAndSetState`
 operations to access and update this state. These methods in turn
 rely on `java.util.concurrent.atomic` support providing JSR133
