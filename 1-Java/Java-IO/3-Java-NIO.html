@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Java 并发" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html" /><link rel="prev" title="常见 IO 模型" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>&lt;no title&gt; - 文档</title>
+        <title>Java NIO - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -216,7 +216,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Java 相关</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-Base/0-index.html">Java 基础</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 基础</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/a1-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">问题汇总</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java 四种引用</a></li>
@@ -225,9 +225,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Java IO</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1-Java-OIO.html">Java OIO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html">常见 IO 模型</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Java NIO</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -362,13 +363,197 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <section class="tex2jax_ignore mathjax_ignore" id="java-nio">
+<h1>Java NIO<a class="headerlink" href="#java-nio" title="Link to this heading">¶</a></h1>
+<p>NIO 就是非阻塞 IO，Java NIO 相关的类都在<code class="docutils literal notranslate"><span class="pre">java.nio</span></code>包下。主要包含：</p>
+<p><img alt="alt text" src="../../_images/image-8.png" /></p>
+<ul class="simple">
+<li><p>Channels 非阻塞读写的通道，实际上是文件、socket 连接（文件描述符）</p></li>
+<li><p>Buffers 缓冲区数组，可以直接被 Channels 读写</p></li>
+<li><p>Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件</p></li>
+<li><p>SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel</p></li>
+</ul>
+<section id="nio-socket-server">
+<h2>NIO Socket Server<a class="headerlink" href="#nio-socket-server" title="Link to this heading">¶</a></h2>
+<p>以下使用 <a class="reference external" href="https://www.cs.oswego.edu/~dl/">Doug Lea</a> 老爷子的 Scalable IO in Java [1^] 演讲搞中的例子，来使用 JAVA NIO 实现一个简单的 NIO Socket Server。</p>
+<section id="set-up">
+<h3>Set up<a class="headerlink" href="#set-up" title="Link to this heading">¶</a></h3>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Reactor</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">Selector</span><span class="w"> </span><span class="n">selector</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ServerSocketChannel</span><span class="w"> </span><span class="n">serverSocket</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos"> 6</span><span class="cm">     * 1. Set up</span>
+<span class="linenos"> 7</span><span class="cm">     */</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Reactor</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="c1">// SelectorProvider provider = SelectorProvider.provider();</span>
+<span class="linenos">10</span><span class="w">        </span><span class="c1">// AbstractSelector selector = provider.openSelector();</span>
+<span class="linenos">11</span><span class="w">        </span><span class="c1">// ServerSocketChannel serverSocket = provider.openServerSocketChannel();</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="n">selector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Selector</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="linenos">14</span><span class="w">        </span><span class="n">serverSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ServerSocketChannel</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="linenos">15</span><span class="w">        </span><span class="n">serverSocket</span><span class="p">.</span><span class="na">configureBlocking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="linenos">16</span><span class="w">        </span><span class="n">SelectionKey</span><span class="w"> </span><span class="n">selectionKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serverSocket</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_ACCEPT</span><span class="p">);</span>
+<span class="hll"><span class="linenos">17</span><span class="w">        </span><span class="n">selectionKey</span><span class="p">.</span><span class="na">attach</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Acceptor</span><span class="p">());</span>
+</span><span class="linenos">18</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">19</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>初始化主要是创建查询器和服务端 Socket，主要包含以下操作：</p>
+<ul class="simple">
+<li><p>打开一个事件查询器 Selector</p></li>
+<li><p>打开一个服务端 Socket 通道，用来监听客户端的 TCP 连接</p></li>
+<li><p>在服务端 Socket 通道上注册 Selector，查询<code class="docutils literal notranslate"><span class="pre">OP_ACCEPT</span></code>事件</p></li>
+<li><p>在对应 SelectionKey 上绑定 Acceptor， 处理建立的连接</p></li>
+</ul>
+</section>
+<section id="dispatch-loop">
+<h3>Dispatch Loop<a class="headerlink" href="#dispatch-loop" title="Link to this heading">¶</a></h3>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="c1">// class Reactor continued</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos"> 4</span><span class="cm">     * 2. Dispatch Loop</span>
+<span class="linenos"> 5</span><span class="cm">     */</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="nd">@Override</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="c1">// normally in a new Thread</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Thread</span><span class="p">.</span><span class="na">interrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">                </span><span class="c1">// blocking, util at least one channel is selected</span>
+<span class="linenos">12</span><span class="w">                </span><span class="n">selector</span><span class="p">.</span><span class="na">select</span><span class="p">();</span>
+<span class="linenos">13</span><span class="w">                </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">SelectionKey</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">selector</span><span class="p">.</span><span class="na">selectedKeys</span><span class="p">();</span>
+<span class="linenos">14</span><span class="w">                </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">SelectionKey</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">selected</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
+<span class="linenos">15</span><span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos">16</span><span class="w">                    </span><span class="n">dispatch</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">());</span>
+</span><span class="linenos">17</span><span class="w">                    </span><span class="n">selected</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+<span class="linenos">18</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">19</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">20</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">21</span><span class="w">            </span><span class="c1">// handle ex</span>
+<span class="linenos">22</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">23</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">24</span>
+<span class="hll"><span class="linenos">25</span><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="n">SelectionKey</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">26</span><span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Runnable</span><span class="p">)</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">attachment</span><span class="p">();</span>
+<span class="linenos">27</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">runnable</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">28</span><span class="w">            </span><span class="n">runnable</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="linenos">29</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">30</span><span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>这一部主要是持续监听客户端的连接，即有新的 <code class="docutils literal notranslate"><span class="pre">OP_ACCEPT</span></code> 事件后，就运行对应 SelectionKey 中绑定的处理逻辑。</p>
+</section>
+<section id="acceptor">
+<h3>Acceptor<a class="headerlink" href="#acceptor" title="Link to this heading">¶</a></h3>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="c1">// class Reactor continued</span>
+<span class="linenos"> 2</span><span class="w">    </span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos"> 4</span><span class="cm">     * 3. Acceptor</span>
+<span class="linenos"> 5</span><span class="cm">     */</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Acceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nd">@Override</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">                </span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serverSocket</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+<span class="linenos">11</span><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">channel</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos">12</span><span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">Handler</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">channel</span><span class="p">);</span>
+</span><span class="linenos">13</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">14</span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">15</span><span class="w">                </span><span class="c1">// handle ex</span>
+<span class="linenos">16</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">17</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">18</span><span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>这一步就是服务端同意客户端发起的连接建立请求，并产生一个服务端和客户端之间的 SocketChannel，然后分配一个 Handler 去专门处理这个连接上读写操作。</p>
+</section>
+<section id="handler-setup">
+<h3>Handler Setup<a class="headerlink" href="#handler-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Handler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_IN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_OUT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SelectionKey</span><span class="w"> </span><span class="n">selectionKey</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="p">.</span><span class="na">allocate</span><span class="p">(</span><span class="n">MAX_IN</span><span class="p">);</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="p">.</span><span class="na">allocate</span><span class="p">(</span><span class="n">MAX_OUT</span><span class="p">);</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">READING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SENDING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">READING</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Handler</span><span class="p">(</span><span class="n">Selector</span><span class="w"> </span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">socketChannel</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">14</span><span class="w">        </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socketChannel</span><span class="p">;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="n">socket</span><span class="p">.</span><span class="na">configureBlocking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="linenos">16</span><span class="w">        </span><span class="c1">// Optionally try first read now</span>
+<span class="hll"><span class="linenos">17</span><span class="w">        </span><span class="n">selectionKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span class="hll"><span class="linenos">18</span><span class="w">        </span><span class="n">selectionKey</span><span class="p">.</span><span class="na">attach</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class="hll"><span class="linenos">19</span><span class="w">        </span><span class="n">selectionKey</span><span class="p">.</span><span class="na">interestOps</span><span class="p">(</span><span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_READ</span><span class="p">);</span>
+</span><span class="hll"><span class="linenos">20</span><span class="w">        </span><span class="n">selector</span><span class="p">.</span><span class="na">wakeup</span><span class="p">();</span>
+</span><span class="linenos">21</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">inputIsComplete</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos">24</span><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">outputIsComplete</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos">25</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos">26</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="request-handling">
+<h3>Request handling<a class="headerlink" href="#request-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// class Handler continued </span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="nd">@Override</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos"> 5</span><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">READING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="w">                </span><span class="n">read</span><span class="p">();</span>
+</span><span class="linenos"> 7</span><span class="w">            </span><span class="p">}</span>
+<span class="hll"><span class="linenos"> 8</span><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SENDING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="w">                </span><span class="n">send</span><span class="p">();</span>
+</span><span class="linenos">10</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">11</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">12</span><span class="w">            </span><span class="cm">/* ... */</span>
+<span class="linenos">13</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">14</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">15</span>
+<span class="hll"><span class="linenos">16</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">read</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">17</span><span class="w">        </span><span class="n">socket</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="linenos">18</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputIsComplete</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">19</span><span class="w">            </span><span class="n">process</span><span class="p">();</span>
+<span class="linenos">20</span><span class="w">            </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENDING</span><span class="p">;</span>
+<span class="linenos">21</span><span class="w">            </span><span class="c1">// Normally also do first write now</span>
+<span class="linenos">22</span><span class="w">            </span><span class="n">selectionKey</span><span class="p">.</span><span class="na">interestOps</span><span class="p">(</span><span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_WRITE</span><span class="p">);</span>
+<span class="linenos">23</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">24</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">send</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">27</span><span class="w">        </span><span class="n">socket</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+<span class="linenos">28</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">outputIsComplete</span><span class="p">())</span><span class="w"> </span><span class="n">sk</span><span class="p">.</span><span class="na">cancel</span><span class="p">();</span>
+<span class="linenos">29</span><span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="channels">
+<h2>Channels<a class="headerlink" href="#channels" title="Link to this heading">¶</a></h2>
+</section>
+<section id="buffers">
+<h2>Buffers<a class="headerlink" href="#buffers" title="Link to this heading">¶</a></h2>
+</section>
+<section id="selectors">
+<h2>Selectors<a class="headerlink" href="#selectors" title="Link to this heading">¶</a></h2>
+</section>
+<section id="selectionkeys">
+<h2>SelectionKeys<a class="headerlink" href="#selectionkeys" title="Link to this heading">¶</a></h2>
+<p>[1^]: <a class="reference external" href="https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java. Doug Lea. State University of New York at Oswego</a></p>
+</section>
+</section>
+
         </article>
       </div>
       <footer>
@@ -419,8 +604,38 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Java NIO</a><ul>
+<li><a class="reference internal" href="#nio-socket-server">NIO Socket Server</a><ul>
+<li><a class="reference internal" href="#set-up">Set up</a></li>
+<li><a class="reference internal" href="#dispatch-loop">Dispatch Loop</a></li>
+<li><a class="reference internal" href="#acceptor">Acceptor</a></li>
+<li><a class="reference internal" href="#handler-setup">Handler Setup</a></li>
+<li><a class="reference internal" href="#request-handling">Request handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#channels">Channels</a></li>
+<li><a class="reference internal" href="#buffers">Buffers</a></li>
+<li><a class="reference internal" href="#selectors">Selectors</a></li>
+<li><a class="reference internal" href="#selectionkeys">SelectionKeys</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
