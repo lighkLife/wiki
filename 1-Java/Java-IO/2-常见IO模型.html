@@ -414,8 +414,8 @@
 <p class="admonition-title">备注</p>
 <ul class="simple">
 <li><p><strong>select</strong> 本质上是扫描<code class="docutils literal notranslate"><span class="pre">fds</span></code>这个 bitmap，逐一检查，是否有需要处理的事件，64位 OS 最多支持 2048 个文件描述符(32位 OS 支持1024个).</p></li>
-<li><p><strong>poll</strong> poll其实内部实现基本跟select一样，区别在于它们底层组织<code class="docutils literal notranslate"><span class="pre">fd[]</span></code>的数据结构不太一样，pollfd 结构没有固定长度的数组.</p></li>
-<li><p><strong>epoll</strong></p></li>
+<li><p><strong>poll</strong> 其实内部实现基本跟 select 一样，区别在于它们底层组织<code class="docutils literal notranslate"><span class="pre">fd[]</span></code>的数据结构不太一样，pollfd 结构没有固定长度的数组.</p></li>
+<li><p><strong>epoll</strong> 是前两者的升级版，将事件注册与监听功能解耦，使用红黑树维护 socket 文件描述符，增加就绪的描述符链表 rdlist</p></li>
 </ul>
 </div>
 <p><img alt="alt text" src="../../_images/image-5.png" /></p>

@@ -371,17 +371,33 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="java-nio">
 <h1>Java NIO<a class="headerlink" href="#java-nio" title="Link to this heading">¶</a></h1>
+<section id="nio-support">
+<h2>nio Support<a class="headerlink" href="#nio-support" title="Link to this heading">¶</a></h2>
 <p>NIO 就是非阻塞 IO，Java NIO 相关的类都在<code class="docutils literal notranslate"><span class="pre">java.nio</span></code>包下。主要包含：</p>
 <p><img alt="alt text" src="../../_images/image-8.png" /></p>
-<ul class="simple">
-<li><p>Channels 非阻塞读写的通道，实际上是文件、socket 连接（文件描述符）</p></li>
-<li><p>Buffers 缓冲区数组，可以直接被 Channels 读写</p></li>
-<li><p>Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件</p></li>
-<li><p>SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel</p></li>
-</ul>
-<section id="nio-socket-server">
-<h2>NIO Socket Server<a class="headerlink" href="#nio-socket-server" title="Link to this heading">¶</a></h2>
-<p>以下使用 <a class="reference external" href="https://www.cs.oswego.edu/~dl/">Doug Lea</a> 老爷子的 Scalable IO in Java [1^] 演讲搞中的例子，来使用 JAVA NIO 实现一个简单的 NIO Socket Server。</p>
+<section id="channels">
+<h3>Channels<a class="headerlink" href="#channels" title="Link to this heading">¶</a></h3>
+<p>Channels 非阻塞读写的通道，实际上是文件或 socket 连接（文件描述符）。</p>
+<p>以 SocketChannelImpl 为例</p>
+<p><img alt="alt text" src="../../_images/image-10.png" /></p>
+</section>
+<section id="buffers">
+<h3>Buffers<a class="headerlink" href="#buffers" title="Link to this heading">¶</a></h3>
+<p>Buffers 缓冲区数组，可以直接被 Channels 读写</p>
+</section>
+<section id="selectors">
+<h3>Selectors<a class="headerlink" href="#selectors" title="Link to this heading">¶</a></h3>
+<p>Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件</p>
+</section>
+<section id="selectionkeys">
+<h3>SelectionKeys<a class="headerlink" href="#selectionkeys" title="Link to this heading">¶</a></h3>
+<p>SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel</p>
+</section>
+</section>
+<section id="java-nio-reactor">
+<h2>Java NIO 实现 Reactor<a class="headerlink" href="#java-nio-reactor" title="Link to this heading">¶</a></h2>
+<p>以下使用 <a class="reference external" href="https://www.cs.oswego.edu/~dl/">Doug Lea</a> 老爷子的 Scalable IO in Java [1^] 演讲搞中的例子，来使用 JAVA NIO 实现单线程的 reactor 模型。</p>
+<p><img alt="alt text" src="../../_images/image-9.png" /></p>
 <section id="set-up">
 <h3>Set up<a class="headerlink" href="#set-up" title="Link to this heading">¶</a></h3>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Reactor</span><span class="w"> </span><span class="p">{</span>
@@ -537,20 +553,8 @@
 <span class="linenos">29</span><span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="channels">
-<h2>Channels<a class="headerlink" href="#channels" title="Link to this heading">¶</a></h2>
-</section>
-<section id="buffers">
-<h2>Buffers<a class="headerlink" href="#buffers" title="Link to this heading">¶</a></h2>
-</section>
-<section id="selectors">
-<h2>Selectors<a class="headerlink" href="#selectors" title="Link to this heading">¶</a></h2>
-</section>
-<section id="selectionkeys">
-<h2>SelectionKeys<a class="headerlink" href="#selectionkeys" title="Link to this heading">¶</a></h2>
 <p>[1^]: <a class="reference external" href="https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java. Doug Lea. State University of New York at Oswego</a></p>
+</section>
 </section>
 </section>
 
@@ -617,7 +621,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Java NIO</a><ul>
-<li><a class="reference internal" href="#nio-socket-server">NIO Socket Server</a><ul>
+<li><a class="reference internal" href="#nio-support">nio Support</a><ul>
+<li><a class="reference internal" href="#channels">Channels</a></li>
+<li><a class="reference internal" href="#buffers">Buffers</a></li>
+<li><a class="reference internal" href="#selectors">Selectors</a></li>
+<li><a class="reference internal" href="#selectionkeys">SelectionKeys</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#java-nio-reactor">Java NIO 实现 Reactor</a><ul>
 <li><a class="reference internal" href="#set-up">Set up</a></li>
 <li><a class="reference internal" href="#dispatch-loop">Dispatch Loop</a></li>
 <li><a class="reference internal" href="#acceptor">Acceptor</a></li>
@@ -625,10 +636,6 @@
 <li><a class="reference internal" href="#request-handling">Request handling</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#channels">Channels</a></li>
-<li><a class="reference internal" href="#buffers">Buffers</a></li>
-<li><a class="reference internal" href="#selectors">Selectors</a></li>
-<li><a class="reference internal" href="#selectionkeys">SelectionKeys</a></li>
 </ul>
 </li>
 </ul>
