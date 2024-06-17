@@ -229,6 +229,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/1-Java-OIO.html">Java OIO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html">常见 IO 模型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/3-Java-NIO.html">Java NIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/4-Reactor-IO.html">Reactor 模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1-Java/Java-IO/5-Proactor.html">Proactor</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../1-Java/Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -388,7 +390,7 @@
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p><strong>命令模式（Command Pattern）</strong>：将一个请求封装为一个对象，从而可用不同的请求对客户进行参数化；对请求排队或者记录请求日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。</p>
 <p>命令模式可以将请求发送者和接收者完全解耦。发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求。</p>
-<p><img alt="命令模式" src="../../_images/image-23.png" /></p>
+<p><img alt="命令模式" src="../../_images/image-25.png" /></p>
 <ol class="arabic simple">
 <li><p>Command（抽象命令类）：抽象命令类一般是一个抽象类或接口，在其中声明了用于执行请求的execute（）等方法，通过这些方法可以调用请求接收者的相关操作。</p></li>
 <li><p>ConcreteCommand（具体命令类）：具体命令类是抽象命令类的子类，实现了在抽象命令类中声明的方法。它对应具体的接收者对象，将接收者对象的动作绑定其中。在实现execute（）方法时，将调用接收者对象的相关操作（Action）。</p></li>

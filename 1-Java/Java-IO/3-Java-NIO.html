@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Java 并发" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html" /><link rel="prev" title="常见 IO 模型" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Reactor 模型" href="4-Reactor-IO.html" /><link rel="prev" title="常见 IO 模型" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>Java NIO - 文档</title>
@@ -229,6 +229,8 @@
 <li class="toctree-l2"><a class="reference internal" href="1-Java-OIO.html">Java OIO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html">常见 IO 模型</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Java NIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-Reactor-IO.html">Reactor 模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-Proactor.html">Proactor</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -378,20 +380,22 @@
 <section id="channels">
 <h3>Channels<a class="headerlink" href="#channels" title="Link to this heading">¶</a></h3>
 <p>Channels 非阻塞读写的通道，实际上是文件或 socket 连接（文件描述符）。</p>
-<p>以 SocketChannelImpl 为例</p>
+<p>以 SocketChannelImpl 为例（Channel 接口是所有通道的祖先接口），主要结构如下</p>
 <p><img alt="alt text" src="../../_images/image-10.png" /></p>
 </section>
 <section id="buffers">
 <h3>Buffers<a class="headerlink" href="#buffers" title="Link to this heading">¶</a></h3>
-<p>Buffers 缓冲区数组，可以直接被 Channels 读写</p>
+<p>Buffers 缓冲区数组，可以直接被 Channels 读写，以 <code class="docutils literal notranslate"><span class="pre">ByteBuffer</span></code> 为例，可以使用堆内存 <code class="docutils literal notranslate"><span class="pre">HeapByteBuffer</span></code>，也可以使用直接内存 <code class="docutils literal notranslate"><span class="pre">DirectByteBuffer</span></code></p>
+<p><img alt="alt text" src="../../_images/image-11.png" /></p>
 </section>
 <section id="selectors">
 <h3>Selectors<a class="headerlink" href="#selectors" title="Link to this heading">¶</a></h3>
-<p>Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件</p>
+<p>Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件
+<img alt="alt text" src="../../_images/image-13.png" /></p>
 </section>
 <section id="selectionkeys">
 <h3>SelectionKeys<a class="headerlink" href="#selectionkeys" title="Link to this heading">¶</a></h3>
-<p>SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel</p>
+<p>SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel，以及附加操作 attachment</p>
 </section>
 </section>
 <section id="java-nio-reactor">
@@ -553,7 +557,6 @@
 <span class="linenos">29</span><span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>[1^]: <a class="reference external" href="https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java. Doug Lea. State University of New York at Oswego</a></p>
 </section>
 </section>
 </section>
@@ -563,12 +566,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">
+          <a class="next-page" href="4-Reactor-IO.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Java 并发</div>
+                <div class="title">Reactor 模型</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

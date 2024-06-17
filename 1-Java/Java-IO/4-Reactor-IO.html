@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Proactor" href="5-Proactor.html" /><link rel="prev" title="Java NIO" href="3-Java-NIO.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>&lt;no title&gt; - 文档</title>
+        <title>Reactor 模型 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -216,7 +216,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Java 相关</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-Base/0-index.html">Java 基础</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 基础</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/a1-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">问题汇总</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java 四种引用</a></li>
@@ -225,10 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">Java IO</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1-Java-OIO.html">Java OIO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html">常见 IO 模型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3-Java-NIO.html">Java NIO</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Reactor 模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-Proactor.html">Proactor</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -363,20 +365,171 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <section class="tex2jax_ignore mathjax_ignore" id="reactor">
+<h1>Reactor 模型<a class="headerlink" href="#reactor" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>传统服务设计<a class="footnote-reference brackets" href="#id11" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-12.png" /></p>
+<p><img alt="alt text" src="../../_images/image-14.png" /></p>
+<ol class="arabic simple">
+<li><p>Each thread synchronously blocks in the accept
+socket call waiting for a client connection request;[1^]</p></li>
+<li><p>A client connects to the server, and the connection is
+accepted;</p></li>
+<li><p>The new client’s HTTP request is synchronously read
+from the network connection;</p></li>
+<li><p>The request is parsed;</p></li>
+<li><p>The requested file is synchronously read;</p></li>
+<li><p>The file is synchronously sent to the client.</p></li>
+</ol>
+<p>这种设计的缺点：</p>
+<ul class="simple">
+<li><p>可伸缩性： 为每个请求分配一个线程，高负载下容易导致资源耗尽（可以使用线程池技术缓解此问题）。</p></li>
+<li><p>资源利用： 线程在等待 IO 时会完全阻塞，导致资源利用率低。</p></li>
+<li><p>通吐量低： 频繁的线程切换，使其处理大量小型请求时吞吐量受限。</p></li>
+</ul>
+</section>
+<section id="reactor1">
+<h2>Reactor<a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#reactor1" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>连接<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><img alt="alt text" src="../../_images/image-19.png" /></p>
+<ol class="arabic simple">
+<li><p>The Web Server registers an Acceptor with the
+Initiation Dispatcher to accept new connections;</p></li>
+<li><p>The
+Web Server invokes event loop of the Initiation
+Dispatcher;</p></li>
+<li><p>A client connects to the Web Server;</p></li>
+<li><p>The Acceptor is notified by the Initiation
+Dispatcher of the new connection request and the
+Acceptor accepts the new connection;</p></li>
+<li><p>The Acceptor creates an HTTP Handler to service
+the new client;</p></li>
+<li><p>HTTP Handler registers the connection with the
+Initiation Dispatcher for reading client request data (that is, when the connection becomes “ready
+for reading”);</p></li>
+<li><p>The HTTP Handler services the request from the
+new client.</p></li>
+</ol>
+</section>
+<section id="id5">
+<h3>读写<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p><img alt="alt text" src="../../_images/image-20.png" /></p>
+<ol class="arabic simple">
+<li><p>The client sends an HTTP GET request;</p></li>
+<li><p>The Initiation Dispatcher notifies the HTTP
+Handler when client request data arrives at the server;</p></li>
+<li><p>The request is read in a non-blocking manner such that
+the read operation returns EWOULDBLOCK if the operation would cause the calling thread to block (steps 2
+and 3 repeat until the request has been completely read);</p></li>
+<li><p>The HTTP Handler parses the HTTP request;</p></li>
+<li><p>The requested file is synchronously read from the file
+system;</p></li>
+<li><p>The HTTP Handler registers the connection with
+the Initiation Dispatcher for sending file data
+(that is, when the connection becomes “ready for writing”);</p></li>
+<li><p>The Initiation Dispatcher notifies the HTTP
+Handler when the TCP connection is ready for writing;</p></li>
+<li><p>The HTTP Handler sends the requested file to the
+client in a non-blocking manner such that the write
+operation returns EWOULDBLOCK if the operation
+would cause the calling thread to block (steps 7 and
+8 will repeat until the data has been delivered completely).</p></li>
+</ol>
+</section>
+</section>
+<section id="reactor-3">
+<h2>Reactor 单线程<a class="footnote-reference brackets" href="#id12" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#reactor-3" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-15.png" /></p>
+<p>一般不会这样子使用。</p>
+</section>
+<section id="id8">
+<h2>Reactor 使用线程池<a class="footnote-reference brackets" href="#id12" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-16.png" /></p>
+<p>这就是 netty 中  <code class="docutils literal notranslate"><span class="pre">bossGroup</span></code> 和 <code class="docutils literal notranslate"><span class="pre">workerGroup</span></code> 使用同一个 EventLoopGroup 的模式。</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">eventLoopGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span><span class="w"> </span><span class="c1">// (1)</span>
+<span class="linenos">2</span><span class="w">    </span><span class="n">ServerBootstrap</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServerBootstrap</span><span class="p">();</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="hll"><span class="linenos">3</span><span class="w">    </span><span class="n">server</span><span class="p">.</span><span class="na">group</span><span class="p">(</span><span class="n">eventLoopGroup</span><span class="p">)</span>
+</span><span class="linenos">4</span><span class="w">        </span><span class="p">.</span><span class="na">channel</span><span class="p">(</span><span class="n">NioServerSocketChannel</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="linenos">5</span><span class="w">        </span><span class="c1">//...</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2>多个 Reactor<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../../_images/image-17.png" /></p>
+<p>这其是就是 netty 中 <code class="docutils literal notranslate"><span class="pre">bossGroup</span></code> 和 <code class="docutils literal notranslate"><span class="pre">workerGroup</span></code>，一个专门用来查询客户端的连接事件，一个专门用来查询连接的读写事件。</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">bossGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span><span class="w"> </span><span class="c1">// (1)</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">workerGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="n">ServerBootstrap</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServerBootstrap</span><span class="p">();</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="hll"><span class="linenos"> 4</span><span class="w">    </span><span class="n">server</span><span class="p">.</span><span class="na">group</span><span class="p">(</span><span class="n">bossGroup</span><span class="p">,</span><span class="w"> </span><span class="n">workerGroup</span><span class="p">)</span>
+</span><span class="linenos"> 5</span><span class="w">        </span><span class="p">.</span><span class="na">channel</span><span class="p">(</span><span class="n">NioServerSocketChannel</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// (3)</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="p">.</span><span class="na">childHandler</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">SocketChannel</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// (4)</span>
+<span class="linenos"> 7</span><span class="w">            </span><span class="nd">@Override</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initChannel</span><span class="p">(</span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">ch</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">            </span>
+<span class="linenos">10</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">11</span><span class="w">        </span><span class="p">})</span>
+<span class="linenos">12</span><span class="w">        </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="n">ChannelOption</span><span class="p">.</span><span class="na">SO_BACKLOG</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">          </span><span class="c1">// (5)</span>
+<span class="linenos">13</span><span class="w">        </span><span class="p">.</span><span class="na">childOption</span><span class="p">(</span><span class="n">ChannelOption</span><span class="p">.</span><span class="na">SO_KEEPALIVE</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// (6)</span>
+</pre></div>
+</div>
+</section>
+<section id="proactor2">
+<h2>Proactor<a class="footnote-reference brackets" href="#id13" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a><a class="headerlink" href="#proactor2" title="Link to this heading">¶</a></h2>
+<p>经典服务设计使用的是阻塞IO，不能有效的利用资源，Reactor 服务设计使用 IO 多路复用，是目前使用最广泛的模式，也有进一步的优化设计——Proactor，但目前使用并不广泛，主要是因为它依赖于操作系统提供的异步 IO，而且不太符合人类直觉，基于它设计的程序理解起来比较困难。（Linux 中 的 io_uring 异步 io 估计会流性起来 ）。</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p><a class="reference external" href="https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor.pdf">Reactor. An Object Behavioral Pattern for De-multiplexing and Dispatching Handles for Synchronous Events. Douglas C. Schmidt</a></p>
+</aside>
+<aside class="footnote brackets" id="id12" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
+<p><a class="reference external" href="https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java. Doug Lea. State University of New York at Oswego</a></p>
+</aside>
+<aside class="footnote brackets" id="id13" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.dre.vanderbilt.edu/~schmidt/PDF/proactor.pdf">Proactor An Object Behavioral Pattern for De-multiplexing and Dispatching Handlers for Asynchronous Events. Irfan Pyarali, Tim Harrison, and Douglas C. Schmidt Thomas D. Jordan</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="5-Proactor.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Proactor</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="3-Java-NIO.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Java NIO</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -402,8 +555,36 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Reactor 模型</a><ul>
+<li><a class="reference internal" href="#id2">传统服务设计</a></li>
+<li><a class="reference internal" href="#reactor1">Reactor</a><ul>
+<li><a class="reference internal" href="#id4">连接</a></li>
+<li><a class="reference internal" href="#id5">读写</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reactor-3">Reactor 单线程</a></li>
+<li><a class="reference internal" href="#id8">Reactor 使用线程池</a></li>
+<li><a class="reference internal" href="#id9">多个 Reactor</a></li>
+<li><a class="reference internal" href="#proactor2">Proactor</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

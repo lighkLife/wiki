@@ -10,20 +10,26 @@ NIO 就是非阻塞 IO，Java NIO 相关的类都在`java.nio`包下。主要包
 
 Channels 非阻塞读写的通道，实际上是文件或 socket 连接（文件描述符）。
 
-以 SocketChannelImpl 为例
+以 SocketChannelImpl 为例（Channel 接口是所有通道的祖先接口），主要结构如下
 
 ![alt text](image-10.png)
 
 ### Buffers
-Buffers 缓冲区数组，可以直接被 Channels 读写
+
+Buffers 缓冲区数组，可以直接被 Channels 读写，以 `ByteBuffer` 为例，可以使用堆内存 `HeapByteBuffer`，也可以使用直接内存 `DirectByteBuffer`
+
+![alt text](image-11.png)
 
 ### Selectors
+
 Selectors IO 多路复用的查询器，可以查询出哪些 Channel 有 IO 事件
+![alt text](image-13.png)
 
 ### SelectionKeys
-SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel
 
-## Java NIO 实现 Reactor 
+SelectionKeys 维护 IO 事件的状态（连接建立、可读、可写），绑定相关的 Selector 和 Channel，以及附加操作 attachment
+
+## Java NIO 实现 Reactor
 
 以下使用 [Doug Lea](https://www.cs.oswego.edu/~dl/) 老爷子的 Scalable IO in Java [1^] 演讲搞中的例子，来使用 JAVA NIO 实现单线程的 reactor 模型。
 
@@ -192,4 +198,4 @@ public class Handler implements Runnable {
     }
 ```
 
-[1^]: [Scalable IO in Java. Doug Lea. State University of New York at Oswego](https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)
+[^1]: [Scalable IO in Java. Doug Lea. State University of New York at Oswego](https://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)
