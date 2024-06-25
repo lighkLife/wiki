@@ -1,4 +1,4 @@
-# A fatal error `SIGSEGV (0xb)`
+ A fatal error `SIGSEGV (0xb)`
 
 ## 问题说明
 
