@@ -1,0 +1,1050 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Spring 框架" href="../../7-Spring/0-index.html" /><link rel="prev" title="垃圾收集与内存非配策略" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>JDK 工具 - 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: -apple-system,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei;
+  --font-stack--monospace: Andale Mono, FiraCode Nerd Font, Fira Code, Consolas, Monaco, Courier, monospace;
+  --sidebar-caption-font-size: 110%;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">  文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">  文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Java 相关</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-Base/0-index.html">Java 基础</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Java 基础</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Java-Base/a1-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">问题汇总</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-Base/Java%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8.html">Java 四种引用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/1-Java-OIO.html">Java OIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/2-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B.html">常见 IO 模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/3-Java-NIO.html">Java NIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/4-Reactor-IO.html">Reactor 模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-IO/5-Proactor.html">Proactor</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/0-index.html">Java 并发</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Java 并发</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Java-%E5%B9%B6%E5%8F%91/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91-AQS.html">论文翻译-AQS</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/0-index.html">Java 集合</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Java 集合</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/01-%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0.html">集合概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Java-%E9%9B%86%E5%90%88/HashMap%E5%AE%9E%E7%8E%B0.html">HashMap实现</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">JVM 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of JVM 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="a1-ClassLoader.html">ClassLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1-Runtime-Data-Areas.html">JVM 运行时数据区域</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">Class 文件结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">JDK 工具</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Spring 框架</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../7-Spring/0-index.html">Spring 框架</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Spring 框架</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/00-Spring%20IoC%20%E5%AE%B9%E5%99%A8.html">Spring IoC 容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/01-Spring%20%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE.html">Spring 容器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/02-Resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/03-%E9%AA%8C%E8%AF%81%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html">验证、数据绑定和类型转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/04-SpEL.html">SpEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/05-AOP%E7%BC%96%E7%A8%8B.html">AOP编程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/06-SpringMVC-DispatcherServlet.html">SpringMVC-DispatcherServlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../7-Spring/07-SpringMVC%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.html">SpringMVC请求拦截</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">中间件</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4-Middleware/01-How-tomcat-works.html">How-tomcat-works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4-Middleware/02-Hudi.html">Hudi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4-Middleware/mysql/1-Performance-Schema.html">Performance Schema</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">设计模式</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">外观模式（门面模式）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/6-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.html">享元模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../5-IoT/test.html">测试文件</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">操作系统</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../6-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../6-OS/01-Ubuntu%20%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rust 相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../2-Rust/test.html">测试文件</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">寻芳拾香</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/06-Mysql-Use-Case.html">Mysql-Use-Case</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/1-Java/JVM-相关/e1-JVM工具.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="jdk-1">
+<h1>JDK 工具<a class="footnote-reference brackets" href="#id20" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#jdk-1" title="Link to this heading">¶</a></h1>
+<p>在 JDK 的 bin 目录下，为 JAVA 开发人员提供了许多工具，从使用方式来说，可以分为两种：</p>
+<ul class="simple">
+<li><p>直接执行这些程序，比如 jstack、jmap 等，这种方式需要记住不同命令的使用方式，个人更偏向使用 jcmd，但这种方式输出的信息更全面。</p></li>
+<li><p>使用<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid</span> <span class="pre">|</span> <span class="pre">main</span> <span class="pre">class&gt;</span> <span class="pre">&lt;command&gt;</span></code>的方式，这种方式可以利用 <code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 查看支持的子命令，使用方式更统一、简单。</p></li>
+</ul>
+<section id="id2">
+<h2>编译<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">javac</span></code> 指定目录编译：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w"> </span>javac<span class="w"> </span>greetings/*.java
+➜<span class="w"> </span>ls<span class="w"> </span>greetings
+Aloha.class<span class="w">         </span>GutenTag.class<span class="w">      </span>Hello.class<span class="w">         </span>Hi.class
+Aloha.java<span class="w">          </span>GutenTag.java<span class="w">       </span>Hello.java<span class="w">          </span>Hi.java
+</pre></div>
+</div>
+<p>指定编译时的类路径，用于查找依赖的类和包编译：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w"> </span>javac<span class="w"> </span>-classpath<span class="w"> </span>/examples:/lib/Banners.jar<span class="w"> </span>/examples/greetings/Hi.java
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>反编译<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">javap</span></code> 反编译 Java 字节码文件（.class 文件），将其转换成可读的 Java 代码。</p>
+<p>下面是一些常用的 javap 命令选项：</p>
+<p>-verbose：输出详细的反编译信息，包括类名、父类、接口、字段、方法等。
+-classpath <path>：指定类路径，用于查找依赖的类和包。
+-l：输出行号和本地变量表。
+-s：输出源代码。
+-c：输出字节码指令。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w"> </span>javap<span class="w"> </span>-v<span class="w"> </span>Hello
+Warning:<span class="w"> </span>File<span class="w"> </span>./Hello.class<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>contain<span class="w"> </span>class<span class="w"> </span>Hello
+Classfile<span class="w"> </span>/home/lighk/IdeaProjects/digital-energy/src/test/java/com/custom/de/Hello.class
+<span class="w">  </span>Last<span class="w"> </span>modified<span class="w"> </span>Jun<span class="w"> </span><span class="m">24</span>,<span class="w"> </span><span class="m">2024</span><span class="p">;</span><span class="w"> </span>size<span class="w"> </span><span class="m">354</span><span class="w"> </span>bytes
+<span class="w">  </span>SHA-256<span class="w"> </span>checksum<span class="w"> </span>3d1583ca57fed9acfeaefb2f97d657d61108c0eafe342b593bee7d3a2d9d1786
+<span class="w">  </span>Compiled<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span>
+public<span class="w"> </span>class<span class="w"> </span>com.custom.de.Hello
+<span class="w">  </span>minor<span class="w"> </span>version:<span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>major<span class="w"> </span>version:<span class="w"> </span><span class="m">66</span>
+<span class="w">  </span>flags:<span class="w"> </span><span class="o">(</span>0x0021<span class="o">)</span><span class="w"> </span>ACC_PUBLIC,<span class="w"> </span>ACC_SUPER
+<span class="w">  </span>this_class:<span class="w"> </span><span class="c1">#10                         // com/custom/de/Hello</span>
+<span class="w">  </span>super_class:<span class="w"> </span><span class="c1">#2                         // java/lang/Object</span>
+<span class="w">  </span>interfaces:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>fields:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>methods:<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>attributes:<span class="w"> </span><span class="m">1</span>
+Constant<span class="w"> </span>pool:
+<span class="w">   </span><span class="c1">#1 = Methodref          #2.#3          // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+<span class="w">   </span><span class="c1">#2 = Class              #4             // java/lang/Object</span>
+<span class="w">   </span><span class="c1">#3 = NameAndType        #5:#6          // &quot;&lt;init&gt;&quot;:()V</span>
+<span class="w">   </span><span class="c1">#4 = Utf8               java/lang/Object</span>
+<span class="w">   </span><span class="c1">#5 = Utf8               &lt;init&gt;</span>
+<span class="w">   </span><span class="c1">#6 = Utf8               ()V</span>
+<span class="w">   </span><span class="c1">#7 = String             #8             // zhangSan</span>
+<span class="w">   </span><span class="c1">#8 = Utf8               zhangSan</span>
+<span class="w">   </span><span class="c1">#9 = Fieldref           #10.#11        // com/custom/de/Hello.name:Ljava/lang/String;</span>
+<span class="w">  </span><span class="c1">#10 = Class              #12            // com/custom/de/Hello</span>
+<span class="w">  </span><span class="c1">#11 = NameAndType        #13:#14        // name:Ljava/lang/String;</span>
+<span class="w">  </span><span class="c1">#12 = Utf8               com/custom/de/Hello</span>
+<span class="w">  </span><span class="c1">#13 = Utf8               name</span>
+<span class="w">  </span><span class="c1">#14 = Utf8               Ljava/lang/String;</span>
+<span class="w">  </span><span class="c1">#15 = Utf8               Code</span>
+<span class="w">  </span><span class="c1">#16 = Utf8               LineNumberTable</span>
+<span class="w">  </span><span class="c1">#17 = Utf8               getName</span>
+<span class="w">  </span><span class="c1">#18 = Utf8               ()Ljava/lang/String;</span>
+<span class="w">  </span><span class="c1">#19 = Utf8               SourceFile</span>
+<span class="w">  </span><span class="c1">#20 = Utf8               Hello.java</span>
+<span class="o">{</span>
+<span class="w">  </span>public<span class="w"> </span>com.custom.de.Hello<span class="o">()</span><span class="p">;</span>
+<span class="w">    </span>descriptor:<span class="w"> </span><span class="o">()</span>V
+<span class="w">    </span>flags:<span class="w"> </span><span class="o">(</span>0x0001<span class="o">)</span><span class="w"> </span>ACC_PUBLIC
+<span class="w">    </span>Code:
+<span class="w">      </span><span class="nv">stack</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">locals</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">args_size</span><span class="o">=</span><span class="m">1</span>
+<span class="w">         </span><span class="m">0</span>:<span class="w"> </span>aload_0
+<span class="w">         </span><span class="m">1</span>:<span class="w"> </span>invokespecial<span class="w"> </span><span class="c1">#1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+<span class="w">         </span><span class="m">4</span>:<span class="w"> </span>aload_0
+<span class="w">         </span><span class="m">5</span>:<span class="w"> </span>ldc<span class="w">           </span><span class="c1">#7                  // String zhangSan</span>
+<span class="w">         </span><span class="m">7</span>:<span class="w"> </span>putfield<span class="w">      </span><span class="c1">#9                  // Field name:Ljava/lang/String;</span>
+<span class="w">        </span><span class="m">10</span>:<span class="w"> </span><span class="k">return</span>
+<span class="w">      </span>LineNumberTable:
+<span class="w">        </span>line<span class="w"> </span><span class="m">3</span>:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>line<span class="w"> </span><span class="m">4</span>:<span class="w"> </span><span class="m">4</span>
+
+<span class="w">  </span>public<span class="w"> </span>java.lang.String<span class="w"> </span>getName<span class="o">()</span><span class="p">;</span>
+<span class="w">    </span>descriptor:<span class="w"> </span><span class="o">()</span>Ljava/lang/String<span class="p">;</span>
+<span class="w">    </span>flags:<span class="w"> </span><span class="o">(</span>0x0001<span class="o">)</span><span class="w"> </span>ACC_PUBLIC
+<span class="w">    </span>Code:
+<span class="w">      </span><span class="nv">stack</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">locals</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">args_size</span><span class="o">=</span><span class="m">1</span>
+<span class="w">         </span><span class="m">0</span>:<span class="w"> </span>aload_0
+<span class="w">         </span><span class="m">1</span>:<span class="w"> </span>getfield<span class="w">      </span><span class="c1">#9                  // Field name:Ljava/lang/String;</span>
+<span class="w">         </span><span class="m">4</span>:<span class="w"> </span>areturn
+<span class="w">      </span>LineNumberTable:
+<span class="w">        </span>line<span class="w"> </span><span class="m">7</span>:<span class="w"> </span><span class="m">0</span>
+<span class="o">}</span>
+SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>进程启动<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>java 命令用于运行Java程序（执行Java类的main方法，目标文件是字节码文件，即javac编译后的领土 <code class="docutils literal notranslate"><span class="pre">*.class</span></code> 文件），使用示例如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w"> </span>java<span class="w"> </span>-classpath<span class="w"> </span>lib/*:.<span class="w"> </span>com.example.HelloWorld
+</pre></div>
+</div>
+<p>常用的 java 命令参数：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;classname&gt;</span> <span class="pre">[args...]</span></code>：运行指定的 Java 类，例如 <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">com.example.HelloWorld</span></code> 表示运行 <code class="docutils literal notranslate"><span class="pre">com.example.HelloWorld</span></code> 类的 <code class="docutils literal notranslate"><span class="pre">main</span></code> 方法，并传递空的命令行参数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-classpath</span> <span class="pre">&lt;path&gt;</span></code>：指定类路径，用于查找依赖的类和包。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Xmx&lt;size&gt;</span></code>：设置 Java 堆内存的最大值，例如 <code class="docutils literal notranslate"><span class="pre">-Xmx512m</span></code> 表示最大堆内存为 512 MB。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Xms&lt;size&gt;</span></code>：设置 Java 堆内存的初始值，例如 <code class="docutils literal notranslate"><span class="pre">-Xms256m</span></code> 表示初始堆内存为 256 MB。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-D&lt;name&gt;=&lt;value&gt;</span></code>：设置系统属性，例如 -Dfile.encoding=UTF-8 表示设置文件编码为 UTF-8。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-jar</span> <span class="pre">&lt;jarfile&gt;</span> <span class="pre">[args...]</span></code>：运行 JAR 文件，例如 <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">myapp.jar</span></code> 表示运行 myapp.jar 文件，并传递空的命令行参数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</span></code>：开启端口为 8000 的远程调试模式</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>当执行 <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">&lt;jarfile&gt;</span></code> 命令时发生了什么？</p>
+<p>实际上 <code class="docutils literal notranslate"><span class="pre">java</span></code> 命令会按照以下步骤执行：</p>
+<ol class="arabic simple">
+<li><p>查找并加载 JAR 文件中的 <code class="docutils literal notranslate"><span class="pre">META-INF/MANIFEST.MF</span></code> 文件。</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">MANIFEST.MF</span></code> 文件中查找 <code class="docutils literal notranslate"><span class="pre">Main-Class</span></code> 属性指定的主类。</p></li>
+<li><p>加载并执行主类的 <code class="docutils literal notranslate"><span class="pre">main</span></code> 方法。</p></li>
+</ol>
+</div>
+</section>
+<section id="id5">
+<h2>远程调试<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p><strong>服务端配置</strong>：</p>
+<ul class="simple">
+<li><p>jdk 1.4.x: <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</span></code></p></li>
+<li><p>jdk 5-8: <code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</span></code></p></li>
+<li><p>jdk 9-*: <code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 有什么区别呢？<a class="footnote-reference brackets" href="#id21" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 对后续的版本依然生效，但是以解释模式运行，没有 JIT，所以运行速度会慢一些。因此对于 jdk5 之后的版本，都建议使用 <code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code>。</p>
+</div>
+<p><strong>客户端配置</strong>：</p>
+<p><img alt="alt text" src="../../_images/image-6.png" /></p>
+</section>
+<section id="jvm">
+<h2>JVM 参数<a class="headerlink" href="#jvm" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>堆大小<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-Xmx</span></code>：设置 JVM 最大堆内存大小，例如 -Xmx2g 表示最大堆内存为 2GB。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Xms</span></code>：设置 JVM 初始堆内存大小，例如 -Xms1g 表示初始堆内存为 1GB。</p></li>
+</ul>
+</section>
+<section id="gc-3">
+<h3>GC 日志<a class="footnote-reference brackets" href="#id22" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#gc-3" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 必备</span>
+-XX:+PrintGCDetails<span class="w"> </span>
+-XX:+PrintGCDateStamps<span class="w"> </span>
+-XX:+PrintTenuringDistribution<span class="w"> </span>
+-XX:+PrintHeapAtGC
+-XX:+PrintReferenceGC
+-XX:+PrintGCApplicationStoppedTime
+
+<span class="c1"># 可选</span>
+-XX:+PrintSafepointStatistics
+-XX:PrintSafepointStatisticsCount<span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># GC日志输出的文件路径</span>
+-Xloggc:/path/to/gc-%t.log
+<span class="c1"># 开启日志文件分割</span>
+-XX:+UseGCLogFileRotation<span class="w"> </span>
+<span class="c1"># 最多分割几个文件，超过之后从头文件开始写</span>
+-XX:NumberOfGCLogFiles<span class="o">=</span><span class="m">14</span>
+<span class="c1"># 每个文件上限大小，超过就触发分割</span>
+-XX:GCLogFileSize<span class="o">=</span>100M
+</pre></div>
+</div>
+</section>
+<section id="oom">
+<h3>OOM 堆转储<a class="headerlink" href="#oom" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在 JVM 抛出 OOM 异常时自动生成堆转储文件。</span>
+-XX:+HeapDumpOnOutOfMemoryError
+<span class="c1"># 指定堆转储文件的保存路径</span>
+-XX:HeapDumpPath<span class="o">=</span>&lt;path&gt;<span class="sb">`</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<ul>
+<li><p><strong>目录不存在</strong></p>
+<p>转储文件路径<path>种的有不存在的目录，比如 <code class="docutils literal notranslate"><span class="pre">-XX:HeapDumpPath=./tmp/</span></code>，但是<code class="docutils literal notranslate"><span class="pre">tmp</span></code>不存在，就不会生成转储文件;</p>
+</li>
+<li><p><strong>指定文件名</strong></p>
+<p>如果指定了转储存文件名，比如 <code class="docutils literal notranslate"><span class="pre">-XX:HeapDumpPath=./tmp/dump.hprof</span></code>, 那生成的文件名一定是<code class="docutils literal notranslate"><span class="pre">dump.hprof</span></code>，就可能会发生文件覆盖，所以不建议指定文件名，这样自动生成的文件名就这种形式<code class="docutils literal notranslate"><span class="pre">java_pid1861234.hprof</span></code>。</p>
+</li>
+</ul>
+</div>
+</section>
+<section id="id9">
+<h3>其他<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:+UseParallelGC</span></code>：使用并行垃圾回收器。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:+UseConcMarkSweepGC</span></code>：使用 CMS 垃圾回收器。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:+UseG1GC</span></code>：使用 G1 垃圾回收器。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:MaxPermSize=&lt;size&gt;</span></code>：设置永久代的最大大小。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:MaxMetaspaceSize=&lt;size&gt;</span></code>：设置元空间的最大大小。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:NewSize=&lt;size&gt;</span></code>：设置新生代的初始大小。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:MaxNewSize=&lt;size&gt;</span></code>：设置新生代的最大大小。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:SurvivorRatio=&lt;ratio&gt;</span></code>：设置 Eden 区和 Survivor 区的比例。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX:ThreadStackSize=&lt;size&gt;</span></code>：设置线程栈的大小。</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>JVM 参数很多，总体上可以分成三类：<a class="footnote-reference brackets" href="#id23" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-</span></code></strong>：标准参数，比如 <code class="docutils literal notranslate"><span class="pre">-verbose:</span></code>gc` 这类表示标准实现，所有的虚拟机都需要实现这些参数的功能，且向后兼容；</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-X</span></code></strong>：非标准参数，默认 JVM 会实现这些参数的功能，但是不保证所有的 JVM 实现都满足，且不保证向后兼容；</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-XX</span></code></strong>：非 Stable 参数，这些参数在不同的 JVM 上会有不同的实现，这些参数不推荐在生成环境中使用，以后很有可能会被取消，需要慎重使用；</p></li>
+</ul>
+<p>关于JVM选项的几点：</p>
+<ul class="simple">
+<li><p>布尔型参数：<strong><code class="docutils literal notranslate"><span class="pre">-XX:+</span></code></strong> 表示打开， <strong><code class="docutils literal notranslate"><span class="pre">-XX:-</span></code></strong> 表示关闭。（比如<code class="docutils literal notranslate"><span class="pre">-XX:+PrintGCDetails</span></code>）；</p></li>
+<li><p>数字型参数：通过 <strong><code class="docutils literal notranslate"><span class="pre">-XX:=</span></code></strong> 设定。数字可以是m/M(兆字节)，k/K(千字节)，g/G(G字节)。比如：32K表示32768字节；</p></li>
+<li><p>字符行参数：通过 <strong><code class="docutils literal notranslate"><span class="pre">-XX:=</span></code></strong> 设定，通常用来指定一个文件，路径，或者一个命令列表。（比如<code class="docutils literal notranslate"><span class="pre">-XX:HeapDumpPath=./java_pid.hprof</span></code>）</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>进程查看<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="jps">
+<h3><code class="docutils literal notranslate"><span class="pre">jps</span></code><a class="headerlink" href="#jps" title="Link to this heading">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jps<span class="w"> </span>
+<span class="m">17242</span><span class="w"> </span>Jps
+<span class="m">16494</span><span class="w"> </span>iot-hub-1.0.0-SNAPSHOT.jar
+</pre></div>
+</div>
+</section>
+<section id="jcmd">
+<h3><code class="docutils literal notranslate"><span class="pre">jcmd</span></code><a class="headerlink" href="#jcmd" title="Link to this heading">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jcmd
+<span class="m">17296</span><span class="w"> </span>sun.tools.jcmd.JCmd
+<span class="m">16494</span><span class="w"> </span>/usr/local/jdk/app/iot-hub_web/iot-hub-1.0.0-SNAPSHOT.jar<span class="w"> </span>--spring.config.location<span class="o">=</span>file:/usr/local/jdk/app/iot-hub_web/application-public.properties,file:/usr/local/jdk/app/iot-hub_web/application-dev.properties
+<span class="o">[</span>root@dev<span class="w"> </span>~<span class="o">]</span><span class="c1"># </span>
+</pre></div>
+</div>
+</section>
+<section id="ps">
+<h3><code class="docutils literal notranslate"><span class="pre">ps</span></code><a class="headerlink" href="#ps" title="Link to this heading">¶</a></h3>
+<p>这个其是是操作系统提供的命令，可以查看更多的信息</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>ps<span class="w"> </span>-aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>java
+root<span class="w">     </span><span class="m">22593</span><span class="w">  </span><span class="m">0</span>.1<span class="w">  </span><span class="m">6</span>.8<span class="w"> </span><span class="m">7991480</span><span class="w"> </span><span class="m">1107164</span><span class="w"> </span>?<span class="w">     </span>Sl<span class="w">   </span>4月30<span class="w"> </span><span class="m">140</span>:58<span class="w"> </span>/usr/local/webserver/jdk/bin/java<span class="w"> </span>-Xms2g<span class="w"> </span>-Xmx2g<span class="w"> </span>-XX:+HeapDumpOnOutOfMemoryError<span class="w"> </span>-Dfile.encoding<span class="o">=</span>UTF-8<span class="w"> </span>-XX:HeapDumpPath<span class="o">=</span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../logs<span class="w"> </span>-Dlog.path<span class="o">=</span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../logs<span class="w"> </span>-Duser.dir<span class="o">=</span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../<span class="w"> </span>-Dserver.port<span class="o">=</span><span class="m">9527</span><span class="w"> </span>-Ddata.path<span class="o">=</span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../data<span class="w"> </span>-Dmail.username<span class="o">=</span>datax<span class="w"> </span>-Dmail.password<span class="o">=</span><span class="m">123456</span><span class="w"> </span>-Dlogging.config<span class="o">=</span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../conf/logback.xml<span class="w"> </span>-classpath<span class="w"> </span>/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../lib/*:/usr/local/jdk/app/datax-web-2.1.2/modules/datax-admin/bin/../conf:.<span class="w"> </span>com.wugui.datax.admin.DataXAdminApplication
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2>线程查看<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>这里通过操作系统<code class="docutils literal notranslate"><span class="pre">top</span></code>命令查看<code class="docutils literal notranslate"><span class="pre">java</span></code>进程的线程：</p>
+<ol class="arabic simple">
+<li><p>通过<code class="docutils literal notranslate"><span class="pre">jcmd</span></code>拿到进程<code class="docutils literal notranslate"><span class="pre">pid</span></code></p></li>
+<li><p>通过<code class="docutils literal notranslate"><span class="pre">top</span> <span class="pre">-H</span> <span class="pre">-p</span> <span class="pre">&lt;pid&gt;</span></code>，主要看哪些线程占 CPU 较高</p></li>
+<li><p>使用<code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code> 查看具体的线程栈</p></li>
+</ol>
+</section>
+<section id="id13">
+<h2>线程快照<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<section id="jstack-pid">
+<h3><code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code><a class="headerlink" href="#jstack-pid" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:
+<span class="w">    </span>jstack<span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
+<span class="w">    </span>jstack<span class="w"> </span>-F<span class="w"> </span><span class="o">[</span>-m<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>hung<span class="w"> </span>process<span class="o">)</span>
+<span class="w">    </span>jstack<span class="w"> </span><span class="o">[</span>-m<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span>&lt;executable&gt;<span class="w"> </span>&lt;core&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>core<span class="w"> </span>file<span class="o">)</span>
+<span class="w">    </span>jstack<span class="w"> </span><span class="o">[</span>-m<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span><span class="o">[</span>server_id@<span class="o">]</span>&lt;remote<span class="w"> </span>server<span class="w"> </span>IP<span class="w"> </span>or<span class="w"> </span>hostname&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>remote<span class="w"> </span>debug<span class="w"> </span>server<span class="o">)</span>
+
+Options:
+<span class="w">    </span>-F<span class="w">  </span>to<span class="w"> </span>force<span class="w"> </span>a<span class="w"> </span>thread<span class="w"> </span>dump.<span class="w"> </span>Use<span class="w"> </span>when<span class="w"> </span>jstack<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>respond<span class="w"> </span><span class="o">(</span>process<span class="w"> </span>is<span class="w"> </span>hung<span class="o">)</span>
+<span class="w">    </span>-m<span class="w">  </span>to<span class="w"> </span>print<span class="w"> </span>both<span class="w"> </span>java<span class="w"> </span>and<span class="w"> </span>native<span class="w"> </span>frames<span class="w"> </span><span class="o">(</span>mixed<span class="w"> </span>mode<span class="o">)</span>
+<span class="w">    </span>-l<span class="w">  </span>long<span class="w"> </span>listing.<span class="w"> </span>Prints<span class="w"> </span>additional<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>locks
+<span class="w">    </span>-h<span class="w"> </span>or<span class="w"> </span>-help<span class="w"> </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+</pre></div>
+</div>
+</section>
+<section id="jcmd-pid-thread-print">
+<h3><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">Thread.print</span></code><a class="headerlink" href="#jcmd-pid-thread-print" title="Link to this heading">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong>jcmd 使用</strong></p>
+<p>jcmd 的参数无须额外记忆（比如这里使用的<code class="docutils literal notranslate"><span class="pre">Thread.print</span></code>），直接使用<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 就可以查看当前 java 进程支持哪些参数</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jcmd<span class="w"> </span><span class="m">28537</span><span class="w"> </span><span class="nb">help</span>
+<span class="m">28537</span>:
+The<span class="w"> </span>following<span class="w"> </span>commands<span class="w"> </span>are<span class="w"> </span>available:
+JFR.stop
+JFR.start
+JFR.dump
+JFR.check
+VM.native_memory
+VM.check_commercial_features
+VM.unlock_commercial_features
+ManagementAgent.stop
+ManagementAgent.start_local
+ManagementAgent.start
+GC.rotate_log
+Thread.print
+GC.class_stats
+GC.class_histogram
+GC.heap_dump
+GC.run_finalization
+GC.run
+VM.uptime
+VM.flags
+VM.system_properties
+VM.command_line
+VM.version
+<span class="nb">help</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="id14">
+<h2>内存快照<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h3>转储 JVM 堆<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:format=b,file=heap.bin</span> <span class="pre">&lt;pid&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.heap_dump</span> <span class="pre">&lt;filename&gt;</span></code></p></li>
+</ul>
+<p>然后可以使用如下工具分析：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://eclipse.dev/mat/">Eclipse Memory Analyzer（MAT）</a></p></li>
+<li><p><a class="reference external" href="https://visualvm.github.io/">JDK VisualVM</a></p></li>
+<li><p><a class="reference external" href="https://www.ej-technologies.com/products/jprofiler/overview.html">YourKit Java Profiler</a></p></li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:live</span></code></strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">live</span></code>选项用于导出 Java 堆中所有存活的对象信息，执行 <code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:live,format=b,file=&lt;filename&gt;</span> <span class="pre">&lt;pid&gt;</span></code> 命令时，需要注意的是，<code class="docutils literal notranslate"><span class="pre">-dump:live</span></code> 选项会在目标 Java 进程中触发一次 Full GC，因此可能会对应用程序的性能产生影响。</p>
+</div>
+</section>
+<section id="id16">
+<h3>对象统计信息<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-histo:live</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-n</span> <span class="pre">15</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.class_histogram</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-n</span> <span class="pre">15</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> num     #instances         #bytes  class name
+----------------------------------------------
+   1:       1587765      139550584  [C
+   2:       1586225       38069400  java.lang.String
+   3:        428156       27401984  java.util.concurrent.ConcurrentHashMap
+   4:        223013       19625144  java.lang.reflect.Method
+   5:        290854       17406264  [Ljava.lang.Object;
+   6:        351148       14045920  java.util.LinkedHashMap$Entry
+   7:        310009        9920288  java.util.concurrent.ConcurrentHashMap$Node
+   8:        212412        8496480  org.springframework.util.AntPathMatcher
+   9:        347877        8349048  java.util.ArrayList
+  10:         86320        8034880  [Ljava.util.HashMap$Node;
+  11:        214163        6853216  java.util.HashMap$Node
+  12:        212701        6806432  org.springframework.security.web.util.matcher.AntPathRequestMatcher
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3>堆统计信息<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-heap</span> <span class="pre">&lt;pid&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.heap_info</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attaching</span> <span class="n">to</span> <span class="n">process</span> <span class="n">ID</span> <span class="mi">28537</span><span class="p">,</span> <span class="n">please</span> <span class="n">wait</span><span class="o">...</span>
+<span class="n">Debugger</span> <span class="n">attached</span> <span class="n">successfully</span><span class="o">.</span>
+<span class="n">Server</span> <span class="n">compiler</span> <span class="n">detected</span><span class="o">.</span>
+<span class="n">JVM</span> <span class="n">version</span> <span class="ow">is</span> <span class="mf">25.144</span><span class="o">-</span><span class="n">b01</span>
+
+<span class="n">using</span> <span class="n">thread</span><span class="o">-</span><span class="n">local</span> <span class="nb">object</span> <span class="n">allocation</span><span class="o">.</span>
+<span class="n">Parallel</span> <span class="n">GC</span> <span class="k">with</span> <span class="mi">8</span> <span class="n">thread</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">Heap</span> <span class="n">Configuration</span><span class="p">:</span>
+   <span class="n">MinHeapFreeRatio</span>         <span class="o">=</span> <span class="mi">0</span>
+   <span class="n">MaxHeapFreeRatio</span>         <span class="o">=</span> <span class="mi">100</span>
+   <span class="n">MaxHeapSize</span>              <span class="o">=</span> <span class="mi">4294967296</span> <span class="p">(</span><span class="mf">4096.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">NewSize</span>                  <span class="o">=</span> <span class="mi">87031808</span> <span class="p">(</span><span class="mf">83.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">MaxNewSize</span>               <span class="o">=</span> <span class="mi">1431306240</span> <span class="p">(</span><span class="mf">1365.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">OldSize</span>                  <span class="o">=</span> <span class="mi">175112192</span> <span class="p">(</span><span class="mf">167.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">NewRatio</span>                 <span class="o">=</span> <span class="mi">2</span>
+   <span class="n">SurvivorRatio</span>            <span class="o">=</span> <span class="mi">8</span>
+   <span class="n">MetaspaceSize</span>            <span class="o">=</span> <span class="mi">21807104</span> <span class="p">(</span><span class="mf">20.796875</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">CompressedClassSpaceSize</span> <span class="o">=</span> <span class="mi">1073741824</span> <span class="p">(</span><span class="mf">1024.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">MaxMetaspaceSize</span>         <span class="o">=</span> <span class="mi">17592186044415</span> <span class="n">MB</span>
+   <span class="n">G1HeapRegionSize</span>         <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mf">0.0</span><span class="n">MB</span><span class="p">)</span>
+
+<span class="n">Heap</span> <span class="n">Usage</span><span class="p">:</span>
+<span class="n">PS</span> <span class="n">Young</span> <span class="n">Generation</span>
+<span class="n">Eden</span> <span class="n">Space</span><span class="p">:</span>
+   <span class="n">capacity</span> <span class="o">=</span> <span class="mi">236978176</span> <span class="p">(</span><span class="mf">226.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">used</span>     <span class="o">=</span> <span class="mi">157770696</span> <span class="p">(</span><span class="mf">150.46186065673828</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">free</span>     <span class="o">=</span> <span class="mi">79207480</span> <span class="p">(</span><span class="mf">75.53813934326172</span><span class="n">MB</span><span class="p">)</span>
+   <span class="mf">66.57604453837978</span><span class="o">%</span> <span class="n">used</span>
+<span class="n">From</span> <span class="n">Space</span><span class="p">:</span>
+   <span class="n">capacity</span> <span class="o">=</span> <span class="mi">2621440</span> <span class="p">(</span><span class="mf">2.5</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">used</span>     <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mf">0.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">free</span>     <span class="o">=</span> <span class="mi">2621440</span> <span class="p">(</span><span class="mf">2.5</span><span class="n">MB</span><span class="p">)</span>
+   <span class="mf">0.0</span><span class="o">%</span> <span class="n">used</span>
+<span class="n">To</span> <span class="n">Space</span><span class="p">:</span>
+   <span class="n">capacity</span> <span class="o">=</span> <span class="mi">2621440</span> <span class="p">(</span><span class="mf">2.5</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">used</span>     <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mf">0.0</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">free</span>     <span class="o">=</span> <span class="mi">2621440</span> <span class="p">(</span><span class="mf">2.5</span><span class="n">MB</span><span class="p">)</span>
+   <span class="mf">0.0</span><span class="o">%</span> <span class="n">used</span>
+<span class="n">PS</span> <span class="n">Old</span> <span class="n">Generation</span>
+   <span class="n">capacity</span> <span class="o">=</span> <span class="mi">781713408</span> <span class="p">(</span><span class="mf">745.5</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">used</span>     <span class="o">=</span> <span class="mi">409595464</span> <span class="p">(</span><span class="mf">390.6206741333008</span><span class="n">MB</span><span class="p">)</span>
+   <span class="n">free</span>     <span class="o">=</span> <span class="mi">372117944</span> <span class="p">(</span><span class="mf">354.8793258666992</span><span class="n">MB</span><span class="p">)</span>
+   <span class="mf">52.39713938743136</span><span class="o">%</span> <span class="n">used</span>
+
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jmap<span class="w"> </span>-help
+Usage:
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;executable<span class="w"> </span>&lt;core&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>core<span class="w"> </span>file<span class="o">)</span>
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span><span class="o">[</span>server_id@<span class="o">]</span>&lt;remote<span class="w"> </span>server<span class="w"> </span>IP<span class="w"> </span>or<span class="w"> </span>hostname&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>remote<span class="w"> </span>debug<span class="w"> </span>server<span class="o">)</span>
+
+where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
+<span class="w">    </span>&lt;none&gt;<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>same<span class="w"> </span>info<span class="w"> </span>as<span class="w"> </span>Solaris<span class="w"> </span>pmap
+<span class="w">    </span>-heap<span class="w">                </span>to<span class="w"> </span>print<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span>summary
+<span class="w">    </span>-histo<span class="o">[</span>:live<span class="o">]</span><span class="w">        </span>to<span class="w"> </span>print<span class="w"> </span>histogram<span class="w"> </span>of<span class="w"> </span>java<span class="w"> </span>object<span class="w"> </span>heap<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;live&quot;</span>
+<span class="w">                         </span>suboption<span class="w"> </span>is<span class="w"> </span>specified,<span class="w"> </span>only<span class="w"> </span>count<span class="w"> </span>live<span class="w"> </span>objects
+<span class="w">    </span>-clstats<span class="w">             </span>to<span class="w"> </span>print<span class="w"> </span>class<span class="w"> </span>loader<span class="w"> </span>statistics
+<span class="w">    </span>-finalizerinfo<span class="w">       </span>to<span class="w"> </span>print<span class="w"> </span>information<span class="w"> </span>on<span class="w"> </span>objects<span class="w"> </span>awaiting<span class="w"> </span>finalization
+<span class="w">    </span>-dump:&lt;dump-options&gt;<span class="w"> </span>to<span class="w"> </span>dump<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span><span class="k">in</span><span class="w"> </span>hprof<span class="w"> </span>binary<span class="w"> </span>format
+<span class="w">                         </span>dump-options:
+<span class="w">                           </span>live<span class="w">         </span>dump<span class="w"> </span>only<span class="w"> </span>live<span class="w"> </span>objects<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>specified,
+<span class="w">                                        </span>all<span class="w"> </span>objects<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>heap<span class="w"> </span>are<span class="w"> </span>dumped.
+<span class="w">                           </span><span class="nv">format</span><span class="o">=</span>b<span class="w">     </span>binary<span class="w"> </span>format
+<span class="w">                           </span><span class="nv">file</span><span class="o">=</span>&lt;file&gt;<span class="w">  </span>dump<span class="w"> </span>heap<span class="w"> </span>to<span class="w"> </span>&lt;file&gt;
+<span class="w">                         </span>Example:<span class="w"> </span>jmap<span class="w"> </span>-dump:live,format<span class="o">=</span>b,file<span class="o">=</span>heap.bin<span class="w"> </span>&lt;pid&gt;
+<span class="w">    </span>-F<span class="w">                   </span>force.<span class="w"> </span>Use<span class="w"> </span>with<span class="w"> </span>-dump:&lt;dump-options&gt;<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>or<span class="w"> </span>-histo
+<span class="w">                         </span>to<span class="w"> </span>force<span class="w"> </span>a<span class="w"> </span>heap<span class="w"> </span>dump<span class="w"> </span>or<span class="w"> </span>histogram<span class="w"> </span>when<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>does<span class="w"> </span>not
+<span class="w">                         </span>respond.<span class="w"> </span>The<span class="w"> </span><span class="s2">&quot;live&quot;</span><span class="w"> </span>suboption<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>supported
+<span class="w">                         </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>mode.
+<span class="w">    </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w">           </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+<span class="w">    </span>-J&lt;flag&gt;<span class="w">             </span>to<span class="w"> </span>pass<span class="w"> </span>&lt;flag&gt;<span class="w"> </span>directly<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>runtime<span class="w"> </span>system
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h2>运行时配置信息<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<section id="jinfo">
+<h3>jinfo<a class="headerlink" href="#jinfo" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">jinfo</span> <span class="pre">&lt;pid&gt;</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jinfo<span class="w"> </span>-help
+Usage:
+<span class="w">    </span>jinfo<span class="w"> </span>&lt;option&gt;<span class="w"> </span>&lt;pid&gt;
+<span class="w">       </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
+
+where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
+<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="w">         </span>to<span class="w"> </span>print<span class="w"> </span>the<span class="w"> </span>value<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
+<span class="w">    </span>-flag<span class="w"> </span><span class="o">[</span>+<span class="p">|</span>-<span class="o">]</span>&lt;name&gt;<span class="w">    </span>to<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>or<span class="w"> </span>disable<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
+<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="o">=</span>&lt;value&gt;<span class="w"> </span>to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>value
+<span class="w">    </span>-flags<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>VM<span class="w"> </span>flags
+<span class="w">    </span>-sysprops<span class="w">            </span>to<span class="w"> </span>print<span class="w"> </span>Java<span class="w"> </span>system<span class="w"> </span>properties
+<span class="w">    </span>&lt;no<span class="w"> </span>option&gt;<span class="w">          </span>to<span class="w"> </span>print<span class="w"> </span>both<span class="w"> </span>VM<span class="w"> </span>flags<span class="w"> </span>and<span class="w"> </span>system<span class="w"> </span>properties
+<span class="w">    </span>-?<span class="w"> </span><span class="p">|</span><span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w"> </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+</pre></div>
+</div>
+</div>
+</section>
+<section id="jcmd-vm-flags">
+<h3>jcmd <pid> VM.flags<a class="headerlink" href="#jcmd-vm-flags" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="id19">
+<h2>运行时内存统计<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#%E5%A0%86%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="xref myst">堆统计信息</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jstat</span> <span class="pre">-[option]</span> <span class="pre">pid</span> <span class="pre">[interval]</span> <span class="pre">[count]</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">[interval]</span></code> 默认单位时 ms，<code class="docutils literal notranslate"><span class="pre">[option]</span></code> 的选项可以通过<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">stat</span></code>查看，<code class="docutils literal notranslate"><span class="pre">-gc</span></code>（按照大小展示） 和 <code class="docutils literal notranslate"><span class="pre">-gcutil</span></code>（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">jhsdb</span></code></strong></p>
+<p>jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability Agent Debugging Tool，用于对 HotSpot JVM 进行调试和分析，也支持堆 JVM 崩溃后转储的 core 文件进行调试。
+使用方式如下:</p>
+<p><code class="docutils literal notranslate"><span class="pre">jhsdb</span> <span class="pre">[subcmd]</span> <span class="pre">[--pid</span> <span class="pre">pid</span> <span class="pre">|</span> <span class="pre">--exe</span> <span class="pre">executable</span> <span class="pre">--core</span> <span class="pre">coredump]</span></code></p>
+<p>其中 subcmd 支持：</p>
+<ul class="simple">
+<li><p>jhsdb clhsdb： Starts the interactive command-line debugger.</p></li>
+<li><p>jhsdb hsdb： Starts the interactive GUI debugger.</p></li>
+<li><p>jhsdb debugd：Starts the remote debug server.</p></li>
+<li><p>jhsdb jstack：Prints stack and locks information.</p></li>
+<li><p>jhsdb jmap：Prints heap information.</p></li>
+<li><p>jhsdb jinfo： Prints basic JVM information.</p></li>
+<li><p>jhsdb jsnap： Prints performance counter information.</p></li>
+</ul>
+</div>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id20" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html">Java® Development Kit Version 21 Tool Specifications</a></p>
+</aside>
+<aside class="footnote brackets" id="id21" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://stackoverflow.com/questions/138511/what-are-java-command-line-options-to-set-to-allow-jvm-to-be-remotely-debugged">What are Java command line options to set to allow JVM to be remotely debugged? StackOverflow.</a></p>
+</aside>
+<aside class="footnote brackets" id="id22" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cnblogs.com/jelly12345/p/15597797.html">求你了，GC 日志打印别再瞎配置了. 郭慕荣博客园. </a></p>
+</aside>
+<aside class="footnote brackets" id="id23" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cnblogs.com/caoweixiong/p/14792874.html">JVM——参数说明. 曹伟雄</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../7-Spring/0-index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Spring 框架</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">垃圾收集与内存非配策略</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, lighk
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/lighkLife" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">JDK 工具</a><ul>
+<li><a class="reference internal" href="#id2">编译</a></li>
+<li><a class="reference internal" href="#id3">反编译</a></li>
+<li><a class="reference internal" href="#id4">进程启动</a></li>
+<li><a class="reference internal" href="#id5">远程调试</a></li>
+<li><a class="reference internal" href="#jvm">JVM 参数</a><ul>
+<li><a class="reference internal" href="#id7">堆大小</a></li>
+<li><a class="reference internal" href="#gc-3">GC 日志</a></li>
+<li><a class="reference internal" href="#oom">OOM 堆转储</a></li>
+<li><a class="reference internal" href="#id9">其他</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">进程查看</a><ul>
+<li><a class="reference internal" href="#jps"><code class="docutils literal notranslate"><span class="pre">jps</span></code></a></li>
+<li><a class="reference internal" href="#jcmd"><code class="docutils literal notranslate"><span class="pre">jcmd</span></code></a></li>
+<li><a class="reference internal" href="#ps"><code class="docutils literal notranslate"><span class="pre">ps</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12">线程查看</a></li>
+<li><a class="reference internal" href="#id13">线程快照</a><ul>
+<li><a class="reference internal" href="#jstack-pid"><code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code></a></li>
+<li><a class="reference internal" href="#jcmd-pid-thread-print"><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">Thread.print</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">内存快照</a><ul>
+<li><a class="reference internal" href="#id15">转储 JVM 堆</a></li>
+<li><a class="reference internal" href="#id16">对象统计信息</a></li>
+<li><a class="reference internal" href="#id17">堆统计信息</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18">运行时配置信息</a><ul>
+<li><a class="reference internal" href="#jinfo">jinfo</a></li>
+<li><a class="reference internal" href="#jcmd-vm-flags">jcmd <pid> VM.flags</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id19">运行时内存统计</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=7d86a446"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "lighkLife/wiki");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js?v=ffc8af2d"></script>
+    <script src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js?v=12818e64"></script>
+    </body>
+</html>

@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -245,8 +245,9 @@
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">JVM 相关</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of JVM 相关</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="a1-ClassLoader.html">ClassLoader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1-Runtime-Data-Areas.html">JVM 运行时数据区域</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">Class 文件结构</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html">JDK 工具</a></li>
 </ul>
 </li>
 </ul>
@@ -365,7 +366,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -373,6 +374,25 @@
         <article role="main" id="furo-main-content">
           <section id="jvm">
 <h1>JVM 相关<a class="headerlink" href="#jvm" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>编译<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<a class=""
+               data-lightbox="group-af885045-3546-4ff6-9cfb-15a7b12fec2b"
+               href="../../_images/image-51.png"
+               title=""
+               data-title=""
+               
+               ><img src="../../_images/image-51.png"
+                     class=""
+                     width="100%"
+                     height="auto"
+                     alt=""/>
+                </a></section>
+<section id="id2">
+<h2>运行<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id3">
+<h2>相关文章<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="a1-ClassLoader.html">ClassLoader</a><ul>
@@ -392,20 +412,43 @@
 <li class="toctree-l2"><a class="reference internal" href="b1-Runtime-Data-Areas.html#run-time-constant-pool">6.Run-Time Constant Pool</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">Class 文件结构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id2">概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id3">魔数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id4">版本</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id5">常量池</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id9">访问标记</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id10">当前类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id11">父类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id12">接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id13">字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id14">方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html#id15">属性</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#id2">0.对象已死？</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#id6">1.垃圾收集算法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#hotspot">2.HotSpot 的算法细节</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html">A fatal error <code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html#id1">问题说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html#sigsegv-0xb"><code class="docutils literal notranslate"><span class="pre">SIGSEGV</span> <span class="pre">(0xb)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="JVM%E5%BC%82%E5%B8%B8%E9%80%80%E5%87%BA%E9%97%AE%E9%A2%98.html#id2">操作系统日志查看</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html">JDK 工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id2">编译</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id3">反编译</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id4">进程启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id5">远程调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#jvm">JVM 参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id11">进程查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id12">线程查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id13">线程快照</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id14">内存快照</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id18">运行时配置信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html#id19">运行时内存统计</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</section>
 </section>
 
         </article>
@@ -458,8 +501,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">JVM 相关</a><ul>
+<li><a class="reference internal" href="#id1">编译</a></li>
+<li><a class="reference internal" href="#id2">运行</a></li>
+<li><a class="reference internal" href="#id3">相关文章</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

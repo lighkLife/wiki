@@ -41,7 +41,7 @@ table[(table.length - 1) & hash];
 
 ## 扩容
 
-参考：
+## 参考
 
 1. [Java 8系列之重新认识HashMap](https://tech.meituan.com/2016/06/24/java-hashmap.html)
 2. [Map - HashSet & HashMap 源码解析](https://pdai.tech/md/java/collection/java-map-HashMap&HashSet.html)
