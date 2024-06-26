@@ -5,6 +5,8 @@
 - 直接执行这些程序，比如 jstack、jmap 等，这种方式需要记住不同命令的使用方式，个人更偏向使用 jcmd，但这种方式输出的信息更全面。
 - 使用`jcmd <pid | main class> <command>`的方式，这种方式可以利用 `jcmd <pid> help` 查看支持的子命令，使用方式更统一、简单。
 
+![alt text](image-7.png)
+
 ## 编译
 
 `javac` 指定目录编译：
@@ -284,8 +286,6 @@ Options:
 
 ## 内存快照
 
-### 转储 JVM 堆
-
 - `jmap -dump:format=b,file=heap.bin <pid>`
 - `jcmd <pid> GC.heap_dump <filename>`
 
@@ -300,9 +300,68 @@ Options:
 `live`选项用于导出 Java 堆中所有存活的对象信息，执行 `jmap -dump:live,format=b,file=<filename> <pid>` 命令时，需要注意的是，`-dump:live` 选项会在目标 Java 进程中触发一次 Full GC，因此可能会对应用程序的性能产生影响。
 ```
 
+```bash
+➜  ~ jmap -help
+Usage:
+    jmap [option] <pid>
+        (to connect to running process)
+    jmap [option] <executable <core>
+        (to connect to a core file)
+    jmap [option] [server_id@]<remote server IP or hostname>
+        (to connect to remote debug server)
+
+where <option> is one of:
+    <none>               to print same info as Solaris pmap
+    -heap                to print java heap summary
+    -histo[:live]        to print histogram of java object heap; if the "live"
+                         suboption is specified, only count live objects
+    -clstats             to print class loader statistics
+    -finalizerinfo       to print information on objects awaiting finalization
+    -dump:<dump-options> to dump java heap in hprof binary format
+                         dump-options:
+                           live         dump only live objects; if not specified,
+                                        all objects in the heap are dumped.
+                           format=b     binary format
+                           file=<file>  dump heap to <file>
+                         Example: jmap -dump:live,format=b,file=heap.bin <pid>
+    -F                   force. Use with -dump:<dump-options> <pid> or -histo
+                         to force a heap dump or histogram when <pid> does not
+                         respond. The "live" suboption is not supported
+                         in this mode.
+    -h | -help           to print this help message
+    -J<flag>             to pass <flag> directly to the runtime system
+```
+
+## 运行时配置信息
+
+### jinfo
+
+`jinfo <pid>`
+
+```{note}
+```bash
+➜  ~ jinfo -help
+Usage:
+    jinfo <option> <pid>
+       (to connect to a running process)
+
+where <option> is one of:
+    -flag <name>         to print the value of the named VM flag
+    -flag [+|-]<name>    to enable or disable the named VM flag
+    -flag <name>=<value> to set the named VM flag to the given value
+    -flags               to print VM flags
+    -sysprops            to print Java system properties
+    <no option>          to print both VM flags and system properties
+    -? | -h | --help | -help to print this help message
+```
+
+### jcmd <pid> VM.flags
+
+## 运行时内存统计
+
 ### 对象统计信息
 
-- `jmap -histo:live <pid> | head -n 15`
+- `jmap -histo <pid> | head -n 15`
 - `jcmd <pid> GC.class_histogram | head -n 15`
 
 ```
@@ -372,74 +431,23 @@ PS Old Generation
    used     = 409595464 (390.6206741333008MB)
    free     = 372117944 (354.8793258666992MB)
    52.39713938743136% used
-
 ```
 
+### GC 情况
 
-```{note}
+`jstat -[option] pid [interval] [count]`
 
-```bash
-➜  ~ jmap -help
-Usage:
-    jmap [option] <pid>
-        (to connect to running process)
-    jmap [option] <executable <core>
-        (to connect to a core file)
-    jmap [option] [server_id@]<remote server IP or hostname>
-        (to connect to remote debug server)
+`[interval]` 默认单位时 ms，`[option]` 的选项及其使用手册可以通过`man stat`查看，`-gc`（按照大小展示） 和 `-gcutil`（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。
 
-where <option> is one of:
-    <none>               to print same info as Solaris pmap
-    -heap                to print java heap summary
-    -histo[:live]        to print histogram of java object heap; if the "live"
-                         suboption is specified, only count live objects
-    -clstats             to print class loader statistics
-    -finalizerinfo       to print information on objects awaiting finalization
-    -dump:<dump-options> to dump java heap in hprof binary format
-                         dump-options:
-                           live         dump only live objects; if not specified,
-                                        all objects in the heap are dumped.
-                           format=b     binary format
-                           file=<file>  dump heap to <file>
-                         Example: jmap -dump:live,format=b,file=heap.bin <pid>
-    -F                   force. Use with -dump:<dump-options> <pid> or -histo
-                         to force a heap dump or histogram when <pid> does not
-                         respond. The "live" suboption is not supported
-                         in this mode.
-    -h | -help           to print this help message
-    -J<flag>             to pass <flag> directly to the runtime system
 ```
-
-## 运行时配置信息
-
-### jinfo
-
-`jinfo <pid>`
-
-```{note}
-```bash
-➜  ~ jinfo -help
-Usage:
-    jinfo <option> <pid>
-       (to connect to a running process)
-
-where <option> is one of:
-    -flag <name>         to print the value of the named VM flag
-    -flag [+|-]<name>    to enable or disable the named VM flag
-    -flag <name>=<value> to set the named VM flag to the given value
-    -flags               to print VM flags
-    -sysprops            to print Java system properties
-    <no option>          to print both VM flags and system properties
-    -? | -h | --help | -help to print this help message
+➜  ~  jstat -gcutil 11025 1000 5
+  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   
+ 52.75   0.00  14.31  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.45  72.75  94.26  91.74    100    4.810     5    1.434    6.244
 ```
-
-### jcmd <pid> VM.flags
-
-## 运行时内存统计
-- [堆统计信息](#堆统计信息)
-- `jstat -[option] pid [interval] [count]`
-
-`[interval]` 默认单位时 ms，`[option]` 的选项可以通过`man stat`查看，`-gc`（按照大小展示） 和 `-gcutil`（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。
 
 ## 全能的 jhsdb 和 jcmd
 
@@ -500,6 +508,15 @@ jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability A
 Core 文件的本质是进程的内存映像，它包含了进程在崩溃或出现错误时的完整内存状态，包括代码、数据、堆栈、寄存器状态、打开文件等信息。Core 文件可以用于进程崩溃后的调试和分析，通过分析 core 文件可以了解进程崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。
 
 在 Java 中，如果 JVM 出现了严重错误（如 OutOfMemoryError），JVM 也会生成一个 core 文件，这个 core 文件包含了 JVM 的内存状态。通过分析 JVM 的 core 文件，可以了解 JVM 崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。
+
+- 使用 jstack 也可以查看 core 文件中的线程栈快照： `jstack java core.26492`
+- 使用 jmap 也可以查看 core 文件中的堆快照： `jmap java core.14652`
+
+| Dump Type   | Use Case                   | Contains  |
+| ----------- | -------------------------- | --------- |
+| Heap Dump   | 诊断内存问题，如*OutOfMemoryError* | 堆中的对象，线程栈 |
+| Thread Dump | 诊断性能问题, 如*死锁*，*无限循环*   | 线程栈、线程状态  |
+| Core Dump   | 调试 native 库引发的崩溃问题        | 进程的内存快照   |
 ```
 
 [^1]: [Java® Development Kit Version 21 Tool Specifications](https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html)

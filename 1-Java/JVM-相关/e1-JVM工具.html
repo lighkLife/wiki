@@ -373,12 +373,13 @@
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="jdk-1">
-<h1>JDK 工具<a class="footnote-reference brackets" href="#id21" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#jdk-1" title="Link to this heading">¶</a></h1>
+<h1>JDK 工具<a class="footnote-reference brackets" href="#id20" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#jdk-1" title="Link to this heading">¶</a></h1>
 <p>在 JDK 的 bin 目录下，为 JAVA 开发人员提供了许多工具，从使用方式来说，可以分为两种：</p>
 <ul class="simple">
 <li><p>直接执行这些程序，比如 jstack、jmap 等，这种方式需要记住不同命令的使用方式，个人更偏向使用 jcmd，但这种方式输出的信息更全面。</p></li>
 <li><p>使用<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid</span> <span class="pre">|</span> <span class="pre">main</span> <span class="pre">class&gt;</span> <span class="pre">&lt;command&gt;</span></code>的方式，这种方式可以利用 <code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 查看支持的子命令，使用方式更统一、简单。</p></li>
 </ul>
+<p><img alt="alt text" src="../../_images/image-71.png" /></p>
 <section id="id2">
 <h2>编译<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">javac</span></code> 指定目录编译：</p>
@@ -504,7 +505,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 有什么区别呢？<a class="footnote-reference brackets" href="#id22" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 有什么区别呢？<a class="footnote-reference brackets" href="#id21" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 对后续的版本依然生效，但是以解释模式运行，没有 JIT，所以运行速度会慢一些。因此对于 jdk5 之后的版本，都建议使用 <code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code>。</p>
 </div>
 <p><strong>客户端配置</strong>：</p>
@@ -520,7 +521,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 </section>
 <section id="gc-3">
-<h3>GC 日志<a class="footnote-reference brackets" href="#id23" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#gc-3" title="Link to this heading">¶</a></h3>
+<h3>GC 日志<a class="footnote-reference brackets" href="#id22" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#gc-3" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 必备</span>
 -XX:+PrintGCDetails<span class="w"> </span>
 -XX:+PrintGCDateStamps<span class="w"> </span>
@@ -579,7 +580,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>JVM 参数很多，总体上可以分成三类：<a class="footnote-reference brackets" href="#id24" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<p>JVM 参数很多，总体上可以分成三类：<a class="footnote-reference brackets" href="#id23" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">-</span></code></strong>：标准参数，比如 <code class="docutils literal notranslate"><span class="pre">-verbose:</span></code>gc` 这类表示标准实现，所有的虚拟机都需要实现这些参数的功能，且向后兼容；</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">-X</span></code></strong>：非标准参数，默认 JVM 会实现这些参数的功能，但是不保证所有的 JVM 实现都满足，且不保证向后兼容；</p></li>
@@ -662,8 +663,6 @@ Options:
 </section>
 <section id="id14">
 <h2>内存快照<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
-<section id="id15">
-<h3>转储 JVM 堆<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:format=b,file=heap.bin</span> <span class="pre">&lt;pid&gt;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.heap_dump</span> <span class="pre">&lt;filename&gt;</span></code></p></li>
@@ -679,11 +678,72 @@ Options:
 <p><strong><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:live</span></code></strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">live</span></code>选项用于导出 Java 堆中所有存活的对象信息，执行 <code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-dump:live,format=b,file=&lt;filename&gt;</span> <span class="pre">&lt;pid&gt;</span></code> 命令时，需要注意的是，<code class="docutils literal notranslate"><span class="pre">-dump:live</span></code> 选项会在目标 Java 进程中触发一次 Full GC，因此可能会对应用程序的性能产生影响。</p>
 </div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jmap<span class="w"> </span>-help
+Usage:
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;executable<span class="w"> </span>&lt;core&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>core<span class="w"> </span>file<span class="o">)</span>
+<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span><span class="o">[</span>server_id@<span class="o">]</span>&lt;remote<span class="w"> </span>server<span class="w"> </span>IP<span class="w"> </span>or<span class="w"> </span>hostname&gt;
+<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>remote<span class="w"> </span>debug<span class="w"> </span>server<span class="o">)</span>
+
+where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
+<span class="w">    </span>&lt;none&gt;<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>same<span class="w"> </span>info<span class="w"> </span>as<span class="w"> </span>Solaris<span class="w"> </span>pmap
+<span class="w">    </span>-heap<span class="w">                </span>to<span class="w"> </span>print<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span>summary
+<span class="w">    </span>-histo<span class="o">[</span>:live<span class="o">]</span><span class="w">        </span>to<span class="w"> </span>print<span class="w"> </span>histogram<span class="w"> </span>of<span class="w"> </span>java<span class="w"> </span>object<span class="w"> </span>heap<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;live&quot;</span>
+<span class="w">                         </span>suboption<span class="w"> </span>is<span class="w"> </span>specified,<span class="w"> </span>only<span class="w"> </span>count<span class="w"> </span>live<span class="w"> </span>objects
+<span class="w">    </span>-clstats<span class="w">             </span>to<span class="w"> </span>print<span class="w"> </span>class<span class="w"> </span>loader<span class="w"> </span>statistics
+<span class="w">    </span>-finalizerinfo<span class="w">       </span>to<span class="w"> </span>print<span class="w"> </span>information<span class="w"> </span>on<span class="w"> </span>objects<span class="w"> </span>awaiting<span class="w"> </span>finalization
+<span class="w">    </span>-dump:&lt;dump-options&gt;<span class="w"> </span>to<span class="w"> </span>dump<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span><span class="k">in</span><span class="w"> </span>hprof<span class="w"> </span>binary<span class="w"> </span>format
+<span class="w">                         </span>dump-options:
+<span class="w">                           </span>live<span class="w">         </span>dump<span class="w"> </span>only<span class="w"> </span>live<span class="w"> </span>objects<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>specified,
+<span class="w">                                        </span>all<span class="w"> </span>objects<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>heap<span class="w"> </span>are<span class="w"> </span>dumped.
+<span class="w">                           </span><span class="nv">format</span><span class="o">=</span>b<span class="w">     </span>binary<span class="w"> </span>format
+<span class="w">                           </span><span class="nv">file</span><span class="o">=</span>&lt;file&gt;<span class="w">  </span>dump<span class="w"> </span>heap<span class="w"> </span>to<span class="w"> </span>&lt;file&gt;
+<span class="w">                         </span>Example:<span class="w"> </span>jmap<span class="w"> </span>-dump:live,format<span class="o">=</span>b,file<span class="o">=</span>heap.bin<span class="w"> </span>&lt;pid&gt;
+<span class="w">    </span>-F<span class="w">                   </span>force.<span class="w"> </span>Use<span class="w"> </span>with<span class="w"> </span>-dump:&lt;dump-options&gt;<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>or<span class="w"> </span>-histo
+<span class="w">                         </span>to<span class="w"> </span>force<span class="w"> </span>a<span class="w"> </span>heap<span class="w"> </span>dump<span class="w"> </span>or<span class="w"> </span>histogram<span class="w"> </span>when<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>does<span class="w"> </span>not
+<span class="w">                         </span>respond.<span class="w"> </span>The<span class="w"> </span><span class="s2">&quot;live&quot;</span><span class="w"> </span>suboption<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>supported
+<span class="w">                         </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>mode.
+<span class="w">    </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w">           </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+<span class="w">    </span>-J&lt;flag&gt;<span class="w">             </span>to<span class="w"> </span>pass<span class="w"> </span>&lt;flag&gt;<span class="w"> </span>directly<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>runtime<span class="w"> </span>system
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h2>运行时配置信息<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="jinfo">
+<h3>jinfo<a class="headerlink" href="#jinfo" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">jinfo</span> <span class="pre">&lt;pid&gt;</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jinfo<span class="w"> </span>-help
+Usage:
+<span class="w">    </span>jinfo<span class="w"> </span>&lt;option&gt;<span class="w"> </span>&lt;pid&gt;
+<span class="w">       </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
+
+where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
+<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="w">         </span>to<span class="w"> </span>print<span class="w"> </span>the<span class="w"> </span>value<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
+<span class="w">    </span>-flag<span class="w"> </span><span class="o">[</span>+<span class="p">|</span>-<span class="o">]</span>&lt;name&gt;<span class="w">    </span>to<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>or<span class="w"> </span>disable<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
+<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="o">=</span>&lt;value&gt;<span class="w"> </span>to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>value
+<span class="w">    </span>-flags<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>VM<span class="w"> </span>flags
+<span class="w">    </span>-sysprops<span class="w">            </span>to<span class="w"> </span>print<span class="w"> </span>Java<span class="w"> </span>system<span class="w"> </span>properties
+<span class="w">    </span>&lt;no<span class="w"> </span>option&gt;<span class="w">          </span>to<span class="w"> </span>print<span class="w"> </span>both<span class="w"> </span>VM<span class="w"> </span>flags<span class="w"> </span>and<span class="w"> </span>system<span class="w"> </span>properties
+<span class="w">    </span>-?<span class="w"> </span><span class="p">|</span><span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w"> </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+</pre></div>
+</div>
+</div>
+</section>
+<section id="jcmd-vm-flags">
+<h3>jcmd <pid> VM.flags<a class="headerlink" href="#jcmd-vm-flags" title="Link to this heading">¶</a></h3>
+</section>
 </section>
 <section id="id16">
-<h3>对象统计信息<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<h2>运行时内存统计<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<section id="id17">
+<h3>对象统计信息<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-histo:live</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-n</span> <span class="pre">15</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-histo</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-n</span> <span class="pre">15</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.class_histogram</span> <span class="pre">|</span> <span class="pre">head</span> <span class="pre">-n</span> <span class="pre">15</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> num     #instances         #bytes  class name
@@ -703,8 +763,8 @@ Options:
 </pre></div>
 </div>
 </section>
-<section id="id17">
-<h3>堆统计信息<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<section id="id18">
+<h3>堆统计信息<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">-heap</span> <span class="pre">&lt;pid&gt;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">GC.heap_info</span></code></p></li>
@@ -753,85 +813,28 @@ Options:
    <span class="n">used</span>     <span class="o">=</span> <span class="mi">409595464</span> <span class="p">(</span><span class="mf">390.6206741333008</span><span class="n">MB</span><span class="p">)</span>
    <span class="n">free</span>     <span class="o">=</span> <span class="mi">372117944</span> <span class="p">(</span><span class="mf">354.8793258666992</span><span class="n">MB</span><span class="p">)</span>
    <span class="mf">52.39713938743136</span><span class="o">%</span> <span class="n">used</span>
-
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jmap<span class="w"> </span>-help
-Usage:
-<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
-<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
-<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span>&lt;executable<span class="w"> </span>&lt;core&gt;
-<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>core<span class="w"> </span>file<span class="o">)</span>
-<span class="w">    </span>jmap<span class="w"> </span><span class="o">[</span>option<span class="o">]</span><span class="w"> </span><span class="o">[</span>server_id@<span class="o">]</span>&lt;remote<span class="w"> </span>server<span class="w"> </span>IP<span class="w"> </span>or<span class="w"> </span>hostname&gt;
-<span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>remote<span class="w"> </span>debug<span class="w"> </span>server<span class="o">)</span>
-
-where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
-<span class="w">    </span>&lt;none&gt;<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>same<span class="w"> </span>info<span class="w"> </span>as<span class="w"> </span>Solaris<span class="w"> </span>pmap
-<span class="w">    </span>-heap<span class="w">                </span>to<span class="w"> </span>print<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span>summary
-<span class="w">    </span>-histo<span class="o">[</span>:live<span class="o">]</span><span class="w">        </span>to<span class="w"> </span>print<span class="w"> </span>histogram<span class="w"> </span>of<span class="w"> </span>java<span class="w"> </span>object<span class="w"> </span>heap<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;live&quot;</span>
-<span class="w">                         </span>suboption<span class="w"> </span>is<span class="w"> </span>specified,<span class="w"> </span>only<span class="w"> </span>count<span class="w"> </span>live<span class="w"> </span>objects
-<span class="w">    </span>-clstats<span class="w">             </span>to<span class="w"> </span>print<span class="w"> </span>class<span class="w"> </span>loader<span class="w"> </span>statistics
-<span class="w">    </span>-finalizerinfo<span class="w">       </span>to<span class="w"> </span>print<span class="w"> </span>information<span class="w"> </span>on<span class="w"> </span>objects<span class="w"> </span>awaiting<span class="w"> </span>finalization
-<span class="w">    </span>-dump:&lt;dump-options&gt;<span class="w"> </span>to<span class="w"> </span>dump<span class="w"> </span>java<span class="w"> </span>heap<span class="w"> </span><span class="k">in</span><span class="w"> </span>hprof<span class="w"> </span>binary<span class="w"> </span>format
-<span class="w">                         </span>dump-options:
-<span class="w">                           </span>live<span class="w">         </span>dump<span class="w"> </span>only<span class="w"> </span>live<span class="w"> </span>objects<span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>specified,
-<span class="w">                                        </span>all<span class="w"> </span>objects<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>heap<span class="w"> </span>are<span class="w"> </span>dumped.
-<span class="w">                           </span><span class="nv">format</span><span class="o">=</span>b<span class="w">     </span>binary<span class="w"> </span>format
-<span class="w">                           </span><span class="nv">file</span><span class="o">=</span>&lt;file&gt;<span class="w">  </span>dump<span class="w"> </span>heap<span class="w"> </span>to<span class="w"> </span>&lt;file&gt;
-<span class="w">                         </span>Example:<span class="w"> </span>jmap<span class="w"> </span>-dump:live,format<span class="o">=</span>b,file<span class="o">=</span>heap.bin<span class="w"> </span>&lt;pid&gt;
-<span class="w">    </span>-F<span class="w">                   </span>force.<span class="w"> </span>Use<span class="w"> </span>with<span class="w"> </span>-dump:&lt;dump-options&gt;<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>or<span class="w"> </span>-histo
-<span class="w">                         </span>to<span class="w"> </span>force<span class="w"> </span>a<span class="w"> </span>heap<span class="w"> </span>dump<span class="w"> </span>or<span class="w"> </span>histogram<span class="w"> </span>when<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>does<span class="w"> </span>not
-<span class="w">                         </span>respond.<span class="w"> </span>The<span class="w"> </span><span class="s2">&quot;live&quot;</span><span class="w"> </span>suboption<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>supported
-<span class="w">                         </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>mode.
-<span class="w">    </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w">           </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
-<span class="w">    </span>-J&lt;flag&gt;<span class="w">             </span>to<span class="w"> </span>pass<span class="w"> </span>&lt;flag&gt;<span class="w"> </span>directly<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>runtime<span class="w"> </span>system
+</section>
+<section id="gc">
+<h3>GC 情况<a class="headerlink" href="#gc" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">jstat</span> <span class="pre">-[option]</span> <span class="pre">pid</span> <span class="pre">[interval]</span> <span class="pre">[count]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">[interval]</span></code> 默认单位时 ms，<code class="docutils literal notranslate"><span class="pre">[option]</span></code> 的选项及其使用手册可以通过<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">stat</span></code>查看，<code class="docutils literal notranslate"><span class="pre">-gc</span></code>（按照大小展示） 和 <code class="docutils literal notranslate"><span class="pre">-gcutil</span></code>（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>➜  ~  jstat -gcutil 11025 1000 5
+  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   
+ 52.75   0.00  14.31  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.42  72.75  94.26  91.74    100    4.810     5    1.434    6.244
+ 52.75   0.00  14.45  72.75  94.26  91.74    100    4.810     5    1.434    6.244
 </pre></div>
 </div>
-</div>
 </section>
-</section>
-<section id="id18">
-<h2>运行时配置信息<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
-<section id="jinfo">
-<h3>jinfo<a class="headerlink" href="#jinfo" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">jinfo</span> <span class="pre">&lt;pid&gt;</span></code></p>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jinfo<span class="w"> </span>-help
-Usage:
-<span class="w">    </span>jinfo<span class="w"> </span>&lt;option&gt;<span class="w"> </span>&lt;pid&gt;
-<span class="w">       </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
-
-where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of:
-<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="w">         </span>to<span class="w"> </span>print<span class="w"> </span>the<span class="w"> </span>value<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
-<span class="w">    </span>-flag<span class="w"> </span><span class="o">[</span>+<span class="p">|</span>-<span class="o">]</span>&lt;name&gt;<span class="w">    </span>to<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>or<span class="w"> </span>disable<span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag
-<span class="w">    </span>-flag<span class="w"> </span>&lt;name&gt;<span class="o">=</span>&lt;value&gt;<span class="w"> </span>to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>the<span class="w"> </span>named<span class="w"> </span>VM<span class="w"> </span>flag<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>value
-<span class="w">    </span>-flags<span class="w">               </span>to<span class="w"> </span>print<span class="w"> </span>VM<span class="w"> </span>flags
-<span class="w">    </span>-sysprops<span class="w">            </span>to<span class="w"> </span>print<span class="w"> </span>Java<span class="w"> </span>system<span class="w"> </span>properties
-<span class="w">    </span>&lt;no<span class="w"> </span>option&gt;<span class="w">          </span>to<span class="w"> </span>print<span class="w"> </span>both<span class="w"> </span>VM<span class="w"> </span>flags<span class="w"> </span>and<span class="w"> </span>system<span class="w"> </span>properties
-<span class="w">    </span>-?<span class="w"> </span><span class="p">|</span><span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>-help<span class="w"> </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
-</pre></div>
-</div>
-</div>
-</section>
-<section id="jcmd-vm-flags">
-<h3>jcmd <pid> VM.flags<a class="headerlink" href="#jcmd-vm-flags" title="Link to this heading">¶</a></h3>
-</section>
-</section>
-<section id="id19">
-<h2>运行时内存统计<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#%E5%A0%86%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="xref myst">堆统计信息</span></a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">jstat</span> <span class="pre">-[option]</span> <span class="pre">pid</span> <span class="pre">[interval]</span> <span class="pre">[count]</span></code></p></li>
-</ul>
-<p><code class="docutils literal notranslate"><span class="pre">[interval]</span></code> 默认单位时 ms，<code class="docutils literal notranslate"><span class="pre">[option]</span></code> 的选项可以通过<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">stat</span></code>查看，<code class="docutils literal notranslate"><span class="pre">-gc</span></code>（按照大小展示） 和 <code class="docutils literal notranslate"><span class="pre">-gcutil</span></code>（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。</p>
 </section>
 <section id="jhsdb-jcmd">
 <h2>全能的 jhsdb 和 jcmd<a class="headerlink" href="#jhsdb-jcmd" title="Link to this heading">¶</a></h2>
-<section id="id20">
-<h3>jcmd 诊断<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<section id="id19">
+<h3>jcmd 诊断<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
 <p>向正在运行的 Java 虚拟机 （JVM） 发送诊断命令请求，支持许多子命令，具体支持哪些可以通过<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 查看。比如：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jcmd<span class="w"> </span><span class="m">28537</span><span class="w"> </span><span class="nb">help</span>
 <span class="m">28537</span>:
@@ -883,22 +886,50 @@ VM.version
 <p>在计算机系统中，进程是操作系统资源的一种抽象，每个进程都有自己的内存空间，包括代码、数据、堆栈等。当进程出现错误或崩溃时，操作系统会将进程的内存状态保存到一个特殊的文件中，这个文件就是所谓的 core 文件（也称为转储文件或映像文件）。</p>
 <p>Core 文件的本质是进程的内存映像，它包含了进程在崩溃或出现错误时的完整内存状态，包括代码、数据、堆栈、寄存器状态、打开文件等信息。Core 文件可以用于进程崩溃后的调试和分析，通过分析 core 文件可以了解进程崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。</p>
 <p>在 Java 中，如果 JVM 出现了严重错误（如 OutOfMemoryError），JVM 也会生成一个 core 文件，这个 core 文件包含了 JVM 的内存状态。通过分析 JVM 的 core 文件，可以了解 JVM 崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。</p>
+<ul class="simple">
+<li><p>使用 jstack 也可以查看 core 文件中的线程栈快照： <code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">java</span> <span class="pre">core.26492</span></code></p></li>
+<li><p>使用 jmap 也可以查看 core 文件中的堆快照： <code class="docutils literal notranslate"><span class="pre">jmap</span> <span class="pre">java</span> <span class="pre">core.14652</span></code></p></li>
+</ul>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dump Type</p></th>
+<th class="head"><p>Use Case</p></th>
+<th class="head"><p>Contains</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Heap Dump</p></td>
+<td><p>诊断内存问题，如<em>OutOfMemoryError</em></p></td>
+<td><p>堆中的对象，线程栈</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thread Dump</p></td>
+<td><p>诊断性能问题, 如<em>死锁</em>，<em>无限循环</em></p></td>
+<td><p>线程栈、线程状态</p></td>
+</tr>
+<tr class="row-even"><td><p>Core Dump</p></td>
+<td><p>调试 native 库引发的崩溃问题</p></td>
+<td><p>进程的内存快照</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id21" role="doc-footnote">
+<aside class="footnote brackets" id="id20" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html">Java® Development Kit Version 21 Tool Specifications</a></p>
 </aside>
-<aside class="footnote brackets" id="id22" role="doc-footnote">
+<aside class="footnote brackets" id="id21" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">2</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://stackoverflow.com/questions/138511/what-are-java-command-line-options-to-set-to-allow-jvm-to-be-remotely-debugged">What are Java command line options to set to allow JVM to be remotely debugged? StackOverflow.</a></p>
 </aside>
-<aside class="footnote brackets" id="id23" role="doc-footnote">
+<aside class="footnote brackets" id="id22" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">3</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.cnblogs.com/jelly12345/p/15597797.html">求你了，GC 日志打印别再瞎配置了. 郭慕荣博客园. </a></p>
 </aside>
-<aside class="footnote brackets" id="id24" role="doc-footnote">
+<aside class="footnote brackets" id="id23" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">4</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.cnblogs.com/caoweixiong/p/14792874.html">JVM——参数说明. 曹伟雄</a></p>
 </aside>
@@ -989,20 +1020,20 @@ VM.version
 </li>
 <li><a class="reference internal" href="#id12">线程查看</a></li>
 <li><a class="reference internal" href="#id13">线程快照</a></li>
-<li><a class="reference internal" href="#id14">内存快照</a><ul>
-<li><a class="reference internal" href="#id15">转储 JVM 堆</a></li>
-<li><a class="reference internal" href="#id16">对象统计信息</a></li>
-<li><a class="reference internal" href="#id17">堆统计信息</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id18">运行时配置信息</a><ul>
+<li><a class="reference internal" href="#id14">内存快照</a></li>
+<li><a class="reference internal" href="#id15">运行时配置信息</a><ul>
 <li><a class="reference internal" href="#jinfo">jinfo</a></li>
 <li><a class="reference internal" href="#jcmd-vm-flags">jcmd <pid> VM.flags</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id19">运行时内存统计</a></li>
+<li><a class="reference internal" href="#id16">运行时内存统计</a><ul>
+<li><a class="reference internal" href="#id17">对象统计信息</a></li>
+<li><a class="reference internal" href="#id18">堆统计信息</a></li>
+<li><a class="reference internal" href="#gc">GC 情况</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#jhsdb-jcmd">全能的 jhsdb 和 jcmd</a><ul>
-<li><a class="reference internal" href="#id20">jcmd 诊断</a></li>
+<li><a class="reference internal" href="#id19">jcmd 诊断</a></li>
 <li><a class="reference internal" href="#jhsdb">jhsdb 调试分析</a></li>
 </ul>
 </li>
