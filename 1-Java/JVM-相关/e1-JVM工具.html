@@ -373,7 +373,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="jdk-1">
-<h1>JDK 工具<a class="footnote-reference brackets" href="#id20" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#jdk-1" title="Link to this heading">¶</a></h1>
+<h1>JDK 工具<a class="footnote-reference brackets" href="#id21" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#jdk-1" title="Link to this heading">¶</a></h1>
 <p>在 JDK 的 bin 目录下，为 JAVA 开发人员提供了许多工具，从使用方式来说，可以分为两种：</p>
 <ul class="simple">
 <li><p>直接执行这些程序，比如 jstack、jmap 等，这种方式需要记住不同命令的使用方式，个人更偏向使用 jcmd，但这种方式输出的信息更全面。</p></li>
@@ -504,7 +504,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 有什么区别呢？<a class="footnote-reference brackets" href="#id21" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 有什么区别呢？<a class="footnote-reference brackets" href="#id22" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdebug</span> <span class="pre">-Xrunjdwp</span></code> 对后续的版本依然生效，但是以解释模式运行，没有 JIT，所以运行速度会慢一些。因此对于 jdk5 之后的版本，都建议使用 <code class="docutils literal notranslate"><span class="pre">-agentlib:jdwp</span></code>。</p>
 </div>
 <p><strong>客户端配置</strong>：</p>
@@ -520,7 +520,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 </section>
 <section id="gc-3">
-<h3>GC 日志<a class="footnote-reference brackets" href="#id22" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#gc-3" title="Link to this heading">¶</a></h3>
+<h3>GC 日志<a class="footnote-reference brackets" href="#id23" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#gc-3" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 必备</span>
 -XX:+PrintGCDetails<span class="w"> </span>
 -XX:+PrintGCDateStamps<span class="w"> </span>
@@ -579,7 +579,7 @@ SourceFile:<span class="w"> </span><span class="s2">&quot;Hello.java&quot;</span
 </ul>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>JVM 参数很多，总体上可以分成三类：<a class="footnote-reference brackets" href="#id23" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<p>JVM 参数很多，总体上可以分成三类：<a class="footnote-reference brackets" href="#id24" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">-</span></code></strong>：标准参数，比如 <code class="docutils literal notranslate"><span class="pre">-verbose:</span></code>gc` 这类表示标准实现，所有的虚拟机都需要实现这些参数的功能，且向后兼容；</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">-X</span></code></strong>：非标准参数，默认 JVM 会实现这些参数的功能，但是不保证所有的 JVM 实现都满足，且不保证向后兼容；</p></li>
@@ -633,9 +633,12 @@ root<span class="w">     </span><span class="m">22593</span><span class="w">  </
 </section>
 <section id="id13">
 <h2>线程快照<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
-<section id="jstack-pid">
-<h3><code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code><a class="headerlink" href="#jstack-pid" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">Thread.print</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jstack<span class="w"> </span><span class="nb">help</span>
+Usage:
 <span class="w">    </span>jstack<span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
 <span class="w">        </span><span class="o">(</span>to<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>running<span class="w"> </span>process<span class="o">)</span>
 <span class="w">    </span>jstack<span class="w"> </span>-F<span class="w"> </span><span class="o">[</span>-m<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="o">]</span><span class="w"> </span>&lt;pid&gt;
@@ -652,43 +655,10 @@ Options:
 <span class="w">    </span>-h<span class="w"> </span>or<span class="w"> </span>-help<span class="w"> </span>to<span class="w"> </span>print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
 </pre></div>
 </div>
-</section>
-<section id="jcmd-pid-thread-print">
-<h3><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">Thread.print</span></code><a class="headerlink" href="#jcmd-pid-thread-print" title="Link to this heading">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p><strong>jcmd 使用</strong></p>
-<p>jcmd 的参数无须额外记忆（比如这里使用的<code class="docutils literal notranslate"><span class="pre">Thread.print</span></code>），直接使用<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 就可以查看当前 java 进程支持哪些参数</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jcmd<span class="w"> </span><span class="m">28537</span><span class="w"> </span><span class="nb">help</span>
-<span class="m">28537</span>:
-The<span class="w"> </span>following<span class="w"> </span>commands<span class="w"> </span>are<span class="w"> </span>available:
-JFR.stop
-JFR.start
-JFR.dump
-JFR.check
-VM.native_memory
-VM.check_commercial_features
-VM.unlock_commercial_features
-ManagementAgent.stop
-ManagementAgent.start_local
-ManagementAgent.start
-GC.rotate_log
-Thread.print
-GC.class_stats
-GC.class_histogram
-GC.heap_dump
-GC.run_finalization
-GC.run
-VM.uptime
-VM.flags
-VM.system_properties
-VM.command_line
-VM.version
-<span class="nb">help</span>
-</pre></div>
+<p><a class="reference internal" href="#jcmd-%E8%AF%8A%E6%96%AD"><span class="xref myst">jcmd</span></a> 的参数无须额外记忆（比如这里使用的<code class="docutils literal notranslate"><span class="pre">Thread.print</span></code>），直接使用<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 就可以查看当前 java 进程支持哪些参数</p>
 </div>
-</div>
-</section>
 </section>
 <section id="id14">
 <h2>内存快照<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
@@ -857,10 +827,44 @@ where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class
 <li><p><code class="docutils literal notranslate"><span class="pre">jstat</span> <span class="pre">-[option]</span> <span class="pre">pid</span> <span class="pre">[interval]</span> <span class="pre">[count]</span></code></p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">[interval]</span></code> 默认单位时 ms，<code class="docutils literal notranslate"><span class="pre">[option]</span></code> 的选项可以通过<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">stat</span></code>查看，<code class="docutils literal notranslate"><span class="pre">-gc</span></code>（按照大小展示） 和 <code class="docutils literal notranslate"><span class="pre">-gcutil</span></code>（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。</p>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p><strong><code class="docutils literal notranslate"><span class="pre">jhsdb</span></code></strong></p>
-<p>jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability Agent Debugging Tool，用于对 HotSpot JVM 进行调试和分析，也支持堆 JVM 崩溃后转储的 core 文件进行调试。
+</section>
+<section id="jhsdb-jcmd">
+<h2>全能的 jhsdb 和 jcmd<a class="headerlink" href="#jhsdb-jcmd" title="Link to this heading">¶</a></h2>
+<section id="id20">
+<h3>jcmd 诊断<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<p>向正在运行的 Java 虚拟机 （JVM） 发送诊断命令请求，支持许多子命令，具体支持哪些可以通过<code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">help</span></code> 查看。比如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>jcmd<span class="w"> </span><span class="m">28537</span><span class="w"> </span><span class="nb">help</span>
+<span class="m">28537</span>:
+The<span class="w"> </span>following<span class="w"> </span>commands<span class="w"> </span>are<span class="w"> </span>available:
+JFR.stop
+JFR.start
+JFR.dump
+JFR.check
+VM.native_memory
+VM.check_commercial_features
+VM.unlock_commercial_features
+ManagementAgent.stop
+ManagementAgent.start_local
+ManagementAgent.start
+GC.rotate_log
+Thread.print
+GC.class_stats
+GC.class_histogram
+GC.heap_dump
+GC.run_finalization
+GC.run
+VM.uptime
+VM.flags
+VM.system_properties
+VM.command_line
+VM.version
+<span class="nb">help</span>
+</pre></div>
+</div>
+</section>
+<section id="jhsdb">
+<h3>jhsdb 调试分析<a class="headerlink" href="#jhsdb" title="Link to this heading">¶</a></h3>
+<p>jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability Agent Debugging Tool，用于对 HotSpot JVM 进行调试和分析，也支持堆 JVM 崩溃后转储的 core 文件进行分析调试。
 使用方式如下:</p>
 <p><code class="docutils literal notranslate"><span class="pre">jhsdb</span> <span class="pre">[subcmd]</span> <span class="pre">[--pid</span> <span class="pre">pid</span> <span class="pre">|</span> <span class="pre">--exe</span> <span class="pre">executable</span> <span class="pre">--core</span> <span class="pre">coredump]</span></code></p>
 <p>其中 subcmd 支持：</p>
@@ -873,26 +877,33 @@ where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class
 <li><p>jhsdb jinfo： Prints basic JVM information.</p></li>
 <li><p>jhsdb jsnap： Prints performance counter information.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong>coredump</strong></p>
+<p>在计算机系统中，进程是操作系统资源的一种抽象，每个进程都有自己的内存空间，包括代码、数据、堆栈等。当进程出现错误或崩溃时，操作系统会将进程的内存状态保存到一个特殊的文件中，这个文件就是所谓的 core 文件（也称为转储文件或映像文件）。</p>
+<p>Core 文件的本质是进程的内存映像，它包含了进程在崩溃或出现错误时的完整内存状态，包括代码、数据、堆栈、寄存器状态、打开文件等信息。Core 文件可以用于进程崩溃后的调试和分析，通过分析 core 文件可以了解进程崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。</p>
+<p>在 Java 中，如果 JVM 出现了严重错误（如 OutOfMemoryError），JVM 也会生成一个 core 文件，这个 core 文件包含了 JVM 的内存状态。通过分析 JVM 的 core 文件，可以了解 JVM 崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。</p>
 </div>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id20" role="doc-footnote">
+<aside class="footnote brackets" id="id21" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html">Java® Development Kit Version 21 Tool Specifications</a></p>
 </aside>
-<aside class="footnote brackets" id="id21" role="doc-footnote">
+<aside class="footnote brackets" id="id22" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">2</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://stackoverflow.com/questions/138511/what-are-java-command-line-options-to-set-to-allow-jvm-to-be-remotely-debugged">What are Java command line options to set to allow JVM to be remotely debugged? StackOverflow.</a></p>
 </aside>
-<aside class="footnote brackets" id="id22" role="doc-footnote">
+<aside class="footnote brackets" id="id23" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">3</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.cnblogs.com/jelly12345/p/15597797.html">求你了，GC 日志打印别再瞎配置了. 郭慕荣博客园. </a></p>
 </aside>
-<aside class="footnote brackets" id="id23" role="doc-footnote">
+<aside class="footnote brackets" id="id24" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">4</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.cnblogs.com/caoweixiong/p/14792874.html">JVM——参数说明. 曹伟雄</a></p>
 </aside>
 </aside>
+</section>
 </section>
 </section>
 
@@ -977,11 +988,7 @@ where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class
 </ul>
 </li>
 <li><a class="reference internal" href="#id12">线程查看</a></li>
-<li><a class="reference internal" href="#id13">线程快照</a><ul>
-<li><a class="reference internal" href="#jstack-pid"><code class="docutils literal notranslate"><span class="pre">jstack</span> <span class="pre">&lt;pid&gt;</span></code></a></li>
-<li><a class="reference internal" href="#jcmd-pid-thread-print"><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">&lt;pid&gt;</span> <span class="pre">Thread.print</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#id13">线程快照</a></li>
 <li><a class="reference internal" href="#id14">内存快照</a><ul>
 <li><a class="reference internal" href="#id15">转储 JVM 堆</a></li>
 <li><a class="reference internal" href="#id16">对象统计信息</a></li>
@@ -994,6 +1001,11 @@ where<span class="w"> </span>&lt;option&gt;<span class="w"> </span>is<span class
 </ul>
 </li>
 <li><a class="reference internal" href="#id19">运行时内存统计</a></li>
+<li><a class="reference internal" href="#jhsdb-jcmd">全能的 jhsdb 和 jcmd</a><ul>
+<li><a class="reference internal" href="#id20">jcmd 诊断</a></li>
+<li><a class="reference internal" href="#jhsdb">jhsdb 调试分析</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
