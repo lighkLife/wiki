@@ -255,9 +255,11 @@ root     22593  0.1  6.8 7991480 1107164 ?     Sl   4月30 140:58 /usr/local/web
 
 ## 线程快照
 
-### `jstack <pid>`
+- `jstack <pid>`
+- `jcmd <pid> Thread.print`
 
 ```bash
+➜  ~ jstack help
 Usage:
     jstack [-l] <pid>
         (to connect to running process)
@@ -275,42 +277,10 @@ Options:
     -h or -help to print this help message
 ```
 
-### `jcmd <pid> Thread.print`
-
-
-
 ```{note}
-**jcmd 使用**
-
-jcmd 的参数无须额外记忆（比如这里使用的`Thread.print`），直接使用`jcmd <pid> help` 就可以查看当前 java 进程支持哪些参数
-```bash
-➜  ~ jcmd 28537 help
-28537:
-The following commands are available:
-JFR.stop
-JFR.start
-JFR.dump
-JFR.check
-VM.native_memory
-VM.check_commercial_features
-VM.unlock_commercial_features
-ManagementAgent.stop
-ManagementAgent.start_local
-ManagementAgent.start
-GC.rotate_log
-Thread.print
-GC.class_stats
-GC.class_histogram
-GC.heap_dump
-GC.run_finalization
-GC.run
-VM.uptime
-VM.flags
-VM.system_properties
-VM.command_line
-VM.version
-help
+[jcmd](#jcmd-诊断) 的参数无须额外记忆（比如这里使用的`Thread.print`），直接使用`jcmd <pid> help` 就可以查看当前 java 进程支持哪些参数
 ```
+
 
 ## 内存快照
 
@@ -471,10 +441,44 @@ where <option> is one of:
 
 `[interval]` 默认单位时 ms，`[option]` 的选项可以通过`man stat`查看，`-gc`（按照大小展示） 和 `-gcutil`（按照使用率展示） 使用的比较多，可以用来查看堆内存使用情况、GC 次数、GC 时间占比等。
 
-```{note}
-**`jhsdb`**
+## 全能的 jhsdb 和 jcmd
 
-jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability Agent Debugging Tool，用于对 HotSpot JVM 进行调试和分析，也支持堆 JVM 崩溃后转储的 core 文件进行调试。
+### jcmd 诊断
+
+向正在运行的 Java 虚拟机 （JVM） 发送诊断命令请求，支持许多子命令，具体支持哪些可以通过`jcmd <pid> help` 查看。比如：
+
+```bash
+➜  ~ jcmd 28537 help
+28537:
+The following commands are available:
+JFR.stop
+JFR.start
+JFR.dump
+JFR.check
+VM.native_memory
+VM.check_commercial_features
+VM.unlock_commercial_features
+ManagementAgent.stop
+ManagementAgent.start_local
+ManagementAgent.start
+GC.rotate_log
+Thread.print
+GC.class_stats
+GC.class_histogram
+GC.heap_dump
+GC.run_finalization
+GC.run
+VM.uptime
+VM.flags
+VM.system_properties
+VM.command_line
+VM.version
+help
+```
+
+### jhsdb 调试分析
+
+jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability Agent Debugging Tool，用于对 HotSpot JVM 进行调试和分析，也支持堆 JVM 崩溃后转储的 core 文件进行分析调试。
 使用方式如下:
 
 `jhsdb [subcmd] [--pid pid | --exe executable --core coredump]`
@@ -487,6 +491,15 @@ jhsdb 是 JDK 自带的一款命令行工具，即 Java HotSpot Serviceability A
 - jhsdb jmap：Prints heap information.
 - jhsdb jinfo： Prints basic JVM information.
 - jhsdb jsnap： Prints performance counter information.
+
+```{note}
+**coredump**
+
+在计算机系统中，进程是操作系统资源的一种抽象，每个进程都有自己的内存空间，包括代码、数据、堆栈等。当进程出现错误或崩溃时，操作系统会将进程的内存状态保存到一个特殊的文件中，这个文件就是所谓的 core 文件（也称为转储文件或映像文件）。
+
+Core 文件的本质是进程的内存映像，它包含了进程在崩溃或出现错误时的完整内存状态，包括代码、数据、堆栈、寄存器状态、打开文件等信息。Core 文件可以用于进程崩溃后的调试和分析，通过分析 core 文件可以了解进程崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。
+
+在 Java 中，如果 JVM 出现了严重错误（如 OutOfMemoryError），JVM 也会生成一个 core 文件，这个 core 文件包含了 JVM 的内存状态。通过分析 JVM 的 core 文件，可以了解 JVM 崩溃的原因、定位错误的位置等，从而帮助开发人员修复程序的 bug。
 ```
 
 [^1]: [Java® Development Kit Version 21 Tool Specifications](https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html)
