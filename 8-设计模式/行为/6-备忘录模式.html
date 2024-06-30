@@ -385,7 +385,7 @@
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>备忘录模式（Memento Pattern）：在不破坏封装的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，这样可以在以后将对象恢复到原先保存的状态。它是一种对象行为型模式，其别名为Token。</p>
 <p>备忘录模式的核心是备忘录类<code class="docutils literal notranslate"><span class="pre">Memento</span></code>以及用于管理备忘录的负责人类<code class="docutils literal notranslate"><span class="pre">Caretaker</span></code>的设计。</p>
-<p><img alt="备忘录模式" src="../../_images/image-115.png" /></p>
+<p><img alt="备忘录模式" src="../../_images/image-116.png" /></p>
 <ol class="arabic simple">
 <li><p><strong>Originator（原发器）</strong>：它是一个普通类，可以创建一个备忘录，并存储其当前内部状态，也可以使用备忘录来恢复其内部状态。一般将需要保存内部状态的类设计为原发器。</p></li>
 <li><p><strong>Memento（备忘录）</strong>：存储原发器的内部状态，根据原发器来决定保存哪些内部状态。备忘录的设计一般可以参考原发器的设计，根据实际需要确定备忘录类中的属性。需要注意的是，除了原发器本身与负责人类之外，备忘录对象不能直接供其他类使用。原发器的设计在不同的编程语言中实现机制会有所不同。</p></li>
