@@ -27,6 +27,7 @@ Welcome to lighk-wiki
    :caption: 中间件
    :maxdepth: 2
 
+   4-Middleware/DDIA/0-index
    4-Middleware/MinIO/MinIO介绍与单节点部署
    4-Middleware/MinIO/MinIO多节点部署
    4-Middleware/01-How-tomcat-works

@@ -2,7 +2,10 @@
 
 ## 介绍
 
-Sphinx 可以轻松创建智能且美观的文档。
+Sphinx 可以轻松创建智能且美观的文档。书写方式：
+
+- 默认使用 [reStructuredText](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#top) 标记语言
+- 可以通过第三方扩展读取 [MyST markdown](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html)
 
 以下是 Sphinx 的一些主要功能：
 
@@ -22,7 +25,7 @@ Sphinx 可以轻松创建智能且美观的文档。
 
 - 贡献的扩展：用户贡献的数十个扩展；其中大部分可以从 PyPI 安装。
 
-Sphinx默认 使用reStructuredText标记语言，并且可以通过第三方扩展读取MyST markdown 。这两者都功能强大且易于使用，并且具有用于复杂文档和发布工作流程的功能。它们都基于 Docutils构建来解析和编写文档。
+
 
 ## 安装
 
