@@ -55,7 +55,7 @@ Welcome to lighk-wiki
    :maxdepth: 1
 
    6-OS/00-linux常用命令
-   6-OS/01-Ubuntu 使用问题记录
+   6-OS/01-Ubuntu使用记录
 
 .. toctree::
    :caption: Rust 相关
