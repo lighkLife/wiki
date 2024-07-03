@@ -365,7 +365,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/6-OS/01-Ubuntu 使用问题记录.md.txt" title="View this page">
+  <a class="muted-link" href="../_sources/6-OS/01-Ubuntu使用记录.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -446,7 +446,33 @@ Last<span class="w"> </span>login:<span class="w"> </span>Wed<span class="w"> </
 <li><p>修改或删除 <code class="docutils literal notranslate"><span class="pre">Ctrl-Shift-U</span></code> 快捷键</p></li>
 </ul>
 </div></blockquote>
-<p><img alt="test" src="../_images/images.jpeg" /></p>
+</section>
+<section id="id2">
+<h2>显卡驱动<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. 查看可选驱动</span>
+➜<span class="w">  </span>~<span class="w"> </span>ubuntu-drivers<span class="w"> </span><span class="nv">devices</span>
+<span class="o">==</span><span class="w"> </span>/sys/devices/pci0000:00/0000:00:03.1/0000:26:00.0<span class="w"> </span><span class="o">==</span>
+modalias<span class="w"> </span>:<span class="w"> </span>pci:v000010DEd00001E84sv00001462sd0000C729bc03sc00i00
+vendor<span class="w">   </span>:<span class="w"> </span>NVIDIA<span class="w"> </span>Corporation
+model<span class="w">    </span>:<span class="w"> </span>TU104<span class="w"> </span><span class="o">[</span>GeForce<span class="w"> </span>RTX<span class="w"> </span><span class="m">2070</span><span class="w"> </span>SUPER<span class="o">]</span>
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-535-server<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-535-open<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-545-open<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-545<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-535-server-open<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-470-server<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-535<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free<span class="w"> </span>recommended
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-450-server<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>nvidia-driver-470<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>non-free
+driver<span class="w">   </span>:<span class="w"> </span>xserver-xorg-video-nouveau<span class="w"> </span>-<span class="w"> </span>distro<span class="w"> </span>free<span class="w"> </span><span class="nb">builtin</span>
+
+<span class="c1"># 2. 安装推荐驱动</span>
+➜<span class="w">  </span>~<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>nvidia-driver-535
+
+<span class="c1"># 3. 重启</span>
+➜<span class="w">  </span>~<span class="w"> </span>reboot
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -515,6 +541,7 @@ Last<span class="w"> </span>login:<span class="w"> </span>Wed<span class="w"> </
 <li><a class="reference internal" href="#">Ubuntu 使用问题记录</a><ul>
 <li><a class="reference internal" href="#id1">快速连接服务器</a></li>
 <li><a class="reference internal" href="#idea">IDEA 转换大小写失效</a></li>
+<li><a class="reference internal" href="#id2">显卡驱动</a></li>
 </ul>
 </li>
 </ul>
