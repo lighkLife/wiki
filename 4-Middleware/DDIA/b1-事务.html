@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="MinIO介绍与单节点部署" href="../MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" /><link rel="prev" title="幻读" href="a6-%E5%B9%BB%E8%AF%BB.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="MinIO介绍与单节点部署" href="../MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" /><link rel="prev" title="设计数据密集型应用" href="0-index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>事务 - 文档</title>
@@ -268,15 +268,6 @@
 <p class="caption" role="heading"><span class="caption-text">中间件</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="a0-%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E9%97%AE%E9%A2%98.html">弱隔离级别的问题</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别的问题</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读偏差（不可重复读）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a6-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
-</ul>
-</li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">事务</a></li>
 </ul>
 </li>
@@ -290,7 +281,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
@@ -299,7 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
@@ -309,7 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
@@ -415,8 +406,8 @@
 <p>但实际上，不同数据库的 ACID 实现并不相同。例如，我们将会看到，关于 隔离性 的含义就有许多含糊不清【8】。高层次上的想法很美好，但魔鬼隐藏在细节里。今天，当一个系统声称自己 “符合 ACID” 时，实际上能期待的是什么保证并不清楚。不幸的是，ACID 现在几乎已经变成了一个营销术语。</p>
 <p>所以，我们必须深入了解原子性，一致性，隔离性和持久性的定义的细节，才能真正辨别数据库到底提供了哪些安全保证。</p>
 </div>
-<p><strong>BASE</strong><a class="footnote-reference brackets" href="#id10" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-<p>不符合 ACID 标准的系统有时被称为 BASE<a class="footnote-reference brackets" href="#id11" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>，它代表 基本可用性（Basically Available），软状态（Soft State） 和 最终一致性（Eventual consistency），这比 ACID 的定义更加模糊，似乎 BASE 的唯一合理的定义是 “不是 ACID”，即它几乎可以代表任何你想要的东西。</p>
+<p><strong>BASE</strong><a class="footnote-reference brackets" href="#id9" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<p>不符合 ACID 标准的系统有时被称为 BASE<a class="footnote-reference brackets" href="#id10" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>，它代表 基本可用性（Basically Available），软状态（Soft State） 和 最终一致性（Eventual consistency），这比 ACID 的定义更加模糊，似乎 BASE 的唯一合理的定义是 “不是 ACID”，即它几乎可以代表任何你想要的东西。</p>
 </section>
 <section id="acid">
 <h3>ACID 的含义<a class="headerlink" href="#acid" title="Link to this heading">¶</a></h3>
@@ -478,19 +469,26 @@
 </section>
 <section id="id7">
 <h2>弱隔离级别<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p>========  ======  ======  ==========  ==========  ==========  ============
+隔离级别   脏读     脏写    读倾斜       丢失更新      幻读         写倾斜
+========  ======  ======  ==========  ==========  ==========  ============
+读未提交   发生     发生      发生         发生        发生         发生
+读提交      -        -       发生         发生        发生         发生<br />
+可重复读    -        -        -           发生        发生         发生
+快照隔离    -        -        -           发生      影响写入       发生
+串行化      -        -        -            -          -           -
+========  ======  ======  ==========  ==========  ==========  ============</p>
+<p><img alt="alt text" src="../../_images/image-122.png" /></p>
+</section>
 <section id="id8">
-<h3>弱隔离级别<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
-</section>
-</section>
-<section id="id9">
-<h2>可串行化<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<h2>可串行化<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id10" role="doc-footnote">
+<aside class="footnote brackets" id="id9" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://aws.amazon.com/cn/compare/the-difference-between-acid-and-base-database/">亚马逊. 云计算概念中心/数据库. ACID 和 BASE 数据库有什么区别？ </a></p>
 </aside>
-<aside class="footnote brackets" id="id11" role="doc-footnote">
+<aside class="footnote brackets" id="id10" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
 <p>Armando Fox, Steven D. Gribble, Yatin Chawathe, et al.: <a class="reference external" href="http://www.cs.berkeley.edu/~brewer/cs262b/TACC.pdf">“Cluster-Based Scalable Network Services,”</a> at 16th ACM Symposium on Operating Systems Principles (SOSP), October 1997.</p>
 </aside>
@@ -512,14 +510,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="a6-%E5%B9%BB%E8%AF%BB.html">
+          <a class="prev-page" href="0-index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">幻读</div>
+                <div class="title">设计数据密集型应用</div>
                 
               </div>
             </a>
@@ -573,11 +571,8 @@
 <li><a class="reference internal" href="#id6">单对象和多对象操作</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id7">弱隔离级别</a><ul>
-<li><a class="reference internal" href="#id8">弱隔离级别</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id9">可串行化</a></li>
+<li><a class="reference internal" href="#id7">弱隔离级别</a></li>
+<li><a class="reference internal" href="#id8">可串行化</a></li>
 </ul>
 </li>
 </ul>

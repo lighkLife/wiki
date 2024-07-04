@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="事务" href="b1-%E4%BA%8B%E5%8A%A1.html" /><link rel="prev" title="写倾斜" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>幻读 - 文档</title>
+        <title>写倾斜 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -266,17 +266,8 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">中间件</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="a0-%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E9%97%AE%E9%A2%98.html">弱隔离级别的问题</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别的问题</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读偏差（不可重复读）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">幻读</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="b1-%E4%BA%8B%E5%8A%A1.html">事务</a></li>
 </ul>
 </li>
@@ -290,7 +281,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
@@ -299,7 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
@@ -309,7 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
@@ -365,7 +356,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a6-幻读.md.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a6-写倾斜.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -379,14 +370,28 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>幻读<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>写倾斜<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>概述<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>在医生值班例子： 你正在为医院写一个医生轮班管理程序。医院通常会同时要求几位医生待命，但底线是至少有一位医生在待命。医生可以放弃他们的班次（例如，如果他们自己生病了），只要至少有一个同事在这一班中继续工作。
+现在想象一下，Alice 和 Bob 是两位值班医生。两人都感到不适，所以他们都决定请假。不幸的是，他们恰好在同一时间点击按钮下班， 下图说明了接下来的事情。</p>
+<p><img alt="alt text" src="../../_images/image-112.png" /></p>
+<p>在两个事务中，应用首先检查是否有两个或以上的医生正在值班；如果是的话，它就假定一名医生可以安全地休班。由于数据库使用快照隔离，两次检查都返回 2 ，所以两个事务都进入下一个阶段。Alice 更新自己的记录休班了，而 Bob 也做了一样的事情。两个事务都成功提交了，现在没有医生值班了。违反了至少有一名医生在值班的要求。</p>
+<p>这种异常称为 <strong>写倾斜（Write Skew）</strong>。它既不是 脏写，也不是 丢失更新，因为这两个事务正在更新两个不同的对象（Alice 和 Bob 各自的待命记录）。</p>
+<p>可以将写入偏差视为丢失更新问题的一般化：</p>
+<ul class="simple">
+<li><p>如果两个事务读取相同的对象，然后更新其中一些对象（不同的事务可能更新不同的对象），则可能发生写入偏差</p></li>
+<li><p>在多个事务更新同一个对象的特殊情况下，就会发生脏写或丢失更新（取决于时序）</p></li>
+</ul>
+<p>写倾斜是幻读引起的，因此写倾斜的更多例子和避免方案可以参考<a class="reference internal" href="a5-%E5%B9%BB%E8%AF%BB.html"><span class="std std-doc">幻读</span></a></p>
+</section>
 </section>
 
         </article>
@@ -394,26 +399,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="b1-%E4%BA%8B%E5%8A%A1.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">事务</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">写倾斜</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -439,8 +426,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">写倾斜</a><ul>
+<li><a class="reference internal" href="#id2">概述</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="脏读" href="a1-%E8%84%8F%E8%AF%BB.html" /><link rel="prev" title="设计数据密集型应用" href="0-index.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>弱隔离级别的问题 - 文档</title>
+        <title>幻读 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -266,17 +266,8 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">中间件</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">弱隔离级别的问题</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别的问题</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读偏差（不可重复读）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a6-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="b1-%E4%BA%8B%E5%8A%A1.html">事务</a></li>
 </ul>
 </li>
@@ -290,7 +281,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
@@ -299,7 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
@@ -309,7 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
@@ -365,7 +356,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a0-弱隔离级别的问题.rst.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a5-幻读.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -385,74 +376,79 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="id1">
-<h1>弱隔离级别的问题<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>数据库通过 <strong>事务</strong> 提供安全保障，<code class="docutils literal notranslate"><span class="pre">ACID</span></code> 具体的描述了这些安全保障包括哪些方面。其中 <code class="docutils literal notranslate"><span class="pre">I</span></code> 代表 <strong>隔离性（Isolation）</strong> 意味着同时执行的事务是相互隔离的：它们不能相互冒犯。</p>
-<p>传统的数据库教科书甚至将隔离性形式化为 <strong>可串行化（Serializability）</strong>, 但是串行化会大大降低数据库的性能，因此主流数据库又定义了不同级别的 <strong>弱隔离级别</strong>。</p>
-<p>反过来描述，在没有事务提供隔离性时，数据库系统面临哪些问题？根据应用对这些问题可容忍的程度，可划分出不同的隔离级别，比如下面这份流性的隔离级别表 <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 提供了不同隔离级别可能遇到的问题：</p>
-<a class=""
-               data-lightbox="group-bcf66c3d-6a4e-463c-8fa6-53536f22c54e"
-               href="../../_images/image-43.png"
-               title=""
-               data-title=""
-               
-               ><img src="../../_images/image-43.png"
-                     class=""
-                     width="100%"
-                     height="auto"
-                     alt=""/>
-                </a><p>接下来我们来详细讨论下不同隔离级别可能遇到哪些问题，又如何解决。</p>
-<a class=""
-               data-lightbox="group-560218d1-ca5d-43f6-a9bf-d309307ef432"
-               href="../../_images/image-54.png"
-               title=""
-               data-title=""
-               
-               ><img src="../../_images/image-54.png"
-                     class=""
-                     width="100%"
-                     height="auto"
-                     alt=""/>
-                </a><section id="id3">
-<h2>相关文章<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>幻读<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>概述<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>一个事务中的写入改变另一个事务的搜索查询的结果，被称为<strong>幻读（Phantom）</strong>。</p>
+<p>幻读是针对多对象查询而言的，可能是看到了不期望看到的数据，从而<a class="reference internal" href="#id4">影响查询</a>，也可能是没看到期望看到的数据，从而<a class="reference internal" href="#id5">影响写入</a>。</p>
+<p><strong>快照隔离</strong>避免了只读查询中幻读，但无法避免读写事务中<a class="reference internal" href="a6-%E5%86%99%E5%80%BE%E6%96%9C.html"><span class="std std-doc">写倾斜</span></a>（）。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>区别于脏读</p>
+<ul class="simple">
+<li><p>脏读是当前事务读取到了未提交事务的数据。</p></li>
+<li><p>幻读的发生可能是读取到了其他事务提交的数据，也可能是没有读到其他事务提交</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id2">什么是脏读</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id3">例子</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id6">脏读产生的问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id7">如何避免脏读</a></li>
+<li><p>读取到了其他事务提交的数据，影响了当前事务的判断逻辑：读提交隔离级别下，第一读和第二次读之间，有其他事务新增了一条数据并提交，导致两次读取总行数不同</p></li>
+<li><p>未读取到其他事务提交的数据，影响了当前事务的判断逻辑：在 MVVC 实现的可重复读隔离级别下，写入的内容依赖之前读取的结果，但是读写之间可能有其他事务提交，影响读的结果，把本不应该写入的数据写入到数据库了，也就是本应该看见的数据却没有看见</p></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id2">什么是脏写</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id3">例子</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id4">如何防止脏写</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读偏差（不可重复读）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id2">什么是读倾斜</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id3">例子</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id4">不能容忍读倾斜</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id5">如何避免读倾斜</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id2">什么是丢失更新</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id3">例子</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id4">如何防止丢失更新</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="a5-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a6-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
+<p>区别于读倾斜</p>
+<ul class="simple">
+<li><p>读倾斜是针对一行记录，多次读取不同字段的结果不同</p></li>
+<li><p>幻读是是针对多行记录，多次读取结果不同（比如多一行）</p></li>
 </ul>
 </div>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id4" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
-<p>Hal Berenson, Philip A. Bernstein, Jim N. Gray, et al.: “<a class="reference external" href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf">A Critique of ANSI SQL Isolation Levels”</a> ” at ACM International Conference on Management of Data (SIGMOD), May 1995.</p>
-</aside>
-</aside>
+</section>
+<section id="id3">
+<h2>产生情景<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>影响查询的幻读<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>读取到了其他事务提交的数据，影响了当前事务的判断逻辑，即读提交隔离级别下，第一读和第二次读之间，有其他事务新增了一条数据并提交，导致两次读取总行数不同</p>
+<p><img alt="alt text" src="../../_images/image-53.png" /></p>
+</section>
+<section id="id5">
+<h3>影响写入的幻读<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h4>模式<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p>一个 SELECT 查询找出符合条件的行，并检查是否符合一些要求。（例如：至少有两名医生在值班；不存在对该会议室同一时段的预定；棋盘上的位置没有被其他棋子占据；用户名还没有被抢注；账户里还有足够余额）</p></li>
+<li><p>按照第一个查询的结果，应用代码决定是否继续。（可能会继续操作，也可能中止并报错）</p></li>
+<li><p>如果应用决定继续操作，就执行写入（插入、更新或删除），并提交事务。</p></li>
+</ol>
+<p>问题就出在这些步骤在数据库上可能是并发执行，当前事务提交前，可能有其他事务提交导致步骤 2 的判断结果发生变化，就不应该执行步骤 3 的， 但是在可使用快照隔离技术实现的重复读隔离级别下，当前事务时读取不到其他事务提交的数据的，所以依赖当前事务的查询结果进行写入，就可能因为没有读到实际的数据出现幻读，从而发生写入偏差。</p>
+</section>
+<section id="id7">
+<h4>值班医生<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<p>比如医生值班例子： 你正在为医院写一个医生轮班管理程序。医院通常会同时要求几位医生待命，但底线是至少有一位医生在待命。医生可以放弃他们的班次（例如，如果他们自己生病了），只要至少有一个同事在这一班中继续工作。
+现在想象一下，Alice 和 Bob 是两位值班医生。两人都感到不适，所以他们都决定请假。不幸的是，他们恰好在同一时间点击按钮下班， 下图说明了接下来的事情。</p>
+<p><img alt="alt text" src="../../_images/image-112.png" /></p>
+<p>在两个事务中，应用首先检查是否有两个或以上的医生正在值班；如果是的话，它就假定一名医生可以安全地休班。由于数据库使用快照隔离，两次检查都返回 2 ，所以两个事务都进入下一个阶段。Alice 更新自己的记录休班了，而 Bob 也做了一样的事情。两个事务都成功提交了，现在没有医生值班了。违反了至少有一名医生在值班的要求。</p>
+</section>
+<section id="id8">
+<h4>其他例子<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>会议室预订系统</p></li>
+<li><p>多人游戏（竞争某个资源）</p></li>
+<li><p>抢注用户名</p></li>
+<li><p>防止双重开支（允许用户花钱或使用积分的服务，需要检查用户的支付数额不超过其余额）</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id9">
+<h2>防止幻读<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h3>物化冲突<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>幻读的问题是没有对象可以加锁，可以人为地在数据库中引入一个锁对象，可以将幻读变为数据库中一组<strong>具体行</strong>上的锁冲突。</p>
+<p>在 MySQL 中可以使用 <code class="docutils literal notranslate"><span class="pre">FOR</span> <span class="pre">UPDATE</span></code> 显式的索引行记录，但建议使用主键或唯一索引来查询锁定一行数据充当锁，如果锁定多行，很容易出现死锁，锁表又很响应性能。</p>
+</section>
+<section id="id11">
+<h3>可串行化<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>使用可串行化（Serializable） 的隔离级别。</p>
+</section>
 </section>
 </section>
 
@@ -461,26 +457,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="a1-%E8%84%8F%E8%AF%BB.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">脏读</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="0-index.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">设计数据密集型应用</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -518,8 +496,23 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">弱隔离级别的问题</a><ul>
-<li><a class="reference internal" href="#id3">相关文章</a></li>
+<li><a class="reference internal" href="#">幻读</a><ul>
+<li><a class="reference internal" href="#id2">概述</a></li>
+<li><a class="reference internal" href="#id3">产生情景</a><ul>
+<li><a class="reference internal" href="#id4">影响查询的幻读</a></li>
+<li><a class="reference internal" href="#id5">影响写入的幻读</a><ul>
+<li><a class="reference internal" href="#id6">模式</a></li>
+<li><a class="reference internal" href="#id7">值班医生</a></li>
+<li><a class="reference internal" href="#id8">其他例子</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">防止幻读</a><ul>
+<li><a class="reference internal" href="#id10">物化冲突</a></li>
+<li><a class="reference internal" href="#id11">可串行化</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

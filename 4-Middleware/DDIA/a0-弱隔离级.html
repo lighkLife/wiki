@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="幻读" href="a6-%E5%B9%BB%E8%AF%BB.html" /><link rel="prev" title="丢失更新" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>写倾斜 - 文档</title>
+        <title>弱隔离级别 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -195,7 +195,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -266,17 +266,8 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">中间件</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="a0-%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E9%97%AE%E9%A2%98.html">弱隔离级别的问题</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别的问题</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读偏差（不可重复读）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">写倾斜</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a6-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="0-index.html">设计数据密集型应用</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="b1-%E4%BA%8B%E5%8A%A1.html">事务</a></li>
 </ul>
 </li>
@@ -290,7 +281,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
@@ -299,7 +290,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
@@ -309,7 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
@@ -365,7 +356,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a5-写倾斜.md.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/4-Middleware/DDIA/a0-弱隔离级.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -379,14 +370,106 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>写倾斜<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+          <section id="id1">
+<h1>弱隔离级别<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>数据库通过 <strong>事务</strong> 提供安全保障，<code class="docutils literal notranslate"><span class="pre">ACID</span></code> 具体的描述了这些安全保障包括哪些方面。其中 <code class="docutils literal notranslate"><span class="pre">I</span></code> 代表 <strong>隔离性（Isolation）</strong> 意味着同时执行的事务是相互隔离的：它们不能相互冒犯。</p>
+<p>传统的数据库教科书甚至将隔离性形式化为 <strong>可串行化（Serializability）</strong>, 但是串行化会大大降低数据库的性能，因此主流数据库又定义了不同级别的 <strong>弱隔离级别</strong>。</p>
+<p>反过来描述，在没有事务提供隔离性时，数据库系统面临哪些问题？根据应用对这些问题可容忍的程度，可划分出不同的隔离级别，比如下面这份流性的隔离级别表 <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 提供了不同隔离级别可能遇到的问题：</p>
+<a class=""
+               data-lightbox="group-c846a344-2116-4566-a76c-34b6ee27ca5f"
+               href="../../_images/image-43.png"
+               title=""
+               data-title=""
+               
+               ><img src="../../_images/image-43.png"
+                     class=""
+                     width="100%"
+                     height="auto"
+                     alt=""/>
+                </a><p>接下来我们来详细讨论下不同隔离级别可能遇到哪些问题，又如何解决。</p>
+<a class=""
+               data-lightbox="group-e52c58ec-cfde-4961-88d1-89d0603734c8"
+               href="../../_images/image-102.png"
+               title=""
+               data-title=""
+               
+               ><img src="../../_images/image-102.png"
+                     class=""
+                     width="100%"
+                     height="auto"
+                     alt=""/>
+                </a><a class=""
+               data-lightbox="group-ac2f2c94-aab3-4365-9c78-c908a9367dc5"
+               href="../../_images/image-122.png"
+               title=""
+               data-title=""
+               
+               ><img src="../../_images/image-122.png"
+                     class=""
+                     width="100%"
+                     height="auto"
+                     alt=""/>
+                </a><div class="admonition hint">
+<p class="admonition-title">提示</p>
+<ol class="arabic simple">
+<li><p>读倾斜也叫不可重复读；</p></li>
+<li><p>读倾斜是指多次读取同一对象（同一行数据），发现结果可能不同，幻读是指多次读取多个对象，读取的结果可能读取到了不想被读到的对象，也可能没有读到期望被读到数据，从而影响最终结果的一种现象。</p></li>
+<li><p>可重复读隔离级别可以解决部分的幻读，是指使用快照技术实现可重复读，可以防止一个事务中多次读取结果不同的问题，但避免不了写入偏差上下文中的幻读。</p></li>
+</ol>
+</div>
+<section id="id3">
+<h2>相关文章<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html">脏读</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id3">发生情景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a1-%E8%84%8F%E8%AF%BB.html#id6">防止脏读</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html">脏写</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id3">发生情景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a2-%E8%84%8F%E5%86%99.html#id4">防止脏写</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读倾斜（不可重复读）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id3">发生情景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a3-%E8%AF%BB%E5%80%BE%E6%96%9C.html#id4">避免读倾斜</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id3">发生情景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html#id4">防止丢失更新</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="a5-%E5%B9%BB%E8%AF%BB.html">幻读</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a5-%E5%B9%BB%E8%AF%BB.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a5-%E5%B9%BB%E8%AF%BB.html#id3">产生情景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a5-%E5%B9%BB%E8%AF%BB.html#id9">防止幻读</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="a6-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="a6-%E5%86%99%E5%80%BE%E6%96%9C.html#id2">概述</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>Hal Berenson, Philip A. Bernstein, Jim N. Gray, et al.: “<a class="reference external" href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf">A Critique of ANSI SQL Isolation Levels”</a> ” at ACM International Conference on Management of Data (SIGMOD), May 1995.</p>
+</aside>
+</aside>
+</section>
 </section>
 
         </article>
@@ -394,26 +477,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="a6-%E5%B9%BB%E8%AF%BB.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">幻读</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="a4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">丢失更新</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -439,8 +504,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">弱隔离级别</a><ul>
+<li><a class="reference internal" href="#id3">相关文章</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
