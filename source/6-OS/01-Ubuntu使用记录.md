@@ -60,4 +60,29 @@ Host had3
 > - 切换到 Emoji 页面
 > - 修改或删除 `Ctrl-Shift-U` 快捷键
 
-![test](./img/images.jpeg)
+## 显卡驱动
+
+```bash
+# 1. 查看可选驱动
+➜  ~ ubuntu-drivers devices
+== /sys/devices/pci0000:00/0000:00:03.1/0000:26:00.0 ==
+modalias : pci:v000010DEd00001E84sv00001462sd0000C729bc03sc00i00
+vendor   : NVIDIA Corporation
+model    : TU104 [GeForce RTX 2070 SUPER]
+driver   : nvidia-driver-535-server - distro non-free
+driver   : nvidia-driver-535-open - distro non-free
+driver   : nvidia-driver-545-open - distro non-free
+driver   : nvidia-driver-545 - distro non-free
+driver   : nvidia-driver-535-server-open - distro non-free
+driver   : nvidia-driver-470-server - distro non-free
+driver   : nvidia-driver-535 - distro non-free recommended
+driver   : nvidia-driver-450-server - distro non-free
+driver   : nvidia-driver-470 - distro non-free
+driver   : xserver-xorg-video-nouveau - distro free builtin
+
+# 2. 安装推荐驱动
+➜  ~ sudo apt-get install nvidia-driver-535
+
+# 3. 重启
+➜  ~ reboot
+```
