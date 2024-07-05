@@ -14,24 +14,25 @@
 .. image:: ./img/image-10.png
 
 
-.. image:: ./img/image-12.png
+.. image:: ./img/image-14.png
 
 .. hint:: 
    1. 读倾斜也叫不可重复读；
    2. 读倾斜是指多次读取同一对象（同一行数据），发现结果可能不同，幻读是指多次读取多个对象，读取的结果可能读取到了不想被读到的对象，也可能没有读到期望被读到数据，从而影响最终结果的一种现象。
    3. 可重复读隔离级别可以解决部分的幻读，是指使用快照技术实现可重复读，可以防止一个事务中多次读取结果不同的问题，但避免不了写入偏差上下文中的幻读。
 
+.. image:: ./img/image-13.png
 
 相关文章
 --------
 .. toctree::
    :maxdepth: 2
 
-   a1-脏读
-   a2-脏写
-   a3-读倾斜
-   a4-丢失更新
-   a5-幻读
-   a6-写倾斜
+   b1-脏读
+   b2-脏写
+   b3-读倾斜
+   b4-丢失更新
+   b5-幻读
+   b6-写倾斜
 
 ..  [1] Hal Berenson, Philip A. Bernstein, Jim N. Gray, et al.: “`A Critique of ANSI SQL Isolation Levels" <https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf>`_ ” at ACM International Conference on Management of Data (SIGMOD), May 1995.
