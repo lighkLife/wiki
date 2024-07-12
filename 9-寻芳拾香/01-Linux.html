@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Hudi" href="02-Hudi.html" /><link rel="prev" title="MinIO多节点部署" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>How-tomcat-works - 文档</title>
+        <title>Linux 常用命令 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -266,32 +266,44 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">中间件</span></p>
-<ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="DDIA/0-index.html">设计数据密集型应用</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/a-%E4%BA%8B%E5%8A%A1%E6%A6%82%E5%BF%B5.html">事务</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b-%E4%BA%8B%E5%8A%A1%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.html">弱隔离级别</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b2-%E8%84%8F%E5%86%99.html">脏写</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读倾斜（不可重复读）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b5-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/b6-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/DDIA/0-index.html">设计数据密集型应用</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 设计数据密集型应用</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/a-%E4%BA%8B%E5%8A%A1%E6%A6%82%E5%BF%B5.html">事务</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b-%E4%BA%8B%E5%8A%A1%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.html">弱隔离级别</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of 弱隔离级别</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b1-%E8%84%8F%E8%AF%BB.html">脏读</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b2-%E8%84%8F%E5%86%99.html">脏写</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b3-%E8%AF%BB%E5%80%BE%E6%96%9C.html">读倾斜（不可重复读）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0.html">丢失更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b5-%E5%B9%BB%E8%AF%BB.html">幻读</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/b6-%E5%86%99%E5%80%BE%E6%96%9C.html">写倾斜</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="DDIA/7-%E4%BA%8B%E5%8A%A1/c-%E5%8F%AF%E4%B8%B2%E8%A1%8C%E5%8C%96.html">可串行化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/DDIA/7-%E4%BA%8B%E5%8A%A1/c-%E5%8F%AF%E4%B8%B2%E8%A1%8C%E5%8C%96.html">可串行化</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">How-tomcat-works</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-Hudi.html">Hudi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mysql/1-Performance-Schema.html">Performance Schema</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/Tomcat/0-index.html">Tomcat</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Tomcat</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/Tomcat/01-How-tomcat-works.html">How-tomcat-works</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/0-index.html">分布式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 分布式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/a1-ZooKeeper-Paper.html">ZooKeeper 论文翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/MinIO/0-index.html">MinIO</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of MinIO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8D%95%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO介绍与单节点部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">MinIO多节点部署</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-Middleware/Hudi/0-index.html">Hudi</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Hudi</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-Middleware/Hudi/a1-Hudi%E4%BB%8B%E7%BB%8D.html">Hudi 介绍</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">设计模式</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
@@ -300,7 +312,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
@@ -310,7 +322,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
@@ -325,27 +337,13 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../5-IoT/test.html">测试文件</a></li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">操作系统</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../6-OS/00-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html">linux常用命令</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6-OS/01-Ubuntu%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Ubuntu 使用问题记录</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rust 相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../2-Rust/test.html">测试文件</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">寻芳拾香</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/00-%E4%BD%BF%E7%94%A8Sphinx%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93.html">使用 Sphinx 搭建知识库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/02-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86.html">字符串中的变量处理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/03-Git%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.html">Git 使用记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/04-MapReduce.html">MapReduce</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/05-%E6%95%B0%E7%89%A9%E8%9E%8D%E5%90%88-%E7%AC%94%E8%AE%B0.html">数物融合-笔记</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../9-%E5%AF%BB%E8%8A%B3%E6%8B%BE%E9%A6%99/06-Mysql-Use-Case.html">Mysql-Use-Case</a></li>
 </ul>
 
 </div>
@@ -366,7 +364,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/4-Middleware/01-How-tomcat-works.md.txt" title="View this page">
+  <a class="muted-link" href="../_sources/9-寻芳拾香/01-Linux.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -386,58 +384,209 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="how-tomcat-works">
-<h1>How-tomcat-works<a class="headerlink" href="#how-tomcat-works" title="Link to this heading">¶</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="linux">
+<h1>Linux 常用命令<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h1>
+<section id="grep">
+<h2><code class="docutils literal notranslate"><span class="pre">grep</span></code> 搜索关键字<a class="headerlink" href="#grep" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>-A NUM  –after-context=NUM</p></li>
+<li><p>-B NUM  –before-context=NUM</p></li>
+<li><p>-C NUM  -NUM –context=NUM</p></li>
+</ol>
+</section>
+<section id="top">
+<h2><code class="docutils literal notranslate"><span class="pre">top</span></code> 查看系统实时状况<a class="headerlink" href="#top" title="Link to this heading">¶</a></h2>
 <section id="id1">
-<h2>一个简单的请求处理程序<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p><img alt="simple-server" src="../_images/simple-server.png" /></p>
-</section>
-<section id="httpconnector">
-<h2>引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code><a class="headerlink" href="#httpconnector" title="Link to this heading">¶</a></h2>
-<p><img alt="HttpConnector" src="../_images/HttpConnector.png" /></p>
-</section>
-<section id="tomcat">
-<h2>Tomcat 的默认连接器<a class="headerlink" href="#tomcat" title="Link to this heading">¶</a></h2>
-<p>默认连接器支持 HTTP 1.1 新特性</p>
-<ul class="simple">
-<li><p>持久连接： <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">keep-alive</span></code></p></li>
-<li><p>管道化： 允许客户端发送多个请求到服务器而无需等待之前的响应</p></li>
-<li><p>块编码： 允许服务器将响应分成一系列的块，每个块之间以长度字段进行分隔</p></li>
-</ul>
-<p>默认连接器主要使用了多线程处理请求，每一个 <code class="docutils literal notranslate"><span class="pre">HttpProcessor</span></code> 都在一个独立的线程中运行，
-但并不总为每个请求创建新的 <code class="docutils literal notranslate"><span class="pre">HttpProcessor</span></code> 实例，而是使用了池化技术。</p>
-<p><img alt="default-http-connector" src="../_images/default-http-connector.png" /></p>
-</section>
-<section id="container">
-<h2>容器 Container<a class="headerlink" href="#container" title="Link to this heading">¶</a></h2>
-<p>容器就是一个能够处理 Servlet 请求，并且能够将响应结果返回给客户端的模块。</p>
-<p class="plantuml">
-<img src="../_images/plantuml-acbd8adf334f964fbee6e17f982f7694671f91c7.png" alt="interface Container
-interface Engine extends Container
-interface Host extends Container
-interface Context extends Container
-interface Wrapper extends Container
+<h3>示例<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">top - 17:22:10 up 1 day,  6:38,  2 users,  load average</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.64, 3.47, 3.30</span>
+<span class="nt">Tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie</span>
+<span class="nt">%Cpu(s)</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">6.7 us,  2.3 sy,  0.0 ni, 90.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st</span>
+<span class="nt">MiB Mem </span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">11862.6 total,    339.1 free,   8378.9 used,   3144.5 buff/cache</span>
+<span class="nt">MiB Swap</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem</span><span class="w"> </span>
 
-class StandardEngine implements Engine
-class StandardHost implements Host
-class StandardContext implements Context
-class StandardWrapper implements Wrapper
-
-StandardEngine &quot;1&quot; *-- &quot;many&quot; StandardHost
-StandardHost &quot;1&quot; *-- &quot;many&quot; StandardContext
-StandardContext &quot;1&quot; *-- &quot;many&quot; StandardWrapper
-
-note top of Engine : 整个 Catalina Servlet 引擎
-note bottom of Host : 一个虚拟主机
-note bottom of Context : 一个 web 应用
-note top of Wrapper : 一个 Servlet 请求(接口)"/>
-</p>
-<section id="pipelining">
-<h3>管道 Pipelining<a class="headerlink" href="#pipelining" title="Link to this heading">¶</a></h3>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">2275 lighk     20   0 6369944 439684  39808 S  16.6   3.6  77:34.25 gnome-shell</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">99353 lighk     20   0   10.9g   3.1g  81984 S   7.6  26.8  79:28.11 java</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">2068 lighk     20   0 1435040 103936  64888 S   7.0   0.9  81:56.48 Xorg</span>
+</pre></div>
+</div>
 </section>
 <section id="id2">
-<h3>Container<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<h3>启动时间和平均负载<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">top - 17:22:10 up 1 day,  6:38,  2 users,  load average</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.64, 3.47, 3.30</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>程序或窗口名，取决于展示模式</p></li>
+<li><p>当前时间和开机时长</p></li>
+<li><p>总用户数</p></li>
+<li><p>系统过去 1,5,15 分钟的平均负载</p></li>
+</ul>
 </section>
+<section id="cpu">
+<h3>任务和 CPU 状态<a class="headerlink" href="#cpu" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">315 total,   1 running, 314 sleeping,   0 stopped,   0 zombie</span>
+<span class="nt">%Cpu(s)</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">6.7 us,  2.3 sy,  0.0 ni, 90.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st</span>
+</pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>标识</p></th>
+<th class="head"><p>全称</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">us</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<td><p>没有设置 nice 值的用户进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">system</span></code></p></td>
+<td><p>内核进程运行时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ni</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nice</span></code></p></td>
+<td><p>设置了 nice 值的用户进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">idle</span></code></p></td>
+<td><p>内核空闲时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wa</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IO-wait</span></code></p></td>
+<td><p>IO 等待时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hi</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware</span> <span class="pre">interrupts</span></code></p></td>
+<td><p>硬件中断消耗时间</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">si</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">interrupts</span></code></p></td>
+<td><p>软件中断消耗时间</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">st</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stolen</span></code></p></td>
+<td><p>虚拟化层夺走的时间</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id3">
+<h3>内存使用<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MiB Mem </span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">11862.6 total,    339.1 free,   8378.9 used,   3144.5 buff/cache</span>
+<span class="nt">MiB Swap</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">15624.0 total,  11226.0 free,   4398.0 used.   2314.6 avail Mem</span><span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>进程信息<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>标识</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PID</p></td>
+<td><p>进程ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>USER</p></td>
+<td><p>用户名</p></td>
+</tr>
+<tr class="row-even"><td><p>PR</p></td>
+<td><p>优先级</p></td>
+</tr>
+<tr class="row-odd"><td><p>NI</p></td>
+<td><p>Nice 值，用于优先级控制</p></td>
+</tr>
+<tr class="row-even"><td><p>VIRT</p></td>
+<td><p>虚拟内存</p></td>
+</tr>
+<tr class="row-odd"><td><p>RES</p></td>
+<td><p>当前使用的物理内存（non-swapped）</p></td>
+</tr>
+<tr class="row-even"><td><p>SHR</p></td>
+<td><p>共享内存，RES的子集</p></td>
+</tr>
+<tr class="row-odd"><td><p>S</p></td>
+<td><p>进程状态</p></td>
+</tr>
+<tr class="row-even"><td><p>%CPU</p></td>
+<td><p>CPU使用率</p></td>
+</tr>
+<tr class="row-odd"><td><p>%MEM</p></td>
+<td><p>内存使用率</p></td>
+</tr>
+<tr class="row-even"><td><p>TIME+</p></td>
+<td><p>进程运行时间</p></td>
+</tr>
+<tr class="row-odd"><td><p>COMMAND</p></td>
+<td><p>命令名</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>进程状态：</p>
+<ul class="simple">
+<li><p>D = uninterruptible sleep</p></li>
+<li><p>I = idle</p></li>
+<li><p>R = running</p></li>
+<li><p>S = sleeping</p></li>
+<li><p>T = stopped by job control signal</p></li>
+<li><p>t = stopped by debugger during trace</p></li>
+<li><p>Z = zombie</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>查看线程状态<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>top<span class="w"> </span>-p<span class="w"> </span><span class="nv">$PID</span><span class="w"> </span>-H
+</pre></div>
+</div>
+</section>
+</section>
+<section id="journalctl">
+<h2>journalctl 日志工具<a class="headerlink" href="#journalctl" title="Link to this heading">¶</a></h2>
+<p>journalctl 是一个用于查询 systemd-journald 服务收集的日志的工具。以下是一些常用的 journalctl 命令用法：</p>
+<ul class="simple">
+<li><p>查看所有日志： journalctl</p></li>
+<li><p>查看特定服务的日志： journalctl -u [服务名称]</p></li>
+<li><p>查看某个时间段的日志： journalctl –since [时间] –until [时间]</p></li>
+<li><p>查看特定级别的日志： journalctl -p [级别]</p></li>
+<li><p>查看某个特定事件的日志： journalctl -k [事件ID]</p></li>
+<li><p>查看系统引导时的日志： journalctl -b</p></li>
+<li><p>查看最近n条日志： ournalctl -n [数字]</p></li>
+<li><p>实时查看日志： journalctl -f</p></li>
+</ul>
+</section>
+<section id="ftp">
+<h2>ftp<a class="headerlink" href="#ftp" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 登录 </span>
+ftp<span class="w"> </span><span class="nv">$host</span>
+
+<span class="c1"># 使用 utf-8</span>
+quote<span class="w"> </span>opts<span class="w"> </span>utf8<span class="w"> </span>on
+
+<span class="c1"># 下载</span>
+get<span class="w"> </span>filename
+<span class="c1"># 上传</span>
+put<span class="w"> </span>filename
+</pre></div>
+</div>
+</section>
+<section id="yum">
+<h2>yum 离线安装软件<a class="headerlink" href="#yum" title="Link to this heading">¶</a></h2>
+<p>在本机下载软件安装包，就可以去机器进行离线安装</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 先安装 工具</span>
+yum<span class="w"> </span>install<span class="w"> </span>yum-utils
+
+<span class="c1"># 下载安装包(以 libffi 为例)</span>
+yumdownloader<span class="w"> </span>libffi
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -446,26 +595,8 @@ note top of Wrapper : 一个 Servlet 请求(接口)"/>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="02-Hudi.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Hudi</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="MinIO/MinIO%E5%A4%9A%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">MinIO多节点部署</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -503,15 +634,20 @@ note top of Wrapper : 一个 Servlet 请求(接口)"/>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">How-tomcat-works</a><ul>
-<li><a class="reference internal" href="#id1">一个简单的请求处理程序</a></li>
-<li><a class="reference internal" href="#httpconnector">引入 <code class="docutils literal notranslate"><span class="pre">HttpConnector</span></code></a></li>
-<li><a class="reference internal" href="#tomcat">Tomcat 的默认连接器</a></li>
-<li><a class="reference internal" href="#container">容器 Container</a><ul>
-<li><a class="reference internal" href="#pipelining">管道 Pipelining</a></li>
-<li><a class="reference internal" href="#id2">Container</a></li>
+<li><a class="reference internal" href="#">Linux 常用命令</a><ul>
+<li><a class="reference internal" href="#grep"><code class="docutils literal notranslate"><span class="pre">grep</span></code> 搜索关键字</a></li>
+<li><a class="reference internal" href="#top"><code class="docutils literal notranslate"><span class="pre">top</span></code> 查看系统实时状况</a><ul>
+<li><a class="reference internal" href="#id1">示例</a></li>
+<li><a class="reference internal" href="#id2">启动时间和平均负载</a></li>
+<li><a class="reference internal" href="#cpu">任务和 CPU 状态</a></li>
+<li><a class="reference internal" href="#id3">内存使用</a></li>
+<li><a class="reference internal" href="#id4">进程信息</a></li>
+<li><a class="reference internal" href="#id5">查看线程状态</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#journalctl">journalctl 日志工具</a></li>
+<li><a class="reference internal" href="#ftp">ftp</a></li>
+<li><a class="reference internal" href="#yum">yum 离线安装软件</a></li>
 </ul>
 </li>
 </ul>

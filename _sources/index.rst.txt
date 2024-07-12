@@ -6,6 +6,20 @@
 Welcome to lighk-wiki
 ======================================
 
+
+.. toctree::
+   :caption: 寻芳拾香
+   :maxdepth: 1
+
+   9-寻芳拾香/00-使用Sphinx搭建知识库
+   9-寻芳拾香/01-开发日常记录
+   9-寻芳拾香/02-字符串中的变量处理
+   9-寻芳拾香/03-Git使用记录
+   9-寻芳拾香/04-MapReduce
+   9-寻芳拾香/05-数物融合-笔记
+   9-寻芳拾香/06-Mysql-Use-Case
+
+
 .. toctree::
    :caption: Java 相关
    :maxdepth: 2
@@ -28,11 +42,11 @@ Welcome to lighk-wiki
    :maxdepth: 2
 
    4-Middleware/DDIA/0-index
-   4-Middleware/MinIO/MinIO介绍与单节点部署
-   4-Middleware/MinIO/MinIO多节点部署
-   4-Middleware/01-How-tomcat-works
-   4-Middleware/02-Hudi
-   4-Middleware/mysql/1-Performance-Schema  
+   4-Middleware/MySQL/0-index
+   4-Middleware/Tomcat/0-index
+   4-Middleware/分布式/0-index
+   4-Middleware/MinIO/0-index
+   4-Middleware/Hudi/0-index
 
 .. toctree::
    :caption: 设计模式
@@ -61,15 +75,4 @@ Welcome to lighk-wiki
    :caption: Rust 相关
    :maxdepth: 2
 
-   2-Rust/test 
-
-.. toctree::
-   :caption: 寻芳拾香
-   :maxdepth: 1
-
-   9-寻芳拾香/00-使用Sphinx搭建知识库
-   9-寻芳拾香/02-字符串中的变量处理
-   9-寻芳拾香/03-Git使用记录
-   9-寻芳拾香/04-MapReduce
-   9-寻芳拾香/05-数物融合-笔记
-   9-寻芳拾香/06-Mysql-Use-Case     
+   2-Rust/test      
