@@ -1,4 +1,4 @@
-# Linux 常用命令
+# Linux
 
 ## `grep` 搜索关键字
 

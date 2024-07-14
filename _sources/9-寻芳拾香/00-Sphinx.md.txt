@@ -1,4 +1,4 @@
-# Sphinx 搭建知识库
+# Sphinx
 
 ## 介绍
 
@@ -6,6 +6,7 @@ Sphinx 可以轻松创建智能且美观的文档。书写方式：
 
 - 默认使用 [reStructuredText](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#top) 标记语言
 - 可以通过第三方扩展读取 [MyST markdown](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html)
+- 支持多种主题，本站点使用 [furo](https://pradyunsg.me/furo/reference/)
 
 以下是 Sphinx 的一些主要功能：
 

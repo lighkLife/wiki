@@ -11,14 +11,11 @@ Welcome to lighk-wiki
    :caption: 寻芳拾香
    :maxdepth: 1
 
-   9-寻芳拾香/00-使用Sphinx搭建知识库
-   9-寻芳拾香/01-开发日常记录
-   9-寻芳拾香/02-字符串中的变量处理
-   9-寻芳拾香/03-Git使用记录
-   9-寻芳拾香/04-MapReduce
-   9-寻芳拾香/05-数物融合-笔记
-   9-寻芳拾香/06-Mysql-Use-Case
-
+   9-寻芳拾香/00-Sphinx
+   9-寻芳拾香/01-Linux
+   9-寻芳拾香/02-Ubuntu
+   9-寻芳拾香/03-Git
+   9-寻芳拾香/04-Maven
 
 .. toctree::
    :caption: Java 相关
@@ -68,8 +65,7 @@ Welcome to lighk-wiki
    :caption: 操作系统
    :maxdepth: 1
 
-   6-OS/00-linux常用命令
-   6-OS/01-Ubuntu使用记录
+   6-OS/test
 
 .. toctree::
    :caption: Rust 相关
