@@ -346,6 +346,13 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/0-index.html">字符串</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/a1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2.html">字符串搜索</a></li>
+</ul>
+</li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">操作系统</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../6-OS/test.html">测试</a></li>
@@ -404,14 +411,14 @@
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>单例模式（Singleton Pattern）：确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，
 这个类称为单例类，它提供全局访问的方法。</p>
-<p><img alt="单例模式" src="../../_images/image3.png" /></p>
+<p><img alt="单例模式" src="../../_images/image4.png" /></p>
 </section>
 <section id="id4">
 <h2>实现方式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
 <h3>饿汉模式<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>在定义静态变量时，直接实例化单例对象。</p>
-<p><img alt="饿汉模式" src="../../_images/image-18.png" /></p>
+<p><img alt="饿汉模式" src="../../_images/image-110.png" /></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">EagerSingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="p">();</span>
 
@@ -426,7 +433,7 @@
 <section id="id6">
 <h3>懒汉模式<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>在真正使用时，也就是<code class="docutils literal notranslate"><span class="pre">getInstance()</span></code>方法被调用时，才去初始化单例对象。也称为“延迟加载”技术。</p>
-<p><img alt="懒汉模式" src="../../_images/image-24.png" /></p>
+<p><img alt="懒汉模式" src="../../_images/image-25.png" /></p>
 </section>
 </section>
 <section id="id7">

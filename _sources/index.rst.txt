@@ -59,6 +59,12 @@ Welcome to lighk-wiki
    :caption: 物联网
    :maxdepth: 1
 
+   10-算法/字符串/0-index
+
+.. toctree::
+   :caption: 物联网
+   :maxdepth: 1
+
    5-IoT/test
 
 .. toctree::

@@ -87,3 +87,13 @@ driver   : xserver-xorg-video-nouveau - distro free builtin
 # 3. 重启
 ➜  ~ reboot
 ```
+
+## ssh 端口转发
+
+```
+    -L [bind_address:]port:host:hostport
+    -L [bind_address:]port:remote_socket
+    -L local_socket:host:hostport
+    -L local_socket:remote_socket
+```
+![alt text](img/image.png)
