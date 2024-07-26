@@ -5,12 +5,12 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../../../genindex.html" /><link rel="search" title="搜索" href="../../../search.html" /><link rel="next" title="脏读" href="b1-%E8%84%8F%E8%AF%BB.html" /><link rel="prev" title="事务" href="a-%E4%BA%8B%E5%8A%A1%E6%A6%82%E5%BF%B5.html" />
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.05.06 -->
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
         <title>弱隔离级别 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     
     
 
@@ -92,19 +92,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -145,7 +132,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -406,7 +393,7 @@
 <p>传统的数据库教科书甚至将隔离性形式化为 <strong>可串行化（Serializability）</strong>, 但是串行化会大大降低数据库的性能，因此主流数据库又定义了不同级别的 <strong>弱隔离级别</strong>。</p>
 <p>反过来描述，在没有事务提供隔离性时，数据库系统面临哪些问题？根据应用对这些问题可容忍的程度，可划分出不同的隔离级别，比如下面这份流性的隔离级别表 <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 提供了不同隔离级别可能遇到的问题：</p>
 <a class=""
-               data-lightbox="group-ee059a56-11e3-4913-884b-76de49f4bbc9"
+               data-lightbox="group-8908f378-d821-491a-a763-784f12f3b64a"
                href="../../../_images/image-44.png"
                title=""
                data-title=""
@@ -418,7 +405,7 @@
                      alt=""/>
                 </a><p>接下来我们来详细讨论下不同隔离级别可能遇到哪些问题，又如何解决。</p>
 <a class=""
-               data-lightbox="group-908d26e0-3445-4856-b607-49bb2e741af0"
+               data-lightbox="group-4350a0e2-28e7-49e8-8af5-8318edc2c427"
                href="../../../_images/image-103.png"
                title=""
                data-title=""
@@ -429,7 +416,7 @@
                      height="auto"
                      alt=""/>
                 </a><a class=""
-               data-lightbox="group-f7a7a6ae-7ddb-48db-918b-47fd38829ed6"
+               data-lightbox="group-2a892caf-8a14-4a80-94e3-7a46aa4bfa5c"
                href="../../../_images/image-142.png"
                title=""
                data-title=""
@@ -448,7 +435,7 @@
 </ol>
 </div>
 <a class=""
-               data-lightbox="group-b1979391-1d3c-4ad4-a02b-e1bed3f29c65"
+               data-lightbox="group-d677a602-6f7b-401b-82ff-492aeb7a9971"
                href="../../../_images/image-132.png"
                title=""
                data-title=""
@@ -585,7 +572,7 @@
 </div><script src="../../../_static/documentation_options.js?v=7d86a446"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
