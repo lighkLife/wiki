@@ -56,7 +56,7 @@ Welcome to lighk-wiki
    8-设计模式/行为/0-index
 
 .. toctree::
-   :caption: 物联网
+   :caption: 算法
    :maxdepth: 1
 
    10-算法/字符串/0-index
