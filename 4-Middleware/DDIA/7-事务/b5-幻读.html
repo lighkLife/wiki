@@ -346,7 +346,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
+<p class="caption" role="heading"><span class="caption-text">算法</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/0-index.html">字符串</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/a1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2.html">字符串搜索</a></li>
@@ -431,7 +431,7 @@
 <section id="id4">
 <h3>影响查询的幻读<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>读取到了其他事务提交的数据，影响了当前事务的判断逻辑，即读提交隔离级别下，第一读和第二次读之间，有其他事务新增了一条数据并提交，导致两次读取总行数不同</p>
-<p><img alt="alt text" src="../../../_images/image-53.png" /></p>
+<p><img alt="alt text" src="../../../_images/image-54.png" /></p>
 </section>
 <section id="id5">
 <h3>影响写入的幻读<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
@@ -448,7 +448,7 @@
 <h4>值班医生<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <p>比如医生值班例子： 你正在为医院写一个医生轮班管理程序。医院通常会同时要求几位医生待命，但底线是至少有一位医生在待命。医生可以放弃他们的班次（例如，如果他们自己生病了），只要至少有一个同事在这一班中继续工作。
 现在想象一下，Alice 和 Bob 是两位值班医生。两人都感到不适，所以他们都决定请假。不幸的是，他们恰好在同一时间点击按钮下班， 下图说明了接下来的事情。</p>
-<p><img alt="alt text" src="../../../_images/image-112.png" /></p>
+<p><img alt="alt text" src="../../../_images/image-113.png" /></p>
 <p>在两个事务中，应用首先检查是否有两个或以上的医生正在值班；如果是的话，它就假定一名医生可以安全地休班。由于数据库使用快照隔离，两次检查都返回 2 ，所以两个事务都进入下一个阶段。Alice 更新自己的记录休班了，而 Bob 也做了一样的事情。两个事务都成功提交了，现在没有医生值班了。违反了至少有一名医生在值班的要求。</p>
 </section>
 <section id="id8">

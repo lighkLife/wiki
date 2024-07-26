@@ -346,7 +346,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
+<p class="caption" role="heading"><span class="caption-text">算法</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">字符串</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">字符串搜索</a></li>
@@ -402,13 +402,15 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>字符串搜索<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p><img alt="alt text" src="../../_images/image-53.png" /></p>
+<p>字符串搜索要解决的问题就是从长度为<code class="docutils literal notranslate"><span class="pre">N</span></code>的文本串中，搜索长度为<code class="docutils literal notranslate"><span class="pre">M</span></code>的模式串，一般<code class="docutils literal notranslate"><span class="pre">N</span></code>是远远大于<code class="docutils literal notranslate"><span class="pre">M</span></code>的。</p>
 <section id="id2">
 <h2>暴力搜索<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../../_images/image2.png" /></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> 是文本串的索引</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">j</span></code> 是模式串的索引</p></li>
 </ul>
+<p><img alt="alt text" src="../../_images/image-62.png" /></p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">pat</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">txt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pat</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">txt</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span>
@@ -417,18 +419,22 @@
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">txt</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pat</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">j</span><span class="p">))</span><span class="w"> </span>
 <span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"> </span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">M</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// found </span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// index in text where pattern starts</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="c1">// not found </span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>暴力搜索中，需要不断回溯，时间复杂度为 O(M*N), 性能有优化空间，但实际场景中也足够使用了，JDK 使用暴力搜索实现 <code class="docutils literal notranslate"><span class="pre">indexOf(String</span> <span class="pre">str)</span></code>。</p>
+<p>暴力搜索中，需要不断回退文本串指针，时间复杂度为 O(M*N), 性能有优化空间，但实际场景中也足够使用了，JDK 使用暴力搜索实现 <code class="docutils literal notranslate"><span class="pre">indexOf(String</span> <span class="pre">str)</span></code>。那还有优化空间吗？理论已经证明，可以在线性复杂度实现
+字符串搜索，下面将介绍几种搜索算法。</p>
 </section>
 <section id="kmp">
 <h2>KMP 搜索<a class="headerlink" href="#kmp" title="Link to this heading">¶</a></h2>
-<p>KMP 的基本思想是：当遇到文本串于模式串不匹配的字符时，我们其实已经得知了文本串的一个子串是什么（就是模式串中不匹配字符之前的字符串）。我们可以利用这些已知子串避免文本串指针不断回溯。</p>
+<section id="id3">
+<h3>KMP 引入<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>在某些情况下，文本串指针回退是比较麻烦的，比如网络流（stream）或标准输入，是否存在一种算泛，不需要回退文本串指针，就可以实现文本串与模式串匹配？神奇的 KMP 算法刚好就具备这个特性。</p>
+<p><strong>KMP 的基本思想</strong>：<strong>当遇到文本串于模式串不匹配的字符时，我们其实已经得知了文本串的一个子串是什么（就是模式串中不匹配字符之前的字符串）。我们可以利用这些已知子串避免文本串指针不断回溯。</strong></p>
 <p><img alt="alt text" src="../../_images/image-18.png" /></p>
 <p>比如上面的文本串和模式串匹配过程中，<code class="docutils literal notranslate"><span class="pre">i</span></code>是文本串的下标，<code class="docutils literal notranslate"><span class="pre">j</span></code> 是模式串的下标，当文本串指针指向图中<code class="docutils literal notranslate"><span class="pre">i</span></code>这个位置时，文本串中的字符<code class="docutils literal notranslate"><span class="pre">B</span></code>和模式串中的字符<code class="docutils literal notranslate"><span class="pre">A</span></code>不匹配了：</p>
 <ul class="simple">
@@ -448,13 +454,111 @@
 </ul>
 </li>
 </ul>
-<p>这次取巧仅限于当前这种情况，但是，我们凭借已经匹配的结果得知：<strong>文本串和模式串的前<code class="docutils literal notranslate"><span class="pre">j-1</span></code>个字符是相同的</strong>，利用这个信息，只需要将<code class="docutils literal notranslate"><span class="pre">j</span></code>重置为某个值，就不需要回溯<code class="docutils literal notranslate"><span class="pre">i</span></code>，而 KMP 算法就是提前利用模式串本身，推断出一份<code class="docutils literal notranslate"><span class="pre">j</span></code>的重置表。</p>
+<p>这次取巧仅限于当前这种情况，但是，我们凭借已经匹配的结果得知：<strong>文本串中当前匹配位置的左边的<code class="docutils literal notranslate"><span class="pre">j-1</span></code>个字符和模式串的前<code class="docutils literal notranslate"><span class="pre">j-1</span></code>个字符是相同的</strong>，利用这个信息，只需要将<code class="docutils literal notranslate"><span class="pre">j</span></code>重置为某个值，就<strong>不需要回退<code class="docutils literal notranslate"><span class="pre">i</span></code></strong>，而 <strong>KMP 算法就是提前利用模式串本身，推断出一份<code class="docutils literal notranslate"><span class="pre">j</span></code>的重置表</strong>。</p>
+<p><img alt="alt text" src="../../_images/image-42.png" /></p>
+</section>
 <section id="dfa">
-<h3>DFA<a class="headerlink" href="#dfa" title="Link to this heading">¶</a></h3>
-<p>使用 <strong>确定有限状态自动机 DFA</strong>（deterministic finite-state automaton）可以有效的说明这个模式匹配的过程。
-<img alt="alt text" src="../../_images/image-23.png" /></p>
-<p>模式串的长度就是状态机的状态数，模式串的下标<code class="docutils literal notranslate"><span class="pre">j</span></code>就代表相对应的状态，状态<code class="docutils literal notranslate"><span class="pre">0</span></code>就是相当于使用文本串去匹配模式串的第一个字符，状态<code class="docutils literal notranslate"><span class="pre">1</span></code>就相当于使用文本串去匹配模式串的第二个字符，其他类似，状态<code class="docutils literal notranslate"><span class="pre">6</span></code>就相当于使用文本串去匹配模式串的第七个个字符（也就是模式串的最后一个字符），如果状态及能转移到<code class="docutils literal notranslate"><span class="pre">6</span></code>，那就说明文本串和模式串已经匹配成功。</p>
-<p>文本串可以不断的输入到状态机，如果当前输入字符和模式串匹配，状态机就可以顺利前进一位（右移，<code class="docutils literal notranslate"><span class="pre">j+1</span></code>），如果不匹配，那状态机就回后退或自旋（左移或不动，<code class="docutils literal notranslate"><span class="pre">j-[0..j]</span></code>）</p>
+<h3>DFA 转移模拟<a class="headerlink" href="#dfa" title="Link to this heading">¶</a></h3>
+<p>使用 <strong>确定有限状态自动机 DFA</strong>（deterministic finite-state automaton）可以有效的说明 KMP 模式匹配的过程。</p>
+<p><img alt="alt text" src="../../_images/image-23.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">dfa[][]</span></code>是状态机数组，可以先不看，直接看状态机图。模式串的长度就是状态机的状态数，状态<code class="docutils literal notranslate"><span class="pre">j</span></code>就是相当于使用文本串已成功匹配模式串的前<code class="docutils literal notranslate"><span class="pre">j</span></code>个字符，比如状态<code class="docutils literal notranslate"><span class="pre">0</span></code>就是相当于使用文本串已成功匹配模式串的前<code class="docutils literal notranslate"><span class="pre">0</span></code>个字符，状态<code class="docutils literal notranslate"><span class="pre">1</span></code>就是相当于使用文本串已成功匹配模式串的前<code class="docutils literal notranslate"><span class="pre">1</span></code>个字符，状态<code class="docutils literal notranslate"><span class="pre">6</span></code>就是相当于使用文本串已成功匹配模式串的前<code class="docutils literal notranslate"><span class="pre">6</span></code>个字符（也就是模式串已经全部匹配成功），如果状态能转移到<code class="docutils literal notranslate"><span class="pre">6</span></code>，那就说明文本串和模式串已经匹配成功。</p>
+<p>文本串可以不断的输入到状态机，如果当前输入字符和模式串匹配，状态机就可以顺利前进一位（右移，<code class="docutils literal notranslate"><span class="pre">j=j+1</span></code>），如果不匹配，那状态机就回后退或自旋（左移或不动，<code class="docutils literal notranslate"><span class="pre">j=j-[0..j]</span></code>）。</p>
+<p>再回头看状态机数组<code class="docutils literal notranslate"><span class="pre">dfa[][]</span></code>, 设当前对比的文本字符下标为<code class="docutils literal notranslate"><span class="pre">i</span></code>，那当前对比的字符在文本串中为<code class="docutils literal notranslate"><span class="pre">txt[i]</span></code>，设为<code class="docutils literal notranslate"><span class="pre">ch</span></code>，当前匹配成功的模式串长度为<code class="docutils literal notranslate"><span class="pre">j</span></code>，<code class="docutils literal notranslate"><span class="pre">dfa[ch][j]=dfa[txt[i]][j]</span></code> 就代表当前匹配到文本串下标为<code class="docutils literal notranslate"><span class="pre">i</span></code>的位置，并且已经在模式串成功匹配了长度<code class="docutils literal notranslate"><span class="pre">j</span></code>,数组中的值就代表这一步需要转移的目标状态。换而言之，数组第一维标识当前对比的文本串字符，这个例子中的取值范围为<code class="docutils literal notranslate"><span class="pre">{A,B,C}</span></code>，数组第二维为已经匹配的模式串长度，也就是状态机的所有状态，这个例子中的取值范围为<code class="docutils literal notranslate"><span class="pre">{0,1,2,3,4,5,6}</span></code>，现在开始向状态机输入文本串的字符：</p>
+<ul class="simple">
+<li><p>从状态<code class="docutils literal notranslate"><span class="pre">0</span></code>开始(即开始匹配成功的长度为0)，输入文本字符<code class="docutils literal notranslate"><span class="pre">txt[i]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][0]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][0]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">1</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">1</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][0]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][0]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+</ul>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">1</span></code>这状态后(即已经匹配成功的长度为1)，继续输入下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i++]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][1]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][1]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">1</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">1</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][1]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">2</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">2</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][1]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+</ul>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">2</span></code>这状态后(即已经匹配成功的长度为2)，继续输入下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i++]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][2]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][2]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">3</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">3</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][2]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][2]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+</ul>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">3</span></code>这状态后(即已经匹配成功的长度为3)，继续输入下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i++]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][3]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][3]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">1</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">1</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][3]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">4</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">4</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][3]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+</ul>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">4</span></code>这状态后(即已经匹配成功的长度为4)，继续输入下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i++]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][4]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][4]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">5</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">5</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][4]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][4]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">0</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">0</span></code>这个状态</p></li>
+</ul>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">5</span></code>这状态后(即已经匹配成功的长度为5)，继续输入下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i++]</span></code>，转移到<code class="docutils literal notranslate"><span class="pre">dfa[txt[i]][5]</span></code>的值对应的状态</p>
+<ul>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">A</span></code>（即<code class="docutils literal notranslate"><span class="pre">A=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[A][5]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">1</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">1</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">B</span></code>（即<code class="docutils literal notranslate"><span class="pre">B=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[B][5]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">4</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">4</span></code>这个状态</p></li>
+<li><p>如果遇到输入<code class="docutils literal notranslate"><span class="pre">C</span></code>（即<code class="docutils literal notranslate"><span class="pre">C=ch=txt[i]</span></code>），查看到<code class="docutils literal notranslate"><span class="pre">dfa[C][5]</span></code>的值为<code class="docutils literal notranslate"><span class="pre">6</span></code>，也就是状态机需要转移到<code class="docutils literal notranslate"><span class="pre">6</span></code>这个状态，而这也是状态机的终止状态，代表匹配成功。</p></li>
+</ul>
+</li>
+</ul>
+<p>使用 DFA 实现的字符串搜索算法代码很简单，具体如下</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// N: length of txt</span>
+<span class="c1">// M: length of pattern</span>
+<span class="c1">// j: current state of DFA</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">txt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">txt</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dfa</span><span class="o">[</span><span class="n">txt</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="c1">// matched</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// not matched</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在的问题是，dfa 数组如何构造？</p>
+</section>
+<section id="id4">
+<h3>构造 DFA 数组<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id5">
+<h4>字符匹配<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<p>如果文本串和模式串总是匹配成功，那就意味着状态机可以一直向右转移，<strong><code class="docutils literal notranslate"><span class="pre">dfa[c][j]=j=1</span></code></strong>，具体如下图所示：</p>
+<p><img alt="alt text" src="../../_images/image-73.png" /></p>
+</section>
+<section id="id6">
+<h4>字符不匹配<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<p>如果遇到文本串和模式串不匹配的字符，当前处于状态<code class="docutils literal notranslate"><span class="pre">j</span></code>，下一个文本字符<code class="docutils literal notranslate"><span class="pre">c</span></code>和模式字符<strong>不匹配</strong>，即<code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">!=</span> <span class="pre">pat.charAt(j)</span></code>，当前文本字符之前的<code class="docutils literal notranslate"><span class="pre">j-1</span></code>字符其实就等与模式串中的<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>（因为前面都是匹配成功的），要计算出<code class="docutils literal notranslate"><span class="pre">dfa[c][j]</span></code>，只需从<code class="docutils literal notranslate"><span class="pre">0</span></code>状态开始，将<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>输入到状态机，再将字符<code class="docutils literal notranslate"><span class="pre">c</span></code>输入状态机，得到的状态就是需要转移到的状态，也就是<code class="docutils literal notranslate"><span class="pre">dfa[c][j]</span></code>的值，具体如下图所示：</p>
+<p><img alt="alt text" src="../../_images/image-81.png" /></p>
+<p>比如当前状态<code class="docutils literal notranslate"><span class="pre">j=5</span></code>，只需要将<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>(<code class="docutils literal notranslate"><span class="pre">BABA</span></code>)输入状态机，状态转移到<code class="docutils literal notranslate"><span class="pre">3</span></code>，再将下一个文本字符<code class="docutils literal notranslate"><span class="pre">c</span></code>继续输入，得到的状态就是<code class="docutils literal notranslate"><span class="pre">dfa[c][5]</span></code>:</p>
+<ul class="simple">
+<li><p>如果<code class="docutils literal notranslate"><span class="pre">c</span></code>为<code class="docutils literal notranslate"><span class="pre">A</span></code>，可以看到之前已经计算出来<code class="docutils literal notranslate"><span class="pre">dfa[A][3]</span></code>为<code class="docutils literal notranslate"><span class="pre">1</span></code>，那么<code class="docutils literal notranslate"><span class="pre">dfa[A][5]</span></code>就是<code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p>如果<code class="docutils literal notranslate"><span class="pre">c</span></code>为<code class="docutils literal notranslate"><span class="pre">B</span></code>，可以看到之前已经计算出来<code class="docutils literal notranslate"><span class="pre">dfa[B][3]</span></code>为<code class="docutils literal notranslate"><span class="pre">4</span></code>，那么<code class="docutils literal notranslate"><span class="pre">dfa[B][5]</span></code>就是<code class="docutils literal notranslate"><span class="pre">4</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong>为什么将<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>输入到状态机，再将字符<code class="docutils literal notranslate"><span class="pre">c</span></code>输入状态机，得到的状态就是需要转移到的状态？</strong></p>
+<p>以下图为例进行说明，当前处于状态<code class="docutils literal notranslate"><span class="pre">j</span></code>，模式字符<code class="docutils literal notranslate"><span class="pre">pat[j]</span></code>为<code class="docutils literal notranslate"><span class="pre">B</span></code>，下一个文本字符<code class="docutils literal notranslate"><span class="pre">txt[i]</span></code>为<code class="docutils literal notranslate"><span class="pre">A</span></code>，匹配失败，但我们知道<code class="docutils literal notranslate"><span class="pre">pat[0..j-1]</span></code>和<code class="docutils literal notranslate"><span class="pre">txt[i-j,</span> <span class="pre">i-1]</span></code>都是匹配成功的，所以两者相等。如果使用暴力匹配，接下来将从<code class="docutils literal notranslate"><span class="pre">txt[i-j+1]</span></code>（也就是<code class="docutils literal notranslate"><span class="pre">pat[1]</span></code>）位置重新开始匹配，也就是说<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>再加上字符<code class="docutils literal notranslate"><span class="pre">c</span></code>，就是接下来使用暴力算法所需要匹配的字符串，只是说我们利用之前的状态机（这个子串最顺利也就只能抵达<code class="docutils literal notranslate"><span class="pre">j-2</span></code>这个状态，而<code class="docutils literal notranslate"><span class="pre">j</span></code>之前的状态机值我们已经计算出来了），可以直接知道这个子串最终会转移到哪个状态。
+<img alt="alt text" src="../../_images/image-91.png" /></p>
+</div>
+<p>接下来，将上面的例子一般化，将<code class="docutils literal notranslate"><span class="pre">pat[1..j-1]</span></code>输入状态及后得到的状态记为<code class="docutils literal notranslate"><span class="pre">X</span></code>，就可以利用状态<code class="docutils literal notranslate"><span class="pre">X</span></code>得到状态<code class="docutils literal notranslate"><span class="pre">j</span></code>的状态值，<strong><code class="docutils literal notranslate"><span class="pre">dfa[c][j]=dfa[c][X]</span></code></strong>，例如，：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dfa[A][5]=dfa[A][X]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dfa[B][5]=dfa[B][X]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dfa[C][5]=dfa[B][X]</span></code></p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/image-101.png" /></p>
+<p>最终给出计算<code class="docutils literal notranslate"><span class="pre">dfa[][]</span></code>的代码</p>
+<p><img alt="alt text" src="../../_images/image-112.png" /></p>
+</section>
 </section>
 </section>
 </section>
@@ -524,7 +628,13 @@
 <li><a class="reference internal" href="#">字符串搜索</a><ul>
 <li><a class="reference internal" href="#id2">暴力搜索</a></li>
 <li><a class="reference internal" href="#kmp">KMP 搜索</a><ul>
-<li><a class="reference internal" href="#dfa">DFA</a></li>
+<li><a class="reference internal" href="#id3">KMP 引入</a></li>
+<li><a class="reference internal" href="#dfa">DFA 转移模拟</a></li>
+<li><a class="reference internal" href="#id4">构造 DFA 数组</a><ul>
+<li><a class="reference internal" href="#id5">字符匹配</a></li>
+<li><a class="reference internal" href="#id6">字符不匹配</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

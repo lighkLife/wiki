@@ -346,7 +346,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">物联网</span></p>
+<p class="caption" role="heading"><span class="caption-text">算法</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/0-index.html">字符串</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../10-%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/a1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2.html">字符串搜索</a></li>
@@ -412,7 +412,7 @@
 <section id="id4">
 <h3>单对象脏读<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>当事务读取到了其他事务对当前对象（数据库中的同一行记录）未提交的修改。</p>
-<p><img alt="alt text" src="../../../_images/image-62.png" /></p>
+<p><img alt="alt text" src="../../../_images/image-63.png" /></p>
 <p>如上图所示，TX1 读取到了 TX2 未提交的写入 <code class="docutils literal notranslate"><span class="pre">counter=2</span></code>，如果 TX2 事务发生异常回滚，问题就发生了，后续 TX1 发现自己读取到的 <code class="docutils literal notranslate"><span class="pre">counter</span></code> 又变为 1 了。</p>
 </section>
 <section id="id5">
@@ -435,7 +435,7 @@
 <span class="o">+----+---------+-----------------+-----------+</span>
 </pre></div>
 </div>
-<p><img alt="alt text" src="../../../_images/image-73.png" /></p>
+<p><img alt="alt text" src="../../../_images/image-74.png" /></p>
 <p>但是如果没有任何隔离措施，上图所示的 User2 就会发生脏读：</p>
 <ul class="simple">
 <li><p>邮件列表里显示有未读消息，但计数器显示为零未读消息，因为计数器增长还没有发生。</p></li>
@@ -462,7 +462,7 @@
 <h3>多版本<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>大多数数据库使用<strong>多版本</strong>的方式防止脏读。对于写入的每个对象，数据库都会记住旧的已提交值，和由当前持有写入锁的事务设置的新值。当事务正在进行时，任何其他读取对象的事务都会拿到旧值。只有当新值提交后，事务才会切换到读取新值（实际上就是多版本并发控制 MVVC）。</p>
 <p>比如用户 1 设置了 x = 3，但用户 2 的 get x 仍旧返回旧值 2 （当用户 1 尚未提交时）。</p>
-<p><img alt="alt text" src="../../../_images/image3.png" /></p>
+<p><img alt="alt text" src="../../../_images/image2.png" /></p>
 </section>
 </section>
 </section>
