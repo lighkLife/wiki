@@ -15,7 +15,7 @@ Welcome to lighk-wiki
    9-寻芳拾香/01-Linux
    9-寻芳拾香/02-Ubuntu
    9-寻芳拾香/03-Git
-   9-寻芳拾香/04-Maven
+   9-寻芳拾香/04-Java
 
 .. toctree::
    :caption: Java 相关
