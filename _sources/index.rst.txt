@@ -59,7 +59,10 @@ Welcome to lighk-wiki
    :caption: 算法
    :maxdepth: 1
 
-   10-算法/字符串/0-index
+   10-算法/04-字符串/0-index
+   10-算法/09-动态规划/0-index
+   10-算法/11-图论/0-index
+
 
 .. toctree::
    :caption: 物联网
