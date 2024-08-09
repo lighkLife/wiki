@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="单源最短路径" href="e1-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html" /><link rel="prev" title="图的遍历" href="b1-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="最小生成树" href="d1-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.html" /><link rel="prev" title="图的遍历" href="b1-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
         <title>拓扑排序 - 文档</title>
@@ -347,7 +347,9 @@
 <li class="toctree-l2"><a class="reference internal" href="a1-%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5.html">图的概念</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86.html">图的遍历</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">拓扑排序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d1-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.html">最小生成树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="e1-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">单源最短路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f1-%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">多源最短路径</a></li>
 </ul>
 </li>
 </ul>
@@ -402,126 +404,142 @@
 <h1>拓扑排序<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
 <h2>知识讲解<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><strong>拓扑排序</strong>（Topological Sorting）：一种对 <strong>有向无环图（DAG）</strong> 的所有顶点进行线性排序的方法，使得图中任意一点 <code class="docutils literal notranslate"><span class="pre">u</span></code> 和  <code class="docutils literal notranslate"><span class="pre">v</span></code>, 如果存在有向边 <code class="docutils literal notranslate"><span class="pre">&lt;u,v&gt;</span></code>, 则 <code class="docutils literal notranslate"><span class="pre">u</span></code> 必须在  <code class="docutils literal notranslate"><span class="pre">v</span></code> 之前出现,对有向图进行拓扑排序产生的<strong>线性序列</strong>称为满足拓扑次序的序列，简称拓扑排序。</p>
 <p>图的拓扑排序是针对有向无环图（DAG）来说的，无向图和有向有环图没有拓扑排序，或者说不存在拓扑排序。</p>
-<p>拓扑排序（Topological Sorting）：一种对有向无环图（DAG）的所有顶点进行线性排序的方法，使得图中任意一点 <code class="docutils literal notranslate"><span class="pre">u</span></code> 和  <code class="docutils literal notranslate"><span class="pre">v</span></code>, 如果存在有向边 <code class="docutils literal notranslate"><span class="pre">&lt;u,v&gt;</span></code>, 则 <code class="docutils literal notranslate"><span class="pre">u</span></code> 必须在  <code class="docutils literal notranslate"><span class="pre">v</span></code> 之前出现,对有向图进行拓扑排序产生的线性序列称为满足拓扑次序的序列，简称拓扑排序。</p>
 <p><img alt="alt text" src="../../_images/image-43.png" /></p>
-<p>一个图可能存在多个拓扑序列，比如上图的拓扑序列可以是:
-$<span class="math notranslate nohighlight">\( v_1 \rightarrow V_2 \rightarrow V_3 \rightarrow V_4 \rightarrow V_5 \rightarrow V_6\)</span><span class="math notranslate nohighlight">\(
-也可以是：
-\)</span><span class="math notranslate nohighlight">\( v_1 \rightarrow V_2 \rightarrow V_3 \rightarrow V_4 \rightarrow V_6 \rightarrow V_5\)</span>$</p>
+<p>一个图可能存在多个拓扑序列，比如上图的拓扑序列可以是:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V_1 \rightarrow V_2 \rightarrow V_3 \rightarrow V_4 \rightarrow V_5 \rightarrow V_6\]</div>
+</div>
+<p>也可以是：</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V_1 \rightarrow V_2 \rightarrow V_3 \rightarrow V_4 \rightarrow V_6 \rightarrow V_5\]</div>
+</div>
+</section>
+<section id="bfs-kahn">
+<h2>BFS 实现(Kahn 算法)<a class="headerlink" href="#bfs-kahn" title="Link to this heading">¶</a></h2>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>Kahn 算法主要基于节点的<strong>入读</strong>进行图遍历，每得到一个<strong>入读=0</strong>的节点，就得到下一个节点，具体操作如下：</p>
+<p><strong>1. 不断找寻有向图中入度为 0 的顶点，将其输出。</strong><br>
+<strong>2. 然后删除入度为 0 的顶点和从该顶点出发的有向边。</strong><br>
+<strong>3. 重复上述操作直到图为空，或者找不到入度为 0 的节点为止。</strong><br></p>
+</div>
+<p>可以看到上述操作其是就是对图进行 BFS 遍历，其关键在于引入<strong>队列</strong>来暂存<strong>入度=0</strong>的节点，如果<strong>有环</strong>，就会发现环里面的节点入度都大于0，也就导致不能完美遍历整个图，也就是排序结果数小于总节点数。</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// 使用 inDegree[i] 维护节点的入读</span>
+<span class="linenos"> 2</span><span class="c1">// 使用 queue 维护入读为 0 的节点，然后再以 queue 中的节点作为出发点，继续遍历下一层节点</span>
+<span class="linenos"> 3</span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">findOrder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numCourses</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="c1">// 排序结果指针</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="c1">// 排序结果容器</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="c1">// 维护每个节点的入度 inDegree[i]</span>
+<span class="linenos">10</span><span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">inDegree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="linenos">12</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">13</span><span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+<span class="linenos">14</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">16</span><span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+<span class="linenos">17</span><span class="w">            </span><span class="n">inDegree</span><span class="o">[</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]]++</span><span class="p">;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">19</span><span class="w">        </span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="linenos">20</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">21</span><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inDegree</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">22</span><span class="w">                </span><span class="c1">// 入度为 0 的节点加入队列和最终结果</span>
+<span class="hll"><span class="linenos">23</span><span class="w">                </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span class="linenos">24</span><span class="w">                </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">++]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="linenos">25</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">26</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">27</span><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">queue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">28</span><span class="w">            </span><span class="c1">// queue 维护入读为 0 的节点， 删除入度为 0 的 vertex</span>
+<span class="hll"><span class="linenos">29</span><span class="w">            </span><span class="n">Integer</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+</span><span class="linenos">30</span><span class="w">            </span><span class="c1">// 访问 vertex 的下一层</span>
+<span class="linenos">31</span><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">32</span><span class="w">                </span><span class="c1">// 删除 vertex 后，相连的节点入读就需要减 1</span>
+<span class="hll"><span class="linenos">33</span><span class="w">                </span><span class="n">inDegree</span><span class="o">[</span><span class="n">next</span><span class="o">]--</span><span class="p">;</span>
+</span><span class="linenos">34</span><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inDegree</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">35</span><span class="w">                    </span><span class="c1">// 入度为 0 的节点加入队列和最终结果</span>
+<span class="hll"><span class="linenos">36</span><span class="w">                    </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">next</span><span class="p">);</span>
+</span><span class="linenos">37</span><span class="w">                    </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">++]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="linenos">38</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">39</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">40</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">41</span><span class="w">        </span><span class="c1">// 这里很重要，只有排序结果数和节点数想等，才说明没有环，当前图存在一个拓扑排序</span>
+<span class="linenos">42</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">43</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">44</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="dfs">
 <h2>DFS 实现<a class="headerlink" href="#dfs" title="Link to this heading">¶</a></h2>
-<p>Kahn 算法主要基于节点的<strong>入读</strong>进行图遍历，每得到一个<strong>入读=0</strong>的节点，就得到下一个节点，具体操作如下：</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>基于 DFS 实现拓扑排序算法的基本思想：</p>
 <ol class="arabic simple">
-<li><p>不断找寻有向图中入度为 0 的顶点，将其输出。</p></li>
-<li><p>然后删除入度为 0 的顶点和从该顶点出发的有向边。</p></li>
-<li><p>重复上述操作直到图为空，或者找不到入度为 0 的节点为止。</p></li>
+<li><p>对于一个顶点 u，深度优先遍历从该顶点出发的有向边 <code class="docutils literal notranslate"><span class="pre">&lt;u,v&gt;</span></code>:</p>
+<ul class="simple">
+<li><p>如果从该顶点 u 出发的所有相邻顶点 v 都已经搜索完毕，则回溯到顶点 u 时，该顶点 u 应该位于其所有相邻顶点 v 的前面（拓扑序列中）。</p></li>
+</ul>
+</li>
+<li><p>这样一来，当我们对每个顶点进行深度优先搜索，在回溯到该顶点时将其放入栈中，则最终从栈顶到栈底的序列就是一种拓扑排序。</p></li>
 </ol>
-<p>可以看到上述操作其是就是对图进行 BFS 遍历，其核心代码如下：</p>
-<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// 使用 inDegree[i] 维护节点的入读</span>
-<span class="c1">// 使用 queue 维护入读为 0 的节点，然后再以 queue 中的节点作为出发点，继续遍历下一层节点</span>
-<span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">findOrder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numCourses</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 排序结果指针</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 排序结果容器</span>
-<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 维护每个节点的入度 inDegree[i]</span>
-<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">inDegree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
-<span class="w">            </span><span class="n">inDegree</span><span class="o">[</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]]++</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inDegree</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="c1">// 入度为 0 的节点加入队列和最终结果</span>
-<span class="w">                </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-<span class="w">                </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">++]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">queue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// queue 维护入读为 0 的节点， 删除入度为 0 的 vertex</span>
-<span class="w">            </span><span class="n">Integer</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
-<span class="w">            </span><span class="c1">// 访问 vertex 的下一层</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="c1">// 删除 vertex 后，相连的节点入读就需要减 1</span>
-<span class="w">                </span><span class="n">inDegree</span><span class="o">[</span><span class="n">next</span><span class="o">]--</span><span class="p">;</span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inDegree</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="c1">// 入度为 0 的节点加入队列和最终结果</span>
-<span class="w">                    </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">next</span><span class="p">);</span>
-<span class="w">                    </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">++]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="c1">// 这里很重要，只有排序结果数和节点数想等，才说明没有环，当前图存在一个拓扑排序</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+</div>
+<p>DFS 遍历的一个重点是一边遍历，一边使用 visited[] 标记节点状态(0-未访问 1-遍历中 2-遍历完毕)，如果 <strong>有环</strong>，那么深度优先遍历从该顶点出发的有向边时，就会发现有节点已经被标记为 <strong>遍历中</strong></p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultIndex</span><span class="p">;</span><span class="w"> </span><span class="c1">// 配合 result 数组模拟栈</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"> </span><span class="c1">// 栈，保存拓扑排序结果</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">visited</span><span class="p">;</span><span class="w"> </span><span class="c1">// 用来标记访问状态（访问当前节点所有相邻节点） 0-未访问 1-访问中 2-访问完</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 标记是否有环</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">findOrder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numCourses</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">        </span><span class="n">visited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="linenos">12</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">13</span><span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+<span class="linenos">14</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">16</span><span class="w">            </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prerequisites</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">17</span><span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+<span class="linenos">18</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">19</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">20</span><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">21</span><span class="w">                </span><span class="n">dfs2</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="linenos">22</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">23</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">24</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="linenos">25</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dfs2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vertex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">28</span><span class="w">        </span><span class="c1">// 将当前节点标记为 访问中</span>
+<span class="hll"><span class="linenos">29</span><span class="w">        </span><span class="n">visited</span><span class="o">[</span><span class="n">vertex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span class="linenos">30</span><span class="w">        </span><span class="c1">// 深度优先遍历从该顶点出发的有向边</span>
+<span class="linenos">31</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos">32</span><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">33</span><span class="w">                </span><span class="n">dfs2</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">);</span>
+<span class="hll"><span class="linenos">34</span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">35</span><span class="w">                </span><span class="c1">// cycle</span>
+<span class="linenos">36</span><span class="w">                </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="linenos">37</span><span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="linenos">38</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">39</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">40</span><span class="w">        </span><span class="c1">// 从该顶点 vertex 出发的所有相邻顶点都已经搜索完毕</span>
+<span class="linenos">41</span><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">--]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="p">;</span>
+<span class="linenos">42</span><span class="w">        </span><span class="c1">// 将当前节点标记为 访问完</span>
+<span class="hll"><span class="linenos">43</span><span class="w">        </span><span class="n">visited</span><span class="o">[</span><span class="n">vertex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span class="linenos">44</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">45</span><span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="id3">
-<h2>DFS 实现<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>基于 DFS 实现拓扑排序算法的基本思想：</p>
-<ol class="arabic simple">
-<li><p>对于一个顶点 u，深度优先遍历从该顶点出发的有向边 <code class="docutils literal notranslate"><span class="pre">&lt;u,v&gt;</span></code>。如果从该顶点 u 出发的所有相邻顶点 v 都已经搜索完毕，则回溯到顶点 u 时，该顶点 u 应该位于其所有相邻顶点 v 的前面（拓扑序列中）。</p></li>
-<li><p>这样一来，当我们对每个顶点进行深度优先搜索，在回溯到该顶点时将其放入栈中，则最终从栈顶到栈底的序列就是一种拓扑排序。</p></li>
-</ol>
-<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultIndex</span><span class="p">;</span><span class="w"> </span><span class="c1">// 配合 result 数组模拟栈</span>
-<span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"> </span><span class="c1">// 栈，保存拓扑排序结果</span>
-<span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">visited</span><span class="p">;</span><span class="w"> </span><span class="c1">// 用来标记访问状态（访问当前节点所有相邻节点） 0-未访问 1-访问中 2-访问完</span>
-<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 标记是否有环</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">findOrder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numCourses</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">visited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">numCourses</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">prerequisites</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prerequisites</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
-<span class="w">            </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numCourses</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">dfs2</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dfs2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vertex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 将当前节点标记为 访问中</span>
-<span class="w">        </span><span class="n">visited</span><span class="o">[</span><span class="n">vertex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 访问当前节点所有相邻节点</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">dfs2</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">);</span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="c1">// cycle</span>
-<span class="w">                </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="n">resultIndex</span><span class="o">--]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 将当前节点标记为 访问完</span>
-<span class="w">        </span><span class="n">visited</span><span class="o">[</span><span class="n">vertex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="id4">
-<h2>参考<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<h2>参考<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://algo.itcharge.cn/08.Graph/02.Graph-Traversal/05.Graph-Topological-Sorting">拓扑排序简介. 算法通关手册（LeetCode）</a></p></li>
 </ol>
@@ -533,12 +551,12 @@ $<span class="math notranslate nohighlight">\( v_1 \rightarrow V_2 \rightarrow V
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="e1-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">
+          <a class="next-page" href="d1-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">单源最短路径</div>
+                <div class="title">最小生成树</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -592,9 +610,9 @@ $<span class="math notranslate nohighlight">\( v_1 \rightarrow V_2 \rightarrow V
             <ul>
 <li><a class="reference internal" href="#">拓扑排序</a><ul>
 <li><a class="reference internal" href="#id2">知识讲解</a></li>
+<li><a class="reference internal" href="#bfs-kahn">BFS 实现(Kahn 算法)</a></li>
 <li><a class="reference internal" href="#dfs">DFS 实现</a></li>
-<li><a class="reference internal" href="#id3">DFS 实现</a></li>
-<li><a class="reference internal" href="#id4">参考</a></li>
+<li><a class="reference internal" href="#id3">参考</a></li>
 </ul>
 </li>
 </ul>
