@@ -462,7 +462,7 @@
 <h3>多版本<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>大多数数据库使用<strong>多版本</strong>的方式防止脏读。对于写入的每个对象，数据库都会记住旧的已提交值，和由当前持有写入锁的事务设置的新值。当事务正在进行时，任何其他读取对象的事务都会拿到旧值。只有当新值提交后，事务才会切换到读取新值（实际上就是多版本并发控制 MVVC）。</p>
 <p>比如用户 1 设置了 x = 3，但用户 2 的 get x 仍旧返回旧值 2 （当用户 1 尚未提交时）。</p>
-<p><img alt="alt text" src="../../../_images/image3.png" /></p>
+<p><img alt="alt text" src="../../../_images/image4.png" /></p>
 </section>
 </section>
 </section>

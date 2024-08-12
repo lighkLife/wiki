@@ -5,7 +5,7 @@
 - 直接执行这些程序，比如 jstack、jmap 等，这种方式需要记住不同命令的使用方式，个人更偏向使用 jcmd，但这种方式输出的信息更全面。
 - 使用`jcmd <pid | main class> <command>`的方式，这种方式可以利用 `jcmd <pid> help` 查看支持的子命令，使用方式更统一、简单。
 
-![alt text](image-7.png)
+![alt text](./img/image-7.png)
 
 ## 编译
 
@@ -143,7 +143,7 @@ java 命令用于运行Java程序（执行Java类的main方法，目标文件是
 
 **客户端配置**：
 
-![alt text](image-6.png)
+![alt text](./img/image-6.png)
 
 ## JVM 参数
 
