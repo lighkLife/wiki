@@ -41,9 +41,17 @@ Java 选择使用 UTF-16 在内存中存储字符，所以大多数 Unicode 符�
 
 采用更节省空间的字符串内部表示形式。参考 [JEP254](https://openjdk.org/jeps/254) 。
 
-String 类的当前实现将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，
-而且大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。
+String 类将字符存储在 char 数组中，每个字符使用两个字节（十六位）。从许多不同应用程序收集的数据表明字符串是堆使用的主要组成部分，
+而大多数 String 对象仅包含 Latin-1 字符。此类字符仅需要一个字节的存储空间，因此此 String 对象的内部 char 数组中的一半空间未使用,存在浪费。所以 Java 9 及以后，String 使用 byte[] 来存储字符串，如果字符串中只存在 Latin-1 字符，就使用压缩存储（`coder=1`）。
 
+![alt text](img/image.png)
+
+coder 目前有两种取值：
+```Java
+    @Native static final byte LATIN1 = 0;
+    @Native static final byte UTF16  = 1;
+```
+如果字符串只含有 Latin-1 ，那么每个字符都只占用一个字节，可以节省一半空间
 
 参考：
 1. [Java 9为什么要将String的底层实现由char数组改成了byte数组?](https://javabetter.cn/basic-extra-meal/jdk9-char-byte-string.html)

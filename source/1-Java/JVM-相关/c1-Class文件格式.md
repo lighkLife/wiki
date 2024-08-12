@@ -2,7 +2,7 @@
 
 ## 概览[^1]
 
-![class-format](image.png)
+![class-format](./img/image.png)
 ```java
 ClassFile {
     u4               magic; // 魔数 0xCAFEBABE
@@ -26,7 +26,7 @@ ClassFile {
 
 ## 魔数
 
-![alt text](image-1.png)
+![alt text](./img/image-1.png)
 
 每个 class 文件开始的 4 个字节 `0xCAFE BABE` 被成为魔数（Magic Number）,主要用来确认当前文件是否为 JVM 可解析的 class 文件。
 
@@ -96,7 +96,7 @@ CONSTANT_Utf8_info {
 
 ### 实例
 
-![alt text](image-2.png)
+![alt text](./img/image-2.png)
 
 从 8 个字节开始[^2]：
 
@@ -147,7 +147,7 @@ u2 --> `CONSTANT_Class_info` --> `CONSTANT_Utf8_info`
 
 首先是一个 u2 类型，代表字段表大小，即字段数量，然后就是一个 `field_info` 的数组，其中 `field_info` 定义如下：
 
-![alt text](image-3.png)
+![alt text](./img/image-3.png)
 
 ```C++
 field_info {
@@ -178,7 +178,7 @@ field_info {
 
 首先是一个 u2 类型，代表方法表大小，即方法数量，然后就是一个 `method_info` 的数组，其中 `method_info` 定义如下：
 
-![alt text](image-4.png)
+![alt text](./img/image-4.png)
 
 ```C++
 method_info {

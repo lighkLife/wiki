@@ -3,11 +3,11 @@ JVM 相关
 
 前端编译
 --------
-.. image:: ./image-5.png
+.. image:: ./img/image-5.png
 
 问题诊断
 --------
-.. image:: ./image-7.png
+.. image:: ./img/image-7.png
 
 
 相关文章
