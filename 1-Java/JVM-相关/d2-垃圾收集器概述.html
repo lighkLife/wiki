@@ -411,23 +411,127 @@
 <h2>常见 GC<a class="headerlink" href="#gc" title="Link to this heading">¶</a></h2>
 <p><img alt="alt text" src="../../_images/image-8.png" /></p>
 </section>
-<section id="serial-gc">
-<h2>Serial GC<a class="headerlink" href="#serial-gc" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h2>查看当前 GC<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="jdk-gc">
+<h3>JDK 默认 GC<a class="headerlink" href="#jdk-gc" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-XX:+PrintCommandLineFlags</span> <span class="pre">-version</span></code></p>
+<p>输出(JDK 7/8)：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">XX</span><span class="p">:</span><span class="o">+</span><span class="n">UseParallelGC</span> 
+</pre></div>
+</div>
 </section>
-<section id="parallel-gc">
-<h2>Parallel GC<a class="headerlink" href="#parallel-gc" title="Link to this heading">¶</a></h2>
+<section id="java-gc">
+<h3>Java 进程 GC<a class="headerlink" href="#java-gc" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jcmd</span> <span class="pre">48617</span> <span class="pre">VM.flags</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jinfo</span> <span class="pre">-flags</span> <span class="pre">48617</span></code></p></li>
+</ul>
+<p>输出(JDK 9-22)：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">XX</span><span class="p">:</span><span class="o">+</span><span class="n">UseG1GC</span> 
+</pre></div>
+</div>
 </section>
-<section id="cms">
-<h2>CMS<a class="headerlink" href="#cms" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id3">
+<h2>串行收集器<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>启用方式： <code class="docutils literal notranslate"><span class="pre">-XX:+UseSerialGC</span></code></p>
+<p><img alt="alt text" src="../../_images/image-10.png" /></p>
+<ul class="simple">
+<li><p>Serial : 新生代，复制算法</p></li>
+<li><p>SerialOld： 老年代，标记整理算法</p></li>
+</ul>
+<p>串行收集器是最早的垃圾收集器，在内存很小的单处理器上很有用。</p>
+</section>
+<section id="id4">
+<h2>并行收集器<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>启用方式：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX：+UseParallelGC</span></code> （Parallel Scavenge + SerialOld）JDK 7-8 默认值</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-XX：+UseParallelOldGC</span></code> （Parallel Scavenge + Parallel Old）</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/image-11.png" /></p>
+<ul class="simple">
+<li><p>ParNew ： Serial 的多线程版，使用<strong>复制算法</strong>回收新生代垃圾</p></li>
+<li><p>Parallel Scavenge ： 也可以看作 Serial 的多线程版，使用<strong>复制算法</strong>回收新生代垃圾，但是可以通过参数控制吞吐率</p></li>
+<li><p>Parallel Old： ParNew 的老年代版本，使用<strong>标记整理算法</strong>回收老年代垃圾</p></li>
+</ul>
+</section>
+<section id="cms-concurrent-mark-sweep">
+<h2>CMS（Concurrent Mark Sweep）<a class="headerlink" href="#cms-concurrent-mark-sweep" title="Link to this heading">¶</a></h2>
+<p>启用方式： <code class="docutils literal notranslate"><span class="pre">-XX：+UseConcMarkSweepGC</span></code>  (ParNew + CMS + SerialOld)</p>
+<p>CMS 是使用<strong>标记清除</strong>算法进行老年代垃圾回收的，因为耗时最长的并发标记和并发清除都是和用户线程并发执行的，所以可以减少<code class="docutils literal notranslate"><span class="pre">Stop</span> <span class="pre">the</span> <span class="pre">World</span></code> 的时间，但是标记清除算法很容易产生很多内存碎片，容易触发 Full GC，这也是为什么还需要搭配 SerialOld 的原因。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>遗憾的是，还没有来得及将 CMS 作为默认垃圾回收器，G1 就出来了，JDK 7/8 默认使用 Parallel Scavenge + SerialOld, JDK 9-22 都将 G1 作为默认回收器，虽然后面又出了ZGC，但 ZGC 为了将停顿时间降低到 1ms 内，但目前普适性最高的还是 G1。</p>
+</div>
+<p><img alt="alt text" src="../../_images/image-13.png" /></p>
+<ul class="simple">
+<li><p><strong>初始标记</strong>: 仅仅只是标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿。</p></li>
+<li><p><strong>并发标记</strong>: 进行 GC Roots Tracing 的过程，它在整个回收过程中<strong>耗时最长</strong>，不需要停顿。</p></li>
+<li><p><strong>重新标记</strong>: 为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，需要停顿。</p></li>
+<li><p><strong>并发清除</strong>: 不需要停顿。</p></li>
+</ul>
 </section>
 <section id="g1">
 <h2>G1<a class="headerlink" href="#g1" title="Link to this heading">¶</a></h2>
+<p>启用方式： <code class="docutils literal notranslate"><span class="pre">-XX:+UseG1GC</span></code></p>
+<p>G1 是目前主推的收集器，JDK 9-22 都将其作为默认收集器，它能够以高概率满足暂停时间目标。</p>
+<p>堆被分为新生代和老年代，之前介绍的回收器回收范围只能是新生代或者老年代，而 G1 可以直接对新生代和老年代一起回收。</p>
+<p><img alt="alt text" src="../../_images/image-12.png" /></p>
+<p>G1 把堆划分成多个大小相等的独立区域(Region)，新生代和老年代不再物理隔离。</p>
+<p><img alt="alt text" src="../../_images/image-14.png" /></p>
+<p>通过引入 Region 的概念，从而将原来的一整块内存空间划分成多个的小空间，使得每个小空间可以单独进行垃圾回收。这种划分方法带来了很大的灵活性，使得可预测的停顿时间模型成为可能。通过记录每个 Region 垃圾回收时间以及回收所获得的空间(这两个值是通过过去回收的经验获得)，并维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的 Region。</p>
+<p><img alt="alt text" src="../../_images/image-15.png" /></p>
+<ul class="simple">
+<li><p><strong>初始标记</strong></p></li>
+<li><p><strong>并发标记</strong></p></li>
+<li><p><strong>最终标记</strong>: 为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的 Remembered Set Logs 里面，最终标记阶段需要把 Remembered Set Logs 的数据合并到 Remembered Set 中。这阶段需要停顿线程，但是可并行执行。</p></li>
+<li><p><strong>筛选回收</strong>: 首先对各个 Region 中的回收价值和成本进行排序，根据用户所期望的 GC 停顿时间来制定回收计划。此阶段其实也可以做到与用户程序一起并发执行，但是因为只回收一部分 Region，时间是用户可控制的，而且停顿用户线程将大幅度提高收集效率。</p></li>
+</ul>
 </section>
 <section id="zgc">
 <h2>ZGC<a class="headerlink" href="#zgc" title="Link to this heading">¶</a></h2>
+<p>启用方式： <code class="docutils literal notranslate"><span class="pre">XX:+UseZGC</span> <span class="pre">-XX:+ZGenerational</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>新版本的 ZGC 是基于分代实现的，所以需要使用  <code class="docutils literal notranslate"><span class="pre">XX:+UseZGC</span> <span class="pre">-XX:+ZGenerational</span></code>启用。</p>
+</div>
+<section id="id5">
+<h3>GC 周期<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>ZGC 提供低于一毫秒的最大暂停时间，主要是因为 ZGC 只是在停顿时进行标记操作。</p>
+<p><img alt="alt text" src="../../_images/image-19.png" /></p>
 </section>
-<section id="shenandoah-gc">
-<h2>Shenandoah GC<a class="headerlink" href="#shenandoah-gc" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>染色指针<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><img alt="alt text" src="../../_images/image-17.png" /></p>
+</section>
+<section id="id7">
+<h3>读屏障<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>之前的GC都是采用写屏障（Write Barrier），而ZGC采用的是读屏障。</p>
+<p>读屏障（Load Barriers）类似于 Spring AOP 的前置通知。</p>
+<p>在ZGC中，当读取处于重分配集的对象时，会被读屏障拦截，通过转发表记录将访问转发到新复制的对象上，并同时修正更新该引用的值，使其直接指向新对象，ZGC将这种行为叫做指针的「自愈能力」。</p>
+<p>这样就算GC把对象移动了，读屏障也会发现并修正指针，于是应用代码就永远都会持有更新后的有效指针，而且不需要STW，类似JDK里的CAS自旋，读取的值发现已经失效了，需要重新读取。</p>
+<p>好处是：第一次访问旧对象访问会变慢，但也只会有一次变慢，当「自愈」完成后，后续访问就不会变慢了。</p>
+<p>正是因为Load Barriers的存在，所以会导致配置ZGC的应用的吞吐量会变低。不过这点开销是值得的。</p>
+</section>
+<section id="id8">
+<h3>分区<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p><img alt="alt text" src="../../_images/image-18.png" /></p>
+</section>
+</section>
+<section id="id9">
+<h2>参考<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://pdai.tech/md/java/jvm/java-jvm-gc.html">GC - Java 垃圾回收基础知识. Java 全栈知识体系</a></p></li>
+<li><p><a class="reference external" href="https://docs.oracle.com/en/java/javase/22/gctuning/available-collectors.html#GUID-C7B19628-27BA-4945-9004-EC0F08C76003">HotSpot Virtual Machine Garbage Collection Tuning Guide. Java SE 22</a></p></li>
+<li><p><a class="reference external" href="https://weread.qq.com/web/reader/cf1320d071a1a78ecf19254">第3章　垃圾收集器与内存分配策略. 深入理解Java虚拟机</a></p></li>
+<li><p><a class="reference external" href="https://cr.openjdk.org/~pliden/slides/ZGC-OracleDevLive-2020.pdf">ZGC The Next Generation Low-Latency Garbage Collector</a></p></li>
+<li><p><a class="reference external" href="https://dev.java/learn/jvm/tool/garbage-collection/zgc-deepdive/">Deep-dive of ZGC’s Architecture</a></p></li>
+<li><p><a class="reference external" href="https://javadoop.com/post/zgc">ZGC 介绍</a></p></li>
+<li><p><a class="reference external" href="https://malloc.se/">perliden blog. ZGC 作者博客</a></p></li>
+<li><p><a class="reference external" href="https://www.cnblogs.com/booksea/p/17665685.html">深入解析ZGC垃圾回收器 </a></p></li>
+</ol>
 </section>
 </section>
 
@@ -477,12 +581,23 @@
             <ul>
 <li><a class="reference internal" href="#">垃圾收集器概述</a><ul>
 <li><a class="reference internal" href="#gc">常见 GC</a></li>
-<li><a class="reference internal" href="#serial-gc">Serial GC</a></li>
-<li><a class="reference internal" href="#parallel-gc">Parallel GC</a></li>
-<li><a class="reference internal" href="#cms">CMS</a></li>
+<li><a class="reference internal" href="#id2">查看当前 GC</a><ul>
+<li><a class="reference internal" href="#jdk-gc">JDK 默认 GC</a></li>
+<li><a class="reference internal" href="#java-gc">Java 进程 GC</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">串行收集器</a></li>
+<li><a class="reference internal" href="#id4">并行收集器</a></li>
+<li><a class="reference internal" href="#cms-concurrent-mark-sweep">CMS（Concurrent Mark Sweep）</a></li>
 <li><a class="reference internal" href="#g1">G1</a></li>
-<li><a class="reference internal" href="#zgc">ZGC</a></li>
-<li><a class="reference internal" href="#shenandoah-gc">Shenandoah GC</a></li>
+<li><a class="reference internal" href="#zgc">ZGC</a><ul>
+<li><a class="reference internal" href="#id5">GC 周期</a></li>
+<li><a class="reference internal" href="#id6">染色指针</a></li>
+<li><a class="reference internal" href="#id7">读屏障</a></li>
+<li><a class="reference internal" href="#id8">分区</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">参考</a></li>
 </ul>
 </li>
 </ul>

@@ -435,7 +435,7 @@
 <h3>KMP 引入<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>在某些情况下，文本串指针回退是比较麻烦的，比如网络流（stream）或标准输入，是否存在一种算泛，不需要回退文本串指针，就可以实现文本串与模式串匹配？神奇的 KMP 算法刚好就具备这个特性。</p>
 <p><strong>KMP 的基本思想</strong>：<strong>当遇到文本串于模式串不匹配的字符时，我们其实已经得知了文本串的一个子串是什么（就是模式串中不匹配字符之前的字符串）。我们可以利用这些已知子串避免文本串指针不断回溯。</strong></p>
-<p><img alt="alt text" src="../../_images/image-18.png" /></p>
+<p><img alt="alt text" src="../../_images/image-110.png" /></p>
 <p>比如上面的文本串和模式串匹配过程中，<code class="docutils literal notranslate"><span class="pre">i</span></code>是文本串的下标，<code class="docutils literal notranslate"><span class="pre">j</span></code> 是模式串的下标，当文本串指针指向图中<code class="docutils literal notranslate"><span class="pre">i</span></code>这个位置时，文本串中的字符<code class="docutils literal notranslate"><span class="pre">B</span></code>和模式串中的字符<code class="docutils literal notranslate"><span class="pre">A</span></code>不匹配了：</p>
 <ul class="simple">
 <li><p>暴力搜索算法</p>
@@ -555,7 +555,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">dfa[B][5]=dfa[B][X]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dfa[C][5]=dfa[B][X]</span></code></p></li>
 </ul>
-<p><img alt="alt text" src="../../_images/image-101.png" /></p>
+<p><img alt="alt text" src="../../_images/image-102.png" /></p>
 <p>最终给出计算<code class="docutils literal notranslate"><span class="pre">dfa[][]</span></code>的代码</p>
 <p><img alt="alt text" src="../../_images/image-112.png" /></p>
 </section>

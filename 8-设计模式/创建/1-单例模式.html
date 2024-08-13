@@ -411,14 +411,14 @@
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>单例模式（Singleton Pattern）：确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，
 这个类称为单例类，它提供全局访问的方法。</p>
-<p><img alt="单例模式" src="../../_images/image5.png" /></p>
+<p><img alt="单例模式" src="../../_images/image6.png" /></p>
 </section>
 <section id="id4">
 <h2>实现方式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
 <h3>饿汉模式<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>在定义静态变量时，直接实例化单例对象。</p>
-<p><img alt="饿汉模式" src="../../_images/image-114.png" /></p>
+<p><img alt="饿汉模式" src="../../_images/image-115.png" /></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">EagerSingleton</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EagerSingleton</span><span class="p">();</span>
 

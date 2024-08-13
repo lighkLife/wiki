@@ -404,8 +404,8 @@
 <h1>Reactor 模型<a class="headerlink" href="#reactor" title="Link to this heading">¶</a></h1>
 <section id="id2">
 <h2>传统服务设计<a class="footnote-reference brackets" href="#id11" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../../_images/image-12.png" /></p>
-<p><img alt="alt text" src="../../_images/image-14.png" /></p>
+<p><img alt="alt text" src="../../_images/image-121.png" /></p>
+<p><img alt="alt text" src="../../_images/image-141.png" /></p>
 <ol class="arabic simple">
 <li><p>Each thread synchronously blocks in the accept
 socket call waiting for a client connection request;[1^]</p></li>
@@ -428,7 +428,7 @@ from the network connection;</p></li>
 <h2>Reactor<a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#reactor1" title="Link to this heading">¶</a></h2>
 <section id="id4">
 <h3>连接<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
-<p><img alt="alt text" src="../../_images/image-19.png" /></p>
+<p><img alt="alt text" src="../../_images/image-191.png" /></p>
 <ol class="arabic simple">
 <li><p>The Web Server registers an Acceptor with the
 Initiation Dispatcher to accept new connections;</p></li>
@@ -476,12 +476,12 @@ would cause the calling thread to block (steps 7 and
 </section>
 <section id="reactor-3">
 <h2>Reactor 单线程<a class="footnote-reference brackets" href="#id12" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#reactor-3" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../../_images/image-15.png" /></p>
+<p><img alt="alt text" src="../../_images/image-151.png" /></p>
 <p>一般不会这样子使用。</p>
 </section>
 <section id="id8">
 <h2>Reactor 使用线程池<a class="footnote-reference brackets" href="#id12" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a><a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../../_images/image-16.png" /></p>
+<p><img alt="alt text" src="../../_images/image-161.png" /></p>
 <p>这就是 netty 中  <code class="docutils literal notranslate"><span class="pre">bossGroup</span></code> 和 <code class="docutils literal notranslate"><span class="pre">workerGroup</span></code> 使用同一个 EventLoopGroup 的模式。</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">eventLoopGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span><span class="w"> </span><span class="c1">// (1)</span>
 <span class="linenos">2</span><span class="w">    </span><span class="n">ServerBootstrap</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServerBootstrap</span><span class="p">();</span><span class="w"> </span><span class="c1">// (2)</span>
@@ -493,7 +493,7 @@ would cause the calling thread to block (steps 7 and
 </section>
 <section id="id9">
 <h2>多个 Reactor<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../../_images/image-17.png" /></p>
+<p><img alt="alt text" src="../../_images/image-171.png" /></p>
 <p>这其是就是 netty 中 <code class="docutils literal notranslate"><span class="pre">bossGroup</span></code> 和 <code class="docutils literal notranslate"><span class="pre">workerGroup</span></code>，一个专门用来查询客户端的连接事件，一个专门用来查询连接的读写事件。</p>
 <div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">bossGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span><span class="w"> </span><span class="c1">// (1)</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="n">EventLoopGroup</span><span class="w"> </span><span class="n">workerGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NioEventLoopGroup</span><span class="p">();</span>

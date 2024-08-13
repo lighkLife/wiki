@@ -405,7 +405,7 @@
 <section id="id2">
 <h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>开发一个可应用于多个软件的文件加密模块，该模块可以对文件中的数据进行加密并将加密之后的数据存储在一个新文件中。具体的流程包括3个部分，分别是读取源文件、加密、保存加密之后的文件。其中，读取文件和保存文件使用流来实现，加密操作通过求模运算实现。这3个操作相对独立，为了实现代码的独立重用，让设计更符合单一职责原则，这3个操作的业务代码封装在3个不同的类中。</p>
-<p><img alt="加密模块" src="../../_images/image-105.png" /></p>
+<p><img alt="加密模块" src="../../_images/image-106.png" /></p>
 <p>这个设计一旦真正使用起来，就会发现以下问题：</p>
 <ol class="arabic simple">
 <li><p>使用加密模块时，FileReader、AesEncrypt、FileWriter 经常一起出现，而且使用方式也相同，造成很多重复代码。</p></li>
@@ -417,12 +417,12 @@
 <section id="id3">
 <h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>外观模式（Facade Pattern）：外部与一个子系统的通信通过一个统一的外观角色进行，为子系统中的一组接口提供一个一致的入口。外观模式定义了一个高层接口，这个接口使得子系统更加容易使用。外观模式又称为门面模式，它是一种对象结构型模式。</p>
-<p><img alt="外观模式" src="../../_images/image-117.png" /></p>
+<p><img alt="外观模式" src="../../_images/image-118.png" /></p>
 </section>
 <section id="id4">
 <h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>加密模块对外提供一个统一的</p>
-<p><img alt="外观模式实现" src="../../_images/image-133.png" /></p>
+<p><img alt="外观模式实现" src="../../_images/image-134.png" /></p>
 <p>如果考虑更强的扩展性，还可以将 EncryptFacade 定义为接口，以便支持数据库读写，为加密算法增加抽象定义和具体实现，以便支持其他加密算法。</p>
 </section>
 <section id="id5">
