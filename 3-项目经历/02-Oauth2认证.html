@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.07.18 -->
-        <title>字符串中的变量处理 - 文档</title>
+        <title>&lt;no title&gt; - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -182,7 +182,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -380,7 +380,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/3-项目经历/02-字符串中的变量处理.md.txt" title="View this page">
+  <a class="muted-link" href="../_sources/3-项目经历/02-Oauth2认证.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -394,52 +394,13 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>字符串中的变量处理<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<section id="id2">
-<h2>需求描述<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>支持动态设置 SQL 中的 Where 条件。</p>
-<section id="id3">
-<h3>需求具象化<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
-<p>使用特殊符号来设置列和参数，例如：<code class="docutils literal notranslate"><span class="pre">$&lt;name&gt;</span> <span class="pre">=</span> <span class="pre">#{myName}</span> <span class="pre">and</span> <span class="pre">$&lt;sex&gt;</span> <span class="pre">=</span> <span class="pre">#{mySex}</span></code></p>
-<ul class="simple">
-<li><p>列名：<code class="docutils literal notranslate"><span class="pre">$&lt;...&gt;</span></code></p></li>
-<li><p>参数：<code class="docutils literal notranslate"><span class="pre">#{myName}</span></code></p></li>
-</ul>
-<p>然后就可以将需求具体化为：
-1.将所有的参数提取出来，并找出参数对应的列名
-2.将所有的列名表达式替换为列名
-3.将所有的参数表达式替换参数值，并根据类型添加”’”</p>
-</section>
-</section>
-<section id="id4">
-<h2>方案一：使用字符串搜索<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<section id="id5">
-<h3>思路<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
-<p>1.识别所有的列名表达式： arg，形如 “&#64;{…}”, 并记录其开始位置：{argIndex, arg}}
-2.识别所有的参数表达式: column，形如 “#{…}”, 并记录其位置：{columnIndex, column}
-3.将列名和参数合并成对:</p>
-<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentArgIndex</span><span class="p">;</span>
-<span class="n">String</span><span class="w"> </span><span class="n">expectedColumn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="n">pair</span><span class="p">:</span><span class="w"> </span><span class="n">allColumnPair</span><span class="p">){</span>
-<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentArgIndex</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="na">columnIndex</span><span class="p">;</span>
-<span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diff</span><span class="p">;</span>
-<span class="w">		</span><span class="n">expectedColumn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="na">column</span><span class="p">;</span>
-<span class="w">	</span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-
+          
         </article>
       </div>
       <footer>
@@ -472,34 +433,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">字符串中的变量处理</a><ul>
-<li><a class="reference internal" href="#id2">需求描述</a><ul>
-<li><a class="reference internal" href="#id3">需求具象化</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id4">方案一：使用字符串搜索</a><ul>
-<li><a class="reference internal" href="#id5">思路</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
