@@ -402,20 +402,34 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>设计模式的六大原则<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p><img alt="principle" src="../_images/principle.png" /></p>
 <section id="id2">
-<h2>1.单一职责原则<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>一个类只负责一个功能领域的相应职责。换而言之，就一个类而言，应该只有一个引起它变换的原因。</p>
+<h2>0. 日常开发中的原则<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><img alt="alt text" src="../_images/image-124.png" /></p>
+<ul class="simple">
+<li><p>用户相关的 Http 接口就写在 <code class="docutils literal notranslate"><span class="pre">UserController</span></code> 中，角色相关的 Http 接口就写在 <code class="docutils literal notranslate"><span class="pre">RoleController</span></code> 中，这是我们日常就已经遵守的规则，一个类只负责一个功能领域单相应职责，这其实就是<strong>单一职责原则</strong></p></li>
+<li><p>和用户相关的操作可能涉及用户的 CURD 操作，也可能涉及数据权限的校验操作，那么我们一般会将不同操作定义成不同的接口，也就是面向接口编程，使用多个专门接口，客户端需要什么特性才实现对应接口，这就是<strong>接口隔离原则</strong></p></li>
+<li><p>我们的逻辑代码一般都是写在实现类中，比如在<code class="docutils literal notranslate"><span class="pre">UserServiceImpl</span></code>中需要使用角色功能时，只是定义个<code class="docutils literal notranslate"><span class="pre">RoleService</span> <span class="pre">roleService</span></code>，具体的方法代码都是调用<code class="docutils literal notranslate"><span class="pre">RoleService</span></code>的方法，将来使用微服务架构时，直接注入<code class="docutils literal notranslate"><span class="pre">RoleServiceRpcImpl</span></code>即可，无须修改现有的<code class="docutils literal notranslate"><span class="pre">UserServiceImpl</span></code>中的代码， 也就是细节依赖于抽象，针对接口编程，而不是针对实现编程，这其是就是利用<strong>依赖倒置原则</strong>实现<strong>里式替换原则</strong>。</p></li>
+</ul>
+<p><img alt="alt text" src="../_images/image-136.png" /></p>
+<ul class="simple">
+<li><p>在编写代码时，如果要查询这个用户有哪些权限资源，我们应该将获取资源的操作封装在<code class="docutils literal notranslate"><span class="pre">RoleService</span></code>中，对<code class="docutils literal notranslate"><span class="pre">UserServiceImpl</span></code>隐藏哪些复杂单关系和实现细节，因为用户只和角色直接关联，也就是不要和“陌生人”说话，只与你的直接朋友通信，这就是<strong>迪米特法则(最小知道原则)</strong></p></li>
+<li><p>所有的原则都是为实现<strong>开闭原则</strong></p></li>
+</ul>
+<p><img alt="principle" src="../_images/principle.png" /></p>
 </section>
 <section id="id3">
-<h2>2.开闭原则<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>1.单一职责原则<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>一个类只负责一个功能领域的相应职责。换而言之，就一个类而言，应该只有一个引起它变换的原因。</p>
+</section>
+<section id="id4">
+<h2>2.开闭原则<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <p>一个软件实体应该对扩展开放，对修改关闭。也就是说软件实体应该在尽量不修改源码情况下进行扩展。</p>
 <p>开闭原则可以看作使用设计模式的目标（也是使用面向对象设计的目标），大部分设计模式都符合开闭原则。
 为满足开闭原则，需要对系统进行抽象化设计。比如 Java 中使用接口定义抽象行为，而使用具体的实现类
 来实现具体的操作细节，客户端可以使用接口进行编程，需要改变具体行为时，只需要新增一个接口实现即可。</p>
 </section>
-<section id="id4">
-<h2>3.里式替换原则<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h2>3.里式替换原则<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
 <p>里氏代换原则是实现开闭原则的重要方式之一。由于使用基类对象的地方都可以使用子类对象，
 因此在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。
@@ -423,8 +437,8 @@
 并实现在父类中声明的方法。程序运行时，子类实例替换父类实例，可以很方便地扩展系统的功能，
 无须修改原有子类的代码，增加新的功能可以通过增加一个新的子类来实现。</p>
 </section>
-<section id="id5">
-<h2>4.依赖倒置原则<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h2>4.依赖倒置原则<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>抽象不应该依赖于细节，细节应该依赖于抽象。换言之，要针对接口编程，而不是针对实现编程，</p>
 <p>如果说开闭原则是面向对象设计的目标的话，那么依赖倒转原则就是面向对象设计的主要实现机制之一，
 它是系统抽象化的具体实现。</p>
@@ -447,14 +461,14 @@
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection#Interface_injection">Dependency injection #Interface injection</a></p>
 </div>
 </section>
-<section id="id6">
-<h2>5.接口隔离原则<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h2>5.接口隔离原则<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <p>使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
 <p>把接口理解为角色时，接口隔离可以理解为“角色隔离”原则。接口是为客户端服务的，因此也可以理解为
 “定制服务”原则。</p>
 </section>
-<section id="id7">
-<h2>6.迪米特法则(最小知道原则)<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h2>6.迪米特法则(最小知道原则)<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <p>一个软件实体应当尽可能少地与其他实体发生相互作用。</p>
 <p>迪米特法则还有几种定义形式：不要和“陌生人”说话，只与你的直接朋友通信等。在迪米特法则中，
 对于一个对象，其“朋友”包括以下几类：</p>
@@ -531,12 +545,13 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">设计模式的六大原则</a><ul>
-<li><a class="reference internal" href="#id2">1.单一职责原则</a></li>
-<li><a class="reference internal" href="#id3">2.开闭原则</a></li>
-<li><a class="reference internal" href="#id4">3.里式替换原则</a></li>
-<li><a class="reference internal" href="#id5">4.依赖倒置原则</a></li>
-<li><a class="reference internal" href="#id6">5.接口隔离原则</a></li>
-<li><a class="reference internal" href="#id7">6.迪米特法则(最小知道原则)</a></li>
+<li><a class="reference internal" href="#id2">0. 日常开发中的原则</a></li>
+<li><a class="reference internal" href="#id3">1.单一职责原则</a></li>
+<li><a class="reference internal" href="#id4">2.开闭原则</a></li>
+<li><a class="reference internal" href="#id5">3.里式替换原则</a></li>
+<li><a class="reference internal" href="#id6">4.依赖倒置原则</a></li>
+<li><a class="reference internal" href="#id7">5.接口隔离原则</a></li>
+<li><a class="reference internal" href="#id8">6.迪米特法则(最小知道原则)</a></li>
 </ul>
 </li>
 </ul>
