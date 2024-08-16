@@ -242,6 +242,7 @@
 <li class="toctree-l2"><a class="reference internal" href="b1-Runtime-Data-Areas.html">JVM 运行时数据区域</a></li>
 <li class="toctree-l2"><a class="reference internal" href="c1-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">Class 文件结构</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html">垃圾收集器概述</a></li>
 <li class="toctree-l2"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html">JDK 工具</a></li>
 </ul>
 </li>
@@ -283,6 +284,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/0-index.html">分布式</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of 分布式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/a1-ZooKeeper-Paper.html">ZooKeeper 论文翻译</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/04-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4-Middleware/%E5%88%86%E5%B8%83%E5%BC%8F/Hbase.html">Hbase</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../4-Middleware/MinIO/0-index.html">MinIO</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of MinIO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -405,7 +407,7 @@
 <section id="id1">
 <h2>前端编译<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <a class=""
-               data-lightbox="group-bb4c0780-a8d5-4774-a7f0-c0bb78bb62c1"
+               data-lightbox="group-c73b9a1d-3dd1-4c03-82d7-a982a792d2d3"
                href="../../_images/image-51.png"
                title=""
                data-title=""
@@ -419,7 +421,7 @@
 <section id="id2">
 <h2>问题诊断<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <a class=""
-               data-lightbox="group-f479ebee-3821-4a06-b725-7527f44481b6"
+               data-lightbox="group-c61e3559-591b-44e2-a26c-d8d08620885f"
                href="../../_images/image-71.png"
                title=""
                data-title=""
@@ -469,6 +471,17 @@
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#id2">0.对象已死？</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#id6">1.垃圾收集算法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html#hotspot">2.HotSpot 的算法细节</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html">垃圾收集器概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#gc">常见 GC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#id2">查看当前 GC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#id3">串行收集器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#id4">并行收集器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#cms-concurrent-mark-sweep">CMS（Concurrent Mark Sweep）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#g1">G1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#zgc">ZGC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html#id9">参考</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="e1-JVM%E5%B7%A5%E5%85%B7.html">JDK 工具</a><ul>
