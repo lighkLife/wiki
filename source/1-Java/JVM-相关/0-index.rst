@@ -19,4 +19,5 @@ JVM 相关
    b1-Runtime-Data-Areas
    c1-Class文件格式
    d1-垃圾收集与内存非配策略
+   d2-垃圾收集器概述
    e1-JVM工具
