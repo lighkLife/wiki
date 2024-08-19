@@ -1,5 +1,5 @@
 Sphinx==7.4.7
-furo==2024.7.18
+furo==2024.8.6
 myst-parser==3.0.1
 sphinx-comments==0.0.3
 sphinxcontrib-images==0.9.4
