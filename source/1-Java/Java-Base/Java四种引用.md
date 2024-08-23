@@ -114,7 +114,7 @@ PhantomReference<String> phantomReference = new PhantomReference<>(new Object(),
 
 ### 使用场景
 
- PhantomReference 的主要作用是在对象被垃圾回收前，执行一些清理操作。例如，在使用DirectByteBuffer时，需要手动释放 ByteBuffer 占用的内存。可以使用 PhantomReference 来跟踪DirectByteBuffer 对象是否已经被垃圾回收，如果已经被垃圾回收，则可以在 PhantomReference 的回调方法中释放 ByteBuffer 占用的内存。
+ PhantomReference 的主要作用是在对象被垃圾回收前，执行一些清理操作。例如，在使用 DirectByteBuffer 时，需要手动释放 ByteBuffer 占用的内存。可以使用 PhantomReference 来跟踪 DirectByteBuffer 对象是否已经没有任何强引用，只有虚引用时，就被加入到 ReferenceQueue，则可以使用一个专门的清理线程，消费 ReferenceQueue 中的元素，在消费方法中释放 ByteBuffer 占用的内存。
 
  ```Java
 import java.lang.ref.PhantomReference;

@@ -44,10 +44,35 @@ DI 存在两种主要方式：
 - 基于构造函数的依赖注入
 - 基于 Setter 的依赖注入
 
-```{note}
-**循环依赖**
+
+## 循环依赖
+
 若A、B相互依赖，则可以基于 Setter 进行依赖注入，Spring 会强制其中一个 Bean 在完全初始化之前注入另一个 Bean。
-```
+
+Spring容器解决单例作用域Bean的循环依赖主要是依靠其三级缓存机制，这里主要讨论的是字段注入或setter注入（构造器注入不支持循环依赖）。以下是Spring如何解决循环依赖的步骤：
+
+1. **一级缓存（Singleton Objects）**：
+   这是一个包含所有已经初始化完成的单例Bean的缓存。当一个Bean被完全初始化后，它会被放入这个缓存中。
+
+2. **二级缓存（Early Singleton Objects）**：
+   这个缓存存放的是提前暴露的Bean引用，也就是说，当一个Bean的实例被创建出来，但是还没有完全初始化（还没有进行属性注入等），Spring会将这个原始的Bean实例放入二级缓存中。
+
+3. **三级缓存（Singleton Factories）**：
+   这个缓存存放的是`ObjectFactory`，当一个Bean正在创建过程中，Spring会将一个创建Bean的工厂对象放入三级缓存中。
+
+当发生循环依赖时，Spring的处理流程如下：
+
+![alt text](img/image-1.png)
+
+- 假设有两个Bean A和B，它们互相依赖。
+- 当Spring尝试创建Bean A时，它发现A需要B，于是它暂停创建A，开始创建B。
+- 在创建B的过程中，B又发现需要依赖A，此时Spring会尝试从缓存中获取A。
+- 因为A已经开始创建了，所以它的工厂对象存在于三级缓存中。Spring会使用这个工厂对象来创建A的早期引用，并将这个引用放到二级缓存中。
+- 接下来，B可以使用这个早期引用完成自己的创建并被放入一级缓存。
+- 然后Spring回到A的创建过程，此时A可以从一级缓存中获取到已经创建好的B，完成自己的初始化，并放入一级缓存。
+
+通过这种方式，Spring可以在不完全初始化Bean的情况下提前暴露一个Bean的引用，从而解决循环依赖的问题。需要注意的是，这种机制只适用于单例作用域的Bean，对于原型作用域的Bean，Spring不会尝试解决循环依赖，因为每次请求原型作用域的Bean时，都会创建一个新的实例。
+
 
 ## 自动注入
 
@@ -88,6 +113,8 @@ spring 提供了 thread scope（`SimpleThreadScope`）, 但默认没有注册，
 ```
 
 ## 自定义 Bean 的生命周期
+
+![alt text](img/image.png)
 
 - `@PostConstruct` 和 `@PreDestroy` 注解。**推荐使用**。
 - `InitializingBean` 和 `DisposableBean` callback 接口。
