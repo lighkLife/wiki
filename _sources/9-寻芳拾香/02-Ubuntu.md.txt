@@ -97,3 +97,19 @@ driver   : xserver-xorg-video-nouveau - distro free builtin
     -L local_socket:remote_socket
 ```
 ![alt text](img/image.png)
+
+## 统计代码行数
+
+`git ls-files | xargs wc -l `
+
+```bash
+➜  ~ git ls-files | xargs wc -l
+  120 src/main.java
+   45 src/utils.java
+   10 README.md
+  175 total
+```
+
+1. `git ls-files` 列出所有被 Git 版本控制的文件。
+2. `xargs` 将文件列表传递给 wc -l。
+3. `wc -l` 统计每个文件的行数并输出结果。

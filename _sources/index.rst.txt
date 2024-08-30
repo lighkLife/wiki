@@ -39,11 +39,13 @@ Welcome to lighk-wiki
    :maxdepth: 2
 
    4-Middleware/DDIA/0-index
-   4-Middleware/MySQL/0-index
+   4-Middleware/MySql/0-index
+   4-Middleware/Redis/0-index
    4-Middleware/Tomcat/0-index
    4-Middleware/分布式/0-index
    4-Middleware/MinIO/0-index
    4-Middleware/Hudi/0-index
+   4-Middleware/Netty/0-index
 
 .. toctree::
    :caption: 设计模式
@@ -65,10 +67,13 @@ Welcome to lighk-wiki
 
 
 .. toctree::
-   :caption: 物联网
+   :caption: 网络
    :maxdepth: 1
 
-   5-IoT/test
+   11-网络/0-index
+
+
+
 
 .. toctree::
    :caption: 操作系统
