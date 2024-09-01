@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="代理模式" href="7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html" /><link rel="prev" title="外观模式（门面模式）" href="5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html" />
+<link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
-        <title>享元模式 - 文档</title>
+        <title>动态规划理论基础 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -272,60 +272,60 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">设计模式</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/UML%E7%B1%BB%E5%9B%BE.html">UML 类图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">设计模式的六大原则</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/0-index.html">创建型模式</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of 创建型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">单例模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">简单工厂模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/3-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">工厂方法模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/4-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">抽象工厂模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/5-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">原型模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA/6-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.html">建造者模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="0-index.html">结构型模式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">外观模式（门面模式）</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">享元模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/0-index.html">结构型模式</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of 结构型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.html">适配器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/2-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.html">桥接模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/3-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.html">组合模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/4-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html">装饰器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">外观模式（门面模式）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/6-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.html">享元模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84/7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">代理模式</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E8%A1%8C%E4%B8%BA/11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/0-index.html">行为型模式</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of 行为型模式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/1-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.html">职责链模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.html">命令模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/3-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F.html">解释器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.html">迭代器模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/5-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F.html">中介者模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/6-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F.html">备忘录模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/7-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">观察者模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/8-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/9-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.html">策略模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/10-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.html">模板方法模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA/11-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F.html">访问者模式</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">算法</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/04-%E5%AD%97%E7%AC%A6%E4%B8%B2/0-index.html">字符串</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/04-%E5%AD%97%E7%AC%A6%E4%B8%B2/a1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2.html">字符串搜索</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-%E5%AD%97%E7%AC%A6%E4%B8%B2/0-index.html">字符串</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of 字符串</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-%E5%AD%97%E7%AC%A6%E4%B8%B2/a1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2.html">字符串搜索</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/0-index.html">动态规划</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of 动态规划</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/a1-%E5%9F%BA%E7%A1%80%E9%A2%98.html">基础题</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/0-index.html">动态规划</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of 动态规划</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/a1-%E5%9F%BA%E7%A1%80%E9%A2%98.html">基础题</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/0-index.html">图论</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of 图论</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/a1-%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5.html">图的概念</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/b1-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86.html">图的遍历</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/c1-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F.html">拓扑排序</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/d1-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.html">最小生成树</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/e1-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">单源最短路径</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../10-%E7%AE%97%E6%B3%95/11-%E5%9B%BE%E8%AE%BA/f1-%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">多源最短路径</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/0-index.html">图论</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of 图论</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/a1-%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5.html">图的概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/b1-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86.html">图的遍历</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/c1-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F.html">拓扑排序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/d1-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.html">最小生成树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/e1-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">单源最短路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11-%E5%9B%BE%E8%AE%BA/f1-%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.html">多源最短路径</a></li>
 </ul>
 </li>
 </ul>
@@ -379,42 +379,113 @@
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>享元模式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>动态规划理论基础<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>背景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>开发围棋软件，发现在围棋棋盘中包含大量棋子，如果将每个棋子都作为一个独立的对象存储在内存中，将导致该围棋软件在运行时所需内存空间较大。如何降低运行代价、提高系统性能？</p>
-<p>仔细观察，会发现棋盘中的黑子和白子，它们的形状、大小都一模一样，只是出现的位置不同而已，那么是否可以在内存中复用黑白子呢？这其实就是享元模式的应用场景。</p>
-<p><img alt="Weiqi" src="../../_images/weiqi.png" /></p>
+<h2>问题分类<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>动态基础</p></li>
+<li><p>背包问题</p></li>
+<li><p>打家劫舍</p></li>
+<li><p>股票问题</p></li>
+<li><p>子序列问题</p></li>
+</ul>
+<p><img alt="alt text" src="../../_images/image4.png" /></p>
 </section>
 <section id="id3">
-<h2>定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p><strong>享元模式（Flyweight Pattern）</strong>：运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式，是一种对象结构型模式。</p>
-<p>享元模式以共享的方式高效地支持大量细粒度对象的重用。享元对象能做到共享的关键是区分了内部状态（Intrinsic State）和外部状态（Extrinsic State）。<strong>享元就是共享元数据，元数据就是内部状态集合。</strong></p>
-<p><strong>内部状态</strong>是存储在享元对象内部并且不会随环境改变而改变的状态，内部状态可以共享。例如字符的内容，不会随外部环境的变化而变化，无论在任何环境下，字符“a”始终是“a”，都不会变成“b”。</p>
-<p><strong>外部状态</strong>是随环境改变而改变的、不可以共享的状态。享元对象的外部状态通常由客户端保存，并在享元对象被创建之后，需要使用的时候，再传入享元对象内部。一个外部状态与另一个外部状态之间是相互独立的。如字符的颜色，可以在不同的地方有不同的颜色，例如有的“a”是红色的，有的“a”是绿色的；字符的大小也是如此，有的“a”是五号字，有的“a”是四号字。而且字符的颜色和大小是两个独立的外部状态，它们可以独立变化，相互之间没有影响，客户端可以在使用时将外部状态注入享元对象中。</p>
-<p><img alt="享元模式" src="../../_images/image-122.png" /></p>
+<h2>解题步骤<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>dp 数组的定义以及其下标的含义（dp[i], dp[i][j]）</p></li>
+<li><p>找出递推公式（找规律）</p></li>
+<li><p>dp 数组如何初始化（结合前两步得出）</p></li>
+<li><p>遍历顺序（比如从前往后遍历或相反，再比如背包问题，先遍历背包，再遍历物品）</p></li>
+<li><p>打印 dp 数组（和自己的手动推导结果进行对比，出问题后方便排查）</p></li>
+</ol>
+</section>
+<section id="fibonacci">
+<h2>Fibonacci<a class="headerlink" href="#fibonacci" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.cn/problems/fibonacci-number/description/">509. 斐波那契数</a></p>
+<p>斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>F(0) = 0，F(1) = 1
+F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1
+</pre></div>
+</div>
+<p>给定 n ，请计算 F(n) 。</p>
+<p>使用五部曲解答：</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dp</span></code> 数组含义： <code class="docutils literal notranslate"><span class="pre">dp[i]</span></code> 代表第 i 个 Fibonacci 数</p></li>
+<li><p>递推公式：<code class="docutils literal notranslate"><span class="pre">dp[i]</span> <span class="pre">=</span> <span class="pre">dp[i-1]</span> <span class="pre">+</span> <span class="pre">dp[i-2]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dp</span></code> 数组初始化： <code class="docutils literal notranslate"><span class="pre">dp[0]</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">dp[1]</span> <span class="pre">=</span> <span class="pre">1</span></code></p></li>
+<li><p>遍历顺序： 由递推公式可知，需要从前往后</p></li>
+<li><p>打印 <code class="docutils literal notranslate"><span class="pre">dp</span></code> 数组</p></li>
+</ol>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w">           </span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dp</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">dp</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">index</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">index</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">            </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="id4">
-<h2>实现<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<p>白子和黑子在棋盘都是重复的，那么黑子和白子就可以作为内部状态，不同棋子的在棋盘的位置不同，那么位置就是外部状态，因此使用享元状态实现围棋游戏如下：</p>
-<p><img alt="享元模式实现" src="../../_images/image-144.png" /></p>
+<h2>爬台阶<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.cn/problems/climbing-stairs/description/">70. 爬楼梯</a></p>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>五部曲解答：</p>
+<ol class="arabic simple">
+<li><p>dp 数组含义： dp[i] 代表达到 i 阶，有 dp[i] 种方法</p></li>
+<li><p>递推公式：只能从前两阶，或前一阶抵达当前阶，所以 <code class="docutils literal notranslate"><span class="pre">dp[i]</span> <span class="pre">=</span> <span class="pre">dp[i-1]</span> <span class="pre">+</span> <span class="pre">dp[i-2]</span></code></p></li>
+<li><p>dp 数组初始化：<code class="docutils literal notranslate"><span class="pre">dp[1]</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">dp[2]</span> <span class="pre">=</span> <span class="pre">2</span></code></p></li>
+<li><p>遍历顺序： 从前往后</p></li>
+<li><p>打印 dp 数组</p></li>
+</ol>
 </section>
 <section id="id5">
-<h2>评价<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
-<section id="id6">
-<h3>优点<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<h2>最小花费爬台阶<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.cn/problems/min-cost-climbing-stairs/description/">746. 使用最小花费爬楼梯</a></p>
+<p>给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。</p>
+<p>你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。</p>
+<p>五部曲解答：</p>
 <ol class="arabic simple">
-<li><p>可以极大减少内存中对象的数量，使得相同或相似对象在内存中只保存一份，从而可以节约系统资源，提高系统性能。</p></li>
-<li><p>享元模式的外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。</p></li>
+<li><p>dp 数组含义：dp[i] 到达 i 位置花费为 dp[i]</p></li>
+<li><p>递推公式： <code class="docutils literal notranslate"><span class="pre">dp[i]</span> <span class="pre">=</span> <span class="pre">min(dp[i-1]</span> <span class="pre">+</span> <span class="pre">cost[i-1],</span> <span class="pre">dp[i-2]</span> <span class="pre">+</span> <span class="pre">cost[i-2])</span></code></p></li>
+<li><p>dp 数组初始化:  <code class="docutils literal notranslate"><span class="pre">dp[0]=0</span></code>,  <code class="docutils literal notranslate"><span class="pre">dp[1]=0</span></code></p></li>
+<li><p>遍历顺序： 从前往后</p></li>
+<li><p>打印dp 数组</p></li>
 </ol>
-</section>
-<section id="id7">
-<h3>缺点<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple">
-<li><p>你可能需要牺牲执行速度来换取内存， 因为他人每次调用享元方法时都需要重新计算部分情景数据。</p></li>
-<li><p>代码会变得更加复杂。 团队中的新成员总是会问： ​ “为什么要像这样拆分一个实体的状态？”。</p></li>
-</ol>
-</section>
+<p>代码：</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">minCostClimbingStairs</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">cost</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cost</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 从下标为 0 或下标为 1 的台阶开始，因此支付费用为0</span>
+<span class="w">        </span><span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dp</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 计算到达每一层台阶的最小费用</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -423,26 +494,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="7-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">代理模式</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="5-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">外观模式（门面模式）</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -480,15 +533,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">享元模式</a><ul>
-<li><a class="reference internal" href="#id2">背景</a></li>
-<li><a class="reference internal" href="#id3">定义</a></li>
-<li><a class="reference internal" href="#id4">实现</a></li>
-<li><a class="reference internal" href="#id5">评价</a><ul>
-<li><a class="reference internal" href="#id6">优点</a></li>
-<li><a class="reference internal" href="#id7">缺点</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">动态规划理论基础</a><ul>
+<li><a class="reference internal" href="#id2">问题分类</a></li>
+<li><a class="reference internal" href="#id3">解题步骤</a></li>
+<li><a class="reference internal" href="#fibonacci">Fibonacci</a></li>
+<li><a class="reference internal" href="#id4">爬台阶</a></li>
+<li><a class="reference internal" href="#id5">最小花费爬台阶</a></li>
 </ul>
 </li>
 </ul>

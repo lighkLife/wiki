@@ -176,6 +176,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/%E5%BC%82%E6%AD%A5%E5%B7%A5%E5%85%B7.html">异步工具</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -439,7 +440,7 @@
 <h3>多版本<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>大多数数据库使用<strong>多版本</strong>的方式防止脏读。对于写入的每个对象，数据库都会记住旧的已提交值，和由当前持有写入锁的事务设置的新值。当事务正在进行时，任何其他读取对象的事务都会拿到旧值。只有当新值提交后，事务才会切换到读取新值（实际上就是多版本并发控制 MVVC）。</p>
 <p>比如用户 1 设置了 x = 3，但用户 2 的 get x 仍旧返回旧值 2 （当用户 1 尚未提交时）。</p>
-<p><img alt="alt text" src="../../../_images/image5.png" /></p>
+<p><img alt="alt text" src="../../../_images/image6.png" /></p>
 </section>
 </section>
 </section>
