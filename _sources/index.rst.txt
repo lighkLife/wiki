@@ -29,7 +29,7 @@ Welcome to lighk-wiki
 
 .. toctree::
    :caption: Spring 框架
-   :maxdepth: 1
+   :maxdepth: 2
 
    7-Spring/0-index
 
@@ -59,7 +59,7 @@ Welcome to lighk-wiki
 
 .. toctree::
    :caption: 算法
-   :maxdepth: 1
+   :maxdepth: 2
 
    10-算法/04-字符串/0-index
    10-算法/09-动态规划/0-index
@@ -68,7 +68,7 @@ Welcome to lighk-wiki
 
 .. toctree::
    :caption: 网络
-   :maxdepth: 1
+   :maxdepth: 2
 
    11-网络/0-index
 
@@ -77,7 +77,7 @@ Welcome to lighk-wiki
 
 .. toctree::
    :caption: 操作系统
-   :maxdepth: 1
+   :maxdepth: 2
 
    6-OS/test
 

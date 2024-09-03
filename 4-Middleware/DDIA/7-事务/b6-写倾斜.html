@@ -176,7 +176,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/%E5%BC%82%E6%AD%A5%E5%B7%A5%E5%85%B7.html">异步工具</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -384,7 +383,7 @@
 <h2>概述<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>在医生值班例子： 你正在为医院写一个医生轮班管理程序。医院通常会同时要求几位医生待命，但底线是至少有一位医生在待命。医生可以放弃他们的班次（例如，如果他们自己生病了），只要至少有一个同事在这一班中继续工作。
 现在想象一下，Alice 和 Bob 是两位值班医生。两人都感到不适，所以他们都决定请假。不幸的是，他们恰好在同一时间点击按钮下班， 下图说明了接下来的事情。</p>
-<p><img alt="alt text" src="../../../_images/image-115.png" /></p>
+<p><img alt="alt text" src="../../../_images/image-116.png" /></p>
 <p>在两个事务中，应用首先检查是否有两个或以上的医生正在值班；如果是的话，它就假定一名医生可以安全地休班。由于数据库使用快照隔离，两次检查都返回 2 ，所以两个事务都进入下一个阶段。Alice 更新自己的记录休班了，而 Bob 也做了一样的事情。两个事务都成功提交了，现在没有医生值班了。违反了至少有一名医生在值班的要求。</p>
 <p>这种异常称为 <strong>写倾斜（Write Skew）</strong>。它既不是 脏写，也不是 丢失更新，因为这两个事务正在更新两个不同的对象（Alice 和 Bob 各自的待命记录）。</p>
 <p>可以将写入偏差视为丢失更新问题的一般化：</p>

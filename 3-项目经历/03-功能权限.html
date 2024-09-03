@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
-        <title>&lt;no title&gt; - 文档</title>
+        <title>功能权限 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -140,7 +140,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -176,7 +176,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/%E5%BC%82%E6%AD%A5%E5%B7%A5%E5%85%B7.html">异步工具</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -372,13 +371,126 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>功能权限<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>基于 SpringMVC、SpringSecurity 实现的功能权限</p>
+<section id="id2">
+<h2>步骤<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>为需要控制的接口打标签</p></li>
+<li><p>修改 <code class="docutils literal notranslate"><span class="pre">FilterSecurityInterceptor</span></code> bean，添加自定义的 <code class="docutils literal notranslate"><span class="pre">AccessDecisionManager</span></code></p></li>
+<li><p>自己实现一个<code class="docutils literal notranslate"><span class="pre">AccessDecisionManager</span></code>，重写<code class="docutils literal notranslate"><span class="pre">decide</span></code>方法进行权限控制（拦截当前请求，与当前登录用户拥有的权限进行匹配）</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>实现<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WebSecurityConfig</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WebSecurityConfigurerAdapter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">http</span><span class="p">.</span><span class="na">authorizeRequests</span><span class="p">()</span>
+<span class="w">				</span><span class="p">.</span><span class="na">antMatchers</span><span class="p">(</span><span class="n">allPermitUrls</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">				</span><span class="p">.</span><span class="na">antMatchers</span><span class="p">(</span><span class="n">authenticateUrls</span><span class="p">).</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">				</span><span class="p">.</span><span class="na">anyRequest</span><span class="p">()</span>
+<span class="w">                    </span><span class="c1">// 1. 为需要控制的接口打标签</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">access</span><span class="p">(</span><span class="n">StringConsts</span><span class="p">.</span><span class="na">ACCESS_DECISION_ATTRIBUTE</span><span class="p">)</span>
+<span class="w">                    </span><span class="c1">// 2. 修改 `FilterSecurityInterceptor` bean</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">withObjectPostProcessor</span><span class="p">(</span><span class="n">filterSecurityInterceptorPostProcessor</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ObjectPostProcessor</span><span class="o">&lt;</span><span class="n">FilterSecurityInterceptor</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">filterSecurityInterceptorPostProcessor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectPostProcessor</span><span class="o">&lt;</span><span class="n">FilterSecurityInterceptor</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span>
+<span class="w">			</span><span class="nd">@Override</span>
+<span class="w">			</span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">O</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">FilterSecurityInterceptor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="nf">postProcess</span><span class="p">(</span><span class="n">O</span><span class="w"> </span><span class="n">object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="c1">// 2. 添加自定义的 AccessDecisionManager</span>
+<span class="w">                </span><span class="c1">// 这里保留了原来的 AccessDecisionManager</span>
+<span class="w">                </span><span class="n">object</span><span class="p">.</span><span class="na">setAccessDecisionManager</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AuthCompAccessDecisionManager</span><span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="na">getAccessDecisionManager</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">));</span>
+<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="n">object</span><span class="p">;</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">};</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>自己实现 AccessDecisionManager，保留原来的 AccessDecisionManager，以便进行<code class="docutils literal notranslate"><span class="pre">support</span></code> 判断，权限对比是使用 <code class="docutils literal notranslate"><span class="pre">AntPathRequestMatcher</span></code> 进行 match 判断</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthCompAccessDecisionManager</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AccessDecisionManager</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">AccessDecisionManager</span><span class="w"> </span><span class="n">delegate</span><span class="p">;</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">passWhenResourceListEmpty</span><span class="p">;</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthCompAccessDecisionManager</span><span class="p">(</span><span class="n">AccessDecisionManager</span><span class="w"> </span><span class="n">accessDecisionManager</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">passWhenResourceListEmpty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">delegate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accessDecisionManager</span><span class="p">;</span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">passWhenResourceListEmpty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">passWhenResourceListEmpty</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="nd">@Override</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">decide</span><span class="p">(</span><span class="n">Authentication</span><span class="w"> </span><span class="n">authentication</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">object</span><span class="p">,</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigAttribute</span><span class="o">&gt;</span><span class="w"> </span><span class="n">configAttributes</span><span class="p">)</span>
+<span class="w">			</span><span class="kd">throws</span><span class="w"> </span><span class="n">AccessDeniedException</span><span class="p">,</span><span class="w"> </span><span class="n">InsufficientAuthenticationException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">require</span><span class="p">(</span><span class="n">configAttributes</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">delegate</span><span class="p">.</span><span class="na">decide</span><span class="p">(</span><span class="n">authentication</span><span class="p">,</span><span class="w"> </span><span class="n">object</span><span class="p">,</span><span class="w"> </span><span class="n">configAttributes</span><span class="p">);</span>
+<span class="w">			</span><span class="k">return</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="n">AuthUser</span><span class="w"> </span><span class="n">authUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getAuthUser</span><span class="p">(</span><span class="n">authentication</span><span class="p">);</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">authUser</span><span class="p">.</span><span class="na">isSuperUser</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 如果是超级管理员，则直接通过</span>
+<span class="w">			</span><span class="k">return</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resourceList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authUser</span><span class="p">.</span><span class="na">getResourceList</span><span class="p">();</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CollectionUtils</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">resourceList</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">passWhenResourceListEmpty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="k">return</span><span class="p">;</span>
+<span class="w">			</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AccessDeniedException</span><span class="p">(</span><span class="s">&quot;资源列表为空，禁止访问&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">FilterInvocation</span><span class="p">)</span><span class="w"> </span><span class="n">object</span><span class="p">).</span><span class="na">getHttpRequest</span><span class="p">();</span>
+<span class="w">		</span><span class="kt">boolean</span><span class="w"> </span><span class="n">matched</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resourceList</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">anyMatch</span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="na">match</span><span class="p">(</span><span class="n">request</span><span class="p">));</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">matched</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AccessDeniedException</span><span class="p">(</span><span class="s">&quot;没有访问权限，禁止访问&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">require</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigAttribute</span><span class="o">&gt;</span><span class="w"> </span><span class="n">configAttributes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CollectionUtils</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">configAttributes</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">configAttributes</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">ConfigAttribute</span><span class="p">::</span><span class="n">toString</span><span class="p">)</span>
+<span class="w">				</span><span class="p">.</span><span class="na">anyMatch</span><span class="p">(</span><span class="n">attr</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">StringConsts</span><span class="p">.</span><span class="na">ACCESS_DECISION_ATTRIBUTE</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">attr</span><span class="p">));</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">AuthUser</span><span class="w"> </span><span class="nf">getAuthUser</span><span class="p">(</span><span class="n">Authentication</span><span class="w"> </span><span class="n">auth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">AuthUser</span><span class="w"> </span><span class="n">authUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AuthUserUtils</span><span class="p">.</span><span class="na">fetchAuthUserFromAuthentication</span><span class="p">(</span><span class="n">auth</span><span class="p">);</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">authUser</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InsufficientAuthenticationException</span><span class="p">(</span><span class="s">&quot;认证信息无效&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">authUser</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="nd">@Override</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">supports</span><span class="p">(</span><span class="n">ConfigAttribute</span><span class="w"> </span><span class="n">attribute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">delegate</span><span class="p">.</span><span class="na">supports</span><span class="p">(</span><span class="n">attribute</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="nd">@Override</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">supports</span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">delegate</span><span class="p">.</span><span class="na">supports</span><span class="p">(</span><span class="n">clazz</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
         </article>
       </div>
       <footer>
@@ -411,8 +523,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">功能权限</a><ul>
+<li><a class="reference internal" href="#id2">步骤</a></li>
+<li><a class="reference internal" href="#id3">实现</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

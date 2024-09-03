@@ -176,7 +176,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1-Java/Java-Base/%E5%BC%82%E6%AD%A5%E5%B7%A5%E5%85%B7.html">异步工具</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -382,12 +381,12 @@
 <h1>字节序列<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
 <h2>大端模式<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../_images/image-114.png" /></p>
+<p><img alt="alt text" src="../_images/image-115.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>大端模式和小端模式都是以字节为最小单元的，字节内部<strong>位序列</strong>不区分大小端（但有标记位的高低0-7），因为计算机内部的寄存器都足以一次性将一个字节的所有位加载进来，计算机的总线也足以同时读取一个字节的所有位（真正的并行读写），所以无须区分位顺序，串口的电气通讯协议会定义位顺序，所以上层协议也无须区分位顺序。</p>
 </div>
-<p><img alt="alt text" src="../_images/image-33.png" /></p>
+<p><img alt="alt text" src="../_images/image-34.png" /></p>
 <p>TCP/IP协议中使用的字节序是大端序，Java 也使用大端序列（X86 架构使用小端序列，JVM 会负责字节序列转换）</p>
 <ul class="simple">
 <li><p>可读性高，从左到右符合人的阅读习惯</p></li>
