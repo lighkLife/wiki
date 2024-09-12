@@ -381,7 +381,7 @@
 <h1>设计模式的六大原则<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
 <h2>0. 日常开发中的原则<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p><img alt="alt text" src="../_images/image-125.png" /></p>
+<p><img alt="alt text" src="../_images/image-126.png" /></p>
 <ul class="simple">
 <li><p>用户相关的 Http 接口就写在 <code class="docutils literal notranslate"><span class="pre">UserController</span></code> 中，角色相关的 Http 接口就写在 <code class="docutils literal notranslate"><span class="pre">RoleController</span></code> 中，这是我们日常就已经遵守的规则，一个类只负责一个功能领域单相应职责，这其实就是<strong>单一职责原则</strong></p></li>
 <li><p>和用户相关的操作可能涉及用户的 CURD 操作，也可能涉及数据权限的校验操作，那么我们一般会将不同操作定义成不同的接口，也就是面向接口编程，使用多个专门接口，客户端需要什么特性才实现对应接口，这就是<strong>接口隔离原则</strong></p></li>

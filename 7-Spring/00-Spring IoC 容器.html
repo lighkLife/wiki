@@ -440,7 +440,7 @@ Dependency-Injection (DI) 是 IoC 更具体版本，依赖注入本质上就是�
 这个缓存存放的是<code class="docutils literal notranslate"><span class="pre">ObjectFactory</span></code>，当一个Bean正在创建过程中，Spring会将一个创建Bean的工厂对象放入三级缓存中。</p></li>
 </ol>
 <p>当发生循环依赖时，Spring的处理流程如下：</p>
-<p><img alt="alt text" src="../_images/image-118.png" /></p>
+<p><img alt="alt text" src="../_images/image-119.png" /></p>
 <ul class="simple">
 <li><p>假设有两个Bean A和B，它们互相依赖。</p></li>
 <li><p>当Spring尝试创建Bean A时，它发现A需要B，于是它暂停创建A，开始创建B。</p></li>

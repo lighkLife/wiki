@@ -132,3 +132,36 @@ yum install yum-utils
 # 下载安装包(以 libffi 为例)
 yumdownloader libffi
 ```
+
+## tcp
+
+### TCP 连接
+
+```bash
+➜  ~ netstat -an | grep 1521
+tcp        0      0 10.10.14.34:35032       10.10.14.5:1521         ESTABLISHED
+tcp        0      0 10.10.14.34:34816       10.10.14.5:1521         ESTABLISHED
+tcp        0      0 10.10.14.34:34814       10.10.14.5:1521         ESTABLISHED
+tcp6       0      0 10.10.14.34:52734       10.10.14.5:1521         ESTABLISHED
+```
+
+
+### TCP 抓包
+
+```bash
+➜  ~ tcpdump -v -n -X -i any port 1521
+tcpdump: listening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes
+13:39:29.848038 IP (tos 0x0, ttl 128, id 17761, offset 0, flags [DF], proto TCP (6), length 41)
+    10.10.14.5.ncube-lm > 10.10.14.34.34816: Flags [.], cksum 0xc3a7 (correct), seq 2959199793:2959199794, ack 2324825286, win 8212, length 1
+	0x0000:  4500 0029 4561 4000 8006 8533 0a0a 0e05  E..)Ea@....3....
+	0x0010:  0a0a 0e22 05f1 8800 b061 ce31 8a92 04c6  ...".....a.1....
+	0x0020:  5010 2014 c3a7 0000 0000 0000 0000 0000  P...............
+	0x0030:  0000 0000 0000 0000 0000 0000 0000       ..............
+13:39:29.848056 IP (tos 0x0, ttl 64, id 23648, offset 0, flags [DF], proto TCP (6), length 52)
+    10.10.14.34.34816 > 10.10.14.5.ncube-lm: Flags [.], cksum 0x3061 (incorrect -> 0xae0d), ack 1, win 623, options [nop,nop,sack 1 {0:1}], length 0
+	0x0000:  4500 0034 5c60 4000 4006 ae29 0a0a 0e22  E..4\`@.@..)..."
+	0x0010:  0a0a 0e05 8800 05f1 8a92 04c6 b061 ce32  .............a.2
+	0x0020:  8010 026f 3061 0000 0101 050a b061 ce31  ...o0a.......a.1
+	0x0030:  b061 ce32 0000 0000 0000 0000 0000 0000  .a.2............
+	0x0040:  0000 0000                                ....
+```

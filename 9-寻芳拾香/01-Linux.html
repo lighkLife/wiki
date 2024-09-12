@@ -581,6 +581,39 @@ yumdownloader<span class="w"> </span>libffi
 </pre></div>
 </div>
 </section>
+<section id="tcp">
+<h2>tcp<a class="headerlink" href="#tcp" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>TCP 连接<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>netstat<span class="w"> </span>-an<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">1521</span>
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">10</span>.10.14.34:35032<span class="w">       </span><span class="m">10</span>.10.14.5:1521<span class="w">         </span>ESTABLISHED
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">10</span>.10.14.34:34816<span class="w">       </span><span class="m">10</span>.10.14.5:1521<span class="w">         </span>ESTABLISHED
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">10</span>.10.14.34:34814<span class="w">       </span><span class="m">10</span>.10.14.5:1521<span class="w">         </span>ESTABLISHED
+tcp6<span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">10</span>.10.14.34:52734<span class="w">       </span><span class="m">10</span>.10.14.5:1521<span class="w">         </span>ESTABLISHED
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>TCP 抓包<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>➜<span class="w">  </span>~<span class="w"> </span>tcpdump<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>-X<span class="w"> </span>-i<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">1521</span>
+tcpdump:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>any,<span class="w"> </span>link-type<span class="w"> </span>LINUX_SLL<span class="w"> </span><span class="o">(</span>Linux<span class="w"> </span>cooked<span class="o">)</span>,<span class="w"> </span>capture<span class="w"> </span>size<span class="w"> </span><span class="m">262144</span><span class="w"> </span>bytes
+<span class="m">13</span>:39:29.848038<span class="w"> </span>IP<span class="w"> </span><span class="o">(</span>tos<span class="w"> </span>0x0,<span class="w"> </span>ttl<span class="w"> </span><span class="m">128</span>,<span class="w"> </span>id<span class="w"> </span><span class="m">17761</span>,<span class="w"> </span>offset<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>flags<span class="w"> </span><span class="o">[</span>DF<span class="o">]</span>,<span class="w"> </span>proto<span class="w"> </span>TCP<span class="w"> </span><span class="o">(</span><span class="m">6</span><span class="o">)</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">41</span><span class="o">)</span>
+<span class="w">    </span><span class="m">10</span>.10.14.5.ncube-lm<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.10.14.34.34816:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>.<span class="o">]</span>,<span class="w"> </span>cksum<span class="w"> </span>0xc3a7<span class="w"> </span><span class="o">(</span>correct<span class="o">)</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">2959199793</span>:2959199794,<span class="w"> </span>ack<span class="w"> </span><span class="m">2324825286</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">8212</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">1</span>
+<span class="w">	</span>0x0000:<span class="w">  </span><span class="m">4500</span><span class="w"> </span><span class="m">0029</span><span class="w"> </span><span class="m">4561</span><span class="w"> </span><span class="m">4000</span><span class="w"> </span><span class="m">8006</span><span class="w"> </span><span class="m">8533</span><span class="w"> </span>0a0a<span class="w"> </span>0e05<span class="w">  </span>E..<span class="o">)</span>Ea@....3....
+<span class="w">	</span>0x0010:<span class="w">  </span>0a0a<span class="w"> </span>0e22<span class="w"> </span>05f1<span class="w"> </span><span class="m">8800</span><span class="w"> </span>b061<span class="w"> </span>ce31<span class="w"> </span>8a92<span class="w"> </span>04c6<span class="w">  </span>...<span class="s2">&quot;.....a.1....</span>
+<span class="s2">	0x0020:  5010 2014 c3a7 0000 0000 0000 0000 0000  P...............</span>
+<span class="s2">	0x0030:  0000 0000 0000 0000 0000 0000 0000       ..............</span>
+<span class="s2">13:39:29.848056 IP (tos 0x0, ttl 64, id 23648, offset 0, flags [DF], proto TCP (6), length 52)</span>
+<span class="s2">    10.10.14.34.34816 &gt; 10.10.14.5.ncube-lm: Flags [.], cksum 0x3061 (incorrect -&gt; 0xae0d), ack 1, win 623, options [nop,nop,sack 1 {0:1}], length 0</span>
+<span class="s2">	0x0000:  4500 0034 5c60 4000 4006 ae29 0a0a 0e22  E..4\`@.@..)...&quot;</span>
+<span class="w">	</span>0x0010:<span class="w">  </span>0a0a<span class="w"> </span>0e05<span class="w"> </span><span class="m">8800</span><span class="w"> </span>05f1<span class="w"> </span>8a92<span class="w"> </span>04c6<span class="w"> </span>b061<span class="w"> </span>ce32<span class="w">  </span>.............a.2
+<span class="w">	</span>0x0020:<span class="w">  </span><span class="m">8010</span><span class="w"> </span>026f<span class="w"> </span><span class="m">3061</span><span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0101</span><span class="w"> </span>050a<span class="w"> </span>b061<span class="w"> </span>ce31<span class="w">  </span>...o0a.......a.1
+<span class="w">	</span>0x0030:<span class="w">  </span>b061<span class="w"> </span>ce32<span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w">  </span>.a.2............
+<span class="w">	</span>0x0040:<span class="w">  </span><span class="m">0000</span><span class="w"> </span><span class="m">0000</span><span class="w">                                </span>....
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -659,6 +692,11 @@ yumdownloader<span class="w"> </span>libffi
 <li><a class="reference internal" href="#journalctl">journalctl 日志工具</a></li>
 <li><a class="reference internal" href="#ftp">ftp</a></li>
 <li><a class="reference internal" href="#yum">yum 离线安装软件</a></li>
+<li><a class="reference internal" href="#tcp">tcp</a><ul>
+<li><a class="reference internal" href="#id6">TCP 连接</a></li>
+<li><a class="reference internal" href="#id7">TCP 抓包</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
