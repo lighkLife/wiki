@@ -176,6 +176,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/Java%E6%A1%A5%E6%8E%A5%E6%96%B9%E6%B3%95.html">Java 桥接方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/String%E5%AE%9E%E7%8E%B0.html">String 实现</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/ThreadLocal-%E6%A6%82%E8%BF%B0.html">ThreadLcoal 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.html">对象内存布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.html">面向对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/Java-Base/%E5%BC%82%E6%AD%A5%E5%B7%A5%E5%85%B7.html">异步工具</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../1-Java/Java-IO/0-index.html">Java IO</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Java IO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -202,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/JVM-%E7%9B%B8%E5%85%B3/d1-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E5%86%85%E5%AD%98%E9%9D%9E%E9%85%8D%E7%AD%96%E7%95%A5.html">垃圾收集与内存非配策略</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/JVM-%E7%9B%B8%E5%85%B3/d2-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%A6%82%E8%BF%B0.html">垃圾收集器概述</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../1-Java/JVM-%E7%9B%B8%E5%85%B3/e1-JVM%E5%B7%A5%E5%85%B7.html">JDK 工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1-Java/JVM-%E7%9B%B8%E5%85%B3/e2-GC%E6%97%A5%E5%BF%97.html">GC 日志</a></li>
 </ul>
 </li>
 </ul>
@@ -250,10 +254,11 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/0-index.html">分布式</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of 分布式</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/01-MapReduce.html">MapReduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/b1-Hbase%E6%9E%B6%E6%9E%84.html">Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/a1-ZooKeeper-Paper.html">ZooKeeper 论文翻译</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/04-MapReduce.html">MapReduce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/Hbase.html">Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/a2-ZooKeeper%E5%9F%BA%E7%A1%80.html">ZooKeeper 基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E5%88%86%E5%B8%83%E5%BC%8F/a3-ZooKeeper-ZAB.html">ZooKeeper ZAB</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../MinIO/0-index.html">MinIO</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of MinIO</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -383,7 +388,7 @@
 <p>传统的数据库教科书甚至将隔离性形式化为 <strong>可串行化（Serializability）</strong>, 但是串行化会大大降低数据库的性能，因此主流数据库又定义了不同级别的 <strong>弱隔离级别</strong>。</p>
 <p>反过来描述，在没有事务提供隔离性时，数据库系统面临哪些问题？根据应用对这些问题可容忍的程度，可划分出不同的隔离级别，比如下面这份流性的隔离级别表 <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 提供了不同隔离级别可能遇到的问题：</p>
 <a class=""
-               data-lightbox="group-38b0f46b-8815-415f-b100-1ceb0a26b4eb"
+               data-lightbox="group-f5696417-8280-4b4a-8f3d-ff25dd060191"
                href="../../../_images/image-46.png"
                title=""
                data-title=""
@@ -395,7 +400,7 @@
                      alt=""/>
                 </a><p>接下来我们来详细讨论下不同隔离级别可能遇到哪些问题，又如何解决。</p>
 <a class=""
-               data-lightbox="group-e7e6f141-7e10-4a7d-a397-d19e0df538b9"
+               data-lightbox="group-c9914f9e-b912-4b68-bde8-f382dfe0229d"
                href="../../../_images/image-104.png"
                title=""
                data-title=""
@@ -406,7 +411,7 @@
                      height="auto"
                      alt=""/>
                 </a><a class=""
-               data-lightbox="group-51c73ca9-9213-4934-ba54-1ae279fa5877"
+               data-lightbox="group-15f55015-983f-403e-bd8a-3cdc0b33ce4c"
                href="../../../_images/image-143.png"
                title=""
                data-title=""
@@ -425,7 +430,7 @@
 </ol>
 </div>
 <a class=""
-               data-lightbox="group-e541d992-b032-4138-8a9e-c505041b6d5c"
+               data-lightbox="group-26ed2063-e8f5-4e90-8d5e-41e134c8e631"
                href="../../../_images/image-133.png"
                title=""
                data-title=""
