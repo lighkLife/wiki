@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
-        <title>数据权限 - 文档</title>
+        <title>云计算 - 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
@@ -382,44 +382,14 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>数据权限<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<div class="highlight-uml notranslate"><div class="highlight"><pre><span></span>enum DpOperationEnum {
-    READ
-    WRITE
-}
-
-interface IdMapping {
-    + mapToAtomicResources(List&lt;Long&gt; resourceIds): Set&lt;DpResourceBo&gt;
-}
-
-class AbstractDpHandler implements IdMapping {
-    + validate(DpOperationEnum operationEnum, List&lt;Long&gt; resourceIds)
-}
-
-
-
-class TradingRetailNoteHandler extends AbstractDpHandler {
-    - tradingRetailHandler: TradingRetailHandler
-    - operationLogMapper: OperationLogMapper
-    + mapToAtomicResources(List&lt;Long&gt; resourceIds): Set&lt;DpResourceBo&gt;
-}
-
-class TradingRetailHandler extends AbstractDpHandler {
-    - retailStandingBookMapper: RetailStandingBookMapper
-    + mapToAtomicResources(List&lt;Long&gt; resourceIds): Set&lt;DpResourceBo&gt;
-}
-
-class TradingRetailFileHandler extends AbstractDpHandler {
-    - tradingRetailHandler: TradingRetailHandler
-    - enclosureMapper: EnclosureMapper
-    + mapToAtomicResources(List&lt;Long&gt; resourceIds): Set&lt;DpResourceBo&gt;
-}
-
-TradingRetailNoteHandler::tradingRetailHandler --&gt; TradingRetailHandler
-TradingRetailFileHandler::tradingRetailHandler --&gt; TradingRetailHandler
-
-</pre></div>
+          <section id="id1">
+<h1>云计算<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Kubernetes/0-index.html">Kubernetes</a><ul class="simple">
+</ul>
+</li>
+</ul>
 </div>
 </section>
 
