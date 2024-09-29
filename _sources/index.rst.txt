@@ -18,6 +18,12 @@ Welcome to lighk-wiki
    9-寻芳拾香/04-Java
 
 .. toctree::
+   :caption: 云计算
+   :maxdepth: 2
+
+   Kubernetes/0-index
+
+.. toctree::
    :caption: Java 相关
    :maxdepth: 2
 
