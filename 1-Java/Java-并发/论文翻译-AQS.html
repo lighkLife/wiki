@@ -7,7 +7,7 @@
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
         <title>论文翻译-AQS - 文档</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -1003,7 +1003,7 @@ await 操作的基本如下：</p>
 </div>
 <p>And the signal operation is:
 signal 操作如下</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transfer</span> <span class="n">the</span> <span class="n">first</span> <span class="n">node</span> <span class="kn">from</span> <span class="nn">condition</span> <span class="n">queue</span> <span class="n">to</span> <span class="n">lock</span> <span class="n">queue</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transfer</span> <span class="n">the</span> <span class="n">first</span> <span class="n">node</span> <span class="kn">from</span><span class="w"> </span><span class="nn">condition</span> <span class="n">queue</span> <span class="n">to</span> <span class="n">lock</span> <span class="n">queue</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Because these operations are performed only when the lock is

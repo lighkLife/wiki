@@ -2,10 +2,12 @@
 <html class="no-js" lang="zh-CN" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="#" /><link rel="search" title="搜索" href="search.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" />
 
-    <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 --><title>索引 - 文档</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.04.27 -->
+        <title>AI 相关技术文档 - 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css?v=5c84f910" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -138,7 +140,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -365,7 +367,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -373,16 +376,124 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
-<section class="genindex-section">
-  <h1 id="index">索引</h1>
-  <div class="genindex-jumpbox"></div>
+          <section id="ai">
+<h1>AI 相关技术文档<a class="headerlink" href="#ai" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>大模型开发核心技术指南<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>本文将为开发者详细介绍大模型应用开发中的关键概念和技术栈，包括大模型基础、Tools、MCP、Skills 和 Agents 等核心组件的原理与使用场景。</p>
+<section id="id2">
+<h3>大模型基础<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>大模型（Large Language Models, LLMs）是当前 AI 领域的核心技术。它们通过在海量文本数据上进行训练，学习到了丰富的语言模式和世界知识。对于开发者而言，理解大模型的工作原理和能力边界是构建有效应用的基础。</p>
+<p><strong>核心特点：</strong>
+- <strong>上下文理解</strong>：能够理解并处理长上下文中的复杂语义关系
+- <strong>零样本/少样本学习</strong>：在没有或仅有少量示例的情况下完成新任务
+- <strong>生成能力</strong>：能够生成连贯、相关的文本内容
+- <strong>工具使用</strong>：通过适当的接口调用外部工具扩展能力</p>
+<p><strong>使用场景：</strong>
+- 内容生成（文章、代码、对话等）
+- 信息提取和问答
+- 文本分类和情感分析
+- 代码辅助和自动化</p>
+</section>
+<section id="tools">
+<h3>Tools 框架<a class="headerlink" href="#tools" title="Link to this heading">¶</a></h3>
+<p>Tools 是大模型与外部世界交互的桥梁。由于大模型本身只能处理文本，Tools 框架允许模型调用各种外部功能来扩展其能力。</p>
+<p><strong>核心原理：</strong>
+- <strong>函数调用</strong>：模型可以识别何时需要调用特定工具，并生成正确的参数
+- <strong>工具注册</strong>：开发者可以注册自定义工具，定义其功能、参数和返回格式
+- <strong>结果处理</strong>：工具执行结果被返回给模型，用于后续的推理和响应生成</p>
+<p><strong>典型工具类型：</strong>
+- <strong>搜索工具</strong>：访问互联网或内部知识库
+- <strong>计算工具</strong>：执行数学运算或数据分析
+- <strong>文件操作</strong>：读写文件、处理文档
+- <strong>API 调用</strong>：与第三方服务集成
+- <strong>系统命令</strong>：执行操作系统级别的操作</p>
+<p><strong>使用场景：</strong>
+- 实时信息获取（股票价格、天气、新闻等）
+- 数据分析和可视化
+- 自动化工作流
+- 系统管理和监控</p>
+</section>
+<section id="mcp">
+<h3>MCP 协议<a class="headerlink" href="#mcp" title="Link to this heading">¶</a></h3>
+<p>MCP（Model Context Protocol）是一种标准化的协议，用于定义大模型如何与外部工具和服务进行交互。它提供了一种通用的接口规范，使得不同的工具可以以一致的方式被模型调用。</p>
+<p><strong>核心组件：</strong>
+- <strong>工具描述</strong>：标准化的工具元数据，包括名称、描述、参数定义等
+- <strong>请求/响应格式</strong>：统一的消息格式，确保模型和工具之间的有效通信
+- <strong>错误处理</strong>：标准化的错误码和错误信息处理机制
+- <strong>认证和安全</strong>：安全的工具调用机制，包括权限控制和数据保护</p>
+<p><strong>优势：</strong>
+- <strong>互操作性</strong>：不同厂商的工具可以在同一生态系统中工作
+- <strong>可扩展性</strong>：轻松添加新的工具而无需修改核心模型
+- <strong>安全性</strong>：内置的安全机制保护系统免受恶意工具调用
+- <strong>调试友好</strong>：标准化的日志和监控接口</p>
+<p><strong>使用场景：</strong>
+- 企业级 AI 应用开发
+- 多工具集成的复杂工作流
+- 跨平台工具生态系统
+- 安全敏感的应用场景</p>
+</section>
+<section id="skills">
+<h3>Skills 系统<a class="headerlink" href="#skills" title="Link to this heading">¶</a></h3>
+<p>Skills 系统是一种高级的工具组织方式，它将相关的工具和逻辑封装成可重用的功能模块。每个 Skill 代表一个特定的能力领域，包含必要的工具、提示词模板和业务逻辑。</p>
+<p><strong>核心特性：</strong>
+- <strong>模块化设计</strong>：每个 Skill 是独立的、可测试的单元
+- <strong>上下文感知</strong>：Skills 可以根据当前对话上下文调整行为
+- <strong>组合能力</strong>：多个 Skills 可以协同工作完成复杂任务
+- <strong>版本管理</strong>：支持 Skills 的版本控制和更新</p>
+<p><strong>Skill 组件：</strong>
+- <strong>工具集合</strong>：该 Skill 所需的所有工具
+- <strong>提示词模板</strong>：针对特定任务优化的提示词
+- <strong>业务逻辑</strong>：处理特定领域问题的代码逻辑
+- <strong>配置文件</strong>：Skill 的参数和依赖配置</p>
+<p><strong>使用场景：</strong>
+- 客户服务自动化（订单查询、问题解决等）
+- 个人助理功能（日程管理、邮件处理等）
+- 专业领域助手（法律咨询、医疗诊断辅助等）
+- 游戏和娱乐应用</p>
+</section>
+<section id="agents">
+<h3>Agents 架构<a class="headerlink" href="#agents" title="Link to this heading">¶</a></h3>
+<p>Agents 架构代表了大模型应用的最高层次抽象。一个 Agent 是一个具有目标导向、自主决策能力和长期记忆的智能体。它能够规划复杂的任务序列，协调多个工具和 Skills，并从经验中学习和改进。</p>
+<p><strong>核心能力：</strong>
+- <strong>目标分解</strong>：将复杂目标分解为可执行的子任务
+- <strong>规划和推理</strong>：制定执行计划并进行多步推理
+- <strong>记忆和学习</strong>：维护长期记忆并从交互中学习
+- <strong>自我反思</strong>：评估自己的表现并进行改进</p>
+<p><strong>Agent 类型：</strong>
+- <strong>Reactive Agents</strong>：基于当前输入立即响应
+- <strong>Deliberative Agents</strong>：进行深思熟虑的规划和决策
+- <strong>Hybrid Agents</strong>：结合反应式和深思熟虑的特点
+- <strong>Multi-Agent Systems</strong>：多个 Agents 协同工作</p>
+<p><strong>架构组件：</strong>
+- <strong>记忆系统</strong>：短期和长期记忆存储
+- <strong>规划引擎</strong>：任务分解和执行计划生成
+- <strong>工具协调器</strong>：管理和调度各种工具调用
+- <strong>学习模块</strong>：从经验中提取知识和改进策略</p>
+<p><strong>使用场景：</strong>
+- 自动化研究助理
+- 智能开发环境
+- 复杂业务流程自动化
+- 个性化教育和培训系统</p>
+</section>
+<section id="id3">
+<h3>总结<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>大模型开发是一个多层次的技术栈，从基础的大模型能力到高级的 Agents 架构，每个层次都有其独特的价值和应用场景。作为开发者，理解这些核心概念和技术将帮助你构建更强大、更智能的应用。</p>
+<p><strong>学习路径建议：</strong>
+1. 从大模型基础开始，理解其能力和限制
+2. 学习 Tools 框架，掌握如何扩展模型能力
+3. 了解 MCP 协议，为构建标准化应用做准备
+4. 实践 Skills 系统，开发可重用的功能模块
+5. 探索 Agents 架构，构建真正的智能应用</p>
+<p>随着技术的不断发展，这个领域将持续演进，但掌握这些核心概念将为你在这个激动人心的领域中打下坚实的基础。</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -417,8 +528,35 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">AI 相关技术文档</a><ul>
+<li><a class="reference internal" href="#id1">大模型开发核心技术指南</a><ul>
+<li><a class="reference internal" href="#id2">大模型基础</a></li>
+<li><a class="reference internal" href="#tools">Tools 框架</a></li>
+<li><a class="reference internal" href="#mcp">MCP 协议</a></li>
+<li><a class="reference internal" href="#skills">Skills 系统</a></li>
+<li><a class="reference internal" href="#agents">Agents 架构</a></li>
+<li><a class="reference internal" href="#id3">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
