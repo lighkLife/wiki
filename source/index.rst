@@ -8,6 +8,13 @@ Welcome to lighk-wiki
 
 
 .. toctree::
+   :caption: LLM Agent 开发
+   :maxdepth: 2
+
+   0-LLM/0-index
+
+
+.. toctree::
    :caption: 寻芳拾香
    :maxdepth: 1
 
